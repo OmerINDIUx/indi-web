@@ -7,27 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <div class="projects-page-wrapper">
-    <!-- Hero Section -->
-    <header class="projects-hero">
-        <script>
-            window.ASSET_URL = "{{ asset('') }}".replace(/\/$/, "");
-        </script>
-        <div class="indi-container">
-            <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div>
-            <h1 class="indi-heading-large reveal-text">NUΞSTROS<br><span class="blue">PROYΞCTOS</span></h1>
-            <div class="hero-bottom">
-                <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
-                <div class="scroll-indicator">
-                    <span class="mouse"></span>
-                </div>
-            </div>
-        </div>
-    </header>
+    <script>
+        window.ASSET_URL = "{{ asset('') }}".replace(/\/$/, "");
+    </script>
 
     <!-- Map Section: Side-by-Side Layout -->
     <section class="map-section-premium">
         <!-- Left: Map Side -->
         <div class="map-side">
+            <!-- Floating Titles Overlay -->
+            <div class="map-titles-overlay">
+                <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div>
+                <h1 class="indi-heading-large">NUΞSTROS<br><span class="blue">PROYΞCTOS</span></h1>
+                <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
+            </div>
+
             <div id="projectsMap"></div>
             <!-- Vignette effect for physical model look from ref -->
             <div class="vignette"></div>
@@ -189,47 +183,51 @@
     .projects-page-wrapper {
         background: #000;
         color: #fff;
-        padding-top: 8rem;
-        overflow-x: hidden;
-    }
-
-    .projects-hero {
-        padding: 10rem 0 6rem;
-        text-align: left;
+        height: 100vh;
+        overflow: hidden;
     }
 
     .hero-pretitle {
         font-family: 'Syncopate', sans-serif;
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         color: var(--indi-blue);
-        letter-spacing: 0.5em;
-        margin-bottom: 2rem;
-    }
-
-    .projects-hero h1 {
-        font-size: clamp(3.5rem, 10vw, 8.5rem);
-        line-height: 0.85;
-        margin-bottom: 4rem;
-        letter-spacing: -0.02em;
-    }
-
-    .projects-hero .blue {
-        color: var(--indi-blue);
-    }
-
-    .hero-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+        letter-spacing: 0.4em;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
     }
 
     .hero-subtitle {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 1.1rem;
-        letter-spacing: 0.05em;
-        color: #666;
-        max-width: 400px;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        color: rgba(0,0,0,0.6);
+        max-width: 320px;
         line-height: 1.6;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    /* Floating Titles Style */
+    .map-titles-overlay {
+        position: absolute;
+        top: 260px;
+        left: 50px;
+        z-index: 1005;
+        pointer-events: none;
+        max-width: 600px;
+    }
+
+    .map-titles-overlay h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        line-height: 0.9;
+        margin-bottom: 2rem;
+        color: #000;
+        font-family: 'Syncopate', sans-serif;
+        font-weight: 700;
+    }
+
+    .map-titles-overlay .blue {
+        color: var(--indi-blue);
     }
 
     /* Map Styles */
@@ -304,33 +302,34 @@
     /* HUD: Technical Solid Look (Reverted) */
     .map-filter-hud {
         position: absolute;
-        bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1001;
-        background: #000;
-        border: 1px solid #111;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        bottom: 40px;
+        left: 40px;
+        z-index: 1100;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0,0,0,0.1);
         display: flex;
         flex-direction: column;
         transition: all 0.5s ease;
+        padding: 8px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.15);
     }
 
     .filter-header {
-        background: #080808;
-        padding: 0.8rem 1.5rem;
+        background: transparent;
+        padding: 0.6rem 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #1a1a1a;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .filter-title {
         font-family: 'Syncopate', sans-serif;
-        font-size: 0.5rem;
+        font-size: 0.65rem;
         font-weight: 700;
-        color: #444;
-        letter-spacing: 0.2em;
+        color: #888;
+        letter-spacing: 0.3em;
     }
 
     .filter-options {
@@ -340,39 +339,40 @@
     .filter-btn {
         background: transparent;
         border: none;
-        border-right: 1px solid #111;
         color: #666;
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 3rem;
         font-family: 'Syncopate', sans-serif;
-        font-size: 0.6rem;
+        font-size: 1.1rem;
         font-weight: 700;
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 0.8rem;
+        align-items: flex-start;
+        gap: 1rem;
         transition: all 0.3s ease;
         text-transform: uppercase;
+        border-right: 1px solid rgba(0,0,0,0.08);
     }
 
     .filter-btn:hover {
-        background: #111;
-        color: #fff;
+        background: rgba(0,0,0,0.02);
+        color: #222;
     }
 
     .filter-btn.active {
         background: #fff;
-        color: #000 !important;
+        color: var(--indi-blue) !important;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 
     .filter-btn .f-index {
-        font-size: 0.5rem;
-        opacity: 0.4;
+        font-size: 0.65rem;
+        opacity: 0.6;
     }
 
     .filter-dot {
-        width: 12px;
-        height: 2px;
+        width: 15px;
+        height: 3px;
         background: currentColor;
     }
 
@@ -383,8 +383,7 @@
 
     .filter-btn.active {
         background: #fff;
-        color: #000;
-        border-bottom: 3px solid var(--indi-blue);
+        color: var(--indi-blue);
     }
 
     .filter-btn.active .f-index {
@@ -861,8 +860,14 @@
 
             overlay.classList.add('active');
             
-            // Map camera update
-            map.flyTo([project.latitude, project.longitude], 12, {
+            // Map camera update: Offset marker to the left side
+            const zoom = 12;
+            const markerPoint = map.project([project.latitude, project.longitude], zoom);
+            // Shift the center coordinates to the right, pushing the marker to the left
+            const targetPoint = L.point(markerPoint.x + 225, markerPoint.y);
+            const targetLatLng = map.unproject(targetPoint, zoom);
+
+            map.flyTo(targetLatLng, zoom, {
                 duration: 1.5,
                 easeLinearity: 0.1
             });
@@ -928,7 +933,12 @@
                 });
 
                 if (markerGroup.getLayers().length > 0) {
-                    map.fitBounds(markerGroup.getBounds(), { padding: [100, 100] });
+                    const isOverlayActive = document.getElementById('projectOverlay').classList.contains('active');
+                    const paddingOptions = isOverlayActive ? 
+                        { paddingTopLeft: [50, 50], paddingBottomRight: [window.innerWidth * 0.45, 50] } : 
+                        { padding: [100, 100] };
+                    
+                    map.fitBounds(markerGroup.getBounds(), paddingOptions);
                 }
             });
         });
