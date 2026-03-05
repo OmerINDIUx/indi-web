@@ -442,9 +442,9 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Contact info box -->
-                    <div style="background: #050505; color: white; padding: 5rem; position: relative; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%); min-height: 600px; display: flex; flex-direction: column; justify-content: center;">
-                        <h4 class="indi-heading" style="color: var(--indi-blue); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em;">CONTΛCTO</h4>
+                    <!-- Right Column: Contact info box with technical shape -->
+                    <div style="background: var(--indi-blue); color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center;">
+                        <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em;">CONTΛCTO</h4>
                         
                         <div style="font-family: 'Space Grotesk';">
                             <a href="tel:+525555406750" style="display: block; font-size: 2.5rem; color: white; text-decoration: none; margin-bottom: 3rem; font-weight: 700; letter-spacing: -0.02em;">+52 55 5540 6750</a>
@@ -461,7 +461,7 @@
                         </div>
 
                         <!-- Technical corner accent -->
-                        <div style="position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: var(--indi-blue); opacity: 0.15;"></div>
+                        <div style="position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: white; opacity: 0.15;"></div>
                     </div>
                 </div>
             </div>
