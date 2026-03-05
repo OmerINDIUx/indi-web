@@ -844,7 +844,7 @@ body {
 
 /* Notched Visual - 40% Height at the bottom with Sharp subtle notch */
 .project-visual-notched {
-    height: 40vh; /* Exactly 40% of the card height */
+    height: 50vh; /* Exactly 50% of the card height */
     width: calc(100% + 8rem);
     margin: 0 -4rem;
     position: relative;

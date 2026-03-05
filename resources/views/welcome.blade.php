@@ -175,11 +175,11 @@
                     <div class="unit-box-trigger" data-unit="3">
                         <div class="unit-identity">
                             <span class="u-num">04</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">ΛDUΛNΛ MODELO</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">INDI FERROVIΛRIΛ</h2>
                         </div>
                         <p class="u-detail indi-scroll-text">Infraestructura fronteriza estratégica diseñada para optimizar el comercio internacional y la seguridad logística en Reynosa.</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Aduana">
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Aduana">
                         </div>
                     </div>
                 </div>
@@ -222,18 +222,12 @@
                             <path class="state-base" d="M506.752,291.992 h-28.989 c-0.73,0-1.457,0.157-2.126,0.448 l-25.459,11.32 c-1.895,0.841-3.114,2.722-3.114,4.788 v17.583 c0,0.791-0.178,1.574-0.524,2.286 l-11.805,24.394 h-12.946 c-0.68,0-1.353,0.135-1.98,0.392 l-32.463,13.28 c-1.706,0.698-3.65,0.449-5.126-0.662 l-9.479-7.103 c-0.844-0.635-1.863-0.998-2.918-1.048 l-14.583-0.627 c-1.693-0.079-3.249-0.97-4.168-2.387 l-35.184-54.302 c-0.74-1.148-1.004-2.536-0.74-3.876 l13.522-67.596 c0.495-2.486-0.855-4.966-3.213-5.899 l-33.517-13.273 c-1.204-0.47-2.187-1.374-2.76-2.528 l-27.407-54.815 c-0.802-1.603-2.369-2.686-4.15-2.864 l-17.608-1.824 c-2.048-0.214-4.032,0.798-5.069,2.572 l-7.074,12.118 c-0.713,1.232-1.895,2.116-3.277,2.45 c-1.379,0.342-2.839,0.107-4.039-0.655 l-15.695-9.882 c-1.218-0.762-2.07-1.994-2.352-3.405 l-3.33-16.657 c-0.218-1.09-0.784-2.087-1.61-2.843 l-25.171-22.954 c-0.965-0.877-2.226-1.368-3.534-1.368 h-22.317 c-2.893,0-5.24,2.344-5.24,5.243 v2.978 h-34.87 c-0.851,0-1.692-0.206-2.444-0.606 L43.826,83.006 C43.07,82.607,42.23,82.4,41.378,82.4 H5.244 c-1.646,0-3.199,0.769-4.185,2.087 c-0.991,1.311-1.311,3.014-0.855,4.596 l14.167,49.592 c0.235,0.826,0.673,1.582,1.272,2.202 l18.719,19.392 c1.909,1.974,1.966,5.087,0.135,7.131 l-7.042,7.872 c-0.958,1.069-1.436,2.487-1.318,3.919 c0.118,1.438,0.819,2.757,1.941,3.662 l28.081,22.599 c0.851,0.691,1.47,1.631,1.763,2.678 l7.477,26.924 c0.193,0.691,0.524,1.332,0.972,1.888 l30.069,37.232 c0.95,1.183,2.365,1.888,3.879,1.945 c1.51,0.057,2.974-0.542,4.015-1.639 l6.946-7.36 c1.696-1.795,1.909-4.531,0.516-6.561 l-18.887-27.607 c-0.064-0.092-0.125-0.185-0.182-0.285 L75.074,202.98 c-0.228-0.384-0.406-0.798-0.531-1.226 l-8.595-29.708 c-0.172-0.577-0.442-1.126-0.798-1.624 l-25.152-34.575 c-0.399-0.555-0.692-1.183-0.855-1.845 l-7.15-29.409 l26.624,12.168 c1.361,0.628,2.394,1.803,2.832,3.235 l11.299,36.912 c0.225,0.734,0.606,1.403,1.118,1.974 l41.607,46.23 c1.24,1.382,1.66,3.306,1.107,5.072 l-2.322,7.438 c-0.556,1.774-0.128,3.705,1.118,5.087 l68.953,76.003 c0.877,0.969,1.361,2.223,1.361,3.527 v19.342 l-4.909,1.511 c-1.454,0.449-2.64,1.503-3.252,2.892 c-0.613,1.39-0.595,2.978,0.05,4.353 l9.775,20.768 c0.517,1.104,1.408,1.994,2.518,2.515 l152.764,71.608 c1.999,0.94,4.371,0.526,5.935-1.04 l17.234-17.226 c0.98-0.984,2.316-1.54,3.705-1.54 h12.582 c1.094,0,2.166,0.342,3.057,0.984 l30.969,22.214 c1.315,0.948,2.993,1.226,4.538,0.77 c1.553-0.449,2.804-1.604,3.398-3.106 l6.957-17.668 c0.766-1.938,2.604-3.242,4.688-3.32 l13.714-0.506 c2.818-0.106,5.051-2.422,5.051-5.236 v-4.538 c0-1.718-0.845-3.328-2.262-4.311 l-6.166-4.267 c-1.415-0.976-2.259-2.586-2.259-4.31 v-12.048 h28.326 c1.81,0,3.488-0.933,4.446-2.465 l34.653-55.442 c0.52-0.827,0.798-1.796,0.798-2.779 v-12.154 C512.0,294.336,509.649,291.992,506.752,291.992 z" />
                             
                             <!-- Location Markers -->
-                            <!-- CDMX (Multiple) -->
-                            <circle class="project-marker marker-cdmx" cx="295" cy="310" r="8" />
-                            <!-- Veracruz (Puerto) -->
-                            <circle class="project-marker marker-southeast" cx="385" cy="310" r="8" data-state="southeast" />
-                            <!-- Oaxaca (Salina Cruz / Huatulco) -->
-                            <circle class="project-marker marker-southeast" cx="355" cy="365" r="8" data-state="southeast" />
-                            <!-- Reynosa (Northeast) -->
-                            <circle class="project-marker marker-northeast" cx="340" cy="155" r="8" data-state="northeast" />
-                            <!-- Cancun (Southeast) -->
-                            <circle class="project-marker marker-southeast" cx="505" cy="285" r="8" data-state="southeast" />
-                            <!-- San Luis Potosi (Ciudad Valles) -->
-                            <circle class="project-marker marker-northeast" cx="325" cy="245" r="8" data-state="northeast" />
+                            <!-- Edomex/CDMX -->
+                            <circle class="project-marker marker-cdmx" cx="295" cy="310" r="8" data-state="cdmx" />
+                            <!-- Oaxaca (Salina Cruz) -->
+                            <circle class="project-marker marker-southeast" cx="295" cy="380" r="8" data-state="southeast" />
+                            <!-- Reynosa (Tamaulipas) -->
+                            <circle class="project-marker marker-northeast" cx="320" cy="224" r="8" data-state="northeast" />
                         </svg>
                     </div>
                 </div>
@@ -294,32 +288,7 @@
                         </div>
                     </div>
 
-                    <!-- Project 03: Calzada Flotante -->
-                    <div class="project-data-card" data-state="cdmx">
-                        <div class="project-white-card">
-                            <h2 class="project-name">CΛLZΛDΛ FLOTΛNTE (CDMX)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CDMX</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2023</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">15 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Puente peatonal icónico que conecta la primera y segunda sección del Bosque de Chapultepec, integrando naturaleza y diseño arquitectónico.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/infraestructura/Calzada-Flotante-CDMX - copia.jpg') }}" alt="Calzada Flotante">
-                            </div>
-                        </div>
-                    </div>
+                   
 
                     <!-- Project 04: Aduana Reynosa -->
                     <div class="project-data-card" data-state="northeast">
@@ -348,167 +317,8 @@
                         </div>
                     </div>
 
-                    <!-- Project 05: Terminal Veracruz -->
-                    <div class="project-data-card" data-state="southeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">PUERTO DE VERΛCRUZ (VERΛCRUZ)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">VERΛCRUZ</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2022</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">36 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Ampliación de la terminal portuaria de Veracruz, uno de los proyectos de infraestructura marítima más importantes del país para el comercio global.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}" alt="Puerto Veracruz">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 06: Centro de Congresos Huatulco -->
-                    <div class="project-data-card" data-state="southeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">CENTRO DE CONGRESOS (HUΛTULCO)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">HUΛTULCO</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2023</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">20 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Espacio de vanguardia para eventos internacionales, diseñado con criterios de sustentabilidad y armonía con el entorno costero de Oaxaca.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Construccion/Centro-de-Congresos-de-Huatulco - copia.jpg') }}" alt="Centro de Congresos">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 07: Parque Lineal Gran Canal -->
-                    <div class="project-data-card" data-state="cdmx">
-                        <div class="project-white-card">
-                            <h2 class="project-name">PΛRQUΞ LINΞΛL GRΛN CΛNΛL (CDMX)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CDMX</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2021</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">18 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Recuperación de espacio público y regeneración urbana a través de un parque lineal que integra áreas verdes y ciclovías en la capital.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/infraestructura/Parque-Lineal-Gran-Canal - copia.webp') }}" alt="Parque Gran Canal">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 08: Puente Rodamiento Cancun -->
-                    <div class="project-data-card" data-state="southeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">PUΞNTΞ RODΛMIΞNTO (CΛNCÚN)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CΛNCÚN</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2023</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">24 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Obra técnica especializada en el Aeropuerto de Cancún para facilitar el rodamiento de aeronaves de gran calado comercial.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Construccion/Puente-Rodamiento-Aeropuerto-Asur-Cancun-Copia.webp') }}" alt="Puente Rodamiento">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 09: Libramiento Ciudad Valles -->
-                    <div class="project-data-card" data-state="northeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">LIBRΛMIΞNTO VΛLLΞS (SLP)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">SΛN LUIS POTOSÍ</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2022</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">30 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Infraestructura carretera estratégica para el Bajío, permitiendo un flujo logístico eficiente y seguro fuera del área urbana.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Construccion/Libramiento-Ciudad-Valles-Tamuin - copia.webp') }}" alt="Libramiento Valles">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 10: Tribunal Superior -->
-                    <div class="project-data-card" data-state="cdmx">
-                        <div class="project-white-card">
-                            <h2 class="project-name">TRIBUNΛL SUPERIOR (CDMX)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CDMX</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2020</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">36 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Edificación institucional de gran escala para el Poder Judicial, diseñada con tecnología estructural avanzada y espacios funcionales.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Construccion/tribunal-superior-de-justicia-cdmx - copia.webp') }}" alt="Tribunal Superior">
-                            </div>
-                        </div>
-                    </div>
+                 
+                   
                 </div>
             </div>
         </section>
