@@ -246,6 +246,7 @@ body {
 
 .logo-menu-wrapper.active .part-top {
     /* Anchored left by flex */
+    opacity: 1;
 }
 
 /* Horizontal Menu Items */

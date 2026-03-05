@@ -9,6 +9,9 @@
 <div class="projects-page-wrapper">
     <!-- Hero Section -->
     <header class="projects-hero">
+        <script>
+            window.ASSET_URL = "{{ asset('') }}".replace(/\/$/, "");
+        </script>
         <div class="indi-container">
             <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div>
             <h1 class="indi-heading-large reveal-text">NUΞSTROS<br><span class="blue">PROYΞCTOS</span></h1>
@@ -595,7 +598,7 @@
     .project-overlay-sidebar .project-visual-notched {
         width: calc(100% + 8rem);
         margin: 0 -4rem;
-        height: 350px;
+        height: 50vh;
         margin-top: auto;
         clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%);
         overflow: hidden;
@@ -843,7 +846,9 @@
             categoryTag.style.backgroundColor = cat.color;
 
             // Use project image if available
-            const imgPath = project.marker_image ? '/' + project.marker_image : 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800';
+            const imgPath = project.marker_image ? 
+                (project.marker_image.startsWith('http') ? project.marker_image : window.ASSET_URL + '/' + project.marker_image) : 
+                window.ASSET_URL + '/imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp';
             document.getElementById('overlayImage').src = imgPath;
             
             // Highlight Active Marker
