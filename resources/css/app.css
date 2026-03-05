@@ -1,0 +1,1019 @@
+@import url("https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;600&display=swap");
+
+:root {
+    --indi-blue: #0066ff;
+    --indi-dark: #000000;
+    --indi-gray: #f2f2f2;
+    --indi-text: #171717;
+    --indi-text-muted: #6b7280;
+    --indi-border: #e5e7eb;
+    --transition: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: white;
+    color: var(--indi-text);
+    overflow-x: hidden;
+}
+
+/* Custom Font Replacements for the "Engineering" look */
+/* Global Text Animation Style */
+.indi-scroll-text {
+    color: #ccc; /* Initial Gray */
+    display: inline-block;
+}
+
+.indi-scroll-text .char {
+    display: inline-block;
+    color: inherit;
+}
+
+/* CSS trick to simulate the no-bar A and E if font doesn't have it */
+.alt-char {
+    display: inline-block;
+    position: relative;
+    color: inherit;
+}
+
+/* Structural Notches (Muescas) & Wrappers (Envolventes) */
+.indi-section-wrap {
+    position: relative;
+    background: white;
+    margin-top: -6rem; /* Overlap with hero */
+    z-index: 10;
+}
+
+.indi-notch-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* More subtle height */
+    transform: translateY(-98%);
+    pointer-events: none;
+    z-index: 20;
+}
+
+.indi-notch-divider svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.indi-notch-divider path {
+    fill: white;
+    transition: d 0.1s linear;
+}
+
+/* Variations */
+.indi-notch-divider.bottom {
+    top: auto;
+    bottom: 0;
+    transform: translateY(98%);
+}
+
+.indi-notch-divider.bottom svg {
+    transform: rotate(180deg);
+}
+
+.indi-notch-divider.dark path {
+    fill: var(--indi-dark);
+}
+
+.indi-notch-divider.gray path {
+    fill: var(--indi-gray);
+}
+
+/* Technical Design Rule (Regla) */
+.indi-rule {
+    width: 60%;
+    height: 1px;
+    background: var(--indi-border);
+    margin: 6rem auto;
+    position: relative;
+}
+
+.indi-rule::before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 7px;
+    background: var(--indi-blue);
+    border-radius: 2px;
+}
+
+.indi-rule::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--indi-border) 0,
+        var(--indi-border) 1px,
+        transparent 1px,
+        transparent 10%
+    );
+    background-size: 10% 100%;
+    opacity: 0.4;
+}
+
+.indi-notch-bottom {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 4rem),
+        85% calc(100% - 4rem),
+        80% 100%,
+        20% 100%,
+        15% calc(100% - 4rem),
+        0 calc(100% - 4rem)
+    );
+}
+
+.indi-card-notch {
+    clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%);
+    background: var(--indi-gray);
+    transition: all 0.6s var(--transition);
+}
+
+/* Container Wrapper */
+.indi-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* --- High-Tech Mechanical Logo Menu --- */
+.logo-menu-wrapper {
+    position: fixed;
+    top: 2rem;
+    left: 4.5%;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: transparent;
+    padding: 0.8rem;
+    border-radius: 4px;
+    transition: all 0.8s var(--transition);
+    cursor: pointer;
+    mix-blend-mode: difference;
+    min-width: 150px;
+}
+
+.logo-menu-wrapper.active {
+    background: var(--indi-blue);
+    mix-blend-mode: normal;
+    padding: 0.8rem 2rem;
+    box-shadow: 0 20px 60px rgba(0, 102, 255, 0.4);
+    justify-content: space-between;
+    width: auto;
+    align-items: center;
+}
+
+/* Logo Parts */
+.logo-part {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    transition: all 0.6s var(--transition);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Overlay them by default */
+.part-bottom {
+    position: absolute;
+    left: 0.8rem; /* Matches wrapper padding */
+    top: 0.8rem;
+    z-index: 10;
+}
+
+.logo-svg-wrapper {
+    width: 120px;
+    height: 120px;
+}
+
+.logo-svg-wrapper svg {
+    width: 100%;
+    height: 100%;
+}
+
+.logo-svg-wrapper .cls-1 {
+    fill: #ffffff;
+}
+
+.part-top {
+    clip-path: inset(0 0 50% 0);
+}
+
+.part-bottom {
+    clip-path: inset(50% 0 0 0);
+}
+
+/* Hover Effect: Bottom half slides right and UP to join top half side-by-side */
+.logo-menu-wrapper:hover:not(.active) .part-bottom {
+    transform: translate(95px, -61px);
+}
+
+.logo-menu-wrapper:hover:not(.active) {
+    min-width: 280px;
+}
+
+/* Active State: Mechanical separation to the extremes */
+.logo-menu-wrapper.active .part-bottom {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0;
+}
+
+.logo-menu-wrapper.active .part-top {
+    /* Anchored left by flex */
+}
+
+/* Horizontal Menu Items */
+.menu-container {
+    max-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.8s var(--transition);
+    opacity: 0;
+    flex-grow: 1;
+}
+
+.menu-container.active {
+    max-width: 1200px;
+    opacity: 1;
+}
+
+.nav-link-item {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Syncopate", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin: 0 1.2rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s var(--transition);
+    letter-spacing: 0.15em;
+}
+
+.menu-container.active .nav-link-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-link-item:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hero Full Background */
+.indi-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 5%;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.indi-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Overlay for legibility */
+    z-index: 1;
+}
+
+.indi-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+}
+
+.indi-hero h1 {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1;
+    margin-bottom: 2rem;
+    color: white;
+    white-space: normal; /* Allow wrapping for the new phrase */
+    font-weight: 700;
+}
+
+.indi-hero h1 span.blue {
+    color: var(--indi-blue);
+}
+
+/* Notched Image */
+.notched-frame {
+    width: 100%;
+    height: 60vh;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+}
+
+.notched-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Stats Section */
+.indi-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: white;
+    position: relative;
+    /* Negative margin to pull the next section up and overlap with the bottom notch */
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    padding: 7rem 2.5rem;
+    border-right: 1px solid var(--indi-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    background: white;
+
+    /* Technical Notch Corner */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+
+    background-image: radial-gradient(var(--indi-border) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center;
+}
+
+.indi-notch-divider.bottom {
+    top: auto;
+    bottom: 0;
+    transform: translateY(98%);
+}
+
+.indi-notch-divider.bottom svg {
+    transform: rotate(180deg);
+}
+
+.stat-card:hover {
+    background-color: #fafafa;
+    transform: translateY(-5px);
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid var(--indi-border);
+    border-left: 1px solid var(--indi-border);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+    top: 1.5rem;
+    left: 1.5rem;
+}
+
+.stat-card.active {
+    background: var(--indi-blue);
+    border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.stat-card.active:hover {
+    background-color: #005ce6;
+}
+
+.stat-card:hover .stat-value {
+    transform: scale(1.05);
+}
+
+.stat-value {
+    font-family: "Syncopate", sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    display: block;
+    letter-spacing: -0.05em;
+    transition: transform 0.6s var(--transition);
+}
+
+.stat-label {
+    font-family: "Syncopate", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.stat-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--indi-text-muted);
+    max-width: 200px;
+}
+
+.stat-card.active .stat-description {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-card h4 {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.stat-card p {
+    text-transform: uppercase;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- High-Tech Units Module (Sticky Scroll Progression) --- */
+.indi-units-module {
+    background: white;
+    position: relative;
+    z-index: 10;
+}
+
+.units-layout-grid {
+    display: flex;
+    position: relative;
+    min-height: 400vh;
+}
+
+/* Left: Text Scroll Side */
+.units-text-scroll {
+    width: 50%;
+    position: relative;
+    z-index: 5;
+}
+
+.unit-box-trigger {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+.unit-identity {
+    margin-bottom: 2rem;
+}
+
+.u-num {
+    display: block;
+    font-family: "Syncopate", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--indi-blue);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.3em;
+}
+
+.u-title {
+    font-size: clamp(1.5rem, 2.5vw, 2.75rem);
+    line-height: 0.85;
+    margin: 0;
+    font-family: "Syncopate", sans-serif;
+    font-weight: 700;
+}
+
+.u-title .blue {
+    color: var(--indi-blue);
+}
+
+.u-detail {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--indi-text-muted);
+    max-width: 480px;
+    margin-top: 1rem;
+}
+
+.u-visual-mobile {
+    display: none;
+    margin-top: 3rem;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    clip-path: polygon(5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%, 0 5%);
+}
+
+.u-visual-mobile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right: Sticky Image Stage */
+.units-sticky-stage {
+    width: 50%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background: #000;
+
+    /* Cinematic Vertical Notch on the left edge */
+    clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% 100%,
+        0% 100%,
+        0% 65%,
+        40px 60%,
+        40px 40%,
+        0% 35%
+    );
+    transition: clip-path 0.8s var(--transition);
+}
+
+.sticky-visual-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.tech-grid-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.tech-corners span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 11;
+}
+
+.tech-corners span:nth-child(1) {
+    top: 40px;
+    left: 40px;
+    border-right: 0;
+    border-bottom: 0;
+}
+.tech-corners span:nth-child(2) {
+    top: 40px;
+    right: 40px;
+    border-left: 0;
+    border-bottom: 0;
+}
+.tech-corners span:nth-child(3) {
+    bottom: 40px;
+    left: 40px;
+    border-right: 0;
+    border-top: 0;
+}
+.tech-corners span:nth-child(4) {
+    bottom: 40px;
+    right: 40px;
+    border-left: 0;
+    border-top: 0;
+}
+
+.unit-images-stack {
+    width: 100%;
+    height: 100%;
+}
+
+.stage-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stage-img.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* --- Interactive Projects Map Section --- */
+.indi-interactive-projects {
+    background: var(--indi-dark);
+    color: white;
+    position: relative;
+    /* overflow: hidden; Removed to allow sticky behavior */
+}
+
+.projects-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-height: 400vh; /* Control the scroll duration */
+    position: relative;
+}
+
+.project-map-stage {
+    width: 50%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    background: #000;
+    z-index: 20;
+    overflow: hidden; /* Critical for clipping the zoom effect */
+}
+
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mexico-map-svg {
+    width: 100%;
+    height: 100%;
+    fill: #1a1a1a;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 1px;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mexico-map-svg .state-base {
+    fill: #050505;
+    stroke: rgba(255, 255, 255, 0.1);
+}
+
+.mexico-map-svg .project-marker {
+    fill: #333;
+    stroke: rgba(255, 255, 255, 0.3);
+    transition: all 0.6s ease;
+}
+
+.mexico-map-svg .project-marker.highlighted {
+    fill: var(--indi-blue);
+    stroke: #fff;
+    filter: drop-shadow(0 0 15px var(--indi-blue));
+}
+
+.mexico-map-svg .state {
+    transition:
+        fill 0.6s ease,
+        filter 0.6s ease;
+    fill: #555; /* Default state visibility */
+}
+
+.mexico-map-svg .state.highlighted {
+    fill: var(--indi-blue) !important;
+    stroke: #ffffff;
+    filter: drop-shadow(0 0 15px var(--indi-blue));
+}
+
+.state-base {
+    fill: #222;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 1.5px;
+}
+
+/* 2. Right: Project Data Scroll */
+.project-data-scroll {
+    width: 50%;
+    position: relative;
+    z-index: 5;
+}
+
+.project-data-card {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s var(--transition);
+    position: relative;
+    z-index: 5;
+}
+
+.project-data-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* The Premium White Card Container - Full Height */
+.project-white-card {
+    background: #ffffff;
+    padding: 3rem 4rem 0; /* Padding only at top and sides */
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    height: 100vh; /* Full screen height */
+    width: 100%;
+}
+
+.project-name {
+    font-family: "Syncopate", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.8vw, 2.8rem);
+    line-height: 1.1;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Redesigned Technical Stats Grid */
+.project-stats-grid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--indi-blue);
+    border-bottom: 2px solid var(--indi-blue);
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    font-family: "Inter", sans-serif;
+}
+
+.stat-value {
+    font-size: clamp(0.9rem, 1.5vw, 1.4rem);
+    font-weight: 400;
+    color: #000;
+    font-family: "Inter", sans-serif;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 100%;
+    font-family: "Inter", sans-serif;
+}
+
+/* Notched Visual - 40% Height at the bottom with Sharp subtle notch */
+.project-visual-notched {
+    height: 40vh; /* Exactly 40% of the card height */
+    width: calc(100% + 8rem);
+    margin: 0 -4rem;
+    position: relative;
+    margin-top: auto; /* Push to the very bottom */
+    clip-path: polygon(
+        0% 0%,
+        35% 0%,
+        42% 5%,
+        58% 5%,
+        65% 0%,
+        100% 0%,
+        100% 100%,
+        0% 100%
+    );
+    overflow: hidden;
+}
+
+/* Blog/News Cards Redesigned */
+.blog-card {
+    background: #fff;
+    padding: 2rem 1.5rem;
+    transition: all 0.4s var(--transition);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+}
+
+.blog-tags {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.blog-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 1.2rem;
+    border-radius: 8px;
+    text-transform: capitalize;
+}
+
+.blog-tag.maritimo {
+    border: 1.5px solid var(--indi-blue);
+    color: var(--indi-blue);
+}
+.blog-tag.construccion {
+    border: 1.5px solid #f39c12;
+    color: #f39c12;
+}
+.blog-tag.ferroviario {
+    border: 1.5px solid #e74c3c;
+    color: #e74c3c;
+}
+.blog-tag.infraestructura {
+    border: 1.5px solid #27ae60;
+    color: #27ae60;
+}
+
+.blog-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.blog-title {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.blog-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem; /* Increased to avoid image overlap */
+    position: relative;
+    z-index: 10;
+}
+
+.blog-read-btn {
+    background: var(--indi-blue);
+    color: white;
+    padding: 0.6rem 1.6rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.blog-read-btn:hover {
+    background: #004ecc;
+}
+
+.indi-card-notch {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    /* Reducido a 6% de profundidad */
+    clip-path: polygon(
+        0% 0%,
+        30% 0%,
+        36% 6%,
+        64% 6%,
+        70% 0%,
+        100% 0%,
+        100% 100%,
+        0% 100%
+    );
+}
+
+.indi-card-notch img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--transition);
+}
+
+.blog-card:hover img {
+    transform: scale(1.08);
+}
+
+.project-visual-notched img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Animations */
+.map-zoom-view {
+    transform: scale(2.5) translate(10%, 10%);
+}
+
+@media (max-width: 1024px) {
+    .projects-layout {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .project-map-stage,
+    .project-data-scroll {
+        width: 100%;
+    }
+    .project-map-stage {
+        height: 50vh;
+        position: relative;
+    }
+    .project-data-card {
+        height: auto;
+        padding: 5rem 5%;
+        opacity: 1;
+        transform: none;
+    }
+    .project-white-card {
+        height: auto;
+        padding: 2.5rem 1.5rem 0;
+    }
+    .project-visual-notched {
+        height: 300px;
+        flex: none;
+    }
+}
