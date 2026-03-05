@@ -177,7 +177,7 @@
                             <span class="u-num">04</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI FERROVIΛRIΛ</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Infraestructura fronteriza estratégica diseñada para optimizar el comercio internacional y la seguridad logística en Reynosa.</p>
+                        <p class="u-detail indi-scroll-text">Ingeniería especializada en infraestructura ferroviaria de gran escala, participando en proyectos estratégicos de conectividad masiva y transporte de carga.</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Aduana">
                         </div>
@@ -197,7 +197,7 @@
                             <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" class="stage-img active" alt="M">
                             <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" class="stage-img" alt="I">
                             <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" class="stage-img" alt="C">
-                            <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" class="stage-img" alt="F">
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="stage-img" alt="F">
                         </div>
                     </div>
                 </div>
