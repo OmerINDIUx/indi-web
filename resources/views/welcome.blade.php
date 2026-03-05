@@ -14,7 +14,7 @@
                 CONSTRUCCIÓN E INFRΛESTRUCTURΛ
             </h1>
         </div>
-    </header>
+    </header
 
     <div class="indi-section-wrap">
         <!-- Main Morphing Notch -->
@@ -143,7 +143,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Ingeniería de vanguardia en infraestructura portuaria y dragado especializado, conectando a México con el mundo.</p>
                         <div class="u-visual-mobile">
-                            <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=800" alt="Maritimo">
+                            <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" alt="Maritimo">
                         </div>
                     </div>
 
@@ -155,7 +155,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Desarrollo de proyectos transformacionales que definen la conectividad y competitividad del país a gran escala.</p>
                         <div class="u-visual-mobile">
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800" alt="Infraestructura">
+                            <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.webp') }}" alt="Infraestructura">
                         </div>
                     </div>
 
@@ -167,7 +167,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Edificaciones icónicas con tecnología de construcción de última generación y los más altos estándares de solidez.</p>
                         <div class="u-visual-mobile">
-                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800" alt="Construccion">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" alt="Construccion">
                         </div>
                     </div>
 
@@ -179,7 +179,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Especialización en sistemas de transporte masivo sobre rieles, impulsando la movilidad sostenible del futuro.</p>
                         <div class="u-visual-mobile">
-                            <img src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?auto=format&fit=crop&q=80&w=800" alt="Ferroviaria">
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Ferroviaria">
                         </div>
                     </div>
                 </div>
@@ -194,10 +194,10 @@
                         </div>
                         
                         <div class="unit-images-stack">
-                            <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&q=80&w=1200" class="stage-img active" alt="M">
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200" class="stage-img" alt="I">
-                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200" class="stage-img" alt="C">
-                            <img src="https://images.unsplash.com/photo-1515162305285-0293e4767cc2?auto=format&fit=crop&q=80&w=1200" class="stage-img" alt="F">
+                            <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" class="stage-img active" alt="M">
+                            <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.webp') }}" class="stage-img" alt="I">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" class="stage-img" alt="C">
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="stage-img" alt="F">
                         </div>
                     </div>
                 </div>
