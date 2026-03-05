@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- 03: Proyectos -->
-                <div class="stat-box-solid" style="background: var(--indi-blue);">
+                <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: white; opacity: 0.9;">+325</span>
                         <h4 class="stat-tit" style="color: white;">PROYΞCTOS</h4>
@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- 04: Familias -->
-                <div class="stat-box-solid" style="background: var(--indi-blue);">
+                <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: white; opacity: 0.9;">+1500</span>
                         <h4 class="stat-tit" style="color: white;">FΛMILIΛS INDI</h4>
@@ -79,6 +79,17 @@
 
                 .stat-box-solid:hover {
                     padding-bottom: 8rem;
+                }
+
+                .stat-card-notched {
+                    -webkit-mask-image: url("{{ asset('assets/stat-card-shape.svg') }}");
+                    mask-image: url("{{ asset('assets/stat-card-shape.svg') }}");
+                    -webkit-mask-size: 100% 100%;
+                    mask-size: 100% 100%;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    border: none !important;
+                    margin: 10px; /* Space between rounded cards */
                 }
 
                 .stat-inner {
