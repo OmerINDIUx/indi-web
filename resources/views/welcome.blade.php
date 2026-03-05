@@ -14,7 +14,7 @@
                 CONSTRUCCIÓN E INFRΛESTRUCTURΛ
             </h1>
         </div>
-    </header
+    </header>
 
     <div class="indi-section-wrap">
         <!-- Main Morphing Notch -->
@@ -259,20 +259,20 @@
                             </p>
 
                             <div class="project-visual-notched">
-                                <img src="https://images.unsplash.com/photo-1549497538-3012255366a4?auto=format&fit=crop&q=80&w=1200" alt="Rompe Olas">
+                                <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Rompe Olas">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 02: Cablebus -->
+                    <!-- Project 02: Mexibus -->
                     <div class="project-data-card" data-state="cdmx">
                         <div class="project-white-card">
-                            <h2 class="project-name">CΛBLEBÚS LÍNEΛ 3</h2>
+                            <h2 class="project-name">MEXIBÚS LÍNEΛ 1</h2>
                             
                             <div class="project-stats-grid">
                                 <div class="stat-item">
                                     <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CIUDΛD DE MÉXICO</span>
+                                    <span class="stat-value indi-scroll-text">ESTΛDO DE MÉXICO</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-label">Año</span>
@@ -285,24 +285,24 @@
                             </div>
 
                             <p class="project-description">
-                                Innovación en movilidad urbana sustentable, conectando zonas de difícil acceso con tecnología de teleférico de alta capacidad y estándares europeos de seguridad.
+                                Modernización del sistema de transporte masivo conectando el Estado de México, mejorando la movilidad de miles de usuarios diariamente con infraestructura de alta eficiencia.
                             </p>
 
                             <div class="project-visual-notched">
-                                <img src="https://images.unsplash.com/photo-1549497538-3012255366a4?auto=format&fit=crop&q=80&w=1200" alt="Cablebus">
+                                <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="Mexibus">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 03: Tren Maya -->
-                    <div class="project-data-card" data-state="southeast">
+                    <!-- Project 03: Aduana -->
+                    <div class="project-data-card" data-state="northeast">
                         <div class="project-white-card">
-                            <h2 class="project-name">TREN MΛYΛ</h2>
+                            <h2 class="project-name">ΛDUΛNΛ MODELO REYNOSΛ</h2>
                             
                             <div class="project-stats-grid">
                                 <div class="stat-item">
                                     <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">QUINTΛNΛ ROO</span>
+                                    <span class="stat-value indi-scroll-text">TΛMΛULIPΛS</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-label">Año</span>
@@ -310,16 +310,16 @@
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">36 MESES</span>
+                                    <span class="stat-value indi-scroll-text">24 MESES</span>
                                 </div>
                             </div>
 
                             <p class="project-description">
-                                Desarrollo de infraestructura ferroviaria crítica, integrando tecnología de vanguardia para la conectividad y el crecimiento económico del sureste mexicano.
+                                Infraestructura fronteriza de clase mundial diseñada para optimizar el comercio internacional y la seguridad, posicionando a Reynosa como un nodo logístico clave.
                             </p>
 
                             <div class="project-visual-notched">
-                                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200" alt="Tren Maya">
+                                <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Aduana">
                             </div>
                         </div>
                     </div>
