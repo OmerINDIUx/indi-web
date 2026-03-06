@@ -11,6 +11,13 @@
                     <img src="/assets/negocios-hero-2.jpg" class="stage-img" data-unit="2">
                     <img src="/assets/negocios-hero-3.jpg" class="stage-img" data-unit="3">
                     <img src="/assets/negocios-hero-4.jpg" class="stage-img" data-unit="4">
+                    
+                    <!-- Inverted SVG Notch: White wings that let the image protrude in the center -->
+                    <div class="negocios-notch-divider">
+                        <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
+                            <path d="M 0 0 H 150 C 180 0 190 60 200 60 H 800 C 810 60 820 0 850 0 H 1000 V 100 H 0 Z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
 
@@ -46,10 +53,10 @@
                                 <p>Somos inversionistas, constructores y operadores de proyectos clave en México, tales como autopistas, estacionamientos y sistemas de transporte público, desarrollados bajo el modelo de Asociación Público-Privada (APP). Este enfoque nos permite impulsar proyectos que mejoran la infraestructura nacional, generando soluciones que fortalecen la conectividad y movilidad en el país.</p>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <p>Grupo INDI ha sido un actor clave en el desarrollo de la infraestructura marítima y portuaria en México, contribuyendo de manera significativa al crecimiento del comercio y la conectividad en el país. A lo largo de su trayectoria, ha ejecutado proyectos de alta complejidad técnica en diversos puertos estratégicos, que han fortalecido la capacidad operativa del sistema portuario mexicano.</p>
+                                <p>Grupo INDI ha sido un actor clave en el desarrollo de la infraestructura marítima y portuaria en México, contribuyendo de manera significativa al crecimiento del comercio y la conectividad en el país. El compromiso con la calidad y la innovación ha permitido que sus proyectos marítimos y portuarios cumplan con los más altos estándares internacionales, posicionando a México como un hub logístico competitivo.</p>
                             </div>
                             <div class="text-unit" data-unit="4">
-                                <p>Nos especializamos en cimentación profunda y en la ejecución de obras de alta complejidad para la construcción, modernización, rehabilitación y conservación de vialidades, puentes, edificaciones, puertos, muelles y escolleras. Cada uno de estos proyectos está respaldado por nuestra capacidad técnica y nuestro enfoque en la calidad, garantizando soluciones duraderas y eficientes.</p>
+                                <p>Ingeniería ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala. Resolvemos retos logísticos y de orografía compleja, trazando rutas estratégicas que impulsan la competitividad nacional mediante infraestructura resiliente y de alto rendimiento técnico.</p>
                             </div>
                         </div>
 
@@ -61,10 +68,10 @@
                                 <p>Nos especializamos en la ejecución de obras de prestación de servicios y concesiones, tanto a nivel estatal como federal, con un profundo conocimiento de las necesidades del sector público. Nuestro objetivo es ofrecer proyectos sostenibles y de alta calidad que contribuyan al desarrollo económico y social de México, garantizando eficiencia y estabilidad a largo plazo.</p>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <p>Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para mejorar el flujo de mercancías y garantizar la seguridad y eficiencia en las operaciones marítimas. Estos proyectos no solo impulsan el desarrollo del comercio exterior, sino que también contribuyen a dinamizar las economías regionales y a mejorar la infraestructura de transporte del país. El compromiso de Grupo INDI con la calidad y la innovación ha permitido que sus proyectos marítimos y portuarios cumplan con los más altos estándares internacionales, posicionando a México como un hub logístico competitivo en el contexto global.</p>
+                                <p>A lo largo de su trayectoria, ha ejecutado proyectos de alta complejidad técnica en diversos puertos estratégicos, que han fortalecido la capacidad operativa del sistema portuario mexicano. Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para garantizar la seguridad operativa.</p>
                             </div>
                             <div class="text-unit" data-unit="4">
-                                <p>Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para mejorar el flujo de mercancías y garantizar la seguridad y eficiencia en las operaciones marítimas. Estos proyectos no solo impulsan el desarrollo del comercio exterior, sino que también contribuyen a dinamizar las economías regionales.</p>
+                                <p>Nuestra capacidad técnica nos permite participar en proyectos estratégicos de conectividad masiva y transporte de carga, integrando soluciones de movilidad que transforman la dinámica de las metrópolis. Cada proyecto está respaldado por un enfoque riguroso en la calidad y la seguridad estructural de gran escala.</p>
                             </div>
                         </div>
                     </div>
@@ -107,10 +114,10 @@
     overflow: hidden;
 }
 
-/* Visual Layer */
+/* Visual Layer: Fixed 70% height */
 .visual-layer {
     width: 100%;
-    height: 65vh;
+    height: 70vh;
     background: #fff;
     z-index: 2;
 }
@@ -120,11 +127,23 @@
     height: 100%;
     position: relative;
     overflow: hidden;
-    clip-path: polygon(
-        0% 0%, 100% 0%, 100% 92%, 
-        82% 92%, 80% 100%, 20% 100%, 18% 92%,
-        0% 92%
-    );
+    border-bottom-left-radius: 40px; /* Rounded frame corners as requested */
+    border-bottom-right-radius: 40px;
+}
+
+.negocios-notch-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Adjusted height for better fit */
+    z-index: 20;
+}
+
+.negocios-notch-divider svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff; /* Matches the content background */
 }
 
 .stage-img {
@@ -145,27 +164,27 @@
     z-index: 10;
 }
 
-/* Content Layer */
+/* Content Layer: Fixed 30% height (Exactly 30vh) */
 .content-layer {
-    flex-grow: 1;
+    height: 30vh;
     display: flex;
     align-items: center;
-    padding-bottom: 5vh;
     z-index: 1;
+    overflow: hidden; /* Ensure it stays at 30% without shifting */
 }
 
 .negocios-page .indi-container {
-    max-width: 85%;
-    width: 85%;
+    max-width: 90%;
+    width: 90%;
     margin: 0 auto;
 }
 
 .unit-info-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 3rem;
-    align-items: flex-start;
-    padding: 3rem 0;
+    grid-template-columns: 0.8fr 1.1fr 1.1fr; /* Optimized for symmetrical column height */
+    gap: 4rem;
+    align-items: center; /* Vertical alignment for a balanced look */
+    padding: 2rem 0;
 }
 
 .text-swap-container {
@@ -208,10 +227,16 @@
     text-transform: uppercase;
 }
 
-.highlight-unit-1 { color: #ffa608; }
-.highlight-unit-2 { color: #64b032; }
-.highlight-unit-3 { color: #0066f9; }
-.highlight-unit-4 { color: #ff3000; }
+.highlight-unit-1 { color: #ffa608; --unit-color: #ffa608; }
+.highlight-unit-2 { color: #64b032; --unit-color: #64b032; }
+.highlight-unit-3 { color: #0066f9; --unit-color: #0066f9; }
+.highlight-unit-4 { color: #ff3000; --unit-color: #ff3000; }
+
+.char {
+    display: inline-block;
+    color: #ccc; /* Initial gray state */
+    transition: color 0.1s ease;
+}
 
 
 .text-unit p {
@@ -254,17 +279,65 @@ document.addEventListener('DOMContentLoaded', () => {
             img.classList.toggle('active', img.dataset.unit == unit);
         });
 
-        // Update Text
+        // Update Text Blocks
         textUnits.forEach(tu => {
-            tu.classList.toggle('active', tu.dataset.unit == unit);
+            const isActive = tu.dataset.unit == unit;
+            if (tu.classList.contains('active') && isActive) return; // Already active
+
+            tu.classList.toggle('active', isActive);
+            
+            if (isActive) {
+                // Find title and its highlight color
+                const highlight = tu.querySelector('[class^="highlight-unit"]');
+                const targetColor = highlight ? getComputedStyle(highlight).getPropertyValue('--unit-color').trim() : '#0066f9';
+                const chars = tu.querySelectorAll('.unit-main-name .char');
+
+                // GSAP Writing/Color Reveal
+                gsap.killTweensOf(chars);
+                gsap.fromTo(chars, 
+                    { color: '#ccc', opacity: 0.2 },
+                    { 
+                        color: (i, target) => {
+                            return target.closest('[class^="highlight-unit"]') ? targetColor : '#000';
+                        },
+                        opacity: 1,
+                        duration: 0.3,
+                        stagger: 0.02,
+                        ease: "none"
+                    }
+                );
+            }
         });
     };
 
-    // Using GSAP ScrollTrigger for snappy switching
+    // Robust Non-destructive Character Wrapper
+    const wrapChars = (container) => {
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+        const nodes = [];
+        let node;
+        while(node = walker.nextNode()) nodes.push(node);
+
+        nodes.forEach(textNode => {
+            const chars = textNode.nodeValue.split('');
+            const fragment = document.createDocumentFragment();
+            chars.forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = char;
+                fragment.appendChild(span);
+            });
+            textNode.parentNode.replaceChild(fragment, textNode);
+        });
+    };
+
+    // Initialize titles
+    document.querySelectorAll('.unit-main-name').forEach(title => wrapChars(title));
+
+    // Using GSAP ScrollTrigger
     triggers.forEach((trigger, i) => {
         ScrollTrigger.create({
             trigger: trigger,
-            start: "top 80%", // Trigger earlier (80% from top)
+            start: "top 80%",
             end: "bottom 80%",
             onEnter: () => updateUnit(i + 1),
             onEnterBack: () => updateUnit(i + 1),
