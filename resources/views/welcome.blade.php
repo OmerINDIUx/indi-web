@@ -408,63 +408,6 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contacto" style="background: white; padding: 10rem 0; position: relative;">
-            <div class="indi-container" style="max-width: 1600px;">
-                <div style="margin-bottom: 6rem;">
-                    <h2 class="indi-heading indi-scroll-text" style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1; margin: 0;">CONSTRUYΛMOS<br>EL FUTURO</h2>
-                    <div style="width: 150px; height: 5px; background: var(--indi-blue); margin-top: 2rem;"></div>
-                </div>
 
-                <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 8rem; align-items: start;">
-                    <!-- Left Column: Consciousness blocks -->
-                    <div style="display: flex; flex-direction: column; gap: 6rem;">
-                        <!-- Conciencia Empresarial -->
-                        <div class="contact-info-block">
-                            <h4 class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em;">CONCIENCIΛ EMPRESΛRIΛ</h4>
-                            <p style="color: var(--indi-text-muted); line-height: 1.8; font-size: 1.2rem; font-weight: 400; margin-bottom: 3rem;">
-                                Certificamos nuestros procesos con los más altos estándares internacionales de calidad, para ofrecer a nuestros clientes la seguridad de una empresa altamente comprometida con cada proyecto.
-                            </p>
-                            
-                            <!-- Certification Logos -->
-                            <div style="display: flex; gap: 5rem; align-items: center; flex-wrap: wrap;">
-                                <img src="{{ asset('assets/9001.png') }}" alt="ISO 9001" style="height: 100px; width: auto; object-fit: contain;">
-                                <img src="{{ asset('assets/14001.png') }}" alt="ISO 14001" style="height: 100px; width: auto; object-fit: contain;">
-                                <img src="{{ asset('assets/45001.png') }}" alt="ISO 45001" style="height: 100px; width: auto; object-fit: contain;">
-                            </div>
-                        </div>
-
-                        <!-- Conciencia Ambiental -->
-                        <div class="contact-info-block">
-                            <h4 class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em;">CONCIENCIΛ ΛMBIENTΛL</h4>
-                            <p style="color: var(--indi-text-muted); line-height: 1.8; font-size: 1.2rem; font-weight: 400;">
-                                Grupo Indi promueve activamente acciones que favorecen la conservación y el cuidado del medio ambiente, comprometiéndose a utilizar de manera racional y eficiente los recursos naturales en todos sus proyectos. Como parte de sus iniciativas, el grupo implementa la recolección de equipos, materiales y accesorios electrónicos, los cuales son enviados a centros de acopio y reciclaje certificados.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Contact info box with technical shape -->
-                    <div style="background: var(--indi-blue); color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center;">
-                        <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em;">CONTΛCTO</h4>
-                        
-                        <div style="font-family: 'Space Grotesk';">
-                            <a href="tel:+525555406750" style="display: block; font-size: 2.5rem; color: white; text-decoration: none; margin-bottom: 3rem; font-weight: 700; letter-spacing: -0.02em;">+52 55 5540 6750</a>
-                            
-                            <div style="margin-bottom: 4rem;">
-                                <a href="mailto:denuncias@grupoindi.com" style="display: block; color: rgba(255,255,255,1); text-decoration: none; margin-bottom: 1.2rem; font-size: 1.2rem; transition: color 0.3s ease;">denuncias@grupoindi.com</a>
-                                <a href="mailto:comunicacion@grupoindi.com" style="display: block; color: rgba(255,255,255,1); text-decoration: none; font-size: 1.2rem; transition: color 0.3s ease;">comunicacion@grupoindi.com</a>
-                            </div>
-                            
-                            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.4); line-height: 1.8; text-transform: uppercase; letter-spacing: 0.1em;">
-                                Zapotecas 17 PB<br>
-                                Col. Santa Cruz Acatlán
-                            </p>
-                        </div>
-
-                        <!-- Technical corner accent -->
-                        <div style="position: absolute; bottom: 0; right: 0; width: 100px; height: 100px; background: white; opacity: 0.15;"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 @endsection

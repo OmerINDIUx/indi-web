@@ -28,19 +28,19 @@
                         <!-- All texts stacked, cross-faded by GSAP -->
                         <div class="text-swap-container" id="title-swap">
                             <div class="text-unit active" data-unit="1">
-                                <span class="unit-index">01/04</span>
+                                <span class="unit-index"><span class="num-roll">01</span>/04</span>
                                 <h2 class="unit-main-name">INDI<br><span class="highlight-unit-1">CONSTRUCCIÓN</span></h2>
                             </div>
                             <div class="text-unit" data-unit="2">
-                                <span class="unit-index">02/04</span>
+                                <span class="unit-index"><span class="num-roll">02</span>/04</span>
                                 <h2 class="unit-main-name">INDI<br><span class="highlight-unit-2">INFRAESTRUCTURA</span></h2>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <span class="unit-index">03/04</span>
+                                <span class="unit-index"><span class="num-roll">03</span>/04</span>
                                 <h2 class="unit-main-name">INDI<br><span class="highlight-unit-3">MARITIMO</span></h2>
                             </div>
                             <div class="text-unit" data-unit="4">
-                                <span class="unit-index">04/04</span>
+                                <span class="unit-index"><span class="num-roll">04</span>/04</span>
                                 <h2 class="unit-main-name">INDI<br><span class="highlight-unit-4">FERROVIARIA</span></h2>
                             </div>
                         </div>
@@ -216,6 +216,19 @@
     line-height: 1;
     margin-bottom: 1rem;
     display: block;
+    position: relative;
+    overflow: hidden; /* Mask for rolling animation */
+    height: 1.2em;
+}
+
+.unit-index span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.unit-index .num-roll {
+    position: relative;
+    display: inline-block;
 }
 
 .unit-main-name {
@@ -247,13 +260,16 @@
     font-weight: 300;
 }
 
-/* Scroll Trigger Areas */
+/* Scroll Trigger Areas: Balanced for fast response without skipping the first slide */
 .scroll-trigger-sections {
     width: 100%;
+    margin-top: -40vh; /* Pulled up slightly to eliminate the header gap, but keeping first trigger active */
+    position: relative;
+    pointer-events: none;
 }
 
 .trigger {
-    height: 60vh; /* Reduced from 100vh for faster switching */
+    height: 40vh; /* Keeps the quick-switching feel */
 }
 
 @media (max-width: 1024px) {
@@ -287,6 +303,15 @@ document.addEventListener('DOMContentLoaded', () => {
             tu.classList.toggle('active', isActive);
             
             if (isActive) {
+                // Trigger Rolling Number Animation
+                const indexNum = tu.querySelector('.num-roll');
+                if (indexNum) {
+                    gsap.fromTo(indexNum, 
+                        { y: '100%', opacity: 0, filter: 'grow(2px)' },
+                        { y: '0%', opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: "power4.out" }
+                    );
+                }
+
                 // Find title and its highlight color
                 const highlight = tu.querySelector('[class^="highlight-unit"]');
                 const targetColor = highlight ? getComputedStyle(highlight).getPropertyValue('--unit-color').trim() : '#0066f9';
@@ -337,12 +362,15 @@ document.addEventListener('DOMContentLoaded', () => {
     triggers.forEach((trigger, i) => {
         ScrollTrigger.create({
             trigger: trigger,
-            start: "top 80%",
-            end: "bottom 80%",
+            start: "top 95%", // Trigger as early as possible
+            end: "bottom 95%",
             onEnter: () => updateUnit(i + 1),
             onEnterBack: () => updateUnit(i + 1),
         });
     });
+
+    // Forced initial state for Unit 01
+    updateUnit(1);
 });
 </script>
 @endsection
