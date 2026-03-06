@@ -17,7 +17,7 @@
         <div class="map-side">
             <!-- Floating Titles Overlay -->
             <div class="map-titles-overlay">
-                <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div>
+                {{-- <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div> --}}
                 <h1 class="indi-heading-large">NUΞSTROS<br><span class="blue">PROYΞCTOS</span></h1>
                 <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
             </div>
@@ -31,12 +31,11 @@
             <!-- Technical Category Filter (Refined as Ref HUD Panel) -->
             <div class="map-filter-hud">
                 <div class="filter-header">
-                    <span class="filter-title">DISPLAY_MODE</span>
                     <span class="filter-status">ON_SYNC</span>
                 </div>
                 <div class="filter-options">
                     <button class="filter-btn active" data-category="all">
-                        <span class="f-index">00</span> ALL_SYSTEMS
+                        <span class="f-index">00</span> TODOS LOS PROYΞCTOS
                     </button>
                     <button class="filter-btn" data-category="2">
                         <span class="f-index">01</span>
@@ -310,8 +309,10 @@
         display: flex;
         flex-direction: column;
         transition: all 0.5s ease;
-        padding: 8px;
+        padding: 4px;
         box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        max-width: calc(100% - 80px); /* Prevent overflow */
+        overflow-x: auto;
     }
 
     .filter-header {
@@ -339,18 +340,19 @@
         background: transparent;
         border: none;
         color: #666;
-        padding: 1.5rem 3rem;
+        padding: 1rem 1.5rem; /* Reduced padding for better fit */
         font-family: 'Syncopate', sans-serif;
-        font-size: 1.1rem;
+        font-size: 0.85rem; /* Slightly smaller to prevent overlap */
         font-weight: 700;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 0.6rem;
         transition: all 0.3s ease;
         text-transform: uppercase;
         border-right: 1px solid rgba(0,0,0,0.08);
+        min-width: 140px;
     }
 
     .filter-btn:hover {
@@ -538,7 +540,7 @@
         line-height: 1.1;
         margin-top: 1rem;
         margin-bottom: 2rem;
-        color: #000;
+        color: var(--accent-color, #000); /* Dynamic title color */
         text-transform: uppercase;
         letter-spacing: 0.1em;
     }
@@ -547,8 +549,8 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        border-top: 1px solid var(--indi-blue);
-        border-bottom: 2px solid var(--indi-blue);
+        border-top: 1px solid var(--accent-color, var(--indi-blue));
+        border-bottom: 2px solid var(--accent-color, var(--indi-blue));
         margin-bottom: 2rem;
         padding: 1.5rem 0;
     }
@@ -570,14 +572,14 @@
         font-family: 'Syncopate', sans-serif;
         font-size: 0.8rem;
         font-weight: 700;
-        color: var(--indi-blue);
+        color: var(--accent-color, var(--indi-blue));
         margin-bottom: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.3em;
     }
 
     .project-overlay-sidebar .stat-value {
-        font-size: 1.3rem;
+        font-size: 1.5rem; /* Increased for better technical impact */
         font-weight: 700;
         color: #000;
         font-family: 'Space Grotesk', sans-serif;
@@ -586,9 +588,9 @@
     }
 
     .project-overlay-sidebar .project-description {
-        font-size: 1.2rem;
-        line-height: 1.7;
-        color: #444;
+        font-size: 1.4rem; /* Increased for better legibility and impact */
+        line-height: 1.6;
+        color: #333;
         margin-bottom: 3rem;
         font-family: 'Inter', sans-serif;
     }
@@ -807,26 +809,28 @@
                 1: { 
                     name: 'INFRΛESTRUCTURΛ', 
                     color: '#64b032',
-                    desc: 'Carreteras, puentes, distribuidores viales y ahora también infraestructura aeroportuaria e hidráulica.'
+                    desc: 'Ingeniería de alta precisión en el desarrollo de sistemas de transporte masivo y vialidades urbanas complejas. Superamos desafíos técnicos en entornos de alta densidad poblacional, implementando soluciones de movilidad que transforman la dinámica de las metrópolis mexicanas.'
                 },
                 2: { 
                     name: 'CONSTRUCCIÓN', 
                     color: '#ffa608',
-                    desc: 'Edificación de centros de servicio, salud, educación y gobierno.'
+                    desc: 'Especialistas en ingeniería civil de alta complejidad y cimentación profunda. Nuestra capacidad técnica nos permite ejecutar obras monumentales enfrentando condiciones geológicas adversas, garantizando la integridad estructural y longevidad en edificaciones icónicas y centros de servicio estratégico.'
                 },
                 3: { 
                     name: 'MΛRÍTIMO', 
                     color: '#0066f9',
-                    desc: 'Proyectos portuarios, muelles, rompeolas y obras costeras de gran magnitud.'
+                    desc: 'Dominio técnico en ingeniería portuaria y obras de dragado especializado. Integramos tecnologías de vanguardia para la construcción de escolleras y terminales en entornos marítimos dinámicos, superando los retos de la hidrodinámica y el clima para conectar a México con el mundo.'
                 },
                 4: { 
                     name: 'FERROVIΛRIΛ', 
                     color: '#ff3000',
-                    desc: 'Infraestructura de trenes y transporte tipo metro.'
+                    desc: 'Ingeniería ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala. Resolvemos retos logísticos y de orografía compleja, trazando rutas estratégicas que impulsan la competitividad nacional mediante infraestructura resiliente y de alto rendimiento.'
                 }
             };
 
             const cat = categories[project.category] || categories[1];
+
+            overlay.style.setProperty('--accent-color', cat.color);
 
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
