@@ -170,43 +170,92 @@ body {
     background: transparent;
     padding: 0.8rem;
     border-radius: 4px;
-    transition: all 0.8s var(--transition);
+    transition:
+        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.4s ease;
     cursor: pointer;
     mix-blend-mode: difference;
     min-width: 150px;
 }
 
 .logo-menu-wrapper.active {
-    background: var(--indi-blue);
+    background: transparent;
     mix-blend-mode: normal;
-    padding: 0.8rem 2rem;
-    box-shadow: 0 20px 60px rgba(0, 102, 255, 0.4);
-    justify-content: space-between;
-    width: auto;
+    padding: 0;
+    box-shadow: none;
+    display: flex;
     align-items: center;
 }
 
 /* Logo Parts */
 .logo-part {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 90px;
     position: relative;
-    transition: all 0.6s var(--transition);
+    transition:
+        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        margin-left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
     flex-shrink: 0;
 }
 
-/* Overlay them by default */
+/* New Robust In-Flow Stacking (Zero Jump System) */
+.part-top {
+    position: relative;
+    z-index: 20;
+    height: 90px;
+    width: 130px;
+}
+
 .part-bottom {
-    position: absolute;
-    left: 0.8rem; /* Matches wrapper padding */
-    top: 0.8rem;
+    position: relative;
     z-index: 10;
+    height: 90px;
+    width: 130px;
+    /* Proper Margin-Based Stacking (Zero Jump) */
+    margin-left: -130px;
+    transform: translateY(100px);
+}
+
+.logo-menu-wrapper.active .logo-part {
+    width: 170px;
+    height: 120px;
+    transform: translateY(0);
+    margin-left: 0;
+}
+
+.logo-menu-wrapper.active .part-top {
+    margin: 0;
+}
+
+.logo-menu-wrapper.active .part-bottom {
+    margin-left: 0;
+}
+
+.part-bottom .logo-svg-wrapper {
+    transform: translateY(-90px);
+}
+
+.logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
+    transform: translateY(-120px);
 }
 
 .logo-svg-wrapper {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 180px;
+    transition:
+        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-menu-wrapper.active .logo-svg-wrapper {
+    width: 170px;
+    height: 240px;
 }
 
 .logo-svg-wrapper svg {
@@ -216,68 +265,96 @@ body {
 
 .logo-svg-wrapper .cls-1 {
     fill: #ffffff;
+    transition: fill 0.6s ease;
 }
 
-.part-top {
-    clip-path: inset(0 0 50% 0);
+.logo-menu-wrapper.active .logo-svg-wrapper .cls-1 {
+    fill: var(--indi-blue);
 }
 
+/* Removing old clip-path system in favor of overflow-hidden containers */
+.part-top,
 .part-bottom {
-    clip-path: inset(50% 0 0 0);
+    clip-path: none;
 }
 
-/* Hover Effect: Bottom half slides right and UP to join top half side-by-side */
+/* Hover Effect: DI slides side-by-side with IN, 10px gap, 10px lower */
 .logo-menu-wrapper:hover:not(.active) .part-bottom {
-    transform: translate(95px, -61px);
+    margin-left: 10px; /* Precise 10px gap */
+    transform: translateY(10px); /* Slightly lower than IN */
 }
 
 .logo-menu-wrapper:hover:not(.active) {
-    min-width: 280px;
+    min-width: 320px;
 }
 
-/* Active State: Mechanical separation to the extremes */
 .logo-menu-wrapper.active .part-bottom {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    margin: 0;
+    transform: translateY(0);
+    margin-left: 0;
 }
 
 .logo-menu-wrapper.active .part-top {
-    /* Anchored left by flex */
-    opacity: 1;
+    position: relative;
+    top: auto;
+    left: auto;
 }
 
 /* Horizontal Menu Items */
 .menu-container {
     max-width: 0;
+    padding: 0;
+    margin: 0; /* Ensure no phantom space when closed */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.8s var(--transition);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
     flex-grow: 1;
+    background: var(--indi-blue);
+    height: 120px;
+    /* Custom clip-path for the notch selector */
+    --notch-x: 50%;
+    --notch-w: 80px;
+    clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% 100%,
+        calc(var(--notch-x) + (var(--notch-w) / 2) + 20px) 100%,
+        calc(var(--notch-x) + (var(--notch-w) / 2)) 88%,
+        calc(var(--notch-x) - (var(--notch-w) / 2)) 88%,
+        calc(var(--notch-x) - (var(--notch-w) / 2) - 20px) 100%,
+        0% 100%
+    );
 }
 
 .menu-container.active {
     max-width: 1200px;
     opacity: 1;
+    height: 120px;
+    padding: 0 2rem;
 }
 
 .nav-link-item {
     color: #ffffff;
     text-decoration: none;
     font-family: "Syncopate", sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    margin: 0 1.2rem;
+    margin: 0 1.5rem;
     white-space: nowrap;
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.4s var(--transition);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.nav-link-item span {
+    display: block;
 }
 
 .menu-container.active .nav-link-item {

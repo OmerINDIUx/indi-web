@@ -73,7 +73,6 @@
             <div class="project-white-card">
                 <button class="close-overlay" id="closeOverlay">&times;</button>
                 
-                <div id="overlayCategoryTag" class="category-pill">CATEGORÍΛ</div>
                 <h2 class="project-name" id="overlayTitle">Project Title</h2>
                 
                 <div class="project-stats-grid">
@@ -87,7 +86,7 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">TIPO</span>
-                        <span class="stat-value">INFRΛESTRUCTURΛ</span>
+                        <span class="stat-value" id="overlayType">INFRΛESTRUCTURΛ</span>
                     </div>
                 </div>
 
@@ -569,7 +568,7 @@
 
     .project-overlay-sidebar .stat-label {
         font-family: 'Syncopate', sans-serif;
-        font-size: 0.65rem;
+        font-size: 0.8rem;
         font-weight: 700;
         color: var(--indi-blue);
         margin-bottom: 0.8rem;
@@ -578,7 +577,7 @@
     }
 
     .project-overlay-sidebar .stat-value {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: #000;
         font-family: 'Space Grotesk', sans-serif;
@@ -587,7 +586,7 @@
     }
 
     .project-overlay-sidebar .project-description {
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1.7;
         color: #444;
         margin-bottom: 3rem;
@@ -840,9 +839,8 @@
                 hudCoords.innerText = `COORD: ${parseFloat(project.latitude).toFixed(4)}N / ${parseFloat(project.longitude).toFixed(4)}W`;
             }
 
-            const categoryTag = document.getElementById('overlayCategoryTag');
-            categoryTag.innerText = cat.name;
-            categoryTag.style.backgroundColor = cat.color;
+            document.getElementById('overlayType').innerText = cat.name;
+            document.getElementById('overlayType').style.color = cat.color;
 
             // Use project image if available
             const imgPath = project.marker_image ? 

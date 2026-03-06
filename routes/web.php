@@ -16,3 +16,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/contacto', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/proyectos', [ProjectController::class, 'index'])->name('proyectos.index');
+
+Route::get('/negocios', function () {
+    return view('negocios');
+})->name('negocios');

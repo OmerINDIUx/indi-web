@@ -18,22 +18,62 @@ document.addEventListener("DOMContentLoaded", () => {
             if (isMenuOpen) {
                 menuLinks.classList.add("active");
                 logoMenu.classList.add("active");
-                gsap.to(".nav-link-item", {
-                    opacity: 1,
-                    y: 0,
-                    stagger: 0.1,
-                    ease: "power2.out",
-                    duration: 0.5,
-                });
+
+                // Advanced Mechanical Reveal for Links (Faster half-time)
+                gsap.fromTo(
+                    ".nav-link-item",
+                    { opacity: 0, y: 30, rotateX: -45, filter: "blur(10px)" },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        rotateX: 0,
+                        filter: "blur(0px)",
+                        stagger: 0.05,
+                        ease: "expo.out",
+                        duration: 0.6,
+                        onComplete: () =>
+                            updateNotch(
+                                document.querySelector(".nav-link-item"),
+                            ),
+                    },
+                );
             } else {
                 menuLinks.classList.remove("active");
                 logoMenu.classList.remove("active");
                 gsap.to(".nav-link-item", {
                     opacity: 0,
-                    y: 10,
-                    duration: 0.3,
+                    y: -20,
+                    filter: "blur(5px)",
+                    duration: 0.4,
+                    ease: "power2.in",
                 });
             }
+        });
+
+        // Menu Notch Selector Logic - High Performance GSAP updates
+        const navLinks = document.querySelectorAll(".nav-link-item");
+
+        function updateNotch(element) {
+            if (!element || !menuLinks.classList.contains("active")) return;
+            const linkRect = element.getBoundingClientRect();
+            const containerRect = menuLinks.getBoundingClientRect();
+            const x = linkRect.left - containerRect.left + linkRect.width / 2;
+            const xPercent = (x / containerRect.width) * 100;
+
+            // Use GSAP for buttery smooth "guided" movement
+            gsap.to(menuLinks, {
+                "--notch-x": `${xPercent}%`,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.75)", // Gives it a slight mechanical bounce
+            });
+
+            // Subtle highlight scale for the active link
+            gsap.to(navLinks, { scale: 1, opacity: 0.7, duration: 0.3 });
+            gsap.to(element, { scale: 1.1, opacity: 1, duration: 0.3 });
+        }
+
+        navLinks.forEach((link) => {
+            link.addEventListener("mouseenter", () => updateNotch(link));
         });
     }
 

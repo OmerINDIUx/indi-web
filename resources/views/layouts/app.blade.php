@@ -17,11 +17,13 @@
             </div>
             
             <div class="menu-container" id="menuLinks">
-                <a href="/nosotros" class="nav-link-item">NOSOTROS</a>
-                <a href="/proyectos" class="nav-link-item">PROYECTOS</a>
-                <a href="/negocios" class="nav-link-item">NEGOCIOS</a>
-                <a href="/prensa" class="nav-link-item">PRENSA</a>
-                <a href="/social" class="nav-link-item">SOCIAL</a>
+                <a href="/" class="nav-link-item">INDI</a>
+                <a href="/proyectos" class="nav-link-item"><span>PRO</span><span>YECTOS</span></a>
+                <a href="/negocios" class="nav-link-item"><span>NEGO</span><span>CIOS</span></a>
+                <a href="/prensa" class="nav-link-item"><span>PREN</span><span>SA</span></a>
+                <a href="/social" class="nav-link-item"><span>SO</span><span>CIAL</span></a>
+                <!-- The "guiño" selector notch -->
+                <div class="menu-notch" id="menuNotch"></div>
             </div>
 
             <div class="logo-part part-bottom">
