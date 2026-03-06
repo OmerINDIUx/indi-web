@@ -9,7 +9,7 @@
             <source src="{{ asset('storage/video-indi.mp4') }}" type="video/mp4">
         </video>
         <div class="indi-hero-content">
-            <h1 class="indi-heading indi-scroll-text" style="color: white; --indi-scroll-initial: white;">
+            <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                 EMPRESΛ CON ΛLTΛ EXPERIENCIΛ EN<br>
                 CONSTRUCCIÓN E INFRΛESTRUCTURΛ
             </h1>
@@ -135,8 +135,8 @@
             <div class="units-layout-grid">
                 <!-- Left: Cinematic Text Flow -->
                 <div class="units-text-scroll">
-                    <!-- Unit 01 -->
-                    <div class="unit-box-trigger" data-unit="0">
+                    <!-- Unit 01: Marítimo (Blue) -->
+                    <div class="unit-box-trigger" data-unit="0" style="--indi-unit-color: #0066f9;">
                         <div class="unit-identity">
                             <span class="u-num">01</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI MΛRÍTIMO</h2>
@@ -147,8 +147,8 @@
                         </div>
                     </div>
 
-                    <!-- Unit 02 -->
-                    <div class="unit-box-trigger" data-unit="1">
+                    <!-- Unit 02: Infraestructura (Green) -->
+                    <div class="unit-box-trigger" data-unit="1" style="--indi-unit-color: #64b032;">
                         <div class="unit-identity">
                             <span class="u-num">02</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI INFRΛESTRUCTURΛ</h2>
@@ -159,8 +159,8 @@
                         </div>
                     </div>
 
-                    <!-- Unit 03 -->
-                    <div class="unit-box-trigger" data-unit="2">
+                    <!-- Unit 03: Construcción (Orange) -->
+                    <div class="unit-box-trigger" data-unit="2" style="--indi-unit-color: #ffa608;">
                         <div class="unit-identity">
                             <span class="u-num">03</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI CONSTRUCCIÓN</h2>
@@ -171,8 +171,8 @@
                         </div>
                     </div>
 
-                    <!-- Unit 04 -->
-                    <div class="unit-box-trigger" data-unit="3">
+                    <!-- Unit 04: Ferroviaria (Red) -->
+                    <div class="unit-box-trigger" data-unit="3" style="--indi-unit-color: #ff3000;">
                         <div class="unit-identity">
                             <span class="u-num">04</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI FERROVIΛRIΛ</h2>

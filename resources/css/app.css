@@ -747,7 +747,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    min-height: 400vh; /* Control the scroll duration */
+    min-height: 300vh; /* Exactly 3 cards */
     position: relative;
 }
 

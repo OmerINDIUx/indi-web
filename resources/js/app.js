@@ -99,23 +99,85 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     });
 
-    // 3. High-Impact Hero Entry Animation
-    const heroHeading = document.querySelector(".indi-hero h1");
-    if (heroHeading) {
-        // We wait a bit for the character split to be ready
-        setTimeout(() => {
-            const chars = heroHeading.querySelectorAll(".char");
-            gsap.from(chars, {
-                y: 100,
-                opacity: 0,
-                rotateX: -90,
-                scale: 1.2,
-                stagger: 0.03,
-                duration: 2,
-                ease: "expo.out",
-                delay: 0.5,
+    // 3. High-Impact Automatic Hero Entry Animation (No ScrollTrigger)
+    const heroAutoText = document.querySelector(".hero-typer-text");
+    if (heroAutoText) {
+        // Improved SPLIT: Resects Words and <br> tags
+        const splitText = (el) => {
+            const html = el.innerHTML;
+            const lines = html.split(/<br\s*\/?>/i);
+            el.innerHTML = "";
+
+            lines.forEach((line, lineIdx) => {
+                const lineWrapper = document.createElement("div");
+                lineWrapper.classList.add("hero-line");
+                lineWrapper.style.overflow = "hidden";
+
+                const words = line.trim().split(/\s+/);
+                words.forEach((word, wordIdx) => {
+                    const wordSpan = document.createElement("span");
+                    wordSpan.classList.add("hero-word");
+                    wordSpan.style.display = "inline-block";
+                    wordSpan.style.whiteSpace = "nowrap"; // Crucial: words don't break mid-air
+
+                    word.split("").forEach((char) => {
+                        const charSpan = document.createElement("span");
+                        charSpan.innerText = char;
+                        charSpan.classList.add("hero-char");
+                        charSpan.style.display = "inline-block";
+                        wordSpan.appendChild(charSpan);
+                    });
+
+                    lineWrapper.appendChild(wordSpan);
+
+                    // Add space between words
+                    if (wordIdx < words.length - 1) {
+                        const space = document.createElement("span");
+                        space.innerHTML = "&nbsp;";
+                        space.style.display = "inline-block";
+                        lineWrapper.appendChild(space);
+                    }
+                });
+
+                el.appendChild(lineWrapper);
             });
-        }, 100);
+        };
+        splitText(heroAutoText);
+
+        const chars = heroAutoText.querySelectorAll(".hero-char");
+        const words = heroAutoText.querySelectorAll(".hero-word");
+
+        const tl = gsap.timeline({ delay: 0.8 });
+
+        // Initial mechanical entrance
+        tl.from(chars, {
+            opacity: 0,
+            y: 30,
+            rotateX: -90,
+            scale: 1.3,
+            filter: "blur(10px)",
+            stagger: {
+                grid: "auto",
+                each: 0.03,
+                from: "start",
+            },
+            duration: 1.5,
+            ease: "expo.out",
+        })
+            // Suble blue glimmer per word
+            .to(
+                words,
+                {
+                    textShadow: "0 0 15px rgba(0, 102, 255, 0.6)",
+                    color: "#fff",
+                    duration: 0.4,
+                    stagger: 0.1,
+                    repeat: 1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                },
+                "-=0.8",
+            );
     }
 
     // 4. Notched Frame Reveals
@@ -178,25 +240,36 @@ document.addEventListener("DOMContentLoaded", () => {
             );
     });
 
-    // 6. Stats Counter - Robust Version
+    // 6. Stats Counter - Repeating Animation (Every Entry)
     gsap.utils.toArray(".stat-num").forEach((stat) => {
-        const finalValue = parseInt(stat.innerText.replace(/\D/g, ""));
-        const hasPlus = stat.innerText.includes("+");
+        const targetText = stat.innerText;
+        const finalValue = parseInt(targetText.replace(/\D/g, ""));
+        const hasPlus = targetText.includes("+");
         const counter = { val: 0 };
 
-        gsap.to(counter, {
+        // Create the tween but keep it paused initially
+        const anim = gsap.to(counter, {
             val: finalValue,
-            duration: 2.5,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: stat,
-                start: "top 90%",
-                toggleActions: "play none none none",
-            },
+            duration: 2,
+            ease: "expo.out",
+            paused: true,
             onUpdate: () => {
                 stat.innerText =
                     (hasPlus ? "+" : "") +
                     Math.floor(counter.val).toLocaleString();
+            },
+        });
+
+        ScrollTrigger.create({
+            trigger: stat,
+            start: "top 90%",
+            onEnter: () => {
+                counter.val = 0; // Reset value
+                anim.restart(); // Play from start
+            },
+            onEnterBack: () => {
+                counter.val = 0;
+                anim.restart();
             },
         });
     });
@@ -220,15 +293,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Apply splitting
-    splitTextIntoChars(".indi-scroll-text");
+    splitTextIntoChars(".indi-scroll-text:not(.hero-typer-text)");
 
-    // Animate characters (Gray -> Blue -> Black)
+    // Animate characters (Gray -> Dynamic Color -> Black)
     gsap.utils.toArray(".indi-scroll-text").forEach((textBlock) => {
         const chars = textBlock.querySelectorAll(".char");
         const initialColor =
             getComputedStyle(textBlock)
                 .getPropertyValue("--indi-scroll-initial")
                 .trim() || "#ccc";
+
+        // Dynamic Accent Color (Green, Orange, Blue, Red per unit)
+        const accentColor =
+            getComputedStyle(textBlock)
+                .getPropertyValue("--indi-unit-color")
+                .trim() || "#0066FF";
 
         gsap.to(chars, {
             scrollTrigger: {
@@ -239,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             keyframes: {
                 "0%": { color: initialColor },
-                "50%": { color: "#0066FF" },
+                "50%": { color: accentColor },
                 "100%": { color: "#000000" },
             },
             stagger: {
@@ -387,6 +466,24 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (projectCards.length > 0) {
+        // ---------------------------------------------------------
+        // A. SNAPPING SYSTEM (Fixed Alignment to Card Tops)
+        // ---------------------------------------------------------
+        ScrollTrigger.create({
+            trigger: ".projects-layout",
+            start: "top top",
+            end: "bottom bottom",
+            snap: {
+                snapTo: 1 / (projectCards.length - 1),
+                duration: { min: 0.1, max: 0.3 },
+                delay: 0,
+                ease: "power1.inOut",
+            },
+        });
+
+        // ---------------------------------------------------------
+        // B. MARKER & ZOOM LOGIC (Existing)
+        // ---------------------------------------------------------
         // Ensure split text applies to new elements
         splitTextIntoChars(".project-data-scroll .indi-scroll-text");
 
@@ -395,8 +492,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ScrollTrigger.create({
                 trigger: card,
-                start: "top 60%",
-                end: "bottom 40%",
+                start: "top center", // Activates when the card is in the middle of the view
+                end: "bottom center",
                 onToggle: (self) => {
                     if (self.isActive) {
                         card.classList.add("active");
@@ -409,7 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (targetMarker)
                                 targetMarker.classList.add("highlighted");
 
-                            // Accurate Zoom/Pan settings for the 520x440 SVG
+                            // Accurate Zoom/Pan settings
                             let zoomX = 0,
                                 zoomY = 0,
                                 scale = 1.2;
@@ -433,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 scale: scale,
                                 x: zoomX,
                                 y: zoomY,
-                                duration: 1.2,
+                                duration: 1,
                                 ease: "power2.out",
                                 transformOrigin: "center center",
                             });
