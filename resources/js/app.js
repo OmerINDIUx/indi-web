@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (logoMenu) {
         logoMenu.addEventListener("click", () => {
             isMenuOpen = !isMenuOpen;
+            
+            // Trigger scroll event to force the logo collision logic to re-evaluate instantly
+            window.dispatchEvent(new Event("scroll"));
+            
             if (isMenuOpen) {
                 menuLinks.classList.add("active");
                 logoMenu.classList.add("active");
@@ -554,5 +558,90 @@ document.addEventListener("DOMContentLoaded", () => {
                 gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 });
             },
         });
+    }
+
+    // ---------------------------------------------------------
+    // 11. Dissolve Logo on Text Collision ("Fonts")
+    // ---------------------------------------------------------
+    const mainLogoWrap = document.getElementById("logoMenu");
+    if (mainLogoWrap) {
+        let textElements = [];
+        const updateTextElements = () => {
+            textElements = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a:not(.nav-link-item), span:not(.char):not(.hero-char):not(.alt-char), li, label, strong, b, i, em"));
+        };
+        updateTextElements();
+        
+        let isLogoHidden = false;
+        let originalLogoRect = null;
+        
+        const checkLogoCollision = () => {
+            if (isMenuOpen) {
+                // Force return to normal if menu is opened while it was hidden
+                if (isLogoHidden) {
+                    gsap.to(mainLogoWrap, { opacity: 1, scale: 1, transformOrigin: "left center", x: 0, duration: 0.4, ease: "power2.out" });
+                    isLogoHidden = false;
+                }
+                return;
+            }
+            
+            // Cache the unscaled rect so the collision box doesn't shrink when the logo shrinks
+            if (!isLogoHidden) {
+                originalLogoRect = mainLogoWrap.getBoundingClientRect();
+            }
+            const logoRect = originalLogoRect || mainLogoWrap.getBoundingClientRect();
+            
+            // Larger margin ensures it starts dissolving much before it mathematically touches the font
+            const marginY = 80; 
+            const marginX = 40;
+            const logoBox = {
+                top: logoRect.top - marginY,
+                bottom: logoRect.bottom + marginY,
+                left: logoRect.left - marginX,
+                right: logoRect.right + marginX
+            };
+
+            let isColliding = false;
+
+            for (let i = 0; i < textElements.length; i++) {
+                const el = textElements[i];
+                // Skip if the element is part of the logo or invisible
+                if (mainLogoWrap.contains(el) || el.offsetParent === null) continue;
+                
+                // Ensure the element actually contains textual content
+                const text = el.innerText || "";
+                if (text.trim() === "") continue;
+
+                const rect = el.getBoundingClientRect();
+                
+                // Pre-filter: if rect is out of viewport or has no dimensions
+                if (rect.bottom < 0 || rect.top > window.innerHeight || rect.width === 0 || rect.height === 0) continue;
+
+                // AABB Collision detection
+                if (!(logoBox.right < rect.left || 
+                      logoBox.left > rect.right || 
+                      logoBox.bottom < rect.top || 
+                      logoBox.top > rect.bottom)) {
+                    isColliding = true;
+                    break;
+                }
+            }
+
+            if (isColliding && !isLogoHidden) {
+                // Shrink and move aside effect
+                gsap.to(mainLogoWrap, { opacity: 0.5, scale: 0.6, transformOrigin: "left center", x: -70, duration: 0.4, ease: "power2.out" });
+                isLogoHidden = true;
+            } else if (!isColliding && isLogoHidden) {
+                // Smoothly return when font passes
+                gsap.to(mainLogoWrap, { opacity: 1, scale: 1, transformOrigin: "left center", x: 0, duration: 0.4, ease: "power2.out" });
+                isLogoHidden = false;
+            }
+        };
+
+        window.addEventListener("scroll", () => requestAnimationFrame(checkLogoCollision));
+        window.addEventListener("load", () => {
+             updateTextElements();
+             checkLogoCollision();
+        });
+        checkLogoCollision();
     }
 });

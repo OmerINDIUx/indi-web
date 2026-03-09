@@ -7,10 +7,10 @@
             <!-- Background Images Layer -->
             <div class="visual-layer">
                 <div class="visual-notched-frame">
-                    <img src="/assets/negocios-hero-1.jpg" class="stage-img active" data-unit="1">
-                    <img src="/assets/negocios-hero-2.jpg" class="stage-img" data-unit="2">
-                    <img src="/assets/negocios-hero-3.jpg" class="stage-img" data-unit="3">
-                    <img src="/assets/negocios-hero-4.jpg" class="stage-img" data-unit="4">
+                    <video src="/videos_indi/Negocios/Indi_construccion.mp4" autoplay loop muted playsinline class="stage-img active" data-unit="1"></video>
+                    <video src="/videos_indi/Negocios/Indi_infraestructura.mp4" autoplay loop muted playsinline class="stage-img" data-unit="2"></video>
+                    <video src="/videos_indi/Negocios/Indi_maritimo.mp4" autoplay loop muted playsinline class="stage-img" data-unit="3"></video>
+                    <video src="/videos_indi/Negocios/Indi_ferroviario.mp4" autoplay loop muted playsinline class="stage-img" data-unit="4"></video>
                     
                     <!-- Inverted SVG Notch: White wings that let the image protrude in the center -->
                     <div class="negocios-notch-divider">
@@ -27,7 +27,7 @@
                     <div class="unit-info-grid">
                         <!-- All texts stacked, cross-faded by GSAP -->
                         <div class="text-swap-container" id="title-swap">
-                            <div class="text-unit active" data-unit="1">
+                            <div class="text-unit" data-unit="1">
                                 <span class="unit-index"><span class="num-roll">01</span>/04</span>
                                 <h2 class="unit-main-name">INDI<br><span class="highlight-unit-1">CONSTRUCCIÓN</span></h2>
                             </div>
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="text-swap-container" id="desc-swap">
-                            <div class="text-unit active" data-unit="1">
+                            <div class="text-unit" data-unit="1">
                                 <p>Nos especializamos en cimentación profunda y en la ejecución de obras de alta complejidad para la construcción, modernización, rehabilitación y conservación de vialidades, puentes, edificaciones, puertos, muelles y escolleras. Cada uno de estos proyectos está respaldado por nuestra capacidad técnica y nuestro enfoque en la calidad, garantizando soluciones duraderas y eficientes.</p>
                             </div>
                             <div class="text-unit" data-unit="2">
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="text-swap-container" id="detail-swap">
-                            <div class="text-unit active" data-unit="1">
+                            <div class="text-unit" data-unit="1">
                                 <p>Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para mejorar el flujo de mercancías y garantizar la seguridad y eficiencia en las operaciones marítimas. Estos proyectos no solo impulsan el desarrollo del comercio exterior, sino que también contribuyen a dinamizar las economías regionales.</p>
                             </div>
                             <div class="text-unit" data-unit="2">
@@ -162,6 +162,15 @@
     opacity: 1;
     transform: scale(1);
     z-index: 10;
+}
+
+/* Adjustments for Infraestructura & Ferroviario (15% larger, anchored to bottom) */
+.stage-img[data-unit="2"], .stage-img[data-unit="4"] {
+    object-position: bottom center;
+    transform: scale(1.25);
+}
+.stage-img.active[data-unit="2"], .stage-img.active[data-unit="4"] {
+    transform: scale(1.15);
 }
 
 /* Content Layer: Fixed 30% height (Exactly 30vh) */

@@ -789,6 +789,11 @@
             attributionControl: false
         });
 
+        // Fix for Leaflet loading at a quarter size due to container CSS resolving late
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 400);
+
         // Custom attribution (minimalist)
         L.control.attribution({position: 'bottomleft'}).setPrefix('GRUPO INDI OSINT-MAP').addTo(map);
 
