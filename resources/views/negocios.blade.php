@@ -210,7 +210,7 @@
 
 .unit-index {
     font-family: 'Syncopate', sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.2rem, 3.5vw, 2.2rem);
     font-weight: 700;
     color: #ccc;
     line-height: 1;
@@ -233,7 +233,7 @@
 
 .unit-main-name {
     font-family: 'Syncopate', sans-serif;
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
     font-weight: 700;
     color: #000;
     line-height: 1;
@@ -254,7 +254,7 @@
 
 .text-unit p {
     font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.7;
     color: #333;
     font-weight: 300;

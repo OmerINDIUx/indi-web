@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirigir todas las peticiones a la carpeta /public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Impedir el acceso directo a archivos sensibles
+    RewriteRule ^\.env$ - [F,L]
+    RewriteRule ^composer\.(json|lock)$ - [F,L]
+    RewriteRule ^package\.(json|lock)$ - [F,L]
+</IfModule>

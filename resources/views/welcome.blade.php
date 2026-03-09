@@ -335,7 +335,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;">
                     <div>
                         <span class="u-num" style="font-size: 0.9rem; margin-bottom: 1rem;">NEWS & INSIGHTS</span>
-                        <h2 class="indi-heading-large" style="font-size: clamp(2rem, 4vw, 3.5rem); color: #222; margin: 0;">PENSΛMIENTO<br>ESTRΛTÉGICO</h2>
+                        <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #222; margin: 0;">PENSΛMIENTO<br>ESTRΛTÉGICO</h2>
                     </div>
                     <a href="/blog" class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid var(--indi-blue); padding-bottom: 5px;">VER TODO EL BLOG ↓</a>
                 </div>

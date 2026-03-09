@@ -42,7 +42,7 @@
             <section id="contacto" style="background: white; padding: 10rem 0; position: relative;">
                 <div class="indi-container" style="max-width: 1600px; margin: 0 auto; width: 90%;">
                     <div style="margin-bottom: 6rem;">
-                        <h2 class="indi-heading" style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1; margin: 0; color: #000; font-family: 'Syncopate', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
+                        <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'Syncopate', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
                         <div style="width: 150px; height: 5px; background: #0066f9; margin-top: 2rem;"></div>
                     </div>
 

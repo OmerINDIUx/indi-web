@@ -22,6 +22,7 @@ body {
     background-color: white;
     color: var(--indi-text);
     overflow-x: hidden;
+    font-size: 15px; /* Slightly more compact base */
 }
 
 /* Custom Font Replacements for the "Engineering" look */
@@ -177,7 +178,7 @@ body {
         background 0.4s ease;
     cursor: pointer;
     mix-blend-mode: difference;
-    min-width: 150px;
+    min-width: 120px;
 }
 
 .logo-menu-wrapper.active {
@@ -191,8 +192,8 @@ body {
 
 /* Logo Parts */
 .logo-part {
-    width: 130px;
-    height: 90px;
+    width: 100px;
+    height: 70px;
     position: relative;
     transition:
         width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
@@ -207,23 +208,23 @@ body {
 .part-top {
     position: relative;
     z-index: 20;
-    height: 90px;
-    width: 130px;
+    height: 70px;
+    width: 100px;
 }
 
 .part-bottom {
     position: relative;
     z-index: 10;
-    height: 90px;
-    width: 130px;
+    height: 70px;
+    width: 100px;
     /* Proper Margin-Based Stacking (Zero Jump) */
-    margin-left: -130px;
-    transform: translateY(100px);
+    margin-left: -100px;
+    transform: translateY(80px);
 }
 
 .logo-menu-wrapper.active .logo-part {
-    width: 170px;
-    height: 120px;
+    width: 140px;
+    height: 100px;
     transform: translateY(0);
     margin-left: 0;
 }
@@ -237,16 +238,16 @@ body {
 }
 
 .part-bottom .logo-svg-wrapper {
-    transform: translateY(-90px);
+    transform: translateY(-70px);
 }
 
 .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
-    transform: translateY(-120px);
+    transform: translateY(-100px);
 }
 
 .logo-svg-wrapper {
-    width: 130px;
-    height: 180px;
+    width: 100px;
+    height: 140px;
     transition:
         width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
         height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
@@ -254,8 +255,8 @@ body {
 }
 
 .logo-menu-wrapper.active .logo-svg-wrapper {
-    width: 170px;
-    height: 240px;
+    width: 140px;
+    height: 200px;
 }
 
 .logo-svg-wrapper svg {
@@ -312,7 +313,7 @@ body {
     opacity: 0;
     flex-grow: 1;
     background: var(--indi-blue);
-    height: 120px;
+    height: 100px;
     /* Custom clip-path for the notch selector */
     --notch-x: 50%;
     --notch-w: 80px;
@@ -331,7 +332,7 @@ body {
 .menu-container.active {
     max-width: 1200px;
     opacity: 1;
-    height: 120px;
+    height: 100px;
     padding: 0 2rem;
 }
 
@@ -413,7 +414,7 @@ body {
 }
 
 .indi-hero h1 {
-    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
     line-height: 1;
     margin-bottom: 2rem;
     color: white;
