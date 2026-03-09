@@ -272,14 +272,25 @@
     height: 40vh; /* Keeps the quick-switching feel */
 }
 
-@media (max-width: 1024px) {
-    .unit-info-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    .visual-layer {
-        height: 50vh;
-    }
+/* Tablets (1080px) */
+@media (max-width: 1080px) {
+    .unit-info-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .visual-layer { height: 50vh; }
+    .content-layer { height: 50vh; }
+}
+
+/* Teléfonos Grandes (720px) */
+@media (max-width: 720px) {
+    .visual-layer { height: 45vh; }
+    .content-layer { height: 55vh; }
+    .unit-main-name { font-size: clamp(2rem, 5vw, 3rem); }
+}
+
+/* Teléfonos Pequeños (500px) */
+@media (max-width: 500px) {
+    .visual-layer { height: 40vh; }
+    .content-layer { height: 60vh; }
+    .negocios-notch-divider { height: 60px; }
 }
 </style>
 

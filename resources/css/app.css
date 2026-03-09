@@ -1068,7 +1068,11 @@ body {
     transform: scale(2.5) translate(10%, 10%);
 }
 
-@media (max-width: 1024px) {
+/* --- RESOLUCIONES RESPONSIVAS GLOBALES --- */
+
+/* Tablets (1080px) */
+@media (max-width: 1080px) {
+    /* Proyectos Map Ajustes */
     .projects-layout {
         flex-direction: column;
         min-height: auto;
@@ -1094,5 +1098,185 @@ body {
     .project-visual-notched {
         height: 300px;
         flex: none;
+    }
+
+    /* Layout Unidades (Home) */
+    .units-layout-grid {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .units-text-scroll,
+    .units-sticky-stage {
+        width: 100%;
+    }
+    .units-sticky-stage {
+        height: 60vh;
+        clip-path: none;
+        position: relative;
+    }
+    .unit-box-trigger {
+        height: auto;
+        padding: 4rem 5%;
+    }
+
+    /* Stats Ajustes */
+    .indi-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .indi-hero h1 {
+        font-size: clamp(3rem, 7vw, 4.5rem);
+    }
+}
+
+/* Teléfonos Grandes (720px) */
+@media (max-width: 720px) {
+    /* Menu y Header (GSAP Safe Dimensions) */
+    .logo-menu-wrapper {
+        top: 1rem;
+        left: 1rem;
+        min-width: 100px;
+    }
+
+    .logo-part {
+        width: 80px;
+        height: 60px;
+    }
+    .part-top {
+        width: 80px;
+        height: 60px;
+    }
+    .part-bottom {
+        width: 80px;
+        height: 60px;
+        margin-left: -80px;
+        transform: translateY(70px);
+    }
+
+    .logo-svg-wrapper {
+        width: 80px;
+        height: 120px;
+    }
+    .part-bottom .logo-svg-wrapper {
+        transform: translateY(-60px);
+    }
+
+    .logo-menu-wrapper.active .logo-part {
+        width: 100px;
+        height: 75px;
+    }
+    .logo-menu-wrapper.active .logo-svg-wrapper {
+        width: 100px;
+        height: 150px;
+    }
+    .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
+        transform: translateY(-75px);
+    }
+
+    .logo-menu-wrapper.active .menu-container {
+        height: auto;
+        padding: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        clip-path: none;
+        justify-content: flex-start;
+    }
+    .nav-link-item {
+        margin: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Hero */
+    .indi-hero h1 {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    /* Bloques de sección */
+    .indi-section-wrap {
+        margin-top: -3rem;
+    }
+
+    /* Stats */
+    .indi-stats {
+        grid-template-columns: 1fr;
+    }
+    .stat-card {
+        padding: 4rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid var(--indi-border);
+    }
+    .stat-value {
+        font-size: 3rem;
+    }
+
+    /* Textos (Home) */
+    .u-title {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+    .u-detail {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding-right: 0.5rem;
+    }
+
+    .project-data-card h3 {
+        font-size: 2rem;
+    }
+}
+
+/* Teléfonos Pequeños (500px) */
+@media (max-width: 500px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* Logo Ultra Compact */
+    .logo-part {
+        width: 60px;
+        height: 45px;
+    }
+    .part-top {
+        width: 60px;
+        height: 45px;
+    }
+    .part-bottom {
+        width: 60px;
+        height: 45px;
+        margin-left: -60px;
+        transform: translateY(50px);
+    }
+    .logo-svg-wrapper {
+        width: 60px;
+        height: 90px;
+    }
+    .part-bottom .logo-svg-wrapper {
+        transform: translateY(-45px);
+    }
+
+    .logo-menu-wrapper.active .logo-part {
+        width: 80px;
+        height: 60px;
+    }
+    .logo-menu-wrapper.active .logo-svg-wrapper {
+        width: 80px;
+        height: 120px;
+    }
+    .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
+        transform: translateY(-60px);
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+    }
+    .indi-hero h1 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    .u-title {
+        font-size: 1.8rem;
+    }
+    .blog-card {
+        padding: 1.5rem;
+    }
+    .indi-card-notch {
+        height: 200px;
     }
 }

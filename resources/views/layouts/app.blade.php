@@ -339,9 +339,33 @@
             .doc-name { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
             .social-link:hover { color: white; letter-spacing: 0.3em; }
 
-            @media (max-width: 1024px) {
+            /* ----- RESOLUCIONES RESPONSIVAS ----- */
+            @media (max-width: 1080px) {
                 .footer-corporate-grid { grid-template-columns: 1fr; gap: 4rem; }
-                .footer-mega-title { font-size: 2.5rem; }
+                .footer-mega-title { font-size: clamp(2rem, 5vw, 3rem); }
+                .footer-contact-box { padding: 4rem; min-height: auto; }
+                .iso-logos { gap: 3rem; justify-content: flex-start; }
+            }
+            
+            @media (max-width: 720px) {
+                #contacto { padding: 6rem 0; }
+                .footer-docs-row { flex-direction: column; align-items: stretch; gap: 1.5rem; padding-top: 4rem; margin-bottom: 4rem; }
+                .footer-doc-btn { justify-content: center; }
+                .footer-social-row { flex-wrap: wrap; gap: 2rem; }
+                .contact-big-phone { font-size: 2rem; margin-bottom: 2rem; }
+                .footer-bottom-bar { flex-direction: column; gap: 1.5rem; text-align: center; }
+                .iso-logos img { height: 75px; }
+            }
+            
+            @media (max-width: 500px) {
+                #contacto { padding: 4rem 0; }
+                .footer-contact-box { padding: 3rem 2rem; }
+                .contact-big-phone { font-size: 1.5rem; }
+                .contact-emails a { font-size: 1rem; }
+                .iso-logos { justify-content: center; gap: 2rem; }
+                .iso-logos img { height: 60px; }
+                .footer-mega-title { font-size: clamp(1.5rem, 8vw, 2rem); }
+                .contact-label, .pill-title { margin-bottom: 1.5rem; }
             }
         </style>
     </body>
