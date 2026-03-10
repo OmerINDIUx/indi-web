@@ -146,12 +146,12 @@
                         </div>
 
                         <!-- Simplified Bottom Bar -->
-                        <div style="width: 100%; border-top: 1px solid #1a1a1a; padding-top: 4rem; margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; color: #444; font-size: 0.8rem; font-family: 'Space Grotesk'; font-weight: 500;">
+                        <div class="footer-bottom-bar">
                             <span>&copy; {{ date('Y') }} GRUPO INDI — SISTEMΛS WG-INDI</span>
-                            <div style="display: flex; gap: 2rem;">
-                                <a href="{{ route('login') }}" style="color: inherit; text-decoration: none;">CMS LOGIN</a>
-                                <a href="#" style="color: inherit; text-decoration: none;">ΛVISO DΞ PRIVΛCIDΛD</a>
-                                <a href="#" style="color: inherit; text-decoration: none;">TÉRMINOS</a>
+                            <div class="legal-links">
+                                <a href="{{ route('login') }}">CMS LOGIN</a>
+                                <a href="#">ΛVISO DΞ PRIVΛCIDΛD</a>
+                                <a href="#">TÉRMINOS</a>
                             </div>
                         </div>
                     </div>
@@ -323,15 +323,17 @@
 
             .footer-bottom-bar {
                 width: 100%;
-                border-top: 1px solid #1a1a1a;
+                border-top: 1px solid #333;
                 padding-top: 4rem;
+                margin-top: 4rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                color: #444;
-                font-size: 0.8rem;
-                font-family: 'Space Grotesk';
+                color: #9ca3af;
+                font-size: 0.85rem;
+                font-family: 'Space Grotesk', sans-serif;
                 font-weight: 500;
+                letter-spacing: 0.05em;
             }
 
             .legal-links {
@@ -339,7 +341,15 @@
                 gap: 2rem;
             }
 
-            .legal-links a { font-color: inherit; color: inherit; text-decoration: none; }
+            .legal-links a { 
+                color: inherit; 
+                text-decoration: none; 
+                transition: color 0.3s ease;
+            }
+
+            .legal-links a:hover {
+                color: #ffffff;
+            }
 
             .social-link {
                 font-family: 'Syncopate', sans-serif;
