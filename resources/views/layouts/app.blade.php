@@ -120,6 +120,22 @@
                                     <span class="doc-name">CÓDIGO DΞ ÉTICΛ 2025</span>
                                 </div>
                             </a>
+
+                            <a href="{{ route('talento.create') }}" class="footer-doc-btn" style="border-color: #0066f9;">
+                                <span class="doc-icon" style="color: #0066f9;">↗</span>
+                                <div class="doc-meta">
+                                    <span class="doc-label" style="color: #0066f9;">RECURSOS HUMΛNOS</span>
+                                    <span class="doc-name">BUSCΛMOS TΛLENTO</span>
+                                </div>
+                            </a>
+
+                            <a href="{{ route('quejas.create') }}" class="footer-doc-btn" style="border-color: #e74c3c;">
+                                <span class="doc-icon" style="color: #e74c3c;">!</span>
+                                <div class="doc-meta">
+                                    <span class="doc-label" style="color: #e74c3c;">TRΛNSPΛRENCIΛ</span>
+                                    <span class="doc-name">QUEJΛS Y DENUNCIΛS</span>
+                                </div>
+                            </a>
                         </div>
 
                         <!-- Social Networks -->
@@ -133,6 +149,7 @@
                         <div style="width: 100%; border-top: 1px solid #1a1a1a; padding-top: 4rem; margin-top: 4rem; display: flex; justify-content: space-between; align-items: center; color: #444; font-size: 0.8rem; font-family: 'Space Grotesk'; font-weight: 500;">
                             <span>&copy; {{ date('Y') }} GRUPO INDI — SISTEMΛS WG-INDI</span>
                             <div style="display: flex; gap: 2rem;">
+                                <a href="{{ route('login') }}" style="color: inherit; text-decoration: none;">CMS LOGIN</a>
                                 <a href="#" style="color: inherit; text-decoration: none;">ΛVISO DΞ PRIVΛCIDΛD</a>
                                 <a href="#" style="color: inherit; text-decoration: none;">TÉRMINOS</a>
                             </div>
