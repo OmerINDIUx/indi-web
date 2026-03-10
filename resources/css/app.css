@@ -154,9 +154,10 @@ body {
 
 /* Container Wrapper */
 .indi-container {
-    max-width: 1440px;
+    width: 90%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 5%;
+    padding: 0;
 }
 
 /* --- High-Tech Mechanical Logo Menu --- */
@@ -282,7 +283,7 @@ body {
 /* Hover Effect: DI slides side-by-side with IN, 10px gap, 10px lower */
 .logo-menu-wrapper:hover:not(.active) .part-bottom {
     margin-left: 10px; /* Precise 10px gap */
-    transform: translateY(10px); /* Slightly lower than IN */
+    transform: translateY(-3px); /* Slightly lower than IN */
 }
 
 .logo-menu-wrapper:hover:not(.active) {
@@ -290,8 +291,8 @@ body {
 }
 
 .logo-menu-wrapper.active .part-bottom {
-    transform: translateY(0);
-    margin-left: 0;
+    transform: translateY(-3px);
+    margin-left: 5px;
 }
 
 .logo-menu-wrapper.active .part-top {
@@ -330,7 +331,8 @@ body {
 }
 
 .menu-container.active {
-    max-width: 1200px;
+    max-width: 90vw;
+    width: 90%;
     opacity: 1;
     height: 100px;
     padding: 0 2rem;
@@ -410,7 +412,8 @@ body {
 .indi-hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1200px;
+    width: 90%;
+    max-width: 100%;
 }
 
 .indi-hero h1 {
@@ -859,6 +862,11 @@ body {
     overflow: hidden;
     height: 100vh; /* Full screen height */
     width: 100%;
+}
+
+/* Remove box shadow for map cards on the main page */
+.indi-interactive-projects .project-white-card {
+    box-shadow: none;
 }
 
 .project-name {

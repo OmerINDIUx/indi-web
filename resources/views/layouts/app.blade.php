@@ -40,7 +40,7 @@
         <footer class="indi-footer">
             <!-- Part 1: Full Corporate Contact Section (Copied exactly from Home Page) -->
             <section id="contacto" style="background: white; padding: 10rem 0; position: relative;">
-                <div class="indi-container" style="max-width: 1600px; margin: 0 auto; width: 90%;">
+                <div class="indi-container">
                     <div style="margin-bottom: 6rem;">
                         <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'Syncopate', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
                         <div style="width: 150px; height: 5px; background: #0066f9; margin-top: 2rem;"></div>
@@ -74,7 +74,7 @@
                         </div>
 
                         <!-- Right Column: Contact info box with technical shape -->
-                        <div style="background: #0066f9; color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center;">
+                        <div style="background: #0066f9; color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                             <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em; font-family: 'Syncopate', sans-serif;">CONTΛCTO</h4>
                             
                             <div style="font-family: 'Space Grotesk';">
@@ -100,7 +100,7 @@
 
             <!-- Part 2: Dark Bottom Footer -->
             <div style="background: #000; padding: 10rem 0 4rem; border-top: 1px solid #1a1a1a;">
-                <div class="indi-container" style="max-width: 1600px; margin: 0 auto; width: 90%;">
+                <div class="indi-container">
                     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6rem;">
                         
                         <!-- Documentation & Key Links -->

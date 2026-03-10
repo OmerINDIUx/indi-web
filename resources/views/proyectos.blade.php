@@ -209,7 +209,7 @@
     .map-titles-overlay {
         position: absolute;
         top: 260px;
-        left: 50px;
+        left: 5%;
         z-index: 1005;
         pointer-events: none;
         max-width: 600px;
@@ -301,7 +301,7 @@
     .map-filter-hud {
         position: absolute;
         bottom: 40px;
-        left: 40px;
+        left: 5%;
         z-index: 1100;
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);
@@ -397,8 +397,8 @@
         height: 2px;
     }
 
-    .hud-top-left { top: 40px; left: 40px; }
-    .hud-bottom-right { bottom: 40px; right: 40px; align-items: flex-end; }
+    .hud-top-left { top: 40px; left: 5%; }
+    .hud-bottom-right { bottom: 40px; right: 5%; align-items: flex-end; }
 
     .hud-line {
         width: 100px;
