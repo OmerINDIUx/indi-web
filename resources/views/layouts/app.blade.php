@@ -105,11 +105,11 @@
                         
                         <!-- Documentation & Key Links -->
                         <div style="display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;">
-                            <a href="{{ asset('assets/Brochure-Grupo-Indi.pdf') }}" target="_blank" class="footer-doc-btn">
-                                <span class="doc-icon">↓</span>
+                            <a href="{{ route('brochure') }}" class="footer-doc-btn">
+                                <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
                                     <span class="doc-label">MΞDIA KIT</span>
-                                    <span class="doc-name">BROCHURΞ CORPORΛTIVO</span>
+                                    <span class="doc-name">BROCHURΞ INTERΛCTIVO</span>
                                 </div>
                             </a>
                             

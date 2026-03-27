@@ -26,6 +26,10 @@ Route::get('/negocios', function () {
     return view('negocios');
 })->name('negocios');
 
+Route::get('/brochure', function () {
+    return view('brochure');
+})->name('brochure');
+
 // Forms for Talent & Quejas
 Route::get('/talento', [TalentController::class, 'create'])->name('talento.create');
 Route::post('/talento', [TalentController::class, 'store'])->name('talento.store');

@@ -7,10 +7,10 @@
             <!-- Background Images Layer -->
             <div class="visual-layer">
                 <div class="visual-notched-frame">
-                    <video src="/videos_indi/Negocios/Indi_construccion.mp4" autoplay loop muted playsinline class="stage-img active" data-unit="1"></video>
-                    <video src="/videos_indi/Negocios/Indi_infraestructura.mp4" autoplay loop muted playsinline class="stage-img" data-unit="2"></video>
-                    <video src="/videos_indi/Negocios/Indi_maritimo.mp4" autoplay loop muted playsinline class="stage-img" data-unit="3"></video>
-                    <video src="/videos_indi/Negocios/Indi_ferroviario.mp4" autoplay loop muted playsinline class="stage-img" data-unit="4"></video>
+                    <video src="/videos_indi/Construccion.mp4" loop muted playsinline class="stage-img active" data-unit="1"></video>
+                    <video src="/videos_indi/Negocios/Indi_infraestructura.mp4" loop muted playsinline class="stage-img" data-unit="2"></video>
+                    <video src="/videos_indi/maritimo.mp4" loop muted playsinline class="stage-img" data-unit="3"></video>
+                    <video src="/videos_indi/Negocios/Indi_ferroviario.mp4" loop muted playsinline class="stage-img" data-unit="4"></video>
                     
                     <!-- Inverted SVG Notch: White wings that let the image protrude in the center -->
                     <div class="negocios-notch-divider">
@@ -310,9 +310,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const textUnits = document.querySelectorAll('.text-unit');
 
     const updateUnit = (unit) => {
-        // Update Images
+        // Update Images (Videos)
         images.forEach(img => {
-            img.classList.toggle('active', img.dataset.unit == unit);
+            const isActive = img.dataset.unit == unit;
+            img.classList.toggle('active', isActive);
+            
+            // Interaction logic for videos: Play only if active
+            if (isActive) {
+                if (img.paused) {
+                    img.play().catch(e => console.log("Video play interrupted or browser blocked: ", e));
+                }
+            } else {
+                img.pause();
+                // Optional: reset to beginning? (user said "inician")
+                // img.currentTime = 0; 
+            }
         });
 
         // Update Text Blocks
