@@ -26,6 +26,14 @@ Route::get('/negocios', function () {
     return view('negocios');
 })->name('negocios');
 
+Route::get('/prensa', function () {
+    return view('prensa');
+})->name('prensa');
+
+Route::get('/social', function () {
+    return "En diseño..."; // Or view('welcome')
+})->name('social');
+
 Route::get('/brochure', function () {
     return view('viewer', ['pdf' => asset('assets/Brochure-Grupo-Indi.pdf'), 'title' => 'BROCHURE CORPORATIVO']);
 })->name('brochure');

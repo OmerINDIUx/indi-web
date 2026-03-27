@@ -108,7 +108,7 @@
                             <a href="{{ route('brochure') }}" class="footer-doc-btn">
                                 <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label">MΞDIA KIT</span>
+                                    <span class="doc-label">VΞR</span>
                                     <span class="doc-name">BROCHURΞ INTERΛCTIVO</span>
                                 </div>
                             </a>
@@ -116,7 +116,7 @@
                             <a href="{{ route('etica') }}" class="footer-doc-btn">
                                 <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label">COMPLIΛNCΞ</span>
+                                    <span class="doc-label">VΞR</span>
                                     <span class="doc-name">CÓDIGO DΞ ÉTICΛ 2025</span>
                                 </div>
                             </a>
