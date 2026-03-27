@@ -28,31 +28,30 @@
             <div class="map-grid-overlay"></div>
             <div class="map-scanner-line"></div>
             
-            <!-- Technical Category Filter (Refined as Ref HUD Panel) -->
-            <div class="map-filter-hud">
-                <div class="filter-header">
-                    <span class="filter-status">ON_SYNC</span>
-                </div>
-                <div class="filter-options">
-                    <button class="filter-btn active" data-category="all">
-                        <span class="f-index">00</span> TODOS LOS PROYΞCTOS
+            <!-- Premium Filter Bar (Inspired by Menu) -->
+            <div class="filter-bar-premium">
+                <div class="filter-container-blue" id="filterLinks">
+                    <button class="filter-link active" data-category="all">
+                        {{-- <span class="f-num">00</span> --}}
+                        <span class="f-text">TODOS</span>
                     </button>
-                    <button class="filter-btn" data-category="2">
-                        <span class="f-index">01</span>
-                        <span class="filter-dot" style="background: var(--color-construccion);"></span> CONSTRUCCIÓN
+                    <button class="filter-link" data-category="2">
+                        <span class="f-text">CONS</span>
+                        <span class="f-text">TRUCCIÓN</span>
                     </button>
-                    <button class="filter-btn" data-category="1">
-                        <span class="f-index">02</span>
-                        <span class="filter-dot" style="background: var(--color-infraestructura);"></span> INFRΛESTRUCTURΛ
+                    <button class="filter-link" data-category="1">
+                        <span class="f-text">INFRΛ</span>
+                        <span class="f-text">ESTRUCTURΛ</span>
                     </button>
-                    <button class="filter-btn" data-category="3">
-                        <span class="f-index">03</span>
-                        <span class="filter-dot" style="background: var(--color-maritimo);"></span> MΛRÍTIMO
+                    <button class="filter-link" data-category="3">
+                        <span class="f-text">MΛRÍ</span>
+                        <span class="f-text">TIMO</span>
                     </button>
-                    <button class="filter-btn" data-category="4">
-                        <span class="f-index">04</span>
-                        <span class="filter-dot" style="background: var(--color-ferroviaria);"></span> FERROVIΛRIΛ
+                    <button class="filter-link" data-category="4">
+                        <span class="f-text">FERRO</span>
+                        <span class="f-text">VIΛRIΛ</span>
                     </button>
+                    <div class="filter-notch" id="filterNotch"></div>
                 </div>
             </div>
             
@@ -298,103 +297,79 @@
 
     /* HUD Elements */
     /* HUD: Technical Solid Look (Reverted) */
-    .map-filter-hud {
+    /* Premium Filter Bar (Similar to Menu) */
+    .filter-bar-premium {
         position: absolute;
-        bottom: 40px;
+        bottom: 60px;
         left: 5%;
-        z-index: 1100;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(0,0,0,0.1);
-        display: flex;
-        flex-direction: column;
-        transition: all 0.5s ease;
-        padding: 4px;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-        max-width: calc(100% - 80px); /* Prevent overflow */
-        overflow-x: auto;
+        z-index: 2100; /* High index to stay above the card if needed */
+        transition: all 1s var(--transition);
     }
 
-    .filter-header {
-        background: transparent;
-        padding: 0.6rem 1rem;
+    .filter-container-blue {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background: var(--indi-blue);
+        padding: 0 1.5rem;
+        height: 60px;
+        position: relative;
+        /* Notch logic */
+        --notch-x: 10%;
+        --notch-w: 60px;
+        clip-path: polygon(
+            0% 0%,
+            100% 0%,
+            100% 100%,
+            calc(var(--notch-x) + (var(--notch-w) / 2) + 15px) 100%,
+            calc(var(--notch-x) + (var(--notch-w) / 2)) 85%,
+            calc(var(--notch-x) - (var(--notch-w) / 2)) 85%,
+            calc(var(--notch-x) - (var(--notch-w) / 2) - 15px) 100%,
+            0% 100%
+        );
+        transition: clip-path 0.5s var(--transition);
     }
 
-    .filter-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 0.65rem;
-        font-weight: 700;
-        color: #888;
-        letter-spacing: 0.3em;
-    }
-
-    .filter-options {
-        display: flex;
-    }
-
-    .filter-btn {
+    .filter-link {
         background: transparent;
         border: none;
-        color: #666;
-        padding: 1rem 1.5rem; /* Reduced padding for better fit */
+        color: rgba(255,255,255,0.6);
+        padding: 0 1.5rem;
         font-family: 'Syncopate', sans-serif;
-        font-size: 0.85rem; /* Slightly smaller to prevent overlap */
+        font-size: 0.75rem;
         font-weight: 700;
         cursor: pointer;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.6rem;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        height: 100%;
         transition: all 0.3s ease;
-        text-transform: uppercase;
-        border-right: 1px solid rgba(0,0,0,0.08);
-        min-width: 140px;
+        letter-spacing: 0.1em;
     }
 
-    .filter-btn:hover {
-        background: rgba(0,0,0,0.02);
-        color: #222;
-    }
-
-    .filter-btn.active {
-        background: #fff;
-        color: var(--indi-blue) !important;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-
-    .filter-btn .f-index {
-        font-size: 0.65rem;
-        opacity: 0.6;
-    }
-
-    .filter-dot {
-        width: 15px;
-        height: 3px;
-        background: currentColor;
-    }
-
-    .filter-btn:hover {
-        background: #080808;
+    .filter-link:hover, .filter-link.active {
         color: #fff;
     }
 
-    .filter-btn.active {
-        background: #fff;
-        color: var(--indi-blue);
+    .filter-link .f-num {
+        font-size: 0.55rem;
+        opacity: 0.5;
     }
 
-    .filter-btn.active .f-index {
-        color: var(--indi-blue);
+    .filter-link.active {
+        transform: translateY(-2px);
     }
 
-    .filter-btn.active .filter-dot {
-        opacity: 1;
-        width: 100%;
-        height: 2px;
+    @media (max-width: 1024px) {
+        .filter-bar-premium {
+            left: 2%;
+            bottom: 40px;
+        }
+        .filter-link {
+            padding: 0 0.8rem;
+            font-size: 0.65rem;
+        }
     }
 
     .hud-top-left { top: 40px; left: 5%; }
@@ -913,15 +888,45 @@
             markerMap.set(project.id, marker);
         });
 
-        // Filtering Logic
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // Filtering Logic with Notch Animation
+        const filterLinks = document.getElementById('filterLinks');
+        const filterBtns = document.querySelectorAll('.filter-link');
+
+        function updateFilterNotch(btn) {
+            if (!btn || !filterLinks) return;
+            const btnRect = btn.getBoundingClientRect();
+            const containerRect = filterLinks.getBoundingClientRect();
+            const x = btnRect.left - containerRect.left + btnRect.width / 2;
+            const xPercent = (x / containerRect.width) * 100;
+
+            gsap.to(filterLinks, {
+                '--notch-x': `${xPercent}%`,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        }
+
+        // Set initial notch position
+        setTimeout(() => {
+            const activeBtn = document.querySelector('.filter-link.active');
+            if(activeBtn) updateFilterNotch(activeBtn);
+        }, 500);
+
+        filterLinks.addEventListener('mouseleave', () => {
+            const activeBtn = document.querySelector('.filter-link.active');
+            if(activeBtn) updateFilterNotch(activeBtn);
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('mouseenter', () => updateFilterNotch(btn));
+            
             btn.addEventListener('click', () => {
                 const category = btn.getAttribute('data-category');
                 
                 // Toggle active button
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
+                updateFilterNotch(btn);
                 // Filter Markers
                 markerGroup.clearLayers();
                 projects.forEach(p => {
@@ -930,7 +935,7 @@
                     }
                 });
 
-                // Filter Cards
+                // Filter Cards (mini grid)
                 document.querySelectorAll('.project-card-mini').forEach(card => {
                     if (category === 'all' || card.getAttribute('data-category') == category) {
                         card.style.display = 'flex';
