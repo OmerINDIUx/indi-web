@@ -17,11 +17,11 @@
             </div>
             
             <div class="menu-container" id="menuLinks">
-                <a href="/" class="nav-link-item">INDI</a>
-                <a href="/proyectos" class="nav-link-item"><span>PRO</span><span>YECTOS</span></a>
-                <a href="/negocios" class="nav-link-item"><span>NEGO</span><span>CIOS</span></a>
-                <a href="/prensa" class="nav-link-item"><span>PREN</span><span>SA</span></a>
-                <a href="/social" class="nav-link-item"><span>SO</span><span>CIAL</span></a>
+                <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
+                <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>PRO</span><span>YECTOS</span></a>
+                <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>NEGO</span><span>CIOS</span></a>
+                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>PREN</span><span>SA</span></a>
+                <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>SO</span><span>CIAL</span></a>
                 <!-- The "guiño" selector notch -->
                 <div class="menu-notch" id="menuNotch"></div>
             </div>

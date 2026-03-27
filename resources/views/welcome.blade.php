@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <header class="indi-hero">
         <video autoplay muted loop playsinline id="heroVideo" class="hero-video">
-            <source src="{{ asset('storage/video-indi.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos_indi/edificaciones.mp4') }}" type="video/mp4">
         </video>
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
@@ -143,7 +143,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Ingeniería de vanguardia en infraestructura portuaria y dragado especializado, conectando a México con el mundo.</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" alt="Maritimo">
+                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Maritimo">
                         </div>
                     </div>
 
@@ -155,7 +155,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Desarrollo de sistemas de transporte masivo como el Mexibús Línea 1, mejorando la movilidad urbana del Estado de México.</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="Infraestructura">
+                            <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
                         </div>
                     </div>
 
@@ -179,7 +179,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">Ingeniería especializada en infraestructura ferroviaria de gran escala, participando en proyectos estratégicos de conectividad masiva y transporte de carga.</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Aduana">
+                            <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
                         </div>
                     </div>
                 </div>
@@ -194,10 +194,10 @@
                         </div>
                         
                         <div class="unit-images-stack">
-                            <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" class="stage-img active" alt="M">
-                            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" class="stage-img" alt="I">
+                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" class="stage-img active" alt="M">
+                            <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" class="stage-img" alt="I">
                             <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" class="stage-img" alt="C">
-                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="stage-img" alt="F">
+                            <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" class="stage-img" alt="F">
                         </div>
                     </div>
                 </div>

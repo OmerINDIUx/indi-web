@@ -13,15 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMenuOpen = false;
 
     if (logoMenu) {
-        logoMenu.addEventListener("click", () => {
-            isMenuOpen = !isMenuOpen;
+        let autoCollapseTimer;
+
+        const toggleMenu = (forceState = null) => {
+            if (forceState !== null) {
+                if (isMenuOpen === forceState) return;
+                isMenuOpen = forceState;
+            } else {
+                isMenuOpen = !isMenuOpen;
+            }
             
             // Trigger scroll event to force the logo collision logic to re-evaluate instantly
             window.dispatchEvent(new Event("scroll"));
             
+            // Auto close timer logic
+            clearTimeout(autoCollapseTimer);
+            
             if (isMenuOpen) {
                 menuLinks.classList.add("active");
                 logoMenu.classList.add("active");
+
+                // Set 1 minute timeout to auto close if user doesn't scroll
+                autoCollapseTimer = setTimeout(() => {
+                    if (isMenuOpen && window.scrollY < 50) {
+                        toggleMenu(false);
+                    }
+                }, 60000); // 1 minute = 60000 ms
 
                 // Advanced Mechanical Reveal for Links (Faster half-time)
                 gsap.fromTo(
@@ -35,10 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         stagger: 0.05,
                         ease: "expo.out",
                         duration: 0.6,
-                        onComplete: () =>
-                            updateNotch(
-                                document.querySelector(".nav-link-item"),
-                            ),
+                        onComplete: () => {
+                            const activeLink = document.querySelector(".nav-link-item.active-page") || document.querySelector(".nav-link-item");
+                            if (activeLink) updateNotch(activeLink);
+                        }
                     },
                 );
             } else {
@@ -52,7 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     ease: "power2.in",
                 });
             }
-        });
+        };
+
+        logoMenu.addEventListener("click", () => toggleMenu());
 
         // Menu Notch Selector Logic - High Performance GSAP updates
         const navLinks = document.querySelectorAll(".nav-link-item");
@@ -79,29 +98,34 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.forEach((link) => {
             link.addEventListener("mouseenter", () => updateNotch(link));
         });
-    }
 
-    // 2. Collapse expanded menu on Scroll Down
-    let lastScrollY = window.scrollY;
-    ScrollTrigger.create({
-        onUpdate: (self) => {
-            const currentScrollY = self.scroll();
-            if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                // Scrolling down - collapse expanded menu only
-                if (isMenuOpen) {
-                    menuLinks.classList.remove("active");
-                    logoMenu.classList.remove("active");
-                    gsap.to(".nav-link-item", {
-                        opacity: 0,
-                        y: 10,
-                        duration: 0.3,
-                    });
-                    isMenuOpen = false;
+        menuLinks.addEventListener("mouseleave", () => {
+            const activeLink = document.querySelector(".nav-link-item.active-page") || document.querySelector(".nav-link-item");
+            if (activeLink) updateNotch(activeLink);
+        });
+
+        // 2. Collapse expanded menu on Scroll Down
+        let lastScrollY = window.scrollY;
+        ScrollTrigger.create({
+            onUpdate: (self) => {
+                const currentScrollY = self.scroll();
+                if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                    // Scrolling down - collapse expanded menu only
+                    if (isMenuOpen) {
+                        toggleMenu(false);
+                    }
                 }
-            }
-            lastScrollY = currentScrollY;
-        },
-    });
+                lastScrollY = currentScrollY;
+            },
+        });
+
+        // Auto-open menu on page load if at the top
+        if (window.scrollY < 50) {
+            setTimeout(() => {
+                toggleMenu(true);
+            }, 300);
+        }
+    }
 
     // 3. High-Impact Automatic Hero Entry Animation (No ScrollTrigger)
     const heroAutoText = document.querySelector(".hero-typer-text");
