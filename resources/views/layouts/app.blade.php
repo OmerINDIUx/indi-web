@@ -113,8 +113,8 @@
                                 </div>
                             </a>
                             
-                            <a href="{{ asset('assets/codigo-de-etica-y-conducta-2025.pdf') }}" target="_blank" class="footer-doc-btn">
-                                <span class="doc-icon">↓</span>
+                            <a href="{{ route('etica') }}" class="footer-doc-btn">
+                                <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
                                     <span class="doc-label">COMPLIΛNCΞ</span>
                                     <span class="doc-name">CÓDIGO DΞ ÉTICΛ 2025</span>

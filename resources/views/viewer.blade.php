@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'BROCHURE CORPORATIVO | GRUPO INDI')
+@section('title', $title . ' | GRUPO INDI')
 
 @section('content')
 <!-- PDF.js and PageFlip Libraries -->
@@ -34,7 +34,7 @@
             <button id="nextBtn" class="control-btn">SIGUIENTΞ →</button>
         </div>
 
-        <a href="{{ asset('assets/Brochure-Grupo-Indi.pdf') }}" download class="download-btn">DΞSCΛRGΛR PDF</a>
+        <a href="{{ $pdf }}" download class="download-btn">DΞSCΛRGΛR PDF</a>
     </div>
 </div>
 
@@ -101,7 +101,7 @@
         width: 90%;
         margin-top: auto;
         padding-bottom: 3vh;
-        z-index: 20;
+        z-index: 5000; /* High z-index to stay above flipbook animations */
     }
 
     .zoom-controls, .nav-controls {
@@ -155,7 +155,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
-        const pdfPath = "{{ asset('assets/Brochure-Grupo-Indi.pdf') }}";
+        const pdfPath = "{{ $pdf }}";
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 

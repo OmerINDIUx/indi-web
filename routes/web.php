@@ -27,8 +27,12 @@ Route::get('/negocios', function () {
 })->name('negocios');
 
 Route::get('/brochure', function () {
-    return view('brochure');
+    return view('viewer', ['pdf' => asset('assets/Brochure-Grupo-Indi.pdf'), 'title' => 'BROCHURE CORPORATIVO']);
 })->name('brochure');
+
+Route::get('/etica', function () {
+    return view('viewer', ['pdf' => asset('assets/codigo-de-etica-y-conducta-2025.pdf'), 'title' => 'CÓDIGO DE ÉTICA 2025']);
+})->name('etica');
 
 // Forms for Talent & Quejas
 Route::get('/talento', [TalentController::class, 'create'])->name('talento.create');
