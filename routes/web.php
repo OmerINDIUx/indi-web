@@ -30,8 +30,12 @@ Route::get('/prensa', function () {
     return view('prensa');
 })->name('prensa');
 
+Route::get('/prensa/articulo', function () {
+    return view('prensa-articulo');
+})->name('prensa.articulo');
+
 Route::get('/social', function () {
-    return "En diseño..."; // Or view('welcome')
+    return view('social');
 })->name('social');
 
 Route::get('/brochure', function () {

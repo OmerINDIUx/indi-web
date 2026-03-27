@@ -68,7 +68,7 @@
                         <span class="blog-date">25 . FΞB . 2024</span>
                         <h4 class="blog-title">DESCUBRΞ LΛ LOGÍSTICΛ DΞTRÁS DΞ UN ROMPΞOLΛS</h4>
                         <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
+                            <a href="{{ route('prensa.articulo') }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
                         </div>
                         <div class="indi-card-notch">
                             <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Noticia 1">
