@@ -12,7 +12,7 @@
         <div class="logo-menu-wrapper" id="logoMenu">
             <div class="logo-part part-top">
                 <div class="logo-svg-wrapper">
-                    {!! file_get_contents(public_path('assets/logo_indi.svg')) !!}
+                    {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
                 </div>
             </div>
             
@@ -28,7 +28,7 @@
 
             <div class="logo-part part-bottom">
                 <div class="logo-svg-wrapper">
-                    {!! file_get_contents(public_path('assets/logo_indi.svg')) !!}
+                    {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
                 </div>
             </div>
         </div>
