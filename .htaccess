@@ -5,8 +5,10 @@
 
     RewriteEngine On
 
-    # Redirigir todas las peticiones a la carpeta /public
+    # Redirigir todas las peticiones a la carpeta /public, EXCEPTO subdominios manuales
     RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_URI} !^/digitaltwin.*
+    RewriteCond %{REQUEST_URI} !^/digitaltwin_viejo.*
     RewriteRule ^(.*)$ public/$1 [L]
 
     # Impedir el acceso directo a archivos sensibles
