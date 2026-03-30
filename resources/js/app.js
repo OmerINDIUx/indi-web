@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (logoMenu) {
         let autoCollapseTimer;
 
+        // Initialize Mechanical Baseline
+        gsap.set(".logo-part", { width: 100, height: 70 });
+        gsap.set(".part-bottom", { marginLeft: -100, y: 80 });
+        gsap.set(".logo-svg-wrapper", { width: 100, height: 140 });
+        gsap.set(".part-bottom .logo-svg-wrapper", { y: -70 });
+
         const toggleMenu = (forceState = null) => {
             if (forceState !== null) {
                 if (isMenuOpen === forceState) return;
@@ -22,26 +28,68 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 isMenuOpen = !isMenuOpen;
             }
-            
-            // Trigger scroll event to force the logo collision logic to re-evaluate instantly
+
+            // Trigger scroll event
             window.dispatchEvent(new Event("scroll"));
-            
-            // Auto close timer logic
             clearTimeout(autoCollapseTimer);
-            
+
             if (isMenuOpen) {
                 menuLinks.classList.add("active");
                 logoMenu.classList.add("active");
+                
+                // When opening menu, always restore full size/opacity
+                gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, duration: 0.4 });
 
-                // Set 1 minute timeout to auto close if user doesn't scroll
-                autoCollapseTimer = setTimeout(() => {
-                    if (isMenuOpen && window.scrollY < 50) {
-                        toggleMenu(false);
-                    }
-                }, 60000); // 1 minute = 60000 ms
+                // Staggered Mechanical Expansion
+                const tl = gsap.timeline();
 
-                // Advanced Mechanical Reveal for Links (Faster half-time)
-                gsap.fromTo(
+                // 1. Expand the Logo Parts to active size
+                tl.to(
+                    ".logo-part",
+                    {
+                        width: 140,
+                        height: 100,
+                        duration: 0.8,
+                        ease: "expo.out",
+                    },
+                    0,
+                );
+
+                tl.to(
+                    ".logo-svg-wrapper",
+                    {
+                        width: 140,
+                        height: 200,
+                        duration: 0.8,
+                        ease: "expo.out",
+                    },
+                    0,
+                );
+
+                tl.to(
+                    ".part-bottom .logo-svg-wrapper",
+                    {
+                        y: -100,
+                        duration: 0.8,
+                        ease: "expo.out",
+                    },
+                    0,
+                );
+
+                // 2. Slide "DI" out side-by-side with a slight elastic bounce
+                tl.to(
+                    ".part-bottom",
+                    {
+                        marginLeft: 10,
+                        y: 0,
+                        duration: 0.9,
+                        ease: "elastic.out(1, 0.75)",
+                    },
+                    0.1,
+                );
+
+                // 3. Expand Menu Container and reveal links
+                tl.fromTo(
                     ".nav-link-item",
                     { opacity: 0, y: 30, rotateX: -45, filter: "blur(10px)" },
                     {
@@ -53,25 +101,186 @@ document.addEventListener("DOMContentLoaded", () => {
                         ease: "expo.out",
                         duration: 0.6,
                         onComplete: () => {
-                            const activeLink = document.querySelector(".nav-link-item.active-page") || document.querySelector(".nav-link-item");
+                            const activeLink =
+                                document.querySelector(
+                                    ".nav-link-item.active-page",
+                                ) || document.querySelector(".nav-link-item");
                             if (activeLink) updateNotch(activeLink);
-                        }
+                        },
                     },
+                    0.2,
                 );
+
+                autoCollapseTimer = setTimeout(() => {
+                    if (isMenuOpen && window.scrollY < 50) {
+                        toggleMenu(false);
+                    }
+                }, 60000);
             } else {
-                menuLinks.classList.remove("active");
-                logoMenu.classList.remove("active");
-                gsap.to(".nav-link-item", {
-                    opacity: 0,
-                    y: -20,
-                    filter: "blur(5px)",
-                    duration: 0.4,
-                    ease: "power2.in",
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        menuLinks.classList.remove("active");
+                        logoMenu.classList.remove("active");
+                    },
                 });
+
+                // Fast mechanical snap back
+                tl.to(
+                    ".nav-link-item",
+                    {
+                        opacity: 0,
+                        y: -20,
+                        filter: "blur(5px)",
+                        duration: 0.3,
+                        ease: "power2.in",
+                    },
+                    0,
+                );
+
+                tl.to(
+                    ".part-bottom",
+                    {
+                        marginLeft: -100,
+                        y: 80,
+                        duration: 0.6,
+                        ease: "power2.inOut",
+                    },
+                    0.1,
+                );
+
+                tl.to(
+                    ".logo-part",
+                    {
+                        width: 100,
+                        height: 70,
+                        duration: 0.6,
+                        ease: "power2.inOut",
+                    },
+                    0.1,
+                );
+
+                tl.to(
+                    ".logo-svg-wrapper",
+                    {
+                        width: 100,
+                        height: 140,
+                        duration: 0.6,
+                        ease: "power2.inOut",
+                    },
+                    0.1,
+                );
+
+                tl.to(
+                    ".part-bottom .logo-svg-wrapper",
+                    {
+                        y: -70,
+                        duration: 0.6,
+                        ease: "power2.inOut",
+                    },
+                    0.1,
+                );
             }
         };
 
-        logoMenu.addEventListener("click", () => toggleMenu());
+        logoMenu.addEventListener("click", (e) => {
+            // Only toggle if not clicking a direct nav link
+            if (!e.target.closest(".nav-link-item")) {
+                toggleMenu();
+            }
+        });
+
+        // Mechanical Hover Animation: Transition from Stacked (IN over DI) to Side-by-side (INDI)
+        logoMenu.addEventListener("mouseenter", () => {
+            if (!isMenuOpen) {
+                // Restore scale/opacity on hover for usability
+                gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, duration: 0.3 });
+
+                // Pre-transition Logo to horizontal "INDI"
+                gsap.to(".logo-part", {
+                    width: 140,
+                    height: 100,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+                gsap.to(".logo-svg-wrapper", {
+                    width: 140,
+                    height: 200,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+                gsap.to(".part-bottom .logo-svg-wrapper", {
+                    y: -100,
+                    duration: 0.5,
+                    ease: "power2.out",
+                });
+
+                gsap.to(".part-top", {
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out",
+                }); // Ensure top is reset
+                gsap.to(".part-bottom", {
+                    marginLeft: 10,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "elastic.out(1, 0.8)",
+                });
+
+                // Subtle blue glow on hover interaction
+                gsap.to(".logo-svg-wrapper .cls-1", {
+                    fill: "#0066FF",
+                    duration: 0.3,
+                });
+            }
+        });
+
+        logoMenu.addEventListener("mouseleave", () => {
+            if (!isMenuOpen) {
+                // Snap back to Mechanical Stacked (IN over DI)
+                gsap.to(".logo-part", {
+                    width: 100,
+                    height: 70,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                });
+                gsap.to(".logo-svg-wrapper", {
+                    width: 100,
+                    height: 140,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                });
+                gsap.to(".part-bottom .logo-svg-wrapper", {
+                    y: -70,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                });
+
+                gsap.to(".part-bottom", {
+                    marginLeft: -100,
+                    y: 80,
+                    duration: 0.5,
+                    ease: "power2.inOut",
+                });
+
+                // Return to clean white/diff
+                gsap.to(".logo-svg-wrapper .cls-1", {
+                    fill: "#ffffff",
+                    duration: 0.3,
+                });
+
+                // Re-apply "collision" shrink if we are still in scroll-down territory
+                if (window.scrollY > 200) {
+                     gsap.to(logoMenu, {
+                        opacity: 0.5,
+                        scale: 0.6,
+                        transformOrigin: "left center",
+                        x: -70,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                }
+            }
+        });
 
         // Menu Notch Selector Logic - High Performance GSAP updates
         const navLinks = document.querySelectorAll(".nav-link-item");
@@ -100,30 +309,69 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         menuLinks.addEventListener("mouseleave", () => {
-            const activeLink = document.querySelector(".nav-link-item.active-page") || document.querySelector(".nav-link-item");
+            const activeLink =
+                document.querySelector(".nav-link-item.active-page") ||
+                document.querySelector(".nav-link-item");
             if (activeLink) updateNotch(activeLink);
         });
 
-        // 2. Collapse expanded menu on Scroll Down
+        // 2. Logo Scroll Behavior: Collision Detection Toggles "Small" state
         let lastScrollY = window.scrollY;
-        ScrollTrigger.create({
-            onUpdate: (self) => {
-                const currentScrollY = self.scroll();
-                if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                    // Scrolling down - collapse expanded menu only
-                    if (isMenuOpen) {
-                        toggleMenu(false);
-                    }
-                }
-                lastScrollY = currentScrollY;
-            },
-        });
+        
+        // Homepage specific logic
+        const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.php' || window.location.href.split('/').pop() === '';
 
-        // Auto-open menu on page load if at the top
-        if (window.scrollY < 50) {
-            setTimeout(() => {
-                toggleMenu(true);
-            }, 300);
+        if (isHomePage) {
+            // Auto-open menu on page load if at the top
+            if (window.scrollY < 50) {
+                setTimeout(() => {
+                    toggleMenu(true);
+                }, 300);
+            }
+
+            // Scroll trigger for the "Collision Point"
+            // We trigger when the content container (.indi-section-wrap) reaches the logo area
+            ScrollTrigger.create({
+                trigger: ".indi-section-wrap",
+                start: "top 160px", // Point where content starts overlapping/colliding with the fixed logo
+                onEnter: () => {
+                    // Collision happens: Shrink
+                    if (isMenuOpen) toggleMenu(false);
+                    gsap.to(logoMenu, {
+                        opacity: 0.5,
+                        scale: 0.6,
+                        transformOrigin: "left center",
+                        x: -70,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                },
+                onLeaveBack: () => {
+                    // Return to Hero area: Restore Large
+                    gsap.to(logoMenu, {
+                        opacity: 1,
+                        scale: 1,
+                        x: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                    // Optional: Re-expand for maximum impact at top
+                    setTimeout(() => {
+                        if (window.scrollY < 50) toggleMenu(true);
+                    }, 200);
+                }
+            });
+        } else {
+             // On other pages, just collapse on scroll down normally
+             ScrollTrigger.create({
+                onUpdate: (self) => {
+                    const currentScrollY = self.scroll();
+                    if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                        if (isMenuOpen) toggleMenu(false);
+                    }
+                    lastScrollY = currentScrollY;
+                },
+            });
         }
     }
 
@@ -582,90 +830,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 });
             },
         });
-    }
-
-    // ---------------------------------------------------------
-    // 11. Dissolve Logo on Text Collision ("Fonts")
-    // ---------------------------------------------------------
-    const mainLogoWrap = document.getElementById("logoMenu");
-    if (mainLogoWrap) {
-        let textElements = [];
-        const updateTextElements = () => {
-            textElements = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a:not(.nav-link-item), span:not(.char):not(.hero-char):not(.alt-char), li, label, strong, b, i, em"));
-        };
-        updateTextElements();
-        
-        let isLogoHidden = false;
-        let originalLogoRect = null;
-        
-        const checkLogoCollision = () => {
-            if (isMenuOpen) {
-                // Force return to normal if menu is opened while it was hidden
-                if (isLogoHidden) {
-                    gsap.to(mainLogoWrap, { opacity: 1, scale: 1, transformOrigin: "left center", x: 0, duration: 0.4, ease: "power2.out" });
-                    isLogoHidden = false;
-                }
-                return;
-            }
-            
-            // Cache the unscaled rect so the collision box doesn't shrink when the logo shrinks
-            if (!isLogoHidden) {
-                originalLogoRect = mainLogoWrap.getBoundingClientRect();
-            }
-            const logoRect = originalLogoRect || mainLogoWrap.getBoundingClientRect();
-            
-            // Larger margin ensures it starts dissolving much before it mathematically touches the font
-            const marginY = 80; 
-            const marginX = 40;
-            const logoBox = {
-                top: logoRect.top - marginY,
-                bottom: logoRect.bottom + marginY,
-                left: logoRect.left - marginX,
-                right: logoRect.right + marginX
-            };
-
-            let isColliding = false;
-
-            for (let i = 0; i < textElements.length; i++) {
-                const el = textElements[i];
-                // Skip if the element is part of the logo or invisible
-                if (mainLogoWrap.contains(el) || el.offsetParent === null) continue;
-                
-                // Ensure the element actually contains textual content
-                const text = el.innerText || "";
-                if (text.trim() === "") continue;
-
-                const rect = el.getBoundingClientRect();
-                
-                // Pre-filter: if rect is out of viewport or has no dimensions
-                if (rect.bottom < 0 || rect.top > window.innerHeight || rect.width === 0 || rect.height === 0) continue;
-
-                // AABB Collision detection
-                if (!(logoBox.right < rect.left || 
-                      logoBox.left > rect.right || 
-                      logoBox.bottom < rect.top || 
-                      logoBox.top > rect.bottom)) {
-                    isColliding = true;
-                    break;
-                }
-            }
-
-            if (isColliding && !isLogoHidden) {
-                // Shrink and move aside effect
-                gsap.to(mainLogoWrap, { opacity: 0.5, scale: 0.6, transformOrigin: "left center", x: -70, duration: 0.4, ease: "power2.out" });
-                isLogoHidden = true;
-            } else if (!isColliding && isLogoHidden) {
-                // Smoothly return when font passes
-                gsap.to(mainLogoWrap, { opacity: 1, scale: 1, transformOrigin: "left center", x: 0, duration: 0.4, ease: "power2.out" });
-                isLogoHidden = false;
-            }
-        };
-
-        window.addEventListener("scroll", () => requestAnimationFrame(checkLogoCollision));
-        window.addEventListener("load", () => {
-             updateTextElements();
-             checkLogoCollision();
-        });
-        checkLogoCollision();
     }
 });

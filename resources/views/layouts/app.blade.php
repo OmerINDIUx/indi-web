@@ -10,26 +10,29 @@
         <!-- High-Tech Mechanical Logo Menu -->
         <!-- High-Tech Mechanical Logo Menu -->
         <div class="logo-menu-wrapper" id="logoMenu">
-            <div class="logo-part part-top">
-                <div class="logo-svg-wrapper">
-                    {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
+            <div class="logo-group">
+                <div class="logo-part part-top">
+                    <div class="logo-svg-wrapper">
+                        {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
+                    </div>
                 </div>
-            </div>
-            
-            <div class="menu-container" id="menuLinks">
-                <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
-                <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>PRO</span><span>YECTOS</span></a>
-                <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>NEGO</span><span>CIOS</span></a>
-                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>PREN</span><span>SA</span></a>
-                <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>SO</span><span>CIAL</span></a>
-                <!-- The "guiño" selector notch -->
-                <div class="menu-notch" id="menuNotch"></div>
+                
+                <div class="logo-part part-bottom">
+                    <div class="logo-svg-wrapper">
+                        {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
+                    </div>
+                </div>
             </div>
 
-            <div class="logo-part part-bottom">
-                <div class="logo-svg-wrapper">
-                    {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
-                </div>
+            <div class="menu-container" id="menuLinks">
+                <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
+                <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>PROYECTOS</span></a>
+                <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>NEGOCIOS</span></a>
+                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>PRENSA</span></a>
+                <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>SOCIAL</span></a>
+                
+                <!-- The "guiño" selector notch -->
+                <div class="menu-notch" id="menuNotch"></div>
             </div>
         </div>
         

@@ -10,8 +10,7 @@
         </video>
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                EMPRESΛ CON ΛLTΛ EXPERIENCIΛ EN
-                CONSTRUCCIÓN E INFRΛESTRUCTURΛ
+              PΛSIÓN POR ΞL PROGRΞSO
             </h1>
         </div>
     </header>

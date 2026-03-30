@@ -172,14 +172,20 @@ body {
     background: transparent;
     padding: 0.8rem;
     border-radius: 4px;
-    transition:
-        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        background 0.4s ease;
+    transition: background 0.4s ease;
     cursor: pointer;
     mix-blend-mode: difference;
     min-width: 120px;
+    min-height: 154px; /* Accommodate both logo parts when stacked */
+}
+
+.logo-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
 }
 
 .logo-menu-wrapper.active {
@@ -189,6 +195,8 @@ body {
     box-shadow: none;
     display: flex;
     align-items: center;
+    gap: 4rem; /* Espacio generoso entre el logo y el menú */
+    min-height: 100px;
 }
 
 /* Logo Parts */
@@ -196,11 +204,7 @@ body {
     width: 100px;
     height: 70px;
     position: relative;
-    transition:
-        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        margin-left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: none; /* Handled by GSAP */
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -209,50 +213,32 @@ body {
 .part-top {
     position: relative;
     z-index: 20;
-    height: 70px;
-    width: 100px;
 }
 
 .part-bottom {
     position: relative;
     z-index: 10;
-    height: 70px;
-    width: 100px;
-    /* Proper Margin-Based Stacking (Zero Jump) */
-    margin-left: -100px;
-    transform: translateY(80px);
 }
 
 .logo-menu-wrapper.active .logo-part {
-    width: 140px;
-    height: 100px;
-    transform: translateY(0);
-    margin-left: 0;
+    /* Baseline sizes defined in base .logo-part, 
+       extended by GSAP during interaction */
 }
 
 .logo-menu-wrapper.active .part-top {
     margin: 0;
 }
 
-.logo-menu-wrapper.active .part-bottom {
-    margin-left: 0;
-}
-
 .part-bottom .logo-svg-wrapper {
-    transform: translateY(-70px);
 }
 
 .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
-    transform: translateY(-100px);
 }
 
 .logo-svg-wrapper {
     width: 100px;
     height: 140px;
-    transition:
-        width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: none; /* Handled by GSAP or immediate */
 }
 
 .logo-menu-wrapper.active .logo-svg-wrapper {
@@ -288,11 +274,6 @@ body {
 
 .logo-menu-wrapper:hover:not(.active) {
     min-width: 320px;
-}
-
-.logo-menu-wrapper.active .part-bottom {
-    transform: translateY(-3px);
-    margin-left: 5px;
 }
 
 .logo-menu-wrapper.active .part-top {
@@ -1220,11 +1201,32 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
-.filter-pill.active.maritimo { background: var(--indi-blue); border-color: var(--indi-blue); color: white; }
-.filter-pill.active.construccion { background: #ffa608; border-color: #ffa608; color: white; }
-.filter-pill.active.infraestructura { background: #27ae60; border-color: #27ae60; color: white; }
-.filter-pill.active.ferroviario { background: #e74c3c; border-color: #e74c3c; color: white; }
-.filter-pill.active:not(.maritimo):not(.construccion):not(.infraestructura):not(.ferroviario) { background: var(--indi-blue); color: white; }
+.filter-pill.active.maritimo {
+    background: var(--indi-blue);
+    border-color: var(--indi-blue);
+    color: white;
+}
+.filter-pill.active.construccion {
+    background: #ffa608;
+    border-color: #ffa608;
+    color: white;
+}
+.filter-pill.active.infraestructura {
+    background: #27ae60;
+    border-color: #27ae60;
+    color: white;
+}
+.filter-pill.active.ferroviario {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+}
+.filter-pill.active:not(.maritimo):not(.construccion):not(.infraestructura):not(
+        .ferroviario
+    ) {
+    background: var(--indi-blue);
+    color: white;
+}
 
 .filter-pill:not(.active):hover {
     border-color: #888;
