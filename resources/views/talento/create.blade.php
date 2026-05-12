@@ -11,18 +11,18 @@
                 <h1 class="indi-heading" style="font-size: 3rem; margin-bottom: 1rem; color: var(--indi-dark);">
                     ÚNETE Λ <span style="color: var(--indi-blue);">INDI</span>
                 </h1>
-                <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
+                <p style="font-family: 'usual', sans-serif; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
                     Forma parte del equipo que está construyendo el futuro de México. Compártenos tus datos y nos pondremos en contacto contigo.
                 </p>
             </div>
 
             @if(session('success'))
-                <div style="background: #dcfce7; color: #166534; padding: 1.5rem; border-radius: 4px; margin-bottom: 3rem; font-family: 'Inter', sans-serif; font-weight: 500; text-align: center;">
+                <div style="background: #dcfce7; color: #166534; padding: 1.5rem; border-radius: 4px; margin-bottom: 3rem; font-family: 'usual', sans-serif; font-weight: 500; text-align: center;">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('talento.store') }}" enctype="multipart/form-data" style="font-family: 'Inter', sans-serif;">
+            <form method="POST" action="{{ route('talento.store') }}" enctype="multipart/form-data" style="font-family: 'usual', sans-serif;">
                 @csrf
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>

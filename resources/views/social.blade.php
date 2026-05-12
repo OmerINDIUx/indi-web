@@ -7,10 +7,10 @@
     <!-- Hero Section -->
     <section class="indi-hero" style="background-image: url('{{ asset('assets/social/hero.png') }}');">
         <div class="indi-hero-content">
-            <h1 class="indi-scroll-text" style="color: white; font-family: 'Syncopate', sans-serif;">
+            <h1 class="indi-scroll-text" style="color: white; font-family: 'usual', sans-serif;">
                 RESPONSΛBILIDΛD <br> <span class="blue">SOCIΛL</span>
             </h1>
-            <p style="font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; letter-spacing: 0.2em; max-width: 800px; margin: 0 auto; color: rgba(255,255,255,0.8);">
+            <p style="font-family: 'usual', sans-serif; font-size: 1.2rem; letter-spacing: 0.2em; max-width: 800px; margin: 0 auto; color: rgba(255,255,255,0.8);">
                 CONSTRUYΞNDO ΞL FUTURO CON CONCIΞNCIΛ ΛMBIΞNTΛL, ΞNΞRGÉTICΛ Y SOCIΛL
             </p>
         </div>
@@ -27,8 +27,8 @@
     <section class="indi-section-wrap" style="padding: 10rem 0; background: #0a0a0a; color: white;">
         <div class="indi-container">
             <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-                <h4 style="font-family: 'Syncopate', sans-serif; color: #0066f9; letter-spacing: 0.4em; margin-bottom: 2rem;">WΞ INDI</h4>
-                <p style="font-size: 1.5rem; line-height: 1.8; color: #ccc; font-family: 'Space Grotesk', sans-serif;">
+                <h4 style="font-family: 'usual', sans-serif; color: #0066f9; letter-spacing: 0.4em; margin-bottom: 2rem;">WΞ INDI</h4>
+                <p style="font-size: 1.5rem; line-height: 1.8; color: #ccc; font-family: 'usual', sans-serif;">
                     Mediante esta división y con la trayectoria y formalidad que le caracterizan, Grupo Indi busca incidir con proyectos que contribuyan al desarrollo sostenible del país y que generen mejora en la calidad de vida de la sociedad.
                 </p>
             </div>
@@ -121,7 +121,7 @@
                 <div class="foundation-card animate-on-scroll">
                     <div class="foundation-header">
                         <span class="section-tag" style="color: white; border-color: white;">FUNDΛCIÓN MMC</span>
-                        <h2 style="font-family: 'Syncopate', sans-serif; font-size: 3rem; margin-top: 2rem;">HΞRΞNCIΛ DΞ BIΞNΞSTΛR</h2>
+                        <h2 style="font-family: 'usual', sans-serif; font-size: 3rem; margin-top: 2rem;">HΞRΞNCIΛ DΞ BIΞNΞSTΛR</h2>
                     </div>
                     <div class="foundation-body">
                         <p>Honramos la memoria del Ingeniero Manuel Rubén Muñoz Cano Cardoso, buscando un México más equitativo y próspero.</p>
@@ -173,7 +173,7 @@
 
     .section-tag {
         display: inline-block;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: 0.7rem;
         letter-spacing: 0.4em;
@@ -184,7 +184,7 @@
     }
 
     .indi-heading {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: clamp(2rem, 4vw, 3.5rem);
         line-height: 1;
         margin-bottom: 2rem;
@@ -192,7 +192,7 @@
     }
 
     .block-text p {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 1.1rem;
         line-height: 1.6;
         color: #666;
@@ -226,7 +226,7 @@
         position: absolute;
         bottom: 20px;
         right: 20px;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 10px;
         color: white;
         background: #0066f9;
@@ -243,7 +243,7 @@
     }
 
     .mini-card h3 {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.8rem;
         margin-bottom: 1rem;
         color: #000;
@@ -263,7 +263,7 @@
     }
 
     .highlight-box h3 {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 1rem;
         color: #00ffcc;
         margin-bottom: 1.5rem;
@@ -294,14 +294,14 @@
 
     .s-stat .val {
         display: block;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 2.5rem;
         font-weight: 700;
         color: #0066f9;
     }
 
     .s-stat .lab {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.6rem;
         letter-spacing: 0.2em;
         color: #999;
@@ -328,7 +328,7 @@
     }
 
     .foundation-body p {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 1.4rem;
         line-height: 1.6;
         margin-bottom: 4rem;
@@ -336,7 +336,7 @@
     }
 
     .foundation-body h3 {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         color: #fff;
         font-size: 1.2rem;
         margin-bottom: 1.5rem;
@@ -349,7 +349,7 @@
         border: 1px solid white;
         color: white;
         text-decoration: none;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.8rem;
         font-weight: 700;
         transition: all 0.4s ease;

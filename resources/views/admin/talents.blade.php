@@ -11,10 +11,10 @@
                 <h1 class="indi-heading" style="font-size: 2rem; margin: 0; color: var(--indi-dark);">
                     BΛNDEJΛ DE <span style="color: var(--indi-blue);">TΛLENTO</span>
                 </h1>
-                <a href="{{ route('admin.dashboard') }}" style="background: #eee; color: #333; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'Inter', sans-serif;">&larr; Volver al Panel</a>
+                <a href="{{ route('admin.dashboard') }}" style="background: #eee; color: #333; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif;">&larr; Volver al Panel</a>
             </div>
 
-            <div style="overflow-x: auto; font-family: 'Inter', sans-serif;">
+            <div style="overflow-x: auto; font-family: 'usual', sans-serif;">
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
                         <tr style="background: #f1f5f9; color: #334155; border-bottom: 2px solid #e2e8f0;">

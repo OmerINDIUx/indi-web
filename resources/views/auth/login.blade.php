@@ -12,7 +12,7 @@
             </h2>
 
             @if($errors->any())
-                <div style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 4px; margin-bottom: 2rem; font-family: 'Inter', sans-serif;">
+                <div style="background: #fee2e2; color: #b91c1c; padding: 1rem; border-radius: 4px; margin-bottom: 2rem; font-family: 'usual', sans-serif;">
                     <ul style="margin: 0; padding-left: 1rem;">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}" style="font-family: 'Inter', sans-serif;">
+            <form method="POST" action="{{ route('login') }}" style="font-family: 'usual', sans-serif;">
                 @csrf
                 <div style="margin-bottom: 1.5rem;">
                     <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Correo Electrónico</label>

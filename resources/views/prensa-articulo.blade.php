@@ -48,7 +48,7 @@
         border: 2px solid var(--indi-blue);
         color: var(--indi-blue);
         padding: 0.5rem 2.5rem;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: 0.85rem;
         letter-spacing: 0.3em;
@@ -59,7 +59,7 @@
     }
 
     .article-main-title {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: clamp(2rem, 5vw, 4rem);
         line-height: 1.1;
@@ -78,14 +78,14 @@
 
     /* Content Column */
     .article-body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 1.1rem;
         line-height: 1.8;
         color: #333;
     }
 
     .article-body h2 {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: 1.8rem;
         margin: 3rem 0 1.5rem;
@@ -131,7 +131,7 @@
     }
 
     .sidebar-section-title {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: 0.9rem;
         color: var(--indi-blue);

@@ -3,8 +3,8 @@
 @section('title', 'PROYECTOS | GRUPO INDI')
 
 @section('content')
-<!-- Outfit Font from Reference -->
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<!-- usual Font from Reference -->
+<link href="https://fonts.googleapis.com/css2?family=usual:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <div class="projects-page-wrapper">
     <script>
@@ -185,7 +185,7 @@
     }
 
     .hero-pretitle {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.65rem;
         color: var(--indi-blue);
         letter-spacing: 0.4em;
@@ -194,7 +194,7 @@
     }
 
     .hero-subtitle {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.9rem;
         letter-spacing: 0.1em;
         color: rgba(0,0,0,0.6);
@@ -219,7 +219,7 @@
         line-height: 0.9;
         margin-bottom: 2rem;
         color: #000;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
     }
 
@@ -334,7 +334,7 @@
         border: none;
         color: rgba(255,255,255,0.6);
         padding: 0 1.5rem;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.75rem;
         font-weight: 700;
         cursor: pointer;
@@ -383,7 +383,7 @@
     }
 
     .hud-label {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.55rem;
         color: var(--indi-dark);
         opacity: 0.6;
@@ -470,7 +470,7 @@
     }
 
     .project-overlay-sidebar h2 {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         color: #000 !important;
         margin-bottom: 2rem;
@@ -484,7 +484,7 @@
     .category-pill {
         display: inline-block;
         padding: 0.4rem 1.2rem;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.6rem;
         font-weight: 700;
         color: #fff;
@@ -509,7 +509,7 @@
     }
 
     .project-overlay-sidebar .project-name {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: clamp(1.5rem, 2.5vw, 2.2rem);
         line-height: 1.1;
@@ -544,7 +544,7 @@
     }
 
     .project-overlay-sidebar .stat-label {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.8rem;
         font-weight: 700;
         color: var(--accent-color, var(--indi-blue));
@@ -557,7 +557,7 @@
         font-size: 1.5rem; /* Increased for better technical impact */
         font-weight: 700;
         color: #000;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'usual', sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
@@ -567,7 +567,7 @@
         line-height: 1.6;
         color: #333;
         margin-bottom: 3rem;
-        font-family: 'Inter', sans-serif;
+        font-family: 'usual', sans-serif;
     }
 
     .project-overlay-sidebar .project-visual-notched {
@@ -635,7 +635,7 @@
 
     .count-num {
         display: block;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 3rem;
         font-weight: 700;
         color: #fff;
@@ -643,7 +643,7 @@
     }
 
     .count-label {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.7rem;
         color: #444;
         letter-spacing: 0.2em;
@@ -694,7 +694,7 @@
     }
 
     .project-title {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 1rem;
         font-weight: 700;
         letter-spacing: 0.05em;
@@ -711,7 +711,7 @@
     }
 
     .view-btn {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.6rem;
         color: var(--indi-blue);
         opacity: 0;
@@ -782,8 +782,8 @@
         function showProject(project) {
             const overlay = document.getElementById('projectOverlay');
             
-            // Helper to tech-ify text (simple replace for demo/consistency)
-            const techify = (text) => text.toUpperCase().replace(/A/g, 'Λ').replace(/E/g, 'Ξ');
+            // Helper to tech-ify text (Disabled to maintain clean Usual font)
+            const techify = (text) => text.toUpperCase();
 
             const categories = {
                 1: { 

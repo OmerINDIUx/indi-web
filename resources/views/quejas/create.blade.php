@@ -11,18 +11,18 @@
                 <h1 class="indi-heading" style="font-size: 3rem; margin-bottom: 1rem; color: var(--indi-dark);">
                     CΛNΛL DE <span style="color: #e74c3c;">DENUNCIΛS</span>
                 </h1>
-                <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; color: #666; max-width: 650px; margin: 0 auto;">
+                <p style="font-family: 'usual', sans-serif; font-size: 1.2rem; color: #666; max-width: 650px; margin: 0 auto;">
                     Espacio confidencial para reportar cualquier anomalía o queja relacionada con nuestras operaciones, colaboradores o proyectos. Puedes reportarlo de manera anónima si así lo deseas.
                 </p>
             </div>
 
             @if(session('success'))
-                <div style="background: #dcfce7; color: #166534; padding: 1.5rem; border-radius: 4px; margin-bottom: 3rem; font-family: 'Inter', sans-serif; font-weight: 500; text-align: center;">
+                <div style="background: #dcfce7; color: #166534; padding: 1.5rem; border-radius: 4px; margin-bottom: 3rem; font-family: 'usual', sans-serif; font-weight: 500; text-align: center;">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('quejas.store') }}" enctype="multipart/form-data" style="font-family: 'Inter', sans-serif;">
+            <form method="POST" action="{{ route('quejas.store') }}" enctype="multipart/form-data" style="font-family: 'usual', sans-serif;">
                 @csrf
                 
                 <div style="background: #f8f9fa; border-left: 4px solid var(--indi-blue); padding: 1.5rem; margin-bottom: 3rem; border-radius: 0 8px 8px 0;">

@@ -9,7 +9,7 @@
             <source src="{{ asset('videos_indi/edificaciones.mp4') }}" type="video/mp4">
         </video>
         <div class="indi-hero-content">
-            <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
               PΛSIÓN POR ΞL PROGRΞSO
             </h1>
         </div>
@@ -97,7 +97,7 @@
 
                 .stat-num {
                     display: block;
-                    font-family: 'Syncopate', sans-serif;
+                    font-family: 'usual', sans-serif;
                     font-size: clamp(3.5rem, 5vw, 6rem);
                     font-weight: 700;
                     line-height: 1;
@@ -106,7 +106,7 @@
                 }
 
                 .stat-tit {
-                    font-family: 'Syncopate', sans-serif;
+                    font-family: 'usual', sans-serif;
                     font-size: 0.8rem;
                     font-weight: 700;
                     letter-spacing: 0.4em;
@@ -115,7 +115,7 @@
                 }
 
                 .stat-txt {
-                    font-family: 'Space Grotesk', sans-serif;
+                    font-family: 'usual', sans-serif;
                     font-size: 0.85rem;
                     line-height: 1.6;
                     color: var(--indi-text-muted);

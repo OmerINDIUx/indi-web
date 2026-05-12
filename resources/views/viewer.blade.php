@@ -115,7 +115,7 @@
         border: 1px solid rgba(255,255,255,0.15);
         color: white;
         padding: 0.8rem 1.5rem;
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.65rem;
         font-weight: 700;
         cursor: pointer;
@@ -136,7 +136,7 @@
     }
 
     .page-indicator, .zoom-level {
-        font-family: 'Syncopate', sans-serif;
+        font-family: 'usual', sans-serif;
         font-size: 0.65rem;
         letter-spacing: 0.1em;
         opacity: 0.7;

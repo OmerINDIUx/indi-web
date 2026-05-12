@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title', 'GRUPO INDI')</title>
+        <link rel="stylesheet" href="https://use.typekit.net/iyv7knh.css">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
@@ -45,7 +46,7 @@
             <section id="contacto" style="background: white; padding: 10rem 0; position: relative;">
                 <div class="indi-container">
                     <div style="margin-bottom: 6rem;">
-                        <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'Syncopate', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
+                        <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'usual', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
                         <div style="width: 150px; height: 5px; background: #0066f9; margin-top: 2rem;"></div>
                     </div>
 
@@ -54,8 +55,8 @@
                         <div style="display: flex; flex-direction: column; gap: 6rem;">
                             <!-- Conciencia Empresarial -->
                             <div class="contact-info-block">
-                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'Syncopate', sans-serif;">CONCIENCIΛ EMPRESΛRIΛ</h4>
-                                <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; margin-bottom: 3rem; font-family: 'Inter', sans-serif;">
+                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONCIENCIΛ EMPRESΛRIΛ</h4>
+                                <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; margin-bottom: 3rem; font-family: 'usual', sans-serif;">
                                     Certificamos nuestros procesos con los más altos estándares internacionales de calidad, para ofrecer a nuestros clientes la seguridad de una empresa altamente comprometida con cada proyecto.
                                 </p>
                                 
@@ -69,8 +70,8 @@
 
                             <!-- Conciencia Ambiental -->
                             <div class="contact-info-block">
-                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'Syncopate', sans-serif;">CONCIENCIΛ ΛMBIENTΛL</h4>
-                                <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; font-family: 'Inter', sans-serif;">
+                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONCIENCIΛ ΛMBIENTΛL</h4>
+                                <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; font-family: 'usual', sans-serif;">
                                     Grupo Indi promueve activamente acciones que favorecen la conservación y el cuidado del medio ambiente, comprometiéndose a utilizar de manera racional y eficiente los recursos naturales en todos sus proyectos. Como parte de sus iniciativas, el grupo implementa la recolección de equipos, materiales y accesorios electrónicos, los cuales son enviados a centros de acopio y reciclaje certificados.
                                 </p>
                             </div>
@@ -78,9 +79,9 @@
 
                         <!-- Right Column: Contact info box with technical shape -->
                         <div style="background: #0066f9; color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                            <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em; font-family: 'Syncopate', sans-serif;">CONTΛCTO</h4>
+                            <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONTΛCTO</h4>
                             
-                            <div style="font-family: 'Space Grotesk';">
+                            <div style="font-family: 'usual', sans-serif;">
                                 <a href="tel:+525555406750" style="display: block; font-size: 2.5rem; color: white; text-decoration: none; margin-bottom: 3rem; font-weight: 700; letter-spacing: -0.02em;">+52 55 5540 6750</a>
                                 
                                 <div style="margin-bottom: 4rem;">
@@ -176,7 +177,7 @@
             }
 
             .footer-mega-title {
-                font-family: 'Syncopate', sans-serif;
+                font-family: 'usual', sans-serif;
                 font-size: clamp(3rem, 6vw, 4.5rem);
                 line-height: 1.1;
                 margin: 0;
@@ -196,7 +197,7 @@
             }
 
             .pill-title {
-                font-family: 'Syncopate', sans-serif;
+                font-family: 'usual', sans-serif;
                 color: #0066f9;
                 font-size: 0.9rem;
                 margin-bottom: 2rem;
@@ -244,7 +245,7 @@
             }
 
             .contact-label {
-                font-family: 'Syncopate', sans-serif;
+                font-family: 'usual', sans-serif;
                 color: rgba(255,255,255,0.7);
                 font-size: 1rem;
                 margin-bottom: 4rem;
@@ -253,7 +254,7 @@
 
             .contact-big-phone {
                 display: block;
-                font-family: 'Space Grotesk', sans-serif;
+                font-family: 'usual', sans-serif;
                 font-size: 2.5rem;
                 color: white;
                 text-decoration: none;
@@ -272,11 +273,11 @@
                 text-decoration: none;
                 margin-bottom: 1.2rem;
                 font-size: 1.2rem;
-                font-family: 'Space Grotesk', sans-serif;
+                font-family: 'usual', sans-serif;
             }
 
             .contact-physical {
-                font-family: 'Space Grotesk', sans-serif;
+                font-family: 'usual', sans-serif;
                 font-size: 1.1rem;
                 color: rgba(255,255,255,0.4);
                 line-height: 1.8;
@@ -334,7 +335,7 @@
                 align-items: center;
                 color: #9ca3af;
                 font-size: 0.85rem;
-                font-family: 'Space Grotesk', sans-serif;
+                font-family: 'usual', sans-serif;
                 font-weight: 500;
                 letter-spacing: 0.05em;
             }
@@ -342,6 +343,7 @@
             .legal-links {
                 display: flex;
                 gap: 2rem;
+                font-family: 'usual', sans-serif;
             }
 
             .legal-links a { 
@@ -355,7 +357,7 @@
             }
 
             .social-link {
-                font-family: 'Syncopate', sans-serif;
+                font-family: 'usual', sans-serif;
                 color: #666;
                 text-decoration: none;
                 font-size: 0.8rem;
@@ -365,8 +367,8 @@
             }
 
             .footer-doc-btn:hover { background: white; color: black; border-color: white; transform: translateY(-5px); }
-            .doc-label { font-family: 'Syncopate', sans-serif; font-size: 0.6rem; color: #0066f9; letter-spacing: 0.2em; margin-bottom: 0.2rem; }
-            .doc-name { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
+            .doc-label { font-family: 'usual', sans-serif; font-size: 0.6rem; color: #0066f9; letter-spacing: 0.2em; margin-bottom: 0.2rem; }
+            .doc-name { font-family: 'usual', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
             .social-link:hover { color: white; letter-spacing: 0.3em; }
 
             /* ----- RESOLUCIONES RESPONSIVAS ----- */
