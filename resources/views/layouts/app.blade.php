@@ -12,17 +12,33 @@
         <!-- High-Tech Mechanical Logo Menu -->
         <div class="logo-menu-wrapper" id="logoMenu">
             <div class="logo-group">
-                <div class="logo-part part-top">
-                    <div class="logo-svg-wrapper">
-                        {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
-                    </div>
+                <div class="logo-svg-wrapper single-logo">
+                    {!! file_get_contents(public_path('assets/indi brand-01.svg')) !!}
                 </div>
-                
-                <div class="logo-part part-bottom">
-                    <div class="logo-svg-wrapper">
-                        {!! file_get_contents(public_path('assets/logo_indi_.svg')) !!}
-                    </div>
-                </div>
+                <style>
+                    /* Make sure SVG can overflow its viewBox */
+                    .single-logo svg {
+                        overflow: visible !important;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    /* Base state transitions for both groups */
+                    .single-logo .in, .single-logo .di {
+                        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+                        transform-origin: 0 0;
+                    }
+                    /* Hover / Active states matching exact coordinates and scale of indi brand-02.svg */
+                    .logo-menu-wrapper:hover .single-logo .in,
+                    .logo-menu-wrapper.active .single-logo .in {
+                        /* 02 is scaled by ~0.9128 and IN is translated slightly */
+                        transform: translate(3.82px, 0.03px) scale(0.9128);
+                    }
+                    .logo-menu-wrapper:hover .single-logo .di,
+                    .logo-menu-wrapper.active .single-logo .di {
+                        /* Translating DI to exact coordinates of 02 space */
+                        transform: translate(494.73px, -327.59px) scale(0.9128); 
+                    }
+                </style>
             </div>
 
             <div class="menu-container" id="menuLinks">

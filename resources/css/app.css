@@ -204,51 +204,23 @@ body {
     min-height: 100px;
 }
 
-/* Logo Parts */
-.logo-part {
-    width: 100px;
-    height: 70px;
-    position: relative;
-    transition: none; /* Handled by GSAP */
-    overflow: hidden;
-    flex-shrink: 0;
-}
 
-/* New Robust In-Flow Stacking (Zero Jump System) */
-.part-top {
-    position: relative;
-    z-index: 20;
-}
-
-.part-bottom {
-    position: relative;
-    z-index: 10;
-}
-
-.logo-menu-wrapper.active .logo-part {
-    /* Baseline sizes defined in base .logo-part, 
-       extended by GSAP during interaction */
-}
-
-.logo-menu-wrapper.active .part-top {
-    margin: 0;
-}
-
-.part-bottom .logo-svg-wrapper {
-}
-
-.logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
-}
 
 .logo-svg-wrapper {
     width: 100px;
     height: 140px;
-    transition: none; /* Handled by GSAP or immediate */
+    transition: margin 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .logo-menu-wrapper.active .logo-svg-wrapper {
     width: 140px;
     height: 200px;
+    margin-right: 140px; /* Space for DI to move into */
+}
+
+/* Also give it space on just hover, so the menu moves smoothly if it opens on hover */
+.logo-menu-wrapper:hover:not(.active) .logo-svg-wrapper {
+    margin-right: 100px; /* Space for DI when hovering at 100px width */
 }
 
 .logo-svg-wrapper svg {
@@ -265,26 +237,8 @@ body {
     fill: var(--indi-blue);
 }
 
-/* Removing old clip-path system in favor of overflow-hidden containers */
-.part-top,
-.part-bottom {
-    clip-path: none;
-}
-
-/* Hover Effect: DI slides side-by-side with IN, 10px gap, 10px lower */
-.logo-menu-wrapper:hover:not(.active) .part-bottom {
-    margin-left: 10px; /* Precise 10px gap */
-    transform: translateY(-3px); /* Slightly lower than IN */
-}
-
 .logo-menu-wrapper:hover:not(.active) {
     min-width: 320px;
-}
-
-.logo-menu-wrapper.active .part-top {
-    position: relative;
-    top: auto;
-    left: auto;
 }
 
 /* Horizontal Menu Items */

@@ -138,7 +138,8 @@ class ProjectController extends Controller
               "marker_image" => "imagenes_indi/Construccion/Libramiento-Ciudad-Valles-Tamuin - copia.webp",
               "address" => "San Luis Potosí",
               "latitude" => "21.985084",
-              "longitude" => "-99.003874"
+              "longitude" => "-99.003874",
+              "description" => "Obra de infraestructura vial que incluye el Puente Tampaón II. Implicó el movimiento de 1.4 millones de m³ de material y la ejecución de pilas de cimentación de hasta 44 metros de profundidad sobre el cauce del río. Destaca por el uso pionero de bases cementadas con zeolitas (Road Cem) en una obra de la SCT, superando retos extremos de fraguado bajo altas temperaturas."
             ],
             [
               "id" => 28,
@@ -307,10 +308,11 @@ class ProjectController extends Controller
               "title" => "Senado de la República",
               "category" => 2,
               "status" => 1,
-              "marker_image" => "imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp",
+              "marker_image" => "imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg",
               "address" => "Ciudad de México",
               "latitude" => "19.436735",
-              "longitude" => "-99.192476"
+              "longitude" => "-99.192476",
+              "description" => "Edificación gubernamental monumental construida con 75,000 toneladas de acero estructural y colados ininterrumpidos de 20,000 m³ de concreto en 24 horas. Primera obra en México en utilizar el sistema Top Down para cimentación profunda en el inestable subsuelo del Lago de Tenochtitlán, alcanzando pilas de hasta 45 metros de profundidad."
             ],
             [
               "id" => 22,
@@ -342,7 +344,8 @@ class ProjectController extends Controller
               "marker_image" => "imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg",
               "address" => "Oaxaca",
               "latitude" => "16.1414",
-              "longitude" => "-95.2040"
+              "longitude" => "-95.2040",
+              "description" => "Obra marítima colosal, catalogada como el rompeolas más grande de Latinoamérica. Su construcción implicó el vertimiento récord de 15,000 toneladas diarias, sumando casi 6 millones de toneladas de roca y 11,000 prefabricados de concreto (Corelocs). Destaca el uso pionero de drones robóticos marinos y posicionamiento GPS de precisión milimétrica."
             ],
             [
               "id" => 103,
@@ -362,7 +365,8 @@ class ProjectController extends Controller
               "marker_image" => "imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp",
               "address" => "Veracruz",
               "latitude" => "19.2359",
-              "longitude" => "-96.1702"
+              "longitude" => "-96.1702",
+              "description" => "Desarrollo y modernización de infraestructura portuaria estratégica. El proyecto incluyó la ampliación de capacidades operativas y logísticas marítimas para optimizar el flujo de comercio internacional, empleando ingeniería de vanguardia para garantizar la estabilidad de las nuevas instalaciones frente a las exigentes dinámicas costeras."
             ],
             [
               "id" => 105,
@@ -414,7 +418,8 @@ class ProjectController extends Controller
               "marker_image" => "imagenes_indi/infraestructura/Fabrica-de-Durmientes-Merida-1 - copia.jpg",
               "address" => "Yucatán",
               "latitude" => "20.869778",
-              "longitude" => "-89.576804"
+              "longitude" => "-89.576804",
+              "description" => "Planta industrial automatizada de alta complejidad para prefabricados ferroviarios. Alcanzó un récord de producción de 1,654 durmientes diarios, fabricando más de 657,000 unidades con cero rechazos. Implementó robótica avanzada y una fórmula exclusiva de concreto que logra la resistencia para pretensado en solo 10 horas."
             ],
             [
               "id" => 34,
@@ -424,7 +429,8 @@ class ProjectController extends Controller
               "marker_image" => "imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg",
               "address" => "Yucatán",
               "latitude" => "20.370866",
-              "longitude" => "-90.049828"
+              "longitude" => "-90.049828",
+              "description" => "Construcción de plataforma ferroviaria y tendido de vía férrea a lo largo de un trazado estratégico de alta complejidad logística. El proyecto superó desafíos topográficos y climáticos mediante una planificación impecable, garantizando la integración de sistemas ferroviarios de carga y pasajeros de última generación."
             ]
         ];
 

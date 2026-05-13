@@ -148,7 +148,7 @@
                             <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
                         </div>
                         <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" alt="Noticia 6">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Noticia 6">
                         </div>
                     </div>
 

@@ -140,7 +140,7 @@
                             <span class="u-num">01</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI MΛRÍTIMO</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Ingeniería de vanguardia en infraestructura portuaria y dragado especializado, conectando a México con el mundo.</p>
+                        <p class="u-detail indi-scroll-text">Dominio técnico en ingeniería portuaria, escolleras monumentales y obras de dragado. Integramos tecnologías de vanguardia para superar las dinámicas costeras y conectar a México con el mundo..</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Maritimo">
                         </div>
@@ -152,7 +152,7 @@
                             <span class="u-num">02</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI INFRΛESTRUCTURΛ</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Desarrollo de sistemas de transporte masivo como el Mexibús Línea 1, mejorando la movilidad urbana del Estado de México.</p>
+                        <p class="u-detail indi-scroll-text">Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precisión técnica, resolviendo retos complejos para conectar y transformar las metrópolis.</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
                         </div>
@@ -164,9 +164,9 @@
                             <span class="u-num">03</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI CONSTRUCCIÓN</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Edificación de obras icónicas como el Senado de la República, integrando funcionalidad y diseño arquitectónico de primer nivel.</p>
+                        <p class="u-detail indi-scroll-text">Especialistas en ingeniería civil de alta complejidad y cimentación profunda. Ejecutamos obras icónicas y monumentales, garantizando la máxima integridad estructural e innovación arquitectónica</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" alt="Construccion">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construccion">
                         </div>
                     </div>
 
@@ -176,7 +176,7 @@
                             <span class="u-num">04</span>
                             <h2 class="indi-heading u-title indi-scroll-text">INDI FERROVIΛRIΛ</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Ingeniería especializada en infraestructura ferroviaria de gran escala, participando en proyectos estratégicos de conectividad masiva y transporte de carga.</p>
+                        <p class="u-detail indi-scroll-text">Ingeniería avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala. Trazamos y construimos rutas resilientes que impulsan la competitividad logística a nivel nacional."</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
                         </div>
@@ -195,7 +195,7 @@
                         <div class="unit-images-stack">
                             <img src="{{ asset('imagenes_indi/Maritimo.png') }}" class="stage-img active" alt="M">
                             <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" class="stage-img" alt="I">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.webp') }}" class="stage-img" alt="C">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="stage-img" alt="C">
                             <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" class="stage-img" alt="F">
                         </div>
                     </div>
@@ -252,8 +252,7 @@
                                 </div>
                             </div>
                             <p class="project-description">
-                                Construcción del rompeolas oeste en el puerto de Salina Cruz, una obra monumental de ingeniería marítima diseñada para potenciar el corredor interoceánico.
-                            </p>
+Rehabilitación estratégica de la vía férrea que conecta el Océano Pacífico con el Golfo de México. La obra implicó la modernización y estabilización de terracerías y puentes para soportar altas capacidades de carga comercial, consolidando una ruta logística fundamental para el país.                            </p>
                             <div class="project-visual-notched">
                                 <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Rompe Olas">
                             </div>
@@ -263,11 +262,11 @@
                     <!-- Project 02: Mexibus -->
                     <div class="project-data-card" data-state="cdmx">
                         <div class="project-white-card">
-                            <h2 class="project-name">MEXIBÚS LÍNEΛ 1 (ΞDOMΞX)</h2>
+                            <h2 class="project-name">CΛBLΞBÚS LÍNΞΛA 1 (CDMX)</h2>
                             <div class="project-stats-grid">
                                 <div class="stat-item">
                                     <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">ESTΛDO DE MÉXICO</span>
+                                    <span class="stat-value indi-scroll-text">CIUDAD DE MÉXICO</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-label">Año</span>
@@ -279,10 +278,9 @@
                                 </div>
                             </div>
                             <p class="project-description">
-                                Modernización del sistema de transporte masivo conectando el Estado de México, mejorando la movilidad de miles de usuarios diariamente.
-                            </p>
+Sistema de transporte público por teleférico urbano diseñado para zonas de alta densidad y topografía compleja. La ingeniería del proyecto se centró en la cimentación profunda de torres en terrenos irregulares y el montaje de sistemas electromecánicos de alta seguridad, mejorando drásticamente la conectividad de la zona.                            </p>
                             <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="Mexibus">
+                                <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="Mexibus">
                             </div>
                         </div>
                     </div>
