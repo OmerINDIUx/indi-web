@@ -746,17 +746,149 @@
         opacity: 0.05;
     }
 
-    @media (max-width: 768px) {
-        .project-overlay {
-            width: 90%;
-            left: 5%;
-            bottom: 2rem;
+    @media (max-width: 1080px) {
+        .map-titles-overlay {
+            top: 180px;
+        }
+        .map-titles-overlay h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+        }
+        .search-container {
+            max-width: 320px !important;
+            margin-top: 2rem !important;
+        }
+        .filter-bar-premium {
+            bottom: 30px;
+            left: 2%;
+        }
+        .filter-container-blue {
+            padding: 0 0.5rem;
+            height: 50px;
+        }
+        .filter-link {
+            padding: 0 0.8rem;
+            font-size: 0.65rem;
+        }
+        .project-overlay-sidebar {
+            width: 450px !important;
+        }
+        .project-overlay-sidebar.active {
+            width: 50% !important;
+        }
+        .project-white-card {
+            padding: 3rem 1.5rem;
+        }
+        .project-overlay-sidebar .project-name {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         
-        .hero-bottom {
+        /* Fix for the stats grid overflow */
+        .project-overlay-sidebar .project-stats-grid {
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+        }
+        .project-overlay-sidebar .stat-item {
+            padding-left: 0.5rem;
+        }
+        .project-overlay-sidebar .stat-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+        }
+        .project-overlay-sidebar .stat-value {
+            font-size: 0.85rem;
+            word-break: break-word;
+            line-height: 1.2;
+        }
+
+        .project-overlay-sidebar .project-description {
+            font-size: 1rem;
+        }
+        .project-overlay-sidebar .project-visual-notched {
+            margin: 0 -1.5rem;
+            width: calc(100% + 3rem);
+            height: 35vh;
+        }
+        .projects-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        .map-titles-overlay {
+            top: 120px;
+            left: 5%;
+        }
+        .map-titles-overlay h1 {
+            font-size: 2.2rem;
+        }
+        .hero-subtitle {
+            font-size: 0.7rem;
+            max-width: 250px;
+        }
+        .search-container {
+            max-width: 280px !important;
+            padding: 0.3rem 0.8rem !important;
+        }
+        .search-container input {
+            font-size: 0.8rem !important;
+        }
+        
+        .filter-bar-premium {
+            bottom: 20px;
+            left: 2%;
+            width: 96%;
+        }
+        .filter-container-blue {
+            overflow-x: auto;
+            white-space: nowrap;
+            justify-content: flex-start;
+            border-radius: 4px;
+            clip-path: none;
+        }
+        .project-overlay-sidebar {
+            width: 100% !important;
+            transform: translateY(100%);
+            bottom: 0;
+            top: auto;
+            height: 80vh;
+        }
+        .project-overlay-sidebar.active {
+            width: 100% !important;
+            transform: translateY(0);
+        }
+        .close-overlay {
+            top: 1rem;
+            right: 1rem;
+        }
+        .project-white-card {
+            padding: 2rem 1.5rem;
+        }
+        .project-overlay-sidebar .project-visual-notched {
+            margin: 0 -1.5rem;
+            width: calc(100% + 3rem);
+            height: 30vh;
+        }
+        .projects-list-section {
+            padding: 6rem 0;
+        }
+        .list-header {
             flex-direction: column;
             align-items: flex-start;
-            gap: 2rem;
+            gap: 2rem !important;
+            margin-bottom: 3rem;
+        }
+        .search-container.list-search {
+            margin: 0 !important;
+            max-width: 100% !important;
+        }
+        .list-count {
+            text-align: left;
+        }
+        .projects-grid {
+            grid-template-columns: 1fr;
         }
     }
 </style>
