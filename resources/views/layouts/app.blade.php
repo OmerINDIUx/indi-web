@@ -30,12 +30,10 @@
                     /* Hover / Active states matching exact coordinates and scale of indi brand-02.svg */
                     .logo-menu-wrapper:hover .single-logo .in,
                     .logo-menu-wrapper.active .single-logo .in {
-                        /* 02 is scaled by ~0.9128 and IN is translated slightly */
                         transform: translate(3.82px, 0.03px) scale(0.9128);
                     }
                     .logo-menu-wrapper:hover .single-logo .di,
                     .logo-menu-wrapper.active .single-logo .di {
-                        /* Translating DI to exact coordinates of 02 space */
                         transform: translate(494.73px, -327.59px) scale(0.9128); 
                     }
                     .logo-menu-wrapper.active {
@@ -49,6 +47,33 @@
                     .menu-container.active {
                         height: 81px !important;
                         margin-top: 5.3px !important;
+                    }
+                    
+                    /* Responsive alignments to fix "desfasado" issues */
+                    @media (max-width: 1080px) {
+                        .logo-menu-wrapper.active {
+                            min-height: 65px !important;
+                        }
+                        .logo-menu-wrapper.active .logo-svg-wrapper {
+                            margin-right: 108px !important;
+                        }
+                        .menu-container.active {
+                            height: 69px !important;
+                            margin-top: 4.5px !important;
+                        }
+                    }
+                    @media (max-width: 720px) {
+                        .logo-menu-wrapper.active {
+                            min-height: 55px !important;
+                        }
+                        .logo-menu-wrapper.active .logo-svg-wrapper {
+                            margin-right: 90px !important;
+                        }
+                        .menu-container.active {
+                            height: auto !important;
+                            min-height: 60px !important;
+                            margin-top: 4px !important;
+                        }
                     }
                 </style>
             </div>

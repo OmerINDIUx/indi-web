@@ -124,6 +124,19 @@
                     font-weight: 500;
                     letter-spacing: 0.05em;
                 }
+
+                @media (max-width: 1080px) {
+                    .stat-box-solid {
+                        min-height: 350px;
+                        padding: 4rem 2rem;
+                    }
+                    .stat-box-solid:hover {
+                        padding-bottom: 4rem;
+                    }
+                    .stat-num {
+                        font-size: 3.5rem;
+                    }
+                }
             </style>
         </section>
 
@@ -329,7 +342,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
             </div>
 
             <div class="indi-container">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;">
+                <div class="blog-header-container" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;">
                     <div>
                         {{-- <span class="u-num" style="font-size: 0.9rem; margin-bottom: 1rem;">NEWS & INSIGHTS</span> --}}
                         <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #222; margin: 0;">PENSΛMIENTO<br>ESTRΛTÉGICO</h2>

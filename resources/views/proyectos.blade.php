@@ -20,6 +20,14 @@
                 {{-- <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div> --}}
                 <h1 class="indi-heading-large">NUΞSTROS<br><span class="blue">PROYΞCTOS</span></h1>
                 <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
+                
+                <!-- MAP OVERLAY SEARCH BAR -->
+                <div class="search-container" style="margin-top: 3rem; position: relative; max-width: 400px; pointer-events: auto; background: white; padding: 0.5rem 1rem; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--indi-blue); display: flex; align-items: center;">
+                    <div style="color: var(--indi-blue); margin-right: 10px; display: flex; align-items: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
+                    <input type="text" id="projectSearchInput" placeholder="BUSCΛR PROYECTO O UBICΛCIÓN..." style="flex: 1; background: transparent; border: none; color: #000; font-family: 'usual', sans-serif; font-size: 1rem; outline: none; font-weight: 700; text-transform: uppercase;">
+                </div>
             </div>
 
             <div id="projectsMap"></div>
@@ -102,11 +110,12 @@
     <!-- Project List / Filter Section -->
     <section class="projects-list-section" style="background: #050505;">
         <div class="indi-container">
-            <div class="list-header">
+            <div class="list-header" style="flex-wrap: wrap; gap: 2rem;">
                 <div class="header-left">
                     <span class="u-num">ARCHIVE_01</span>
                     <h3 class="indi-heading">DOMINIO TÉCNICO</h3>
                 </div>
+
                 <div class="list-count">
                     <span class="count-num" id="projectCount">{{ count($projects) }}</span>
                     <span class="count-label">LOCALIZACIONES ACTIVA_S</span>
@@ -917,41 +926,71 @@
             if(activeBtn) updateFilterNotch(activeBtn);
         });
 
+        const searchInput = document.getElementById('projectSearchInput');
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategoryBtn = document.querySelector('.filter-link.active');
+            const category = activeCategoryBtn ? activeCategoryBtn.getAttribute('data-category') : 'all';
+
+            let visibleCount = 0;
+
+            // Filter Markers
+            markerGroup.clearLayers();
+            projects.forEach(p => {
+                const matchesCategory = (category === 'all' || p.category == category);
+                const matchesSearch = p.title.toLowerCase().includes(searchTerm) || p.address.toLowerCase().includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    markerGroup.addLayer(markerMap.get(p.id));
+                    visibleCount++;
+                }
+            });
+
+            // Filter Cards (mini grid)
+            document.querySelectorAll('.project-card-mini').forEach(card => {
+                const id = card.getAttribute('data-id');
+                const project = projects.find(p => p.id == id);
+                
+                const matchesCategory = (category === 'all' || card.getAttribute('data-category') == category);
+                const matchesSearch = project && (project.title.toLowerCase().includes(searchTerm) || project.address.toLowerCase().includes(searchTerm));
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update Counter
+            const countEl = document.getElementById('projectCount');
+            if(countEl) countEl.innerText = visibleCount;
+
+            // Fit map bounds if there are markers
+            if (markerGroup.getLayers().length > 0) {
+                const isOverlayActive = document.getElementById('projectOverlay').classList.contains('active');
+                const paddingOptions = isOverlayActive ? 
+                    { paddingTopLeft: [50, 50], paddingBottomRight: [window.innerWidth * 0.45, 50] } : 
+                    { padding: [100, 100] };
+                
+                try {
+                    map.fitBounds(markerGroup.getBounds(), paddingOptions);
+                } catch(e) {}
+            }
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+
         filterBtns.forEach(btn => {
             btn.addEventListener('mouseenter', () => updateFilterNotch(btn));
             
             btn.addEventListener('click', () => {
-                const category = btn.getAttribute('data-category');
-                
                 // Toggle active button
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 updateFilterNotch(btn);
-                // Filter Markers
-                markerGroup.clearLayers();
-                projects.forEach(p => {
-                    if (category === 'all' || p.category == category) {
-                        markerGroup.addLayer(markerMap.get(p.id));
-                    }
-                });
-
-                // Filter Cards (mini grid)
-                document.querySelectorAll('.project-card-mini').forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') == category) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                if (markerGroup.getLayers().length > 0) {
-                    const isOverlayActive = document.getElementById('projectOverlay').classList.contains('active');
-                    const paddingOptions = isOverlayActive ? 
-                        { paddingTopLeft: [50, 50], paddingBottomRight: [window.innerWidth * 0.45, 50] } : 
-                        { padding: [100, 100] };
-                    
-                    map.fitBounds(markerGroup.getBounds(), paddingOptions);
-                }
+                
+                applyFilters();
             });
         });
 

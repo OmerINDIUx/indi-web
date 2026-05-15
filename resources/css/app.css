@@ -1237,57 +1237,19 @@ body {
 
 /* Tablets (1080px) */
 @media (max-width: 1080px) {
-    /* Proyectos Map Ajustes */
-    .projects-layout {
-        flex-direction: column;
-        min-height: auto;
-    }
-    .project-map-stage,
-    .project-data-scroll {
-        width: 100%;
-    }
-    .project-map-stage {
-        height: 50vh;
-        position: relative;
-    }
-    .project-data-card {
-        height: auto;
-        padding: 5rem 5%;
-        opacity: 1;
-        transform: none;
-    }
-    .project-white-card {
-        height: auto;
-        padding: 2.5rem 1.5rem 0;
-    }
-    .project-visual-notched {
-        height: 300px;
-        flex: none;
-    }
-
-    /* Layout Unidades (Home) */
-    .units-layout-grid {
-        flex-direction: column;
-        min-height: auto;
-    }
-    .units-text-scroll,
-    .units-sticky-stage {
-        width: 100%;
-    }
-    .units-sticky-stage {
-        height: 60vh;
-        clip-path: none;
-        position: relative;
-    }
-    .unit-box-trigger {
-        height: auto;
-        padding: 4rem 5%;
-    }
 
     /* Stats Ajustes */
     .indi-stats {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    /* Blog Header */
+    .blog-header-container {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1.5rem;
+    }
+
     .indi-hero h1 {
         font-size: clamp(3rem, 7vw, 4.5rem);
     }
@@ -1329,6 +1291,56 @@ body {
     /* Hero */
     .indi-hero h1 {
         font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    /* Proyectos Map Ajustes */
+    .projects-layout {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .project-map-stage,
+    .project-data-scroll {
+        width: 100%;
+    }
+    .project-map-stage {
+        height: 50vh;
+        position: relative;
+    }
+    .project-data-card {
+        height: auto;
+        padding: 3rem 5%;
+        opacity: 1;
+        transform: none;
+    }
+    .project-white-card {
+        height: auto;
+        padding: 2.5rem 1.5rem 0;
+    }
+    .project-visual-notched {
+        height: 300px;
+        flex: none;
+        margin: 2rem -1.5rem 0;
+        width: calc(100% + 3rem);
+    }
+
+    /* Layout Unidades (Home) */
+    .units-layout-grid {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .units-text-scroll {
+        width: 100%;
+    }
+    .units-sticky-stage {
+        display: none;
+    }
+    .u-visual-mobile {
+        display: block;
+        margin-top: 2rem;
+    }
+    .unit-box-trigger {
+        height: auto;
+        padding: 4rem 5%;
     }
 
     /* Bloques de sección */
