@@ -38,6 +38,18 @@
                         /* Translating DI to exact coordinates of 02 space */
                         transform: translate(494.73px, -327.59px) scale(0.9128); 
                     }
+                    .logo-menu-wrapper.active {
+                        align-items: flex-start !important;
+                        gap: 0 !important;
+                        min-height: 81px !important;
+                    }
+                    .logo-menu-wrapper.active .logo-svg-wrapper {
+                        margin-right: 127px !important;
+                    }
+                    .menu-container.active {
+                        height: 81px !important;
+                        margin-top: 5.3px !important;
+                    }
                 </style>
             </div>
 

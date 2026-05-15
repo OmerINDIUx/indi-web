@@ -199,9 +199,9 @@ body {
     padding: 0;
     box-shadow: none;
     display: flex;
-    align-items: center;
-    gap: 4rem; /* Espacio generoso entre el logo y el menú */
-    min-height: 100px;
+    align-items: flex-start; /* Align vertically with the logo */
+    gap: 0; /* Remove gap so margin precisely controls distance */
+    min-height: 81px;
 }
 
 
@@ -215,12 +215,12 @@ body {
 .logo-menu-wrapper.active .logo-svg-wrapper {
     width: 140px;
     height: 200px;
-    margin-right: 140px; /* Space for DI to move into */
+    margin-right: 127px; /* Matches the exact overflow of DI */
 }
 
 /* Also give it space on just hover, so the menu moves smoothly if it opens on hover */
 .logo-menu-wrapper:hover:not(.active) .logo-svg-wrapper {
-    margin-right: 100px; /* Space for DI when hovering at 100px width */
+    margin-right: 127px;
 }
 
 .logo-svg-wrapper svg {
@@ -254,7 +254,7 @@ body {
     opacity: 0;
     flex-grow: 1;
     background: var(--indi-blue);
-    height: 100px;
+    height: 85px; /* Matches exactly the vertical height of the expanded DI logo */
     /* Custom clip-path for the notch selector */
     --notch-x: 50%;
     --notch-w: 80px;
@@ -274,7 +274,8 @@ body {
     max-width: 90vw;
     width: 90%;
     opacity: 1;
-    height: 100px;
+    height: 81px; /* Match the exact physical height of the DI block */
+    margin-top: 5.3px; /* Align perfectly with the top of the SVG letters */
     padding: 0 2rem;
 }
 
@@ -1294,50 +1295,26 @@ body {
 
 /* Teléfonos Grandes (720px) */
 @media (max-width: 720px) {
-    /* Menu y Header (GSAP Safe Dimensions) */
     .logo-menu-wrapper {
         top: 1rem;
         left: 1rem;
-        min-width: 100px;
-    }
-
-    .logo-part {
-        width: 80px;
-        height: 60px;
-    }
-    .part-top {
-        width: 80px;
-        height: 60px;
-    }
-    .part-bottom {
-        width: 80px;
-        height: 60px;
-        margin-left: -80px;
-        transform: translateY(70px);
     }
 
     .logo-svg-wrapper {
         width: 80px;
         height: 120px;
     }
-    .part-bottom .logo-svg-wrapper {
-        transform: translateY(-60px);
-    }
 
-    .logo-menu-wrapper.active .logo-part {
-        width: 100px;
-        height: 75px;
-    }
     .logo-menu-wrapper.active .logo-svg-wrapper {
         width: 100px;
         height: 150px;
-    }
-    .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
-        transform: translateY(-75px);
+        margin-right: 90px; /* Adjusted for mobile scale */
     }
 
     .logo-menu-wrapper.active .menu-container {
         height: auto;
+        min-height: 60px;
+        margin-top: 4px;
         padding: 1rem;
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -1394,38 +1371,15 @@ body {
     }
 
     /* Logo Ultra Compact */
-    .logo-part {
-        width: 60px;
-        height: 45px;
-    }
-    .part-top {
-        width: 60px;
-        height: 45px;
-    }
-    .part-bottom {
-        width: 60px;
-        height: 45px;
-        margin-left: -60px;
-        transform: translateY(50px);
-    }
     .logo-svg-wrapper {
         width: 60px;
         height: 90px;
     }
-    .part-bottom .logo-svg-wrapper {
-        transform: translateY(-45px);
-    }
 
-    .logo-menu-wrapper.active .logo-part {
-        width: 80px;
-        height: 60px;
-    }
     .logo-menu-wrapper.active .logo-svg-wrapper {
         width: 80px;
         height: 120px;
-    }
-    .logo-menu-wrapper.active .part-bottom .logo-svg-wrapper {
-        transform: translateY(-60px);
+        margin-right: 70px;
     }
 
     .stat-value {

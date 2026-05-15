@@ -262,7 +262,7 @@ Rehabilitación estratégica de la vía férrea que conecta el Océano Pacífico
                     <!-- Project 02: Mexibus -->
                     <div class="project-data-card" data-state="cdmx">
                         <div class="project-white-card">
-                            <h2 class="project-name">CΛBLΞBÚS LÍNΞΛA 1 (CDMX)</h2>
+                            <h2 class="project-name">CΛBLΞBÚS LÍNΞΛ 1 (CDMX)</h2>
                             <div class="project-stats-grid">
                                 <div class="stat-item">
                                     <span class="stat-label">Ubicación</span>
