@@ -318,7 +318,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const mapSvg = document.getElementById("mexicoMap");
     const markers = document.querySelectorAll(".mexico-map-svg .project-marker");
     if (projectCards.length > 0) {
-        ScrollTrigger.create({ trigger: ".projects-layout", start: "top top", end: "bottom bottom", snap: { snapTo: 1 / (projectCards.length - 1), duration: { min: 0.1, max: 0.3 }, delay: 0, ease: "power1.inOut" } });
+        let mm = gsap.matchMedia();
+        mm.add("(min-width: 721px)", () => {
+            ScrollTrigger.create({ trigger: ".projects-layout", start: "top top", end: "bottom bottom", snap: { snapTo: 1 / (projectCards.length - 1), duration: { min: 0.1, max: 0.3 }, delay: 0, ease: "power1.inOut" } });
+        });
         splitTextIntoChars(".project-data-scroll .indi-scroll-text");
         projectCards.forEach((card, i) => {
             const markerClass = ".marker-" + card.dataset.state;

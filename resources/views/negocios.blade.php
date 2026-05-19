@@ -219,15 +219,44 @@
 
 .unit-index {
     font-family: 'usual', sans-serif;
-    font-size: clamp(1.2rem, 3.5vw, 2.2rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     font-weight: 700;
     color: #ccc;
     line-height: 1;
-    margin-bottom: 1rem;
-    display: block;
+    margin-bottom: 1.5rem;
+    display: inline-flex;
+    align-items: center;
     position: relative;
     overflow: hidden; /* Mask for rolling animation */
-    height: 1.2em;
+    height: auto;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    background: rgba(200, 200, 200, 0.05);
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+    transition: all 0.6s ease;
+    letter-spacing: 0.1em;
+}
+
+/* Category-specific unit index accents */
+.text-unit[data-unit="1"] .unit-index {
+    color: #ffa608;
+    border-color: rgba(254, 166, 8, 0.3);
+    background: rgba(254, 166, 8, 0.05);
+}
+.text-unit[data-unit="2"] .unit-index {
+    color: #64b032;
+    border-color: rgba(100, 176, 50, 0.3);
+    background: rgba(100, 176, 50, 0.05);
+}
+.text-unit[data-unit="3"] .unit-index {
+    color: #0066f9;
+    border-color: rgba(0, 102, 249, 0.3);
+    background: rgba(0, 102, 249, 0.05);
+}
+.text-unit[data-unit="4"] .unit-index {
+    color: #ff3000;
+    border-color: rgba(255, 48, 0, 0.3);
+    background: rgba(255, 48, 0, 0.05);
 }
 
 .unit-index span {
@@ -263,7 +292,7 @@
 
 .text-unit p {
     font-family: 'usual', sans-serif;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
     line-height: 1.7;
     color: #333;
     font-weight: 300;
@@ -283,23 +312,47 @@
 
 /* Tablets (1080px) */
 @media (max-width: 1080px) {
-    .unit-info-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .visual-layer { height: 50vh; }
-    .content-layer { height: 50vh; }
+    .unit-info-grid { 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
+        padding: 1.5rem 0;
+    }
+    .visual-layer { height: 45vh; }
+    .content-layer { 
+        height: 55vh; 
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    .text-unit p {
+        font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+        line-height: 1.6;
+    }
 }
 
 /* Teléfonos Grandes (720px) */
 @media (max-width: 720px) {
-    .visual-layer { height: 45vh; }
-    .content-layer { height: 55vh; }
-    .unit-main-name { font-size: clamp(2rem, 5vw, 3rem); }
+    .visual-layer { height: 40vh; }
+    .content-layer { 
+        height: 60vh; 
+        padding-top: 1rem;
+    }
+    .unit-main-name { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+    .unit-info-grid { gap: 1rem; }
 }
 
 /* Teléfonos Pequeños (500px) */
 @media (max-width: 500px) {
-    .visual-layer { height: 40vh; }
-    .content-layer { height: 60vh; }
-    .negocios-notch-divider { height: 60px; }
+    .visual-layer { height: 35vh; }
+    .content-layer { 
+        height: 65vh; 
+        overflow-y: auto; /* Allow scrolling if it still overflows */
+    }
+    .negocios-notch-divider { height: 50px; }
+    
+    /* Hide the third detailed text swap block to prevent content overlap */
+    #detail-swap {
+        display: none !important;
+    }
 }
 </style>
 

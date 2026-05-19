@@ -25,7 +25,7 @@
 
         <!-- Stats Section: Premium Bold Blocks -->
         <section class="indi-stats-premium" style="background: white; position: relative; z-index: 20;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="stats-solid-grid">
                 
                 <!-- 01: Años -->
                 <div class="stat-box-solid" style="background: white; border-right: 1px solid #eee;">
@@ -66,6 +66,11 @@
             </div>
 
             <style>
+                .stats-solid-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                }
+
                 .stat-box-solid {
                     padding: 6rem 3rem;
                     display: flex;
@@ -125,7 +130,81 @@
                     letter-spacing: 0.05em;
                 }
 
+                /* Premium Blog Card styling overrides local to Home page */
+                .blog-card {
+                    background: #ffffff !important;
+                    border: 1px solid #e2e8f0 !important;
+                    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%) !important;
+                    position: relative !important;
+                    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                    padding: 2.5rem 2rem !important;
+                }
+                .blog-card:hover {
+                    transform: translateY(-8px) !important;
+                    border-color: #0066f9 !important;
+                    box-shadow: 0 20px 40px rgba(0, 102, 249, 0.1) !important;
+                }
+                .blog-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4px;
+                    height: 100%;
+                    background: #0066f9;
+                    transform: scaleY(0);
+                    transform-origin: bottom;
+                    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .blog-card:hover::before {
+                    transform: scaleY(1);
+                }
+                
+                .blog-card:has(.maritimo):hover::before { background: #0066f9; }
+                .blog-card:has(.construccion):hover::before { background: #ffa608; }
+                .blog-card:has(.infraestructura):hover::before { background: #64b032; }
+                .blog-card:has(.ferroviario):hover::before { background: #ff3000; }
+
+                .blog-title {
+                    color: #1a202c !important;
+                    font-family: 'usual', sans-serif !important;
+                    font-weight: 700 !important;
+                    font-size: 1.3rem !important;
+                    margin-bottom: 1.5rem !important;
+                    letter-spacing: 0.05em !important;
+                    line-height: 1.3 !important;
+                }
+
+                .blog-read-btn {
+                    border-radius: 4px !important;
+                    background: #0066f9 !important;
+                    font-family: 'usual', sans-serif !important;
+                    font-weight: 700 !important;
+                    font-size: 0.8rem !important;
+                    letter-spacing: 0.1em !important;
+                    padding: 0.6rem 1.6rem !important;
+                    transition: all 0.3s ease !important;
+                }
+
+                .blog-read-btn:hover {
+                    background: #000000 !important;
+                    box-shadow: 0 0 10px rgba(0, 102, 249, 0.5) !important;
+                }
+
+                /* Mobile visuals and sticky layouts */
+                .u-visual-mobile {
+                    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%) !important;
+                    border: 2px solid var(--indi-unit-color) !important;
+                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1), 0 0 5px var(--indi-unit-color) !important;
+                    border-radius: 0 !important;
+                    overflow: hidden;
+                    height: 280px !important;
+                }
+
                 @media (max-width: 1080px) {
+                    .stats-solid-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                     .stat-box-solid {
                         min-height: 350px;
                         padding: 4rem 2rem;
@@ -135,6 +214,45 @@
                     }
                     .stat-num {
                         font-size: 3.5rem;
+                    }
+                    .u-title {
+                        font-size: 2.2rem !important;
+                    }
+                    .u-detail {
+                        font-size: 0.95rem !important;
+                    }
+                    .unit-box-trigger {
+                        padding: 0 5% !important;
+                    }
+                }
+
+                @media (max-width: 720px) {
+                    .stats-solid-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .stat-box-solid {
+                        min-height: 280px !important;
+                        padding: 3rem 1.5rem !important;
+                        border-right: none !important;
+                        border-bottom: 1px solid #eee !important;
+                    }
+                    .project-visual-notched {
+                        height: 30vh !important;
+                        margin: 2rem -1.5rem 0 -1.5rem !important;
+                        width: calc(100% + 3rem) !important;
+                        clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%) !important;
+                    }
+                }
+                
+                @media (max-width: 500px) {
+                    .stat-num {
+                        font-size: 2.8rem !important;
+                    }
+                    .u-title {
+                        font-size: 1.8rem !important;
+                    }
+                    .u-visual-mobile {
+                        height: 200px !important;
                     }
                 }
             </style>

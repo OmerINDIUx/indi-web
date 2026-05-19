@@ -47,32 +47,126 @@
                     .menu-container.active {
                         height: 81px !important;
                         margin-top: 5.3px !important;
+                        border: 1px solid rgba(0, 102, 249, 0.2);
+                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+                    }
+
+                    /* Custom navigation link enhancements - Clean Typography Only */
+                    .nav-link-item {
+                        position: relative !important;
+                        padding: 0.5rem 1rem !important;
+                        margin: 0 0.8rem !important;
+                        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                        font-family: "usual", sans-serif !important;
+                        text-transform: uppercase !important;
+                        letter-spacing: 0.15em !important;
+                        font-weight: 700 !important;
+                        color: rgba(255, 255, 255, 0.65) !important; /* Elegant semi-transparent white */
+                        text-shadow: none !important;
+                    }
+
+                    .nav-link-item.active-page {
+                        color: #ffffff !important; /* Pure elegant white */
+                        opacity: 1 !important;
+                    }
+
+                    .nav-link-item:hover {
+                        color: #ffffff !important; /* Pure elegant white */
+                        opacity: 1 !important;
+                        transform: translateY(-1px);
+                    }
+
+                    /* Make sure SVG logo sits beautifully on top and has priority */
+                    .logo-group {
+                        z-index: 1001 !important;
+                        position: relative;
+                    }
+                    .logo-svg-wrapper {
+                        z-index: 1001 !important;
+                    }
+
+                    /* Push the menu container correctly to the right of the logo group */
+                    .logo-menu-wrapper.active .logo-group,
+                    .logo-menu-wrapper:hover:not(.active) .logo-group {
+                        margin-right: 127px !important;
+                    }
+                    .logo-menu-wrapper.active .logo-svg-wrapper,
+                    .logo-menu-wrapper:hover:not(.active) .logo-svg-wrapper {
+                        margin-right: 0 !important;
                     }
                     
-                    /* Responsive alignments to fix "desfasado" issues */
+                    /* Responsive alignments to fix "desfasado" and overlapping issues */
                     @media (max-width: 1080px) {
                         .logo-menu-wrapper.active {
                             min-height: 65px !important;
                         }
+                        .logo-menu-wrapper.active .logo-group {
+                            margin-right: 127px !important; /* Keep original spacing to prevent logo overlaps */
+                        }
                         .logo-menu-wrapper.active .logo-svg-wrapper {
-                            margin-right: 108px !important;
+                            margin-right: 0 !important;
                         }
                         .menu-container.active {
                             height: 69px !important;
                             margin-top: 4.5px !important;
                         }
+                        .nav-link-item {
+                            padding: 0.4rem 0.8rem !important;
+                            margin: 0 0.5rem !important;
+                            font-size: 0.8rem !important;
+                        }
                     }
                     @media (max-width: 720px) {
                         .logo-menu-wrapper.active {
-                            min-height: 55px !important;
+                            flex-direction: column !important;
+                            align-items: flex-start !important;
+                            gap: 1.5rem !important;
+                            min-height: auto !important;
+                            width: 91% !important; /* Perfectly centered with the left: 4.5% */
+                        }
+                        .logo-menu-wrapper.active .logo-group {
+                            margin-right: 127px !important; /* Ensure the logo letters IN and DI separate fully without overlapping */
                         }
                         .logo-menu-wrapper.active .logo-svg-wrapper {
-                            margin-right: 90px !important;
+                            margin-right: 0 !important;
                         }
                         .menu-container.active {
+                            width: 100% !important;
+                            max-width: 100% !important;
                             height: auto !important;
                             min-height: 60px !important;
-                            margin-top: 4px !important;
+                            margin-top: 0 !important;
+                            padding: 1rem !important;
+                            flex-wrap: wrap !important;
+                            gap: 0.5rem !important;
+                            clip-path: none !important;
+                            justify-content: flex-start !important;
+                            background: rgba(0, 102, 249, 0.95) !important;
+                            backdrop-filter: blur(10px) !important;
+                            border: 1px solid rgba(0, 255, 255, 0.2) !important;
+                            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+                        }
+                        .nav-link-item {
+                            margin: 0.3rem 0.6rem !important;
+                            font-size: 0.75rem !important;
+                        }
+                    }
+                    @media (max-width: 500px) {
+                        .logo-menu-wrapper.active {
+                            gap: 1rem !important;
+                        }
+                        .logo-menu-wrapper.active .logo-group {
+                            margin-right: 127px !important;
+                        }
+                        .logo-menu-wrapper.active .logo-svg-wrapper {
+                            margin-right: 0 !important;
+                        }
+                        .menu-container.active {
+                            padding: 0.75rem !important;
+                        }
+                        .nav-link-item {
+                            margin: 0.2rem 0.4rem !important;
+                            font-size: 0.7rem !important;
                         }
                     }
                 </style>
