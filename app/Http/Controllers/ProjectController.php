@@ -31,6 +31,26 @@ class ProjectController extends Controller
               "longitude" => "-99.194375"
             ],
             [
+              "id" => 108,
+              "title" => "Cablebús Línea 1",
+              "category" => 1,
+              "status" => 1,
+              "marker_image" => "imagenes_indi/poryectus/CablebusL1.jpg",
+              "address" => "Ciudad de México",
+              "latitude" => "19.5577669",
+              "longitude" => "-99.1344122"
+            ],
+            [
+              "id" => 109,
+              "title" => "Cablebús Línea 3",
+              "category" => 1,
+              "status" => 1,
+              "marker_image" => "imagenes_indi/poryectus/CablebusL3.jpg",
+              "address" => "Ciudad de México",
+              "latitude" => "19.3992386",
+              "longitude" => "-99.2267458"
+            ],
+            [
               "id" => 39,
               "title" => "Carretera Atlacomulco",
               "category" => 1,
@@ -409,6 +429,16 @@ class ProjectController extends Controller
               "address" => "Ciudad de México",
               "latitude" => "19.483860",
               "longitude" => "-99.105411"
+            ],
+            [
+              "id" => 110,
+              "title" => "Ampliación Línea 12 del Metro",
+              "category" => 4,
+              "status" => 1,
+              "marker_image" => "imagenes_indi/poryectus/linea12.jpg",
+              "address" => "Ciudad de México",
+              "latitude" => "19.386907",
+              "longitude" => "-99.196978"
             ],
             [
               "id" => 32,
