@@ -22,139 +22,93 @@
     <div class="prensa-page-wrap" style="background: white; position: relative; z-index: 20;">
         
         <!-- Featured Article Section -->
+        @if($featured)
         <section class="prensa-featured-section">
             <div class="indi-container">
                 <div class="featured-row">
                     <div class="featured-visual notched-frame">
-                        <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Tren Maya Featured">
+                        @if($featured->thumbnail)
+                            <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}">
+                        @else
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $featured->title }}">
+                        @endif
                     </div>
                     <div class="featured-info">
-                        <span class="featured-cat">CONSTRUCCIÓN</span>
-                        <h2 class="featured-title">DESCUBRΞ LΛ INGENIERÍΛ ΛTRÁS DΞ TRΛMO 3 Y 5 DΞL TRΞN MΛYΛ</h2>
+                        <span class="featured-cat" style="text-transform: uppercase;">
+                            @if($featured->category === 'maritimo') MΛRÍTIMO @elseif($featured->category === 'construccion') CONSTRUCCIÓN @elseif($featured->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($featured->category === 'ferroviario') FΞRROVIΛRIO @else {{ $featured->category }} @endif
+                        </span>
+                        <h2 class="featured-title">{{ $featured->title }}</h2>
                         <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
-                            <span class="blog-tag ferroviario" style="border-radius: 4px;">FERROVIΛRIO</span>
+                            <span class="blog-tag {{ $featured->category }}" style="border-radius: 4px; text-transform: uppercase;">
+                                @if($featured->category === 'maritimo') MΛRÍTIMO @elseif($featured->category === 'construccion') CONSTRUCCIÓN @elseif($featured->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($featured->category === 'ferroviario') FΞRROVIΛRIO @else {{ $featured->category }} @endif
+                            </span>
                         </div>
-                        <a href="#" class="blog-read-btn" style="border-radius: 50px; padding: 1rem 3rem;">LΞΞR ΛRTÍCULO</a>
+                        <a href="{{ route('prensa.show', $featured->slug) }}" class="blog-read-btn" style="border-radius: 50px; padding: 1rem 3rem;">LΞΞR ΛRTÍCULO</a>
                     </div>
-                </div>
-
-                <!-- Search Bar -->
-                <div class="prensa-search-bar">
-                    <input type="text" class="prensa-search-input" placeholder="BUSCΛ, NOSOTROS TΞ ΞXPLICΛMOS">
-                </div>
-
-                <!-- Filters -->
-                <div class="prensa-filters">
-                    <span class="filter-label">FILTRΛR POR UNIDΛDΞS DΞ NEGOCIO</span>
-                    <div class="filter-group">
-                        <button class="filter-pill active" data-filter="all">TODOS</button>
-                        <button class="filter-pill maritimo" data-filter="maritimo">MΛRÍTIMO</button>
-                        <button class="filter-pill construccion" data-filter="construccion">CONSTRUCCIÓN</button>
-                        <button class="filter-pill infraestructura" data-filter="infraestructura">INFRΛΞSTRUCTURΛ</button>
-                        <button class="filter-pill ferroviario" data-filter="ferroviario">FΞRROVIΛRIO</button>
-                    </div>
-                </div>
-
-                <!-- News Grid -->
-                <div id="newsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem; padding-bottom: 10rem;">
-                    
-                    <!-- Card 01 -->
-                    <div class="blog-card" data-categories="maritimo construccion" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag maritimo">MΛRÍTIMO</span>
-                            <span class="blog-tag construccion">CONSTRUCCIÓN</span>
-                        </div>
-                        <span class="blog-date">25 . FΞB . 2024</span>
-                        <h4 class="blog-title">DESCUBRΞ LΛ LOGÍSTICΛ DΞTRÁS DΞ UN ROMPΞOLΛS</h4>
-                        <div class="blog-footer">
-                            <a href="{{ route('prensa.articulo') }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Noticia 1">
-                        </div>
-                    </div>
-
-                    <!-- Card 02 -->
-                    <div class="blog-card" data-categories="ferroviario infraestructura" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag ferroviario">FΞRROVIΛRIO</span>
-                            <span class="blog-tag infraestructura">INFRΛΞSTRUCTURΛ</span>
-                        </div>
-                        <span class="blog-date">20 . FΞB . 2024</span>
-                        <h4 class="blog-title">TΞCNOLOGÍΛ INDI ΞN ΞL SURΞSTΞ MΞXICΛNO</h4>
-                        <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="Noticia 2">
-                        </div>
-                    </div>
-
-                    <!-- Card 03 -->
-                    <div class="blog-card" data-categories="construccion infraestructura" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag construccion">CONSTRUCCIÓN</span>
-                            <span class="blog-tag infraestructura">INFRΛΞSTRUCTURΛ</span>
-                        </div>
-                        <span class="blog-date">15 . FΞB . 2024</span>
-                        <h4 class="blog-title">NUΞVΛS DRΛGΛS DΞ SUCCIÓN DΞ ΛLTΛ CΛPΛCIDΛD</h4>
-                        <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Maritimo/muelle-lerma-campeche - copia.webp') }}" alt="Noticia 3">
-                        </div>
-                    </div>
-
-                    <!-- Card 04 (Extra to show grid) -->
-                    <div class="blog-card" data-categories="maritimo" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag maritimo">MΛRÍTIMO</span>
-                        </div>
-                        <span class="blog-date">10 . FΞB . 2024</span>
-                        <h4 class="blog-title">EXPΛNSIÓN PORTUΛRIΛ ΞN LÁZΛRO CÁRDΞNΛS</h4>
-                        <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" alt="Noticia 4">
-                        </div>
-                    </div>
-
-                     <!-- Card 05 -->
-                     <div class="blog-card" data-categories="infraestructura" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag infraestructura">INFRΛΞSTRUCTURΛ</span>
-                        </div>
-                        <span class="blog-date">05 . FΞB . 2024</span>
-                        <h4 class="blog-title">MODΞRNIZΛCIÓN DΞ LΛ ΛDUΛNΛ DΞ RΞYNOSΛ</h4>
-                        <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Noticia 5">
-                        </div>
-                    </div>
-
-                    <!-- Card 06 -->
-                    <div class="blog-card" data-categories="construccion" style="border: 1px solid #f0f0f0;">
-                        <div class="blog-tags">
-                            <span class="blog-tag construccion">CONSTRUCCIÓN</span>
-                        </div>
-                        <span class="blog-date">01 . FΞB . 2024</span>
-                        <h4 class="blog-title">ΛVΛNCΞS ΞN ΞL SΞNΛDO DΞ LΛ RΞPÚBLICΛ</h4>
-                        <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                        </div>
-                        <div class="indi-card-notch">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Noticia 6">
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
+        @endif
 
+        <div class="indi-container" style="padding-top: 2rem;">
+            <!-- Search Bar -->
+            <div class="prensa-search-bar">
+                <input type="text" class="prensa-search-input" placeholder="BUSCΛ, NOSOTROS TΞ ΞXPLICΛMOS">
+            </div>
+
+            <!-- Filters -->
+            <div class="prensa-filters" style="text-align: center; margin-bottom: 4rem;">
+                <span class="filter-label" style="display: block; font-family: 'usual', sans-serif; font-weight: 700; font-size: 0.8rem; color: #888; letter-spacing: 0.2em; margin-bottom: 1.5rem;">FILTRΛR POR UNIDΛDΞS DΞ NEGOCIO</span>
+                <div class="filter-group" id="filterLinks">
+                    <button class="filter-pill active" data-filter="all">TODOS</button>
+                    <button class="filter-pill maritimo" data-filter="maritimo">MΛRÍTIMO</button>
+                    <button class="filter-pill construccion" data-filter="construccion">CONSTRUCCIÓN</button>
+                    <button class="filter-pill infraestructura" data-filter="infraestructura">INFRΛΞSTRUCTURΛ</button>
+                    <button class="filter-pill ferroviario" data-filter="ferroviario">FΞRROVIΛRIO</button>
+                </div>
+            </div>
+
+            <!-- News Grid -->
+            <div id="newsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 3rem; margin-top: 4rem; padding-bottom: 10rem;">
+                @forelse($posts ?? [] as $post)
+                    <!-- Card Dynamic -->
+                    <div class="blog-card" data-categories="{{ $post->category }}" style="border: 1px solid #f0f0f0;">
+                        <div class="blog-tags">
+                            <span class="blog-tag {{ $post->category }}">
+                                @if($post->category === 'maritimo') MΛRÍTIMO @elseif($post->category === 'construccion') CONSTRUCCIÓN @elseif($post->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($post->category === 'ferroviario') FΞRROVIΛRIO @else {{ $post->category }} @endif
+                            </span>
+                        </div>
+                        <span class="blog-date">{{ $post->created_at->format('d . M . Y') }}</span>
+                        <h4 class="blog-title">{{ $post->title }}</h4>
+                        <div class="blog-footer">
+                            <a href="{{ route('prensa.show', $post->slug) }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
+                        </div>
+                        <div class="indi-card-notch">
+                            @if($post->thumbnail)
+                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}">
+                            @else
+                                @if($post->category === 'maritimo')
+                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $post->title }}">
+                                @elseif($post->category === 'ferroviario')
+                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $post->title }}">
+                                @elseif($post->category === 'infraestructura')
+                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $post->title }}">
+                                @else
+                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $post->title }}">
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    @if(!$featured)
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 8rem 0; font-family: 'usual', sans-serif; color: #666; width: 100%;">
+                            <h3>PRÓXIMΛMΞNTΞ MÁS NOTICIΛS</h3>
+                            <p style="margin-top: 1rem;">Estamos preparando nuevos artículos y novedades de Grupo INDI.</p>
+                        </div>
+                    @endif
+                @endforelse
+            </div>
+        </div>
     </div>
 
     <script>
@@ -162,6 +116,7 @@
             const filterButtons = document.querySelectorAll('.filter-pill');
             const searchInput = document.querySelector('.prensa-search-input');
             const cards = document.querySelectorAll('.blog-card');
+            const filterLinks = document.getElementById('filterLinks');
             let activeFilter = 'all';
 
             // Helper to remove accents and normalize special characters (Λ -> A, Ξ -> E)
@@ -173,12 +128,12 @@
                     .replace(/[íïîì]/g, 'i')
                     .replace(/[óöôò]/g, 'o')
                     .replace(/[úüûù]/g, 'u')
-                    .replace(/λ/g, 'a') // Handles both cases if needed
+                    .replace(/λ/g, 'a') 
                     .replace(/ξ/g, 'e')
                     .replace(/λ/g, 'a')
-                    .replace(/Λ/g, 'a') // Real special chars
+                    .replace(/Λ/g, 'a') 
                     .replace(/Ξ/g, 'e')
-                    .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remove other diacritics
+                    .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             }
 
             function filterNews() {
@@ -201,16 +156,64 @@
                 });
             }
 
+            function setFilterNotchX(value) {
+                if (!filterLinks) return;
+
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(filterLinks, {
+                        '--notch-x': value,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                    return;
+                }
+
+                filterLinks.style.setProperty('--notch-x', value);
+            }
+
+            function updateFilterNotch(button) {
+                if (!button || !filterLinks || window.innerWidth <= 720) return;
+
+                const buttonRect = button.getBoundingClientRect();
+                const containerRect = filterLinks.getBoundingClientRect();
+                const x = buttonRect.left - containerRect.left + buttonRect.width / 2;
+                const xPercent = (x / containerRect.width) * 100;
+
+                setFilterNotchX(`${xPercent}%`);
+            }
+
             filterButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => updateFilterNotch(button));
+
                 button.addEventListener('click', () => {
                     filterButtons.forEach(b => b.classList.remove('active'));
                     button.classList.add('active');
                     activeFilter = button.getAttribute('data-filter');
+                    updateFilterNotch(button);
                     filterNews();
                 });
             });
 
-            searchInput.addEventListener('input', filterNews);
+            if (filterLinks) {
+                filterLinks.addEventListener('mouseleave', () => {
+                    const activeButton = document.querySelector('.filter-pill.active');
+                    if (activeButton) updateFilterNotch(activeButton);
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', filterNews);
+            }
+
+            setTimeout(() => {
+                const activeButton = document.querySelector('.filter-pill.active');
+                if (activeButton) updateFilterNotch(activeButton);
+            }, 250);
+
+            window.addEventListener('resize', () => {
+                const activeButton = document.querySelector('.filter-pill.active');
+                if (activeButton) updateFilterNotch(activeButton);
+            });
         });
     </script>
 
@@ -279,34 +282,35 @@
         color: #000;
     }
 
-    /* Search Bar with Premium Glassmorphism */
+    /* Search bar aligned to platform identity */
     .prensa-search-bar {
         width: 100%;
         max-width: 800px;
         margin: 4rem auto;
         position: relative;
-        padding: 2px;
-        background: linear-gradient(90deg, rgba(0, 102, 249, 0.2) 0%, rgba(255, 184, 0, 0.2) 50%, rgba(0, 102, 249, 0.2) 100%);
-        clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
-        transition: background 0.4s ease;
+        padding: 0;
+        background: #fff;
+        border: 1px solid var(--indi-border);
+        clip-path: none;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+        transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
     .prensa-search-bar:hover, .prensa-search-bar:focus-within {
-        background: linear-gradient(90deg, #0066f9 0%, #ffa608 50%, #0066f9 100%);
+        border-color: rgba(0, 102, 255, 0.35);
+        box-shadow: 0 16px 34px rgba(0, 102, 255, 0.08);
     }
 
     .prensa-search-input {
         width: 100%;
         padding: 1.3rem 2.2rem;
         border: none !important;
-        background: rgba(255, 255, 255, 0.8) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
+        background: #fff !important;
         font-family: 'usual', sans-serif;
         font-size: 1.05rem;
         color: #111;
-        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        clip-path: none;
+        box-shadow: none;
         transition: all 0.4s ease;
         letter-spacing: 0.1em;
     }
@@ -314,117 +318,156 @@
     .prensa-search-input:focus {
         outline: none;
         background: #ffffff !important;
-        box-shadow: 0 20px 45px rgba(0, 102, 249, 0.1);
+        box-shadow: none;
     }
 
-    /* Filter Pills Redesign */
+    .prensa-search-input::placeholder {
+        color: var(--indi-text-muted);
+    }
+
+    /* Filters aligned to menu identity */
     .filter-group {
         display: flex;
         justify-content: center;
-        gap: 1.2rem;
-        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 0;
+        flex-wrap: nowrap;
+        width: min(100%, 988px);
+        margin: 0 auto;
+        padding: 0 1.75rem;
+        min-height: 64px;
+        background: var(--indi-blue);
+        --notch-x: 50%;
+        --notch-w: 80px;
+        clip-path: polygon(
+            0% 0%,
+            100% 0%,
+            100% 100%,
+            calc(var(--notch-x) + (var(--notch-w) / 2) + 20px) 100%,
+            calc(var(--notch-x) + (var(--notch-w) / 2)) 88%,
+            calc(var(--notch-x) - (var(--notch-w) / 2)) 88%,
+            calc(var(--notch-x) - (var(--notch-w) / 2) - 20px) 100%,
+            0% 100%
+        );
+        overflow-x: auto;
+        overflow-y: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .filter-group::-webkit-scrollbar {
+        display: none;
     }
 
     .filter-pill {
-        padding: 0.8rem 2.2rem;
-        border: 1px solid rgba(229, 231, 235, 0.8) !important;
-        border-radius: 0 !important; /* Remove generic pill curves */
-        background: #fff;
+        min-width: 150px;
+        padding: 0 1.5rem;
+        border: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
         cursor: pointer;
         font-family: 'usual', sans-serif;
         font-weight: 700;
         font-size: 0.75rem;
-        color: #444;
+        color: rgba(255, 255, 255, 0.7) !important;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+        clip-path: none;
         position: relative;
         letter-spacing: 0.15em;
+        text-transform: uppercase;
+        height: 64px;
+        flex: 1 0 auto;
     }
 
-    /* Hover effects with light neon glow corresponding to category colors */
-    .filter-pill.maritimo:hover, .filter-pill.maritimo.active {
-        border-color: #0066f9 !important;
-        background: rgba(0, 102, 249, 0.05) !important;
-        color: #0066f9 !important;
-        box-shadow: 0 0 15px rgba(0, 102, 249, 0.2);
-    }
-    .filter-pill.construccion:hover, .filter-pill.construccion.active {
-        border-color: #ffa608 !important;
-        background: rgba(255, 166, 8, 0.05) !important;
-        color: #ffa608 !important;
-        box-shadow: 0 0 15px rgba(255, 166, 8, 0.2);
-    }
-    .filter-pill.infraestructura:hover, .filter-pill.infraestructura.active {
-        border-color: #64b032 !important;
-        background: rgba(100, 176, 50, 0.05) !important;
-        color: #64b032 !important;
-        box-shadow: 0 0 15px rgba(100, 176, 50, 0.2);
-    }
-    .filter-pill.ferroviario:hover, .filter-pill.ferroviario.active {
-        border-color: #ff3000 !important;
-        background: rgba(255, 48, 0, 0.05) !important;
-        color: #ff3000 !important;
-        box-shadow: 0 0 15px rgba(255, 48, 0, 0.2);
-    }
-    .filter-pill[data-filter="all"]:hover, .filter-pill[data-filter="all"].active {
-        border-color: #0066f9 !important;
-        background: rgba(0, 102, 249, 0.05) !important;
-        color: #0066f9 !important;
-        box-shadow: 0 0 15px rgba(0, 102, 249, 0.2);
+    .filter-pill:hover,
+    .filter-pill.active,
+    .filter-pill.maritimo:hover,
+    .filter-pill.maritimo.active,
+    .filter-pill.construccion:hover,
+    .filter-pill.construccion.active,
+    .filter-pill.infraestructura:hover,
+    .filter-pill.infraestructura.active,
+    .filter-pill.ferroviario:hover,
+    .filter-pill.ferroviario.active,
+    .filter-pill[data-filter="all"]:hover,
+    .filter-pill[data-filter="all"].active {
+        background: transparent !important;
+        color: #fff !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
     }
 
-    /* Active solid accent strip on the bottom of active pills */
     .filter-pill.active::after {
         content: "";
         position: absolute;
         bottom: 0;
-        left: 0;
-        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 58px;
         height: 3px;
-        background: currentColor;
+        background: #fff;
     }
 
     /* Grid & Cards Redesign */
     #newsGrid {
         display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)) !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
         gap: 2.5rem !important;
+        align-items: start;
     }
 
     .blog-card {
-        background: #fff;
+        background: #ffffff;
         padding: 2.5rem 2rem !important;
-        border: 1px solid rgba(229, 231, 235, 0.7) !important;
+        border: 1px solid #e2e8f0 !important;
         border-radius: 0 !important;
-        border-left: 4px solid var(--indi-blue) !important; /* Left border corporate blue by default */
-        clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)) !important;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        border-left: none !important;
+        clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%) !important;
+        position: relative !important;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
         display: flex;
         flex-direction: column;
         height: 100%;
-        position: relative;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01) !important;
+        box-shadow: none !important;
+        overflow: hidden;
     }
 
-    /* Category specific left border */
-    .blog-card[data-categories*="maritimo"] { border-left-color: #0066f9 !important; }
-    .blog-card[data-categories*="construccion"] { border-left-color: #ffa608 !important; }
-    .blog-card[data-categories*="infraestructura"] { border-left-color: #64b032 !important; }
-    .blog-card[data-categories*="ferroviario"] { border-left-color: #ff3000 !important; }
+    .blog-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #0066f9;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
     .blog-card:hover {
         transform: translateY(-8px) !important;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08) !important;
-        border-color: rgba(0, 102, 249, 0.2) !important;
+        border-color: #0066f9 !important;
+        box-shadow: 0 20px 40px rgba(0, 102, 249, 0.1) !important;
     }
 
+    .blog-card:hover::before {
+        transform: scaleY(1);
+    }
+
+    .blog-card[data-categories*="maritimo"]:hover::before { background: #0066f9; }
+    .blog-card[data-categories*="construccion"]:hover::before { background: #ffa608; }
+    .blog-card[data-categories*="infraestructura"]:hover::before { background: #64b032; }
+    .blog-card[data-categories*="ferroviario"]:hover::before { background: #ff3000; }
+
     .blog-card .blog-title {
+        color: #1a202c !important;
         font-family: 'usual', sans-serif !important;
-        font-size: 1.35rem !important;
         font-weight: 700 !important;
-        line-height: 1.3 !important;
-        color: #171717 !important;
+        font-size: 1.3rem !important;
         margin-bottom: 1.5rem !important;
+        letter-spacing: 0.05em !important;
+        line-height: 1.3 !important;
         min-height: 3.6rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -440,41 +483,38 @@
         margin-bottom: 0.8rem !important;
     }
 
+    .blog-card .blog-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: auto;
+        margin-bottom: 1.5rem;
+    }
+
     .blog-card .blog-read-btn {
-        background: transparent !important;
-        color: var(--indi-blue) !important;
-        border: 1px solid var(--indi-blue) !important;
-        border-radius: 0 !important;
+        border-radius: 4px !important;
+        background: #0066f9 !important;
+        color: #fff !important;
+        border: none !important;
         padding: 0.6rem 1.6rem !important;
         font-size: 0.8rem !important;
         font-weight: 700 !important;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%) !important;
+        clip-path: none !important;
         transition: all 0.3s ease !important;
         display: inline-block;
         text-decoration: none;
     }
 
     .blog-card:hover .blog-read-btn {
-        background: var(--indi-blue) !important;
-        color: #fff !important;
+        background: #000000 !important;
+        box-shadow: 0 0 10px rgba(0, 102, 249, 0.5) !important;
     }
-
-    /* Customize the button borders based on category */
-    .blog-card[data-categories*="construccion"] .blog-read-btn { border-color: #ffa608 !important; color: #ffa608 !important; }
-    .blog-card[data-categories*="construccion"]:hover .blog-read-btn { background: #ffa608 !important; color: #fff !important; }
-
-    .blog-card[data-categories*="infraestructura"] .blog-read-btn { border-color: #64b032 !important; color: #64b032 !important; }
-    .blog-card[data-categories*="infraestructura"]:hover .blog-read-btn { background: #64b032 !important; color: #fff !important; }
-
-    .blog-card[data-categories*="ferroviario"] .blog-read-btn { border-color: #ff3000 !important; color: #ff3000 !important; }
-    .blog-card[data-categories*="ferroviario"]:hover .blog-read-btn { background: #ff3000 !important; color: #fff !important; }
 
     /* Image frame inside news card */
     .blog-card .indi-card-notch {
         margin-top: 1.5rem !important;
-        clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 10% 100%, 0 85%) !important;
+        clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%) !important;
         height: 220px !important;
         border-radius: 0 !important;
     }
@@ -492,6 +532,9 @@
             max-width: 600px;
             height: 380px !important;
         }
+        #newsGrid {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        }
         .featured-info {
             display: flex;
             flex-direction: column;
@@ -507,13 +550,20 @@
             height: 280px !important;
         }
         .filter-group {
-            gap: 0.8rem;
+            justify-content: flex-start;
+            width: 100%;
+            min-height: 56px;
+            padding: 0 1rem;
+            clip-path: none;
         }
         .filter-pill {
-            padding: 0.6rem 1.5rem;
+            min-width: 138px;
+            padding: 0 1rem;
             font-size: 0.7rem;
+            height: 56px;
         }
         #newsGrid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             gap: 1.5rem !important;
         }
     }
@@ -531,6 +581,9 @@
         .prensa-search-input {
             padding: 1.1rem 1.6rem;
             font-size: 0.95rem;
+        }
+        #newsGrid {
+            grid-template-columns: minmax(0, 1fr) !important;
         }
     }
     </style>

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +8,8 @@ use App\Http\Controllers\TalentController;
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PrensaController;
+use App\Http\Controllers\AdminPostController;
 
 Route::get('/', function () {
     // $posts = \App\Models\Post::where('is_published', true)->latest()->take(3)->get();
@@ -16,8 +17,6 @@ Route::get('/', function () {
     return view('welcome', compact('posts'));
 });
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/contacto', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/proyectos', [ProjectController::class, 'index'])->name('proyectos.index');
@@ -26,13 +25,9 @@ Route::get('/negocios', function () {
     return view('negocios');
 })->name('negocios');
 
-Route::get('/prensa', function () {
-    return view('prensa');
-})->name('prensa');
-
-Route::get('/prensa/articulo', function () {
-    return view('prensa-articulo');
-})->name('prensa.articulo');
+// Dynamic Prensa Routes
+Route::get('/prensa', [PrensaController::class, 'index'])->name('prensa');
+Route::get('/prensa/{slug}', [PrensaController::class, 'show'])->name('prensa.show');
 
 Route::get('/social', function () {
     return view('social');
@@ -63,7 +58,19 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/talento', [AdminController::class, 'talents'])->name('talento.index');
     Route::get('/quejas', [AdminController::class, 'complaints'])->name('quejas.index');
     
+    // CRUD Prensa (Blogs)
+    Route::get('/prensa', [AdminPostController::class, 'index'])->name('prensa.index');
+    Route::get('/prensa/crear', [AdminPostController::class, 'create'])->name('prensa.create');
+    Route::post('/prensa', [AdminPostController::class, 'store'])->name('prensa.store');
+    Route::get('/prensa/{id}/editar', [AdminPostController::class, 'edit'])->name('prensa.edit');
+    Route::put('/prensa/{id}', [AdminPostController::class, 'update'])->name('prensa.update');
+    Route::delete('/prensa/{id}', [AdminPostController::class, 'destroy'])->name('prensa.destroy');
+    Route::post('/prensa/{id}/toggle-publish', [AdminPostController::class, 'togglePublish'])->name('prensa.toggle-publish');
+    
     // Secure downloads
     Route::get('/descargar-evidencia/{filename}', [AdminController::class, 'downloadEvidence'])->name('evidencia.download');
     Route::get('/descargar-cv/{filename}', [AdminController::class, 'downloadResume'])->name('cv.download');
+
+    // Dynamic block image upload
+    Route::post('/prensa/upload-image', [AdminPostController::class, 'uploadBlockImage'])->name('prensa.upload-image');
 });

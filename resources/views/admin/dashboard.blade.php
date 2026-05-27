@@ -38,12 +38,12 @@
                     <a href="{{ route('admin.quejas.index') }}" style="display: inline-block; background: #e74c3c; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif; font-size: 0.9rem;">Ver Reportes</a>
                 </div>
                 
-                <!-- Próximamente: Prensa -->
-                <div style="border: 1px solid #eaeaea; padding: 2.5rem; border-radius: 6px; text-align: center; background: #fafafa; opacity: 0.7;">
-                    <div style="font-size: 2.5rem; color: #888; margin-bottom: 1rem;">📰</div>
-                    <h3 style="font-family: 'usual', sans-serif; font-size: 1.2rem; margin-bottom: 1rem;">PRENSΛ (PRÓXIMΛMENTE)</h3>
-                    <p style="font-family: 'usual', sans-serif; color: #888; margin-bottom: 2rem;">Módulo para subir y editar nuevos blogs de prensa.</p>
-                    <span style="display: inline-block; background: #ccc; color: white; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif; font-size: 0.9rem;">En Construcción</span>
+                <!-- Tarjeta Prensa (Activa) -->
+                <div style="border: 1px solid #eaeaea; padding: 2.5rem; border-radius: 6px; text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.5rem; color: #ffa608; margin-bottom: 1rem;">📰</div>
+                    <h3 style="font-family: 'usual', sans-serif; font-size: 1.2rem; color: #111; margin-bottom: 1rem;">PRENSΛ DÍNΛMICΛ</h3>
+                    <p style="font-family: 'usual', sans-serif; color: #666; margin-bottom: 2rem;">Módulo para subir, editar y eliminar blogs de prensa.</p>
+                    <a href="{{ route('admin.prensa.index') }}" style="display: inline-block; background: #ffa608; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif; font-size: 0.9rem;">Gestionar Prensa</a>
                 </div>
 
             </div>

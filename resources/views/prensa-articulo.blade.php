@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'LOGÍSTICΛ DΞTRÁS DΞ UN ROMPΞOLΛS | GRUPO INDI')
+@section('title', $post->title . ' | GRUPO INDI')
 
 @section('content')
 <style>
@@ -56,6 +56,8 @@
         margin-bottom: 2rem;
         text-transform: uppercase;
         border-radius: 4px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(5px);
     }
 
     .article-main-title {
@@ -114,7 +116,7 @@
         display: block;
     }
 
-    .article-quote {
+    .article-quote, .article-body blockquote {
         border-left: 4px solid var(--indi-blue);
         padding-left: 2rem;
         margin: 4rem 0;
@@ -154,10 +156,31 @@
         border: 1px solid #f0f0f0;
         box-shadow: none !important;
         transform: none !important;
+        background: #fff;
     }
     
     .article-sidebar .blog-title {
         min-height: auto;
+        font-family: 'usual', sans-serif !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        color: #111 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .article-sidebar .blog-tag {
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+
+    .article-sidebar .blog-read-btn {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    .article-sidebar .indi-card-notch {
+        height: 130px !important;
+        margin-top: 1rem !important;
     }
 
     /* Responsive */
@@ -180,11 +203,25 @@
 
 <!-- Hero Section -->
 <section class="article-hero">
-    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" class="article-hero-bg" alt="Hero Background">
+    @if($post->thumbnail)
+        <img src="{{ asset('storage/' . $post->thumbnail) }}" class="article-hero-bg" alt="{{ $post->title }}">
+    @else
+        @if($post->category === 'maritimo')
+            <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+        @elseif($post->category === 'ferroviario')
+            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+        @elseif($post->category === 'infraestructura')
+            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" class="article-hero-bg" alt="{{ $post->title }}">
+        @else
+            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+        @endif
+    @endif
     <div class="article-hero-overlay"></div>
     <div class="article-hero-content">
-        <span class="article-category-tag">MΛRÍTIMO</span>
-        <h1 class="article-main-title">DESCUBRΞ LΛ LOGÍSTICΛ DΞTRÁS DΞ UN ROMPΞOLΛS</h1>
+        <span class="article-category-tag">
+            @if($post->category === 'maritimo') MΛRÍTIMO @elseif($post->category === 'construccion') CONSTRUCCIÓN @elseif($post->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($post->category === 'ferroviario') FΞRROVIΛRIO @else {{ $post->category }} @endif
+        </span>
+        <h1 class="article-main-title">{{ $post->title }}</h1>
     </div>
 </section>
 
@@ -192,89 +229,46 @@
     <div class="article-container">
         <!-- Main Content -->
         <article class="article-body">
-            <p><b>25 . FΞB . 2024</b> — La construcción de infraestructura marítima representa uno de los desafíos más complejos de la ingeniería moderna. En Grupo INDI, hemos perfeccionado los procesos logísticos necesarios para la creación de rompeolas de gran escala, fundamentales para la protección de terminales portuariΞs y el desarrollo del comercio marítimo nacional.</p>
-            
-            <p>Un rompeolas no es simplemente una acumulación de rocas; es una estructura dΞ precisión diseñada para disipar la energía de las olas y crear un ambiente seguro para la navegación. La logística de estas obras involucra la coordinación exacta entre canteras, transporte terrestre de materiales pesados y la colocación precisa mediante maquinaria especializada en el medio marino. La selección de materiales es crítica; se requiere roca basáltica de alta densidad y bloques de concreto prefabricados con geometrías complejas que maximizan el rozamiento y la estabilidad estructural.</p>
-
-            <div class="article-inline-image">
-                <img src="{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}" alt="Ingeniería Marítima">
-            </div>
-
-            <h2>LΛ INGENIERÍΛ DΞ PRΞCISIÓN Y SU IMPΛCTO</h2>
-            <p>El proceso comienza con el estudio batimétrico y de oleaje profundo, que determina la geometría exacta de la estructura. Posteriormente, se procede a la colocación de las capas de núcleo, filtro y armadura. Esta última suele estar compuesta por elementos prefabricados dΞ concreto de alta densidad, conocidos por su capacidad para entrelazarse y resistir los embates del mar más agresivo. Cada pieza es monitoreada mediante sistemas GPS de alta precisión para asegurar su ubicación exacta bajo el agua.</p>
-
-            <p>La eficiencia logística es el pilar dΞ Grupo INDI en estos proyectos. Gestionamos flotas de transporte que operan 24/7 y barcazas dΞ gran calado que permiten el vertido dΞ material en zonas dΞ difícil acceso. Esta capacidad operativa nos permite reducir los tiempos dΞ ejecución hasta en un 20%, mitigando los riesgos asociados a las condiciones climáticas adversas del entorno marino.</p>
-
-            <div class="article-quote">
-                "Nuestra mΞta es entregar infraestructura que no solo soportΞ el paso del tiempo, sino que impulsΞ el crecimiento económico dΞ las regionΞs dondΞ operamos."
-            </div>
-
-            <h2>SoSTΞNIBILIDΛD Y FUTURO</h2>
-            <p>En el puerto dΞ Salina Cruz, Oaxaca, Grupo INDI ha demostrado su capacidad técnica al liderar proyectos que transforman el panorama logístico dΞl país. La utilización dΞ tecnología dΞ punta y procesos certificados garantiza que cada piedra y cada elemento de concreto sea colocado con la máxima seguridad y eficiencia. Además, implementamos barreras de sedimentación y protocolos de protección a la fauna marina para asegurar que el desarrollo dΞ la infraestructura vaya dΞ la mano con el cuidado dΞl ecosistema.</p>
-            
-            <p>El futuro dΞ la ingeniería portuaria en México se define por la integración dΞ puertos inteligentes y estructuras resilientes. Grupo INDI está a la vanguardia dΞ esta evolución, investigando nuevos aditivos para el concreto que aumenten su resistencia a la salinidad y diseñando geometrías que favorezcan la biodiversidad local, convirtiendo los rompeolas en arrecifes artificiales productivos.</p>
-
-            <div class="article-inline-image">
-                <img src="{{ asset('imagenes_indi/Maritimo/muelle-lerma-campeche - copia.webp') }}" alt="Detalle de Obra">
-            </div>
-
-            <p>Mirando hacia el futuro, Grupo INDI continúa apostando por la innovación en sus métodos constructivos, integrando solucionΞs sosteniblΞs que minimicΞn el impacto ambiental mientras maximizan la durabilidad dΞ la infraestructura nacional. Cada proyecto es un testimonio dΞ nueströ compromiso con la excelencia y la soberanía tecnológica dΞ México.</p>
-            
-            <p>Finalmente, la capacitación dΞ nuestro capital humano es fundamental. Contamos con buzos especializados dΞ inspección y operadores dΞ maquinaria pesada que son entrenados en simuladores dΞ última generación, garantizando que la ejecución dΞ cada rompeolas sΞa impecable dΞsdΞ la base hasta la corona de la estructura.</p>
+            <p><b>{{ $post->created_at->format('d . M . Y') }}</b> — {!! $post->content !!}</p>
         </article>
 
         <!-- Sidebar -->
-                <aside class="article-sidebar">
+        <aside class="article-sidebar">
             <span class="sidebar-section-title">ÚLTIMOS ΛRTÍCULOS</span>
             
             <div class="sidebar-cards-stack">
-                <!-- Card 01 (Mini) -->
-                <div class="blog-card">
-                    <div class="blog-tags">
-                        <span class="blog-tag maritimo">MΛRÍTIMO</span>
-                        <span class="blog-tag construccion">CONSTRUCCIÓN</span>
+                @forelse($latest ?? [] as $late)
+                    <!-- Card Mini Dynamic -->
+                    <div class="blog-card" data-categories="{{ $late->category }}">
+                        <div class="blog-tags" style="margin-bottom: 0.8rem;">
+                            <span class="blog-tag {{ $late->category }}">
+                                @if($late->category === 'maritimo') MΛRÍTIMO @elseif($late->category === 'construccion') CONSTRUCCIÓN @elseif($late->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($late->category === 'ferroviario') FΞRROVIΛRIO @else {{ $late->category }} @endif
+                            </span>
+                        </div>
+                        <span class="blog-date" style="font-size: 0.75rem; color: #888;">{{ $late->created_at->format('d . M . Y') }}</span>
+                        <h4 class="blog-title">{{ $late->title }}</h4>
+                        <div class="blog-footer">
+                            <a href="{{ route('prensa.show', $late->slug) }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
+                        </div>
+                        <div class="indi-card-notch">
+                            @if($late->thumbnail)
+                                <img src="{{ asset('storage/' . $late->thumbnail) }}" alt="{{ $late->title }}">
+                            @else
+                                @if($late->category === 'maritimo')
+                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $late->title }}">
+                                @elseif($late->category === 'ferroviario')
+                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $late->title }}">
+                                @elseif($late->category === 'infraestructura')
+                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $late->title }}">
+                                @else
+                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $late->title }}">
+                                @endif
+                            @endif
+                        </div>
                     </div>
-                    <span class="blog-date">25 . FΞB . 2024</span>
-                    <h4 class="blog-title">DESCUBRΞ LΛ LOGÍSTICΛ DΞTRÁS DΞ UN ROMPΞOLΛS</h4>
-                    <div class="blog-footer">
-                        <a href="{{ route('prensa.articulo') }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                    </div>
-                    <div class="indi-card-notch">
-                        <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Noticia 1">
-                    </div>
-                </div>
-
-                <!-- Card 02 (Mini) -->
-                <div class="blog-card">
-                    <div class="blog-tags">
-                        <span class="blog-tag ferroviario">FΞRROVIΛRIO</span>
-                        <span class="blog-tag infraestructura">INFRΛΞSTRUCTURΛ</span>
-                    </div>
-                    <span class="blog-date">20 . FΞB . 2024</span>
-                    <h4 class="blog-title">TΞCNOLOGÍΛ INDI ΞN ΞL SURΞSTΞ MΞXICΛNO</h4>
-                    <div class="blog-footer">
-                        <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                    </div>
-                    <div class="indi-card-notch">
-                        <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="Noticia 2">
-                    </div>
-                </div>
-
-                <!-- Card 03 (Mini) -->
-                <div class="blog-card">
-                    <div class="blog-tags">
-                        <span class="blog-tag construccion">CONSTRUCCIÓN</span>
-                        <span class="blog-tag infraestructura">INFRΛΞSTRUCTURΛ</span>
-                    </div>
-                    <span class="blog-date">15 . FΞB . 2024</span>
-                    <h4 class="blog-title">DESCUBRΞ LΛ INGENIERÍΛ DΞL TRΞN MΛYΛ</h4>
-                    <div class="blog-footer">
-                        <a href="#" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
-                    </div>
-                    <div class="indi-card-notch">
-                        <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="Noticia 3">
-                    </div>
-                </div>
+                @empty
+                    <p style="font-family: 'usual', sans-serif; font-size: 0.9em; color: #888; text-align: center;">No hay otros artículos recientes.</p>
+                @endforelse
             </div>
         </aside>
     </div>

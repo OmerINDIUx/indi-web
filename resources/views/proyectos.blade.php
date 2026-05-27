@@ -20,14 +20,6 @@
                 {{-- <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div> --}}
                 <h1 class="indi-heading-large hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">NUΞSTROS<br>PROYΞCTOS</h1>
                 <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
-                
-                <!-- MAP OVERLAY SEARCH BAR -->
-                <div class="project-search-container">
-                    <div class="project-search-input-wrapper">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <input type="text" id="projectSearchInput" placeholder="BUSCΛR PROYECTO O UBICΛCIÓN...">
-                    </div>
-                </div>
             </div>
 
             <div id="projectsMap"></div>
@@ -36,30 +28,38 @@
             <div class="map-grid-overlay"></div>
             <div class="map-scanner-line"></div>
             
-            <!-- Premium Filter Bar (Inspired by Menu) -->
-            <div class="filter-bar-premium">
-                <div class="filter-container-blue" id="filterLinks">
-                    <button class="filter-link active" data-category="all">
-                        {{-- <span class="f-num">00</span> --}}
-                        <span class="f-text">TODOS</span>
-                    </button>
-                    <button class="filter-link" data-category="2">
-                        <span class="f-text">CONS</span>
-                        <span class="f-text">TRUCCIÓN</span>
-                    </button>
-                    <button class="filter-link" data-category="1">
-                        <span class="f-text">INFRΛ</span>
-                        <span class="f-text">ESTRUCTURΛ</span>
-                    </button>
-                    <button class="filter-link" data-category="3">
-                        <span class="f-text">MΛRÍ</span>
-                        <span class="f-text">TIMO</span>
-                    </button>
-                    <button class="filter-link" data-category="4">
-                        <span class="f-text">FERRO</span>
-                        <span class="f-text">VIΛRIΛ</span>
-                    </button>
-                    <div class="filter-notch" id="filterNotch"></div>
+            <!-- Search and filters, aligned to the platform identity -->
+            <div class="map-controls-overlay">
+                <div class="project-search-container">
+                    <div class="project-search-input-wrapper">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="projectSearchInput" placeholder="BUSCΛR PROYECTO O UBICΛCIÓN...">
+                    </div>
+                </div>
+
+                <div class="filter-bar-premium">
+                    <div class="filter-container-blue" id="filterLinks">
+                        <button class="filter-link active" data-category="all">
+                            {{-- <span class="f-num">00</span> --}}
+                            <span class="f-text">TODOS</span>
+                        </button>
+                        <button class="filter-link" data-category="2">
+                            <span class="f-text">CONS</span>
+                            <span class="f-text">TRUCCIÓN</span>
+                        </button>
+                        <button class="filter-link" data-category="1">
+                            <span class="f-text">INFRΛ</span>
+                            <span class="f-text">ESTRUCTURΛ</span>
+                        </button>
+                        <button class="filter-link" data-category="3">
+                            <span class="f-text">MΛRÍ</span>
+                            <span class="f-text">TIMO</span>
+                        </button>
+                        <button class="filter-link" data-category="4">
+                            <span class="f-text">FERRO</span>
+                            <span class="f-text">VIΛRIΛ</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -226,25 +226,38 @@
         text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
     }
 
-    /* Modern notched glassmorphic search container */
+    .map-controls-overlay {
+        position: absolute;
+        bottom: 60px;
+        left: 5%;
+        z-index: 2100;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        pointer-events: none;
+        transition: all 1s var(--transition);
+    }
+
+    /* Search control aligned to INDI platform colors */
     .project-search-container {
         pointer-events: auto !important;
-        background: rgba(10, 10, 10, 0.75);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 255, 255, 0.2);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-        clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-        padding: 0.1rem 1.5rem;
+        background: var(--indi-gray);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--indi-border);
+        clip-path: none;
+        padding: 0 1.5rem;
+        width: min(420px, 80vw);
         max-width: 420px;
-        margin-top: 2rem;
+        min-height: 56px;
         display: flex;
         align-items: center;
         transition: all 0.4s ease;
     }
 
     .project-search-container:focus-within {
-        border-color: #00ffff;
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+        border-color: var(--indi-blue);
+        box-shadow: 0 14px 35px rgba(0, 102, 255, 0.12);
     }
 
     .project-search-input-wrapper {
@@ -255,13 +268,14 @@
     }
 
     .project-search-input-wrapper svg {
-        color: #00ffff;
+        color: var(--indi-blue);
+        flex: 0 0 auto;
     }
 
     .project-search-input-wrapper input {
         background: transparent;
         border: none;
-        color: #fff;
+        color: var(--indi-dark);
         font-family: 'usual', sans-serif;
         font-size: 0.85rem;
         font-weight: 600;
@@ -275,7 +289,7 @@
     }
 
     .project-search-input-wrapper input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
+        color: var(--indi-text-muted);
     }
 
     /* Map Styles */
@@ -345,20 +359,17 @@
 
     /* Premium Filter Bar (Inspired by Menu) */
     .filter-bar-premium {
-        position: absolute;
-        bottom: 60px;
-        left: 5%;
-        z-index: 2100;
+        pointer-events: auto;
         transition: all 1s var(--transition);
     }
 
     .filter-container-blue {
         display: flex;
         align-items: center;
-        background: rgba(10, 10, 10, 0.75);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 255, 255, 0.25);
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+        justify-content: center;
+        background: var(--indi-blue);
+        border: 0;
+        box-shadow: none;
         padding: 0 2rem;
         height: 64px;
         position: relative;
@@ -381,7 +392,7 @@
     .filter-link {
         background: transparent;
         border: none;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255,255,255,0.68);
         padding: 0 1.5rem;
         font-family: 'usual', sans-serif;
         font-size: 0.75rem;
@@ -398,8 +409,8 @@
     }
 
     .filter-link:hover, .filter-link.active {
-        color: #00ffff;
-        text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        color: #fff;
+        text-shadow: none;
     }
 
     .filter-link::after {
@@ -410,8 +421,8 @@
         transform: translateX(-50%) scaleX(0);
         width: 60%;
         height: 2px;
-        background: #00ffff;
-        box-shadow: 0 0 8px #00ffff;
+        background: #fff;
+        box-shadow: none;
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -542,22 +553,21 @@
         transform: translateX(-50%) translateY(-5px);
     }
 
-    /* Project Sidebar - Technical Glassmorphic Overlay */
+    /* Project Sidebar */
     .project-overlay-sidebar {
         position: absolute;
         top: 0;
         right: 0;
         width: 450px;
         height: 100%;
-        background: rgba(10, 10, 10, 0.85);
-        backdrop-filter: blur(20px);
+        background: var(--indi-gray);
         z-index: 2105;
         transform: translateX(100%);
         transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         display: flex;
         flex-direction: column;
-        border-left: 1px solid rgba(0, 255, 255, 0.15);
-        box-shadow: -15px 0 35px rgba(0,0,0,0.5);
+        border-left: 2px solid var(--indi-blue);
+        box-shadow: -15px 0 35px rgba(0,0,0,0.18);
     }
 
     .project-overlay-sidebar.active {
@@ -568,7 +578,7 @@
     .project-white-card {
         width: 100%;
         height: 100%;
-        background: transparent;
+        background: var(--indi-gray);
         padding: 4.5rem;
         display: flex;
         flex-direction: column;
@@ -581,14 +591,14 @@
         width: 6px;
     }
     .project-white-card::-webkit-scrollbar-track {
-        background: rgba(255,255,255,0.02);
+        background: rgba(0,0,0,0.04);
     }
     .project-white-card::-webkit-scrollbar-thumb {
-        background: rgba(0,255,255,0.2);
+        background: rgba(0,102,255,0.35);
         border-radius: 3px;
     }
     .project-white-card::-webkit-scrollbar-thumb:hover {
-        background: rgba(0,255,255,0.5);
+        background: var(--indi-blue);
     }
 
     .project-overlay-sidebar .project-name {
@@ -598,7 +608,7 @@
         line-height: 1.1;
         margin-top: 1.5rem;
         margin-bottom: 2rem;
-        color: var(--accent-color, #00ffff);
+        color: var(--indi-dark);
         text-transform: uppercase;
         letter-spacing: 0.08em;
     }
@@ -607,8 +617,8 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-bottom: 2px solid var(--accent-color, var(--indi-blue));
+        border-top: 1px solid var(--indi-border);
+        border-bottom: 2px solid var(--indi-blue);
         margin-bottom: 2.5rem;
         padding: 1.5rem 0;
         gap: 1rem;
@@ -618,7 +628,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid var(--indi-border);
         padding-left: 0.8rem;
     }
 
@@ -634,7 +644,7 @@
         font-family: 'usual', sans-serif;
         font-size: 0.7rem;
         font-weight: 700;
-        color: rgba(255, 255, 255, 0.4);
+        color: var(--indi-text-muted);
         margin-bottom: 0.6rem;
         text-transform: uppercase;
         letter-spacing: 0.2em;
@@ -643,7 +653,7 @@
     .project-overlay-sidebar .stat-value {
         font-size: clamp(0.9rem, 1.8vw, 1.25rem);
         font-weight: 700;
-        color: #fff;
+        color: var(--indi-dark);
         font-family: 'usual', sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -653,7 +663,7 @@
     .project-overlay-sidebar .project-description {
         font-size: clamp(0.95rem, 1.8vw, 1.15rem);
         line-height: 1.7;
-        color: rgba(255, 255, 255, 0.8);
+        color: #333;
         margin-bottom: 3rem;
         font-family: 'usual', sans-serif;
         font-weight: 400;
@@ -666,7 +676,7 @@
         margin-top: auto;
         clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%);
         overflow: hidden;
-        border-top: 1px solid rgba(0, 255, 255, 0.15);
+        border-top: 1px solid var(--indi-border);
     }
 
     .project-overlay-sidebar .project-visual-notched img {
@@ -675,14 +685,13 @@
         object-fit: cover;
     }
 
-    /* Highly visible tech-styled close button */
     .close-overlay {
         position: absolute;
         top: 2rem;
         right: 2rem;
-        background: rgba(20, 20, 20, 0.8);
-        border: 1px solid rgba(0, 255, 255, 0.3);
-        color: #00ffff;
+        background: #fff;
+        border: 1px solid var(--indi-border);
+        color: var(--indi-dark);
         width: 44px;
         height: 44px;
         border-radius: 0;
@@ -697,9 +706,10 @@
     }
 
     .close-overlay:hover {
-        background: #00ffff;
-        color: #000;
-        box-shadow: 0 0 15px #00ffff;
+        background: var(--indi-blue);
+        border-color: var(--indi-blue);
+        color: #fff;
+        box-shadow: none;
         transform: rotate(90deg);
     }
 
@@ -818,7 +828,7 @@
     }
 
     .project-card-mini:hover .card-corner {
-        border-color: #00ffff;
+        border-color: var(--indi-blue);
     }
 
     .project-title {
@@ -834,7 +844,7 @@
     }
 
     .project-card-mini:hover .project-title {
-        color: #00ffff;
+        color: var(--indi-blue);
     }
 
     .card-footer {
@@ -853,7 +863,7 @@
     .view-btn {
         font-family: 'usual', sans-serif;
         font-size: 0.65rem;
-        color: #00ffff;
+        color: var(--indi-blue);
         font-weight: 700;
         letter-spacing: 0.08em;
         opacity: 0;
@@ -864,7 +874,7 @@
     .project-card-mini:hover .view-btn {
         opacity: 1;
         transform: translateX(0);
-        text-shadow: 0 0 8px rgba(0,255,255,0.6);
+        text-shadow: none;
     }
 
     .card-glow {
@@ -887,14 +897,14 @@
             top: 180px;
         }
         
-        .project-search-container {
-            max-width: 320px;
-            margin-top: 1.5rem;
-        }
-
-        .filter-bar-premium {
+        .map-controls-overlay {
             bottom: 40px;
             left: 3%;
+        }
+
+        .project-search-container {
+            width: min(360px, 78vw);
+            max-width: 360px;
         }
 
         .filter-container-blue {
@@ -972,20 +982,23 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
+        .map-controls-overlay {
+            bottom: 20px;
+            left: 2%;
+            width: 96%;
+            gap: 0.75rem;
+        }
+
         .project-search-container {
-            max-width: 280px;
-            padding: 0.1rem 1rem;
+            width: 100%;
+            max-width: none;
+            min-height: 48px;
+            padding: 0 1rem;
         }
 
         .project-search-input-wrapper input {
             padding: 0.6rem 0;
             font-size: 0.8rem;
-        }
-
-        .filter-bar-premium {
-            bottom: 20px;
-            left: 2%;
-            width: 96%;
         }
 
         .filter-container-blue {
@@ -996,6 +1009,7 @@
             justify-content: flex-start;
             padding: 0 1rem;
             height: 48px;
+            width: 100%;
         }
 
         .filter-link {
@@ -1013,9 +1027,9 @@
             bottom: 0;
             left: 0;
             border-left: none;
-            border-top: 1px solid rgba(0, 255, 255, 0.25);
+            border-top: 2px solid var(--indi-blue);
             transform: translateY(100%);
-            box-shadow: 0 -15px 35px rgba(0,0,0,0.6);
+            box-shadow: 0 -15px 35px rgba(0,0,0,0.18);
         }
 
         .project-overlay-sidebar.active {
@@ -1093,8 +1107,8 @@
         }
 
         .project-search-container {
-            max-width: 240px;
-            margin-top: 1rem;
+            width: 100%;
+            max-width: none;
         }
 
         .project-search-input-wrapper input {
@@ -1217,8 +1231,6 @@
 
             const cat = categories[project.category] || categories[1];
 
-            overlay.style.setProperty('--accent-color', cat.color);
-
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
             document.getElementById('overlayStatus').innerText = project.status == 1 ? 'COMPLETΛDO' : 'ΞN PROCESO';
@@ -1231,7 +1243,6 @@
             }
 
             document.getElementById('overlayType').innerText = cat.name;
-            document.getElementById('overlayType').style.color = cat.color;
 
             // Use project image if available
             const imgPath = project.marker_image ? 
