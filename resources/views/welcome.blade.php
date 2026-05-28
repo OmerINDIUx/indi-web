@@ -10,7 +10,7 @@
         </video>
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
-              PΛSIÓN POR ΞL PROGRΞSO
+              {{ \App\Support\CmsText::get('home.hero.title', 'PASION POR EL PROGRESO') }}
             </h1>
         </div>
     </header>
@@ -31,8 +31,8 @@
                 <div class="stat-box-solid" style="background: white; border-right: 1px solid #eee;">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: var(--indi-blue);">+50</span>
-                        <h4 class="stat-tit">ΛÑOS</h4>
-                        <p class="stat-txt">CONSTRUYΞNDO ΞL FUTURO DΞ MÉXICO</p>
+                        <h4 class="stat-tit">{{ \App\Support\CmsText::get('home.stats.years.title', 'ANOS') }}</h4>
+                        <p class="stat-txt">{{ \App\Support\CmsText::get('home.stats.years.text', 'CONSTRUYENDO EL FUTURO DE MEXICO') }}</p>
                     </div>
                 </div>
 
@@ -40,8 +40,8 @@
                 <div class="stat-box-solid" style="background: white; border-right: 1px solid #eee;">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: var(--indi-blue);">+25</span>
-                        <h4 class="stat-tit">CIUDΛDΞS</h4>
-                        <p class="stat-txt">IMPULSΛDΛS POR NUΞSTRΛ INNOVΛCIÓN</p>
+                        <h4 class="stat-tit">{{ \App\Support\CmsText::get('home.stats.cities.title', 'CIUDADES') }}</h4>
+                        <p class="stat-txt">{{ \App\Support\CmsText::get('home.stats.cities.text', 'IMPULSADAS POR NUESTRA INNOVACION') }}</p>
                     </div>
                 </div>
 
@@ -49,8 +49,8 @@
                 <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: white; opacity: 0.9;">+325</span>
-                        <h4 class="stat-tit" style="color: white;">PROYΞCTOS</h4>
-                        <p class="stat-txt" style="color: rgba(255,255,255,0.7);">TΞRMINΛDOS CON LΛ MÁS ΛLTΛ CΛLIDΛD</p>
+                        <h4 class="stat-tit" style="color: white;">{{ \App\Support\CmsText::get('home.stats.projects.title', 'PROYECTOS') }}</h4>
+                        <p class="stat-txt" style="color: rgba(255,255,255,0.7);">{{ \App\Support\CmsText::get('home.stats.projects.text', 'TERMINADOS CON LA MAS ALTA CALIDAD') }}</p>
                     </div>
                 </div>
 
@@ -58,8 +58,8 @@
                 <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
                         <span class="stat-num" style="color: white; opacity: 0.9;">+1500</span>
-                        <h4 class="stat-tit" style="color: white;">FΛMILIΛS INDI</h4>
-                        <p class="stat-txt" style="color: rgba(255,255,255,0.7);">NUΞSTROS COLΛBORΛDORΞS SON NUΞSTRO MOTOR</p>
+                        <h4 class="stat-tit" style="color: white;">{{ \App\Support\CmsText::get('home.stats.families.title', 'FAMILIAS INDI') }}</h4>
+                        <p class="stat-txt" style="color: rgba(255,255,255,0.7);">{{ \App\Support\CmsText::get('home.stats.families.text', 'NUESTROS COLABORADORES SON NUESTRO MOTOR') }}</p>
                     </div>
                 </div>
 
@@ -269,9 +269,9 @@
                     <div class="unit-box-trigger" data-unit="0" style="--indi-unit-color: #0066f9;">
                         <div class="unit-identity">
                             <span class="u-num">01</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">INDI MΛRÍTIMO</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.title', 'INDI MARITIMO') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Dominio técnico en ingeniería portuaria, escolleras monumentales y obras de dragado. Integramos tecnologías de vanguardia para superar las dinámicas costeras y conectar a México con el mundo..</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.text', 'Dominio tecnico en ingenieria portuaria, escolleras monumentales y obras de dragado.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Maritimo">
                         </div>
@@ -281,9 +281,9 @@
                     <div class="unit-box-trigger" data-unit="1" style="--indi-unit-color: #64b032;">
                         <div class="unit-identity">
                             <span class="u-num">02</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">INDI INFRΛESTRUCTURΛ</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.title', 'INDI INFRAESTRUCTURA') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precisión técnica, resolviendo retos complejos para conectar y transformar las metrópolis.</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.text', 'Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precision tecnica.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
                         </div>
@@ -293,9 +293,9 @@
                     <div class="unit-box-trigger" data-unit="2" style="--indi-unit-color: #ffa608;">
                         <div class="unit-identity">
                             <span class="u-num">03</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">INDI CONSTRUCCIÓN</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.title', 'INDI CONSTRUCCION') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Especialistas en ingeniería civil de alta complejidad y cimentación profunda. Ejecutamos obras icónicas y monumentales, garantizando la máxima integridad estructural e innovación arquitectónica</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.text', 'Especialistas en ingenieria civil de alta complejidad y cimentacion profunda.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construccion">
                         </div>
@@ -305,9 +305,9 @@
                     <div class="unit-box-trigger" data-unit="3" style="--indi-unit-color: #ff3000;">
                         <div class="unit-identity">
                             <span class="u-num">04</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">INDI FERROVIΛRIΛ</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.title', 'INDI FERROVIARIA') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">Ingeniería avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala. Trazamos y construimos rutas resilientes que impulsan la competitividad logística a nivel nacional."</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.text', 'Ingenieria avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
                         </div>
@@ -335,6 +335,31 @@
         </section>
 
         <!-- Interactive Projects Map Section -->
+        @php
+            $homeProjects = ($featuredProjects ?? collect())->values();
+            $useDynamicHomeProjects = $homeProjects->count() >= 3 && $homeProjects->count() <= 5;
+            $projectCategoryKeys = [
+                1 => 'infraestructura',
+                2 => 'construccion',
+                3 => 'maritimo',
+                4 => 'ferroviaria',
+            ];
+            $mapWidth = 520;
+            $mapHeight = 440;
+            $minLat = 14.4;
+            $maxLat = 32.8;
+            $minLng = -118.6;
+            $maxLng = -86.5;
+            $projectPoint = function ($lat, $lng) use ($mapWidth, $mapHeight, $minLat, $maxLat, $minLng, $maxLng) {
+                $xRatio = ((float) $lng - $minLng) / ($maxLng - $minLng);
+                $yRatio = ($maxLat - (float) $lat) / ($maxLat - $minLat);
+
+                return [
+                    'x' => max(26, min($mapWidth - 18, round($xRatio * $mapWidth, 1))),
+                    'y' => max(28, min($mapHeight - 24, round($yRatio * $mapHeight, 1))),
+                ];
+            };
+        @endphp
         <section class="indi-interactive-projects">
             <div class="indi-notch-divider dark">
                 <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -351,102 +376,132 @@
                             <!-- Mexico Base Outline (Accurate Path) -->
                             <path class="state-base" d="M506.752,291.992 h-28.989 c-0.73,0-1.457,0.157-2.126,0.448 l-25.459,11.32 c-1.895,0.841-3.114,2.722-3.114,4.788 v17.583 c0,0.791-0.178,1.574-0.524,2.286 l-11.805,24.394 h-12.946 c-0.68,0-1.353,0.135-1.98,0.392 l-32.463,13.28 c-1.706,0.698-3.65,0.449-5.126-0.662 l-9.479-7.103 c-0.844-0.635-1.863-0.998-2.918-1.048 l-14.583-0.627 c-1.693-0.079-3.249-0.97-4.168-2.387 l-35.184-54.302 c-0.74-1.148-1.004-2.536-0.74-3.876 l13.522-67.596 c0.495-2.486-0.855-4.966-3.213-5.899 l-33.517-13.273 c-1.204-0.47-2.187-1.374-2.76-2.528 l-27.407-54.815 c-0.802-1.603-2.369-2.686-4.15-2.864 l-17.608-1.824 c-2.048-0.214-4.032,0.798-5.069,2.572 l-7.074,12.118 c-0.713,1.232-1.895,2.116-3.277,2.45 c-1.379,0.342-2.839,0.107-4.039-0.655 l-15.695-9.882 c-1.218-0.762-2.07-1.994-2.352-3.405 l-3.33-16.657 c-0.218-1.09-0.784-2.087-1.61-2.843 l-25.171-22.954 c-0.965-0.877-2.226-1.368-3.534-1.368 h-22.317 c-2.893,0-5.24,2.344-5.24,5.243 v2.978 h-34.87 c-0.851,0-1.692-0.206-2.444-0.606 L43.826,83.006 C43.07,82.607,42.23,82.4,41.378,82.4 H5.244 c-1.646,0-3.199,0.769-4.185,2.087 c-0.991,1.311-1.311,3.014-0.855,4.596 l14.167,49.592 c0.235,0.826,0.673,1.582,1.272,2.202 l18.719,19.392 c1.909,1.974,1.966,5.087,0.135,7.131 l-7.042,7.872 c-0.958,1.069-1.436,2.487-1.318,3.919 c0.118,1.438,0.819,2.757,1.941,3.662 l28.081,22.599 c0.851,0.691,1.47,1.631,1.763,2.678 l7.477,26.924 c0.193,0.691,0.524,1.332,0.972,1.888 l30.069,37.232 c0.95,1.183,2.365,1.888,3.879,1.945 c1.51,0.057,2.974-0.542,4.015-1.639 l6.946-7.36 c1.696-1.795,1.909-4.531,0.516-6.561 l-18.887-27.607 c-0.064-0.092-0.125-0.185-0.182-0.285 L75.074,202.98 c-0.228-0.384-0.406-0.798-0.531-1.226 l-8.595-29.708 c-0.172-0.577-0.442-1.126-0.798-1.624 l-25.152-34.575 c-0.399-0.555-0.692-1.183-0.855-1.845 l-7.15-29.409 l26.624,12.168 c1.361,0.628,2.394,1.803,2.832,3.235 l11.299,36.912 c0.225,0.734,0.606,1.403,1.118,1.974 l41.607,46.23 c1.24,1.382,1.66,3.306,1.107,5.072 l-2.322,7.438 c-0.556,1.774-0.128,3.705,1.118,5.087 l68.953,76.003 c0.877,0.969,1.361,2.223,1.361,3.527 v19.342 l-4.909,1.511 c-1.454,0.449-2.64,1.503-3.252,2.892 c-0.613,1.39-0.595,2.978,0.05,4.353 l9.775,20.768 c0.517,1.104,1.408,1.994,2.518,2.515 l152.764,71.608 c1.999,0.94,4.371,0.526,5.935-1.04 l17.234-17.226 c0.98-0.984,2.316-1.54,3.705-1.54 h12.582 c1.094,0,2.166,0.342,3.057,0.984 l30.969,22.214 c1.315,0.948,2.993,1.226,4.538,0.77 c1.553-0.449,2.804-1.604,3.398-3.106 l6.957-17.668 c0.766-1.938,2.604-3.242,4.688-3.32 l13.714-0.506 c2.818-0.106,5.051-2.422,5.051-5.236 v-4.538 c0-1.718-0.845-3.328-2.262-4.311 l-6.166-4.267 c-1.415-0.976-2.259-2.586-2.259-4.31 v-12.048 h28.326 c1.81,0,3.488-0.933,4.446-2.465 l34.653-55.442 c0.52-0.827,0.798-1.796,0.798-2.779 v-12.154 C512.0,294.336,509.649,291.992,506.752,291.992 z" />
                             
-                            <!-- Location Markers -->
-                            <!-- Edomex/CDMX -->
-                            <circle class="project-marker marker-cdmx" cx="295" cy="310" r="8" data-state="cdmx" />
-                            <!-- Oaxaca (Salina Cruz) -->
-                            <circle class="project-marker marker-southeast" cx="295" cy="380" r="8" data-state="southeast" />
-                            <!-- Reynosa (Tamaulipas) -->
-                            <circle class="project-marker marker-northeast" cx="320" cy="224" r="8" data-state="northeast" />
+                            @if($useDynamicHomeProjects)
+                                @foreach($homeProjects as $project)
+                                    @php($point = $projectPoint($project->latitude, $project->longitude))
+                                    <circle class="project-marker marker-project-{{ $project->id }}" cx="{{ $point['x'] }}" cy="{{ $point['y'] }}" r="8" data-state="project-{{ $project->id }}" />
+                                @endforeach
+                            @else
+                                <circle class="project-marker marker-cdmx" cx="295" cy="310" r="8" data-state="cdmx" />
+                                <circle class="project-marker marker-southeast" cx="295" cy="380" r="8" data-state="southeast" />
+                                <circle class="project-marker marker-northeast" cx="320" cy="224" r="8" data-state="northeast" />
+                            @endif
                         </svg>
                     </div>
                 </div>
 
                 <!-- Right: Project Scroll Info -->
                 <div class="project-data-scroll">
-                    <!-- Project 01: Rompe Olas -->
-                    <div class="project-data-card" data-state="southeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">ROMPE OLΛS SΛLINΛ CRUZ (OΛXΛCΛ)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">OΛXΛCΛ</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2024</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">3 ΛÑOS</span>
+                    @if($useDynamicHomeProjects)
+                        @foreach($homeProjects as $project)
+                            <div class="project-data-card" data-state="project-{{ $project->id }}">
+                                <div class="project-white-card">
+                                    <h2 class="project-name">{{ mb_strtoupper($project->localized_title) }}</h2>
+                                    <div class="project-stats-grid">
+                                        <div class="stat-item">
+                                            <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
+                                            <span class="stat-value indi-scroll-text">{{ mb_strtoupper($project->localized_address) }}</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
+                                            <span class="stat-value indi-scroll-text">{{ $project->status ? \App\Support\CmsText::get('projects.completed', 'COMPLETADO') : \App\Support\CmsText::get('projects.in_progress', 'EN PROCESO') }}</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
+                                            @php($projectCategoryKey = $projectCategoryKeys[$project->category] ?? 'infraestructura')
+                                            <span class="stat-value indi-scroll-text">{{ mb_strtoupper(\App\Support\CmsText::get('category.' . $projectCategoryKey, __('site.categories.' . $projectCategoryKey))) }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="project-description">
+                                        {{ $project->localized_description }}
+                                    </p>
+                                    <div class="project-visual-notched">
+                                        @if($project->marker_image)
+                                            <img src="{{ asset('storage/' . $project->marker_image) }}" alt="{{ $project->localized_title }}">
+                                        @else
+                                            <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="{{ $project->localized_title }}">
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                            <p class="project-description">
+                        @endforeach
+                    @else
+                        <div class="project-data-card" data-state="southeast">
+                            <div class="project-white-card">
+                                <h2 class="project-name">ROMPE OLΛS SΛLINΛ CRUZ (OΛXΛCΛ)</h2>
+                                <div class="project-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
+                                        <span class="stat-value indi-scroll-text">OΛXΛCΛ</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('category.maritimo', __('site.categories.maritimo')) }}</span>
+                                    </div>
+                                </div>
+                                <p class="project-description">
 Rehabilitación estratégica de la vía férrea que conecta el Océano Pacífico con el Golfo de México. La obra implicó la modernización y estabilización de terracerías y puentes para soportar altas capacidades de carga comercial, consolidando una ruta logística fundamental para el país.                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Rompe Olas">
+                                <div class="project-visual-notched">
+                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Rompe Olas">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Project 02: Mexibus -->
-                    <div class="project-data-card" data-state="cdmx">
-                        <div class="project-white-card">
-                            <h2 class="project-name">CΛBLΞBÚS LÍNΞΛ 1 (CDMX)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">CIUDAD DE MÉXICO</span>
+                        <div class="project-data-card" data-state="cdmx">
+                            <div class="project-white-card">
+                                <h2 class="project-name">CΛBLΞBÚS LÍNΞΛ 1 (CDMX)</h2>
+                                <div class="project-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
+                                        <span class="stat-value indi-scroll-text">CIUDAD DE MÉXICO</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('category.infraestructura', __('site.categories.infraestructura')) }}</span>
+                                    </div>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2024</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">18 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
+                                <p class="project-description">
 Sistema de transporte público por teleférico urbano diseñado para zonas de alta densidad y topografía compleja. La ingeniería del proyecto se centró en la cimentación profunda de torres en terrenos irregulares y el montaje de sistemas electromecánicos de alta seguridad, mejorando drásticamente la conectividad de la zona.                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="Mexibus">
+                                <div class="project-visual-notched">
+                                    <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="Mexibus">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                   
-
-                    <!-- Project 04: Aduana Reynosa -->
-                    <div class="project-data-card" data-state="northeast">
-                        <div class="project-white-card">
-                            <h2 class="project-name">ΛDUΛNΛ MODELO (RΞYNOSΛ)</h2>
-                            <div class="project-stats-grid">
-                                <div class="stat-item">
-                                    <span class="stat-label">Ubicación</span>
-                                    <span class="stat-value indi-scroll-text">TΛMΛULIPΛS</span>
+                        <div class="project-data-card" data-state="northeast">
+                            <div class="project-white-card">
+                                <h2 class="project-name">ΛDUΛNΛ MODELO (RΞYNOSΛ)</h2>
+                                <div class="project-stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
+                                        <span class="stat-value indi-scroll-text">TΛMΛULIPΛS</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
+                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('category.ferroviaria', __('site.categories.ferroviaria')) }}</span>
+                                    </div>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Año</span>
-                                    <span class="stat-value indi-scroll-text">2023</span>
+                                <p class="project-description">
+                                    Infraestructura fronteriza de clase mundial diseñada para optimizar el comercio internacional y la seguridad logística.
+                                </p>
+                                <div class="project-visual-notched">
+                                    <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Aduana">
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Tiempo</span>
-                                    <span class="stat-value indi-scroll-text">24 MESES</span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                Infraestructura fronteriza de clase mundial diseñada para optimizar el comercio internacional y la seguridad logística.
-                            </p>
-                            <div class="project-visual-notched">
-                                <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Aduana">
                             </div>
                         </div>
-                    </div>
-
-                 
-                   
+                    @endif
                 </div>
             </div>
         </section>
@@ -463,25 +518,36 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                 <div class="blog-header-container" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5rem;">
                     <div>
                         {{-- <span class="u-num" style="font-size: 0.9rem; margin-bottom: 1rem;">NEWS & INSIGHTS</span> --}}
-                        <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #222; margin: 0;">PENSΛMIENTO<br>ESTRΛTÉGICO</h2>
+                        <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #222; margin: 0;">{{ \App\Support\CmsText::get('home.projects.thinking', 'PENSAMIENTO ESTRATEGICO') }}</h2>
                     </div>
-                    <a href="/prensa" class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid var(--indi-blue); padding-bottom: 5px;">Visita las Noticias ↓</a>
+                    <a href="/prensa" class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid var(--indi-blue); padding-bottom: 5px;">{{ \App\Support\CmsText::get('home.projects.visit_news', 'Visita las Noticias') }} ↓</a>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
                     @forelse($posts ?? [] as $post)
                     <div class="blog-card">
                         <div class="blog-tags">
-                            <span class="blog-tag maritimo">Marítimo</span>
-                            <span class="blog-tag infraestructura">Infraestructura</span>
+                            <span class="blog-tag {{ $post->category }}">
+                                {{ \App\Support\CmsText::get('category.' . $post->category, __('site.categories.' . $post->category)) }}
+                            </span>
                         </div>
                         <span class="blog-date">{{ $post->created_at->format('d . M . Y') }}</span>
-                        <h4 class="blog-title">{{ $post->title }}</h4>
+                        <h4 class="blog-title">{{ $post->localized_title }}</h4>
                         <div class="blog-footer">
-                            <a href="{{ route('blog.show', $post->slug) }}" class="blog-read-btn">Leer Artículo</a>
+                            <a href="{{ route('prensa.show', $post->localized_slug) }}" class="blog-read-btn">{{ \App\Support\CmsText::get('home.blog.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
-                            <img src="{{ $post->thumbnail ?? asset('imagenes_indi/Maritimo/contenedores-muelle-lazaro-cardenas.webp') }}" alt="{{ $post->title }}">
+                            @if($post->thumbnail)
+                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->localized_title }}">
+                            @elseif($post->category === 'maritimo')
+                                <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $post->localized_title }}">
+                            @elseif($post->category === 'ferroviario')
+                                <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $post->localized_title }}">
+                            @elseif($post->category === 'infraestructura')
+                                <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $post->localized_title }}">
+                            @else
+                                <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $post->localized_title }}">
+                            @endif
                         </div>
                     </div>
                     @empty
@@ -494,7 +560,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                         <span class="blog-date">25 . FEB . 2024</span>
                         <h4 class="blog-title">DESCUBRE LΛ LOGÍSTICΛ DETRÁS DE UN ROMPEOLΛS</h4>
                         <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LEER ΛRTÍCULO</a>
+                            <a href="#" class="blog-read-btn">{{ \App\Support\CmsText::get('home.blog.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
                             <img src="{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}" style="width: 100%; height: 100%; object-fit: cover;">
@@ -509,7 +575,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                         <span class="blog-date">20 . FEB . 2024</span>
                         <h4 class="blog-title">TECNOLOGÍΛ INDI EN EL SURESTE MEXICΛNO</h4>
                         <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LEER ΛRTÍCULO</a>
+                            <a href="#" class="blog-read-btn">{{ \App\Support\CmsText::get('home.blog.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
                             <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" style="width: 100%; height: 100%; object-fit: cover;">
@@ -524,7 +590,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                         <span class="blog-date">15 . FEB . 2024</span>
                         <h4 class="blog-title">NUEVΛS DRΛGΛS DE SUCCIÓN DE ΛLTΛ CΛPΛCIDΛD</h4>
                         <div class="blog-footer">
-                            <a href="#" class="blog-read-btn">LEER ΛRTÍCULO</a>
+                            <a href="#" class="blog-read-btn">{{ \App\Support\CmsText::get('home.blog.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
                             <img src="{{ asset('imagenes_indi/Maritimo/muelle-lerma-campeche - copia.webp') }}" style="width: 100%; height: 100%; object-fit: cover;">

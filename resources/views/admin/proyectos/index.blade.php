@@ -15,7 +15,7 @@
 <style>
     .projects-admin-filter {
         display: grid;
-        grid-template-columns: minmax(240px, 1fr) 210px 180px auto auto;
+        grid-template-columns: minmax(240px, 1fr) 190px 180px 180px auto auto;
         gap: 0.8rem;
         align-items: end;
         margin-bottom: 2rem;
@@ -133,6 +133,11 @@
                 </div>
             </div>
 
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 1rem 1.2rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; font-family: 'usual', sans-serif; color: #166534; flex-wrap: wrap;">
+                <div style="font-weight: 700;">Proyectos en inicio: {{ $homeProjectsCount ?? 0 }} / 5</div>
+                <div style="font-size: 0.95rem;">La portada usa entre 3 y 5 proyectos con posición asignada del 1 al 5.</div>
+            </div>
+
             <form method="GET" action="{{ route('admin.proyectos.index') }}" class="projects-admin-filter" id="projectsFilterForm">
                 <div>
                     <label for="search">Buscar</label>
@@ -158,6 +163,15 @@
                     </select>
                 </div>
 
+                <div>
+                    <label for="home">Inicio</label>
+                    <select id="home" name="home">
+                        <option value="">Todos</option>
+                        <option value="featured" @selected(($filters['home'] ?? '') === 'featured')>En inicio</option>
+                        <option value="not_featured" @selected(($filters['home'] ?? '') === 'not_featured')>Fuera de inicio</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="projects-admin-btn" style="background: #0066f9; color: white;">Filtrar</button>
                 <a href="{{ route('admin.proyectos.index') }}" class="projects-admin-btn" style="background: #e2e8f0; color: #334155;">Limpiar</a>
             </form>
@@ -171,6 +185,7 @@
                                 <th style="padding: 1.2rem; font-weight: 600;">Título</th>
                                 <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Ubicación</th>
                                 <th style="padding: 1.2rem; font-weight: 600; width: 150px;">Tipo</th>
+                                <th style="padding: 1.2rem; font-weight: 600; width: 140px;">Inicio</th>
                                 <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Coordenadas</th>
                                 <th style="padding: 1.2rem; font-weight: 600; width: 160px; text-align: center;">Acciones</th>
                             </tr>
@@ -191,6 +206,23 @@
                                         @php($category = $categories[$project->category] ?? $categories[1])
                                         <span style="background: {{ $category['bg'] }}; color: {{ $category['color'] }}; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8em; font-weight: 700; text-transform: uppercase;">{{ $category['label'] }}</span>
                                     </td>
+                                    <td style="padding: 1.2rem;">
+                                        <form method="POST" action="{{ route('admin.proyectos.toggle-home', $project) }}" style="margin: 0;">
+                                            @csrf
+                                            <button
+                                                type="submit"
+                                                @disabled(($homeProjectsCount ?? 0) >= 5 && ! $project->home_order)
+                                                title="{{ (($homeProjectsCount ?? 0) >= 5 && ! $project->home_order) ? 'Ya hay 5 proyectos en portada.' : 'Agregar o quitar de portada' }}"
+                                                style="background: none; border: none; padding: 0; cursor: {{ ((($homeProjectsCount ?? 0) >= 5) && ! $project->home_order) ? 'not-allowed' : 'pointer' }}; opacity: {{ ((($homeProjectsCount ?? 0) >= 5) && ! $project->home_order) ? '0.55' : '1' }};"
+                                            >
+                                                @if($project->home_order)
+                                                    <span style="background: #dcfce7; color: #166534; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8em; font-weight: 700; text-transform: uppercase;">Inicio {{ $project->home_order }}</span>
+                                                @else
+                                                    <span style="background: #f8fafc; color: #64748b; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8em; font-weight: 700; text-transform: uppercase;">Agregar</span>
+                                                @endif
+                                            </button>
+                                        </form>
+                                    </td>
                                     <td style="padding: 1.2rem; font-size: 0.86rem;">{{ $project->latitude }}, {{ $project->longitude }}</td>
                                     <td style="padding: 1.2rem; text-align: center;">
                                         <div style="display: flex; gap: 0.5rem; justify-content: center;">
@@ -205,7 +237,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" style="padding: 3rem; text-align: center; color: #64748b;">No hay proyectos que coincidan con la búsqueda o filtros actuales.</td>
+                                    <td colspan="7" style="padding: 3rem; text-align: center; color: #64748b;">No hay proyectos que coincidan con la búsqueda o filtros actuales.</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $post->title . ' | GRUPO INDI')
+@section('title', $post->localized_title . ' | GRUPO INDI')
 
 @section('content')
 <style>
@@ -204,24 +204,24 @@
 <!-- Hero Section -->
 <section class="article-hero">
     @if($post->thumbnail)
-        <img src="{{ asset('storage/' . $post->thumbnail) }}" class="article-hero-bg" alt="{{ $post->title }}">
+        <img src="{{ asset('storage/' . $post->thumbnail) }}" class="article-hero-bg" alt="{{ $post->localized_title }}">
     @else
         @if($post->category === 'maritimo')
-            <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+            <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->localized_title }}">
         @elseif($post->category === 'ferroviario')
-            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->localized_title }}">
         @elseif($post->category === 'infraestructura')
-            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" class="article-hero-bg" alt="{{ $post->title }}">
+            <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" class="article-hero-bg" alt="{{ $post->localized_title }}">
         @else
-            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->title }}">
+            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="article-hero-bg" alt="{{ $post->localized_title }}">
         @endif
     @endif
     <div class="article-hero-overlay"></div>
     <div class="article-hero-content">
         <span class="article-category-tag">
-            @if($post->category === 'maritimo') MΛRÍTIMO @elseif($post->category === 'construccion') CONSTRUCCIÓN @elseif($post->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($post->category === 'ferroviario') FΞRROVIΛRIO @else {{ $post->category }} @endif
+            {{ \App\Support\CmsText::get('category.' . $post->category, __('site.categories.' . $post->category)) }}
         </span>
-        <h1 class="article-main-title">{{ $post->title }}</h1>
+        <h1 class="article-main-title">{{ $post->localized_title }}</h1>
     </div>
 </section>
 
@@ -229,12 +229,12 @@
     <div class="article-container">
         <!-- Main Content -->
         <article class="article-body">
-            <p><b>{{ $post->created_at->format('d . M . Y') }}</b> — {!! $post->content !!}</p>
+            <p><b>{{ $post->created_at->format('d . M . Y') }}</b> — {!! $post->localized_content !!}</p>
         </article>
 
         <!-- Sidebar -->
         <aside class="article-sidebar">
-            <span class="sidebar-section-title">ÚLTIMOS ΛRTÍCULOS</span>
+            <span class="sidebar-section-title">{{ \App\Support\CmsText::get('press.latest', 'ULTIMOS ARTICULOS') }}</span>
             
             <div class="sidebar-cards-stack">
                 @forelse($latest ?? [] as $late)
@@ -242,32 +242,32 @@
                     <div class="blog-card" data-categories="{{ $late->category }}">
                         <div class="blog-tags" style="margin-bottom: 0.8rem;">
                             <span class="blog-tag {{ $late->category }}">
-                                @if($late->category === 'maritimo') MΛRÍTIMO @elseif($late->category === 'construccion') CONSTRUCCIÓN @elseif($late->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($late->category === 'ferroviario') FΞRROVIΛRIO @else {{ $late->category }} @endif
+                                {{ \App\Support\CmsText::get('category.' . $late->category, __('site.categories.' . $late->category)) }}
                             </span>
                         </div>
                         <span class="blog-date" style="font-size: 0.75rem; color: #888;">{{ $late->created_at->format('d . M . Y') }}</span>
-                        <h4 class="blog-title">{{ $late->title }}</h4>
+                        <h4 class="blog-title">{{ $late->localized_title }}</h4>
                         <div class="blog-footer">
-                            <a href="{{ route('prensa.show', $late->slug) }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
+                            <a href="{{ route('prensa.show', $late->localized_slug) }}" class="blog-read-btn">{{ \App\Support\CmsText::get('press.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
                             @if($late->thumbnail)
-                                <img src="{{ asset('storage/' . $late->thumbnail) }}" alt="{{ $late->title }}">
+                                <img src="{{ asset('storage/' . $late->thumbnail) }}" alt="{{ $late->localized_title }}">
                             @else
                                 @if($late->category === 'maritimo')
-                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $late->title }}">
+                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $late->localized_title }}">
                                 @elseif($late->category === 'ferroviario')
-                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $late->title }}">
+                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $late->localized_title }}">
                                 @elseif($late->category === 'infraestructura')
-                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $late->title }}">
+                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $late->localized_title }}">
                                 @else
-                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $late->title }}">
+                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $late->localized_title }}">
                                 @endif
                             @endif
                         </div>
                     </div>
                 @empty
-                    <p style="font-family: 'usual', sans-serif; font-size: 0.9em; color: #888; text-align: center;">No hay otros artículos recientes.</p>
+                    <p style="font-family: 'usual', sans-serif; font-size: 0.9em; color: #888; text-align: center;">{{ \App\Support\CmsText::get('press.no_latest', 'No hay otros articulos recientes.') }}</p>
                 @endforelse
             </div>
         </aside>

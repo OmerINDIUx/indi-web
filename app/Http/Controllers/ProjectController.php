@@ -14,14 +14,14 @@ class ProjectController extends Controller
             ->map(function (Project $project) {
                 return [
                     'id' => $project->id,
-                    'title' => $project->title,
+                    'title' => $project->localized_title,
                     'category' => $project->category,
                     'status' => $project->status ? 1 : 0,
                     'marker_image' => $project->marker_image ? 'storage/' . $project->marker_image : null,
-                    'address' => $project->address,
+                    'address' => $project->localized_address,
                     'latitude' => (string) $project->latitude,
                     'longitude' => (string) $project->longitude,
-                    'description' => $project->description,
+                    'description' => $project->localized_description,
                 ];
             })
             ->all();

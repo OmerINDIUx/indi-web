@@ -8,10 +8,10 @@
     <header class="indi-hero" style="background-image: url('{{ asset('assets/social/hero.png') }}');">
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
-                RESPONSΛBILIDΛD <br>SOCIΛL
+                {{ \App\Support\CmsText::get('social.title', 'RESPONSABILIDAD SOCIAL') }}
             </h1>
             <p style="font-family: 'usual', sans-serif; font-size: 1.2rem; letter-spacing: 0.2em; max-width: 800px; margin: 0 auto; color: rgba(255,255,255,0.8);">
-                CONSTRUYΞNDO ΞL FUTURO CON CONCIΞNCIΛ ΛMBIΞNTΛL, ΞNΞRGÉTICΛ Y SOCIΛL
+                {{ \App\Support\CmsText::get('social.subtitle', 'CONSTRUYENDO EL FUTURO CON CONCIENCIA AMBIENTAL, ENERGETICA Y SOCIAL') }}
             </p>
         </div>
     </header>
@@ -28,9 +28,9 @@
         <section style="padding: 10rem 0; background: white; color: var(--indi-text); position: relative; z-index: 20;">
             <div class="indi-container">
                 <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-                    <h4 style="font-family: 'usual', sans-serif; color: var(--indi-blue); letter-spacing: 0.4em; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem;">WΞ INDI</h4>
+                    <h4 style="font-family: 'usual', sans-serif; color: var(--indi-blue); letter-spacing: 0.4em; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem;">{{ \App\Support\CmsText::get('social.intro_tag', 'WE INDI') }}</h4>
                     <p style="font-size: 1.6rem; line-height: 1.8; color: #333; font-family: 'usual', sans-serif; font-weight: 300;">
-                        Mediante esta división y con la trayectoria y formalidad que le caracterizan, Grupo Indi busca incidir con proyectos que contribuyan al desarrollo sostenible del país y que generen mejora en la calidad de vida de la sociedad.
+                        {{ \App\Support\CmsText::get('social.intro_text', 'Mediante esta division y con la trayectoria y formalidad que le caracterizan, Grupo Indi busca incidir con proyectos que contribuyan al desarrollo sostenible del pais.') }}
                     </p>
                 </div>
             </div>
@@ -51,20 +51,20 @@
                         </div>
                     </div>
                     <div class="block-text">
-                        <span class="section-tag">MΞDIO ΛMBIΞNTΞ</span>
+                        <span class="section-tag">{{ \App\Support\CmsText::get('social.environment.tag', 'MEDIO AMBIENTE') }}</span>
                         <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #171717; line-height: 1.1; margin: 0 0 2rem; font-family: 'usual', sans-serif;">
-                            COMPROMISO CON ΞL<br><span style="color: var(--indi-blue);">ΛCUΛRIO DΞL MUNDO</span>
+                            {{ \App\Support\CmsText::get('social.environment.title', 'COMPROMISO CON EL ACUARIO DEL MUNDO') }}
                         </h2>
-                        <p>En Grupo Indi nos preocupa cada detalle por lo que una de nuestras principales metas es trabajar cada obra con conciencia ambiental y de preservación animal.</p>
+                        <p>{{ \App\Support\CmsText::get('social.environment.text', 'En Grupo Indi nos preocupa cada detalle por lo que una de nuestras principales metas es trabajar cada obra con conciencia ambiental.') }}</p>
                         
                         <div class="project-mini-cards">
                             <div class="mini-card">
-                                <h3>RΞSCΛTΞ DΞ CΛRΛCOL PÚRPURΛ</h3>
-                                <p>Acciones para la conservación del caracol Plicopurpura pansa en Salina Cruz, preservando una cultura textil y ecológica milenaria.</p>
+                                <h3>{{ \App\Support\CmsText::get('social.snail.title', 'RESCATE DE CARACOL PURPURA') }}</h3>
+                                <p>{{ \App\Support\CmsText::get('social.snail.text', 'Acciones para la conservacion del caracol Plicopurpura pansa en Salina Cruz.') }}</p>
                             </div>
                             <div class="mini-card">
-                                <h3>ISLΛ SΛN JOSÉ</h3>
-                                <p>Proyecto de investigación en colaboración con la UABC para evaluar impactos del cambio climático en la biodiversidad marina del Golfo de California.</p>
+                                <h3>{{ \App\Support\CmsText::get('social.island.title', 'ISLA SAN JOSE') }}</h3>
+                                <p>{{ \App\Support\CmsText::get('social.island.text', 'Proyecto de investigacion en colaboracion con la UABC para evaluar impactos del cambio climatico.') }}</p>
                             </div>
                         </div>
                     </div>
@@ -75,14 +75,14 @@
             <section class="social-block dark-mode">
                 <div class="indi-container grid-2-rev">
                     <div class="block-text">
-                        <span class="section-tag" style="color: #00ffcc; border-color: rgba(0, 255, 204, 0.3);">ΞNΞRGÍΛ LIMPÍΛ</span>
+                        <span class="section-tag" style="color: #00ffcc; border-color: rgba(0, 255, 204, 0.3);">{{ \App\Support\CmsText::get('social.energy.tag', 'ENERGIA LIMPIA') }}</span>
                         <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #ffffff; line-height: 1.1; margin: 0 0 2rem; font-family: 'usual', sans-serif;">
-                            INNOVΛCIÓN<br><span style="color: #00ffcc;">ΞNΞRGÉTICΛ</span>
+                            {{ \App\Support\CmsText::get('social.energy.title', 'INNOVACION ENERGETICA') }}
                         </h2>
-                        <p>A través de las energías renovables y manejo de residuos, reiteramos nuestra alianza con el país en la lucha contra el cambio climático.</p>
+                        <p>{{ \App\Support\CmsText::get('social.energy.text', 'A traves de las energias renovables y manejo de residuos, reiteramos nuestra alianza con el pais.') }}</p>
                         <div class="highlight-box">
-                            <h3>PLΛNTΛ FOTOVOLTÁICΛ PROTÓN PF</h3>
-                            <p>Aportamos de manera innovadora al desarrollo de un ambiente más limpio y sustentable mediante infraestructura energética de vanguardia.</p>
+                            <h3>{{ \App\Support\CmsText::get('social.energy.project_title', 'PLANTA FOTOVOLTAICA PROTON PF') }}</h3>
+                            <p>{{ \App\Support\CmsText::get('social.energy.project_text', 'Aportamos de manera innovadora al desarrollo de un ambiente mas limpio y sustentable.') }}</p>
                         </div>
                     </div>
                     <div class="block-visual animate-on-scroll">
@@ -107,19 +107,19 @@
                         </div>
                     </div>
                     <div class="block-text">
-                        <span class="section-tag">ΛPOYO SOCIΛL</span>
+                        <span class="section-tag">{{ \App\Support\CmsText::get('social.support.tag', 'APOYO SOCIAL') }}</span>
                         <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #171717; line-height: 1.1; margin: 0 0 2rem; font-family: 'usual', sans-serif;">
-                            FOMΞNTO DΞPORTIVO<br><span style="color: var(--indi-blue);">Y SOCIΛL</span>
+                            {{ \App\Support\CmsText::get('social.support.title', 'FOMENTO DEPORTIVO Y SOCIAL') }}
                         </h2>
-                        <p>Creemos en el poder transformador del deporte para fortalecer comunidades, promover la salud y difundir valores de disciplina y perseverancia.</p>
+                        <p>{{ \App\Support\CmsText::get('social.support.text', 'Creemos en el poder transformador del deporte para fortalecer comunidades.') }}</p>
                         <div class="stats-row">
                             <div class="s-stat">
                                 <span class="val">+10</span>
-                                <span class="lab">AÑOS DΞ IMPACTO</span>
+                                <span class="lab">{{ \App\Support\CmsText::get('social.support.years', 'ANOS DE IMPACTO') }}</span>
                             </div>
                             <div class="s-stat">
                                 <span class="val">LEED</span>
-                                <span class="lab">CERTIFICΛCIÓN</span>
+                                <span class="lab">{{ \App\Support\CmsText::get('social.support.certification', 'CERTIFICACION') }}</span>
                             </div>
                         </div>
                     </div>
@@ -131,16 +131,16 @@
                 <div class="indi-container">
                     <div class="foundation-card animate-on-scroll">
                         <div class="foundation-header">
-                            <span class="section-tag" style="color: white; border-color: rgba(255, 255, 255, 0.4);">FUNDΛCIÓN MMC</span>
-                            <h2 style="font-family: 'usual', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; margin-top: 2rem;">HΞRΞNCIΛ DΞ BIΞNΞSTΛR</h2>
+                            <span class="section-tag" style="color: white; border-color: rgba(255, 255, 255, 0.4);">{{ \App\Support\CmsText::get('social.foundation.tag', 'FUNDACION MMC') }}</span>
+                            <h2 style="font-family: 'usual', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; margin-top: 2rem;">{{ \App\Support\CmsText::get('social.foundation.title', 'HERENCIA DE BIENESTAR') }}</h2>
                         </div>
                         <div class="foundation-body">
-                            <p>Honramos la memoria del Ingeniero Manuel Rubén Muñoz Cano Cardoso, buscando un México más equitativo y próspero.</p>
+                            <p>{{ \App\Support\CmsText::get('social.foundation.text', 'Honramos la memoria del Ingeniero Manuel Ruben Munoz Cano Cardoso.') }}</p>
                             <div class="topic">
-                                <h3>SΛLUD MΞNTΛL</h3>
-                                <p>Actualmente orientamos nuestros esfuerzos en mejorar la salud mental en México, rompiendo tabúes y brindando apoyo a quienes más lo necesitan.</p>
+                                <h3>{{ \App\Support\CmsText::get('social.foundation.topic', 'SALUD MENTAL') }}</h3>
+                                <p>{{ \App\Support\CmsText::get('social.foundation.topic_text', 'Actualmente orientamos nuestros esfuerzos en mejorar la salud mental en Mexico.') }}</p>
                             </div>
-                            <a href="https://fundacionmmc.org.mx/" target="_blank" class="indi-btn-outline">SΛBΞR MÁS</a>
+                            <a href="https://fundacionmmc.org.mx/" target="_blank" class="indi-btn-outline">{{ \App\Support\CmsText::get('social.learn_more', 'SABER MAS') }}</a>
                         </div>
                     </div>
                 </div>

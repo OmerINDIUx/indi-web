@@ -18,8 +18,8 @@
             <!-- Floating Titles Overlay -->
             <div class="map-titles-overlay">
                 {{-- <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div> --}}
-                <h1 class="indi-heading-large hero-typer-text" style="color: #0066f9; font-family: 'usual', sans-serif;">NUΞSTROS<br>PROYΞCTOS</h1>
-                <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
+                <h1 class="indi-heading-large hero-typer-text" style="color: #0066f9; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('projects.title', 'NUESTROS PROYECTOS') }}</h1>
+                <p class="hero-subtitle">{{ \App\Support\CmsText::get('projects.subtitle', 'MAS DE 50 ANOS CONSTRUYENDO LA INFRAESTRUCTURA DE MEXICO') }}</p>
             </div>
 
             <div id="projectsMap"></div>
@@ -33,7 +33,7 @@
                 <div class="project-search-container">
                     <div class="project-search-input-wrapper">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <input type="text" id="projectSearchInput" placeholder="BUSCΛR PROYECTO O UBICΛCIÓN...">
+                        <input type="text" id="projectSearchInput" placeholder="{{ \App\Support\CmsText::get('projects.search', 'BUSCAR PROYECTO O UBICACION...') }}">
                     </div>
                 </div>
 
@@ -41,23 +41,19 @@
                     <div class="filter-container-blue" id="filterLinks">
                         <button class="filter-link active" data-category="all">
                             {{-- <span class="f-num">00</span> --}}
-                            <span class="f-text">TODOS</span>
+                            <span class="f-text">{{ \App\Support\CmsText::get('category.all', __('site.categories.all')) }}</span>
                         </button>
                         <button class="filter-link" data-category="2">
-                            <span class="f-text">CONS</span>
-                            <span class="f-text">TRUCCIÓN</span>
+                            <span class="f-text">{{ \App\Support\CmsText::get('category.construccion', __('site.categories.construccion')) }}</span>
                         </button>
                         <button class="filter-link" data-category="1">
-                            <span class="f-text">INFRΛ</span>
-                            <span class="f-text">ESTRUCTURΛ</span>
+                            <span class="f-text">{{ \App\Support\CmsText::get('category.infraestructura', __('site.categories.infraestructura')) }}</span>
                         </button>
                         <button class="filter-link" data-category="3">
-                            <span class="f-text">MΛRÍ</span>
-                            <span class="f-text">TIMO</span>
+                            <span class="f-text">{{ \App\Support\CmsText::get('category.maritimo', __('site.categories.maritimo')) }}</span>
                         </button>
                         <button class="filter-link" data-category="4">
-                            <span class="f-text">FERRO</span>
-                            <span class="f-text">VIΛRIΛ</span>
+                            <span class="f-text">{{ \App\Support\CmsText::get('category.ferroviaria', __('site.categories.ferroviaria')) }}</span>
                         </button>
                     </div>
                 </div>
@@ -80,15 +76,15 @@
                 
                 <div class="project-stats-grid">
                     <div class="stat-item">
-                        <span class="stat-label">UBICΛCIÓN</span>
+                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.location', 'UBICACION') }}</span>
                         <span class="stat-value" id="overlayAddress">Address</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">ESTΛDO</span>
+                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
                         <span class="stat-value" id="overlayStatus">COMPLETΛDO</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">TIPO</span>
+                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
                         <span class="stat-value" id="overlayType">INFRΛESTRUCTURΛ</span>
                     </div>
                 </div>
@@ -109,13 +105,13 @@
         <div class="indi-container">
             <div class="list-header" style="flex-wrap: wrap; gap: 2rem;">
                 <div class="header-left">
-                    <span class="u-num">ARCHIVE_01</span>
-                    <h3 class="indi-heading">DOMINIO TÉCNICO</h3>
+                    <span class="u-num">{{ \App\Support\CmsText::get('projects.archive', 'ARCHIVE_01') }}</span>
+                    <h3 class="indi-heading">{{ \App\Support\CmsText::get('projects.technical_domain', 'DOMINIO TECNICO') }}</h3>
                 </div>
 
                 <div class="list-count">
                     <span class="count-num" id="projectCount">{{ count($projects) }}</span>
-                    <span class="count-label">LOCALIZACIONES ACTIVA_S</span>
+                    <span class="count-label">{{ \App\Support\CmsText::get('projects.active_locations', 'LOCALIZACIONES ACTIVAS') }}</span>
                 </div>
             </div>
             
@@ -136,7 +132,7 @@
                         <h4 class="project-title">{{ $project['title'] }}</h4>
                         <div class="card-footer">
                             <span class="project-loc">{{ $project['address'] }}</span>
-                            <span class="view-btn">LOCΛLIZΛR +</span>
+                            <span class="view-btn">{{ \App\Support\CmsText::get('projects.locate', 'LOCALIZAR +') }}</span>
                         </div>
                     </div>
                     <div class="card-glow" style="background: radial-gradient(circle at center, var(--color-{{ 
@@ -1205,22 +1201,22 @@
 
             const categories = {
                 1: { 
-                    name: 'INFRΛESTRUCTURΛ', 
+                    name: @json(\App\Support\CmsText::get('category.infraestructura', __('site.categories.infraestructura'))), 
                     color: '#64b032',
                     desc: 'Ingeniería de alta precisión en el desarrollo de sistemas de transporte masivo y vialidades urbanas complejas. Superamos desafíos técnicos en entornos de alta densidad poblacional, implementando soluciones de movilidad que transforman la dinámica de las metrópolis mexicanas.'
                 },
                 2: { 
-                    name: 'CONSTRUCCIÓN', 
+                    name: @json(\App\Support\CmsText::get('category.construccion', __('site.categories.construccion'))), 
                     color: '#ffa608',
                     desc: 'Especialistas en ingeniería civil de alta complejidad y cimentación profunda. Nuestra capacidad técnica nos permite ejecutar obras monumentales enfrentando condiciones geológicas adversas, garantizando la integridad estructural y longevidad en edificaciones icónicas y centros de servicio estratégico.'
                 },
                 3: { 
-                    name: 'MΛRÍTIMO', 
+                    name: @json(\App\Support\CmsText::get('category.maritimo', __('site.categories.maritimo'))), 
                     color: '#0066f9',
                     desc: 'Dominio técnico en ingeniería portuaria y obras de dragado especializado. Integramos tecnologías de vanguardia para la construcción de escolleras y terminales en entornos marítimos dinámicos, superando los retos de la hidrodinámica y el clima para conectar a México con el mundo.'
                 },
                 4: { 
-                    name: 'FERROVIΛRIΛ', 
+                    name: @json(\App\Support\CmsText::get('category.ferroviaria', __('site.categories.ferroviaria'))), 
                     color: '#ff3000',
                     desc: 'Ingeniería ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala. Resolvemos retos logísticos y de orografía compleja, trazando rutas estratégicas que impulsan la competitividad nacional mediante infraestructura resiliente y de alto rendimiento.'
                 }
@@ -1230,7 +1226,7 @@
 
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
-            document.getElementById('overlayStatus').innerText = project.status == 1 ? 'COMPLETΛDO' : 'ΞN PROCESO';
+            document.getElementById('overlayStatus').innerText = project.status == 1 ? @json(\App\Support\CmsText::get('projects.completed', 'COMPLETADO')) : @json(\App\Support\CmsText::get('projects.in_progress', 'EN PROCESO'));
             document.getElementById('overlayDescription').innerText = project.description || cat.desc;
             
             // Update HUD Coordinates dynamically

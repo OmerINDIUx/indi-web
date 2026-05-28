@@ -29,49 +29,49 @@
                         <div class="text-swap-container" id="title-swap">
                             <div class="text-unit" data-unit="1">
                                 <span class="unit-index"><span class="num-roll">01</span>/04</span>
-                                <h2 class="unit-main-name">INDI<br><span class="highlight-unit-1">CONSTRUCCIÓN</span></h2>
+                                <h2 class="unit-main-name">{{ \App\Support\CmsText::get('business.construction.title', 'INDI CONSTRUCCION') }}</h2>
                             </div>
                             <div class="text-unit" data-unit="2">
                                 <span class="unit-index"><span class="num-roll">02</span>/04</span>
-                                <h2 class="unit-main-name">INDI<br><span class="highlight-unit-2">INFRAESTRUCTURA</span></h2>
+                                <h2 class="unit-main-name">{{ \App\Support\CmsText::get('business.infrastructure.title', 'INDI INFRAESTRUCTURA') }}</h2>
                             </div>
                             <div class="text-unit" data-unit="3">
                                 <span class="unit-index"><span class="num-roll">03</span>/04</span>
-                                <h2 class="unit-main-name">INDI<br><span class="highlight-unit-3">MARITIMO</span></h2>
+                                <h2 class="unit-main-name">{{ \App\Support\CmsText::get('business.maritime.title', 'INDI MARITIMO') }}</h2>
                             </div>
                             <div class="text-unit" data-unit="4">
                                 <span class="unit-index"><span class="num-roll">04</span>/04</span>
-                                <h2 class="unit-main-name">INDI<br><span class="highlight-unit-4">FERROVIARIA</span></h2>
+                                <h2 class="unit-main-name">{{ \App\Support\CmsText::get('business.railway.title', 'INDI FERROVIARIA') }}</h2>
                             </div>
                         </div>
 
                         <div class="text-swap-container" id="desc-swap">
                             <div class="text-unit" data-unit="1">
-                                <p>Nos especializamos en cimentación profunda y en la ejecución de obras de alta complejidad para la construcción, modernización, rehabilitación y conservación de vialidades, puentes, edificaciones, puertos, muelles y escolleras. Cada uno de estos proyectos está respaldado por nuestra capacidad técnica y nuestro enfoque en la calidad, garantizando soluciones duraderas y eficientes.</p>
+                                <p>{{ \App\Support\CmsText::get('business.construction.desc', 'Nos especializamos en cimentacion profunda y en la ejecucion de obras de alta complejidad.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="2">
-                                <p>Somos inversionistas, constructores y operadores de proyectos clave en México, tales como autopistas, estacionamientos y sistemas de transporte público, desarrollados bajo el modelo de Asociación Público-Privada (APP). Este enfoque nos permite impulsar proyectos que mejoran la infraestructura nacional, generando soluciones que fortalecen la conectividad y movilidad en el país.</p>
+                                <p>{{ \App\Support\CmsText::get('business.infrastructure.desc', 'Somos inversionistas, constructores y operadores de proyectos clave en Mexico.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <p>Grupo INDI ha sido un actor clave en el desarrollo de la infraestructura marítima y portuaria en México, contribuyendo de manera significativa al crecimiento del comercio y la conectividad en el país. El compromiso con la calidad y la innovación ha permitido que sus proyectos marítimos y portuarios cumplan con los más altos estándares internacionales, posicionando a México como un hub logístico competitivo.</p>
+                                <p>{{ \App\Support\CmsText::get('business.maritime.desc', 'Grupo INDI ha sido un actor clave en el desarrollo de la infraestructura maritima y portuaria en Mexico.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="4">
-                                <p>Ingeniería ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala. Resolvemos retos logísticos y de orografía compleja, trazando rutas estratégicas que impulsan la competitividad nacional mediante infraestructura resiliente y de alto rendimiento técnico.</p>
+                                <p>{{ \App\Support\CmsText::get('business.railway.desc', 'Ingenieria ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala.') }}</p>
                             </div>
                         </div>
 
                         <div class="text-swap-container" id="detail-swap">
                             <div class="text-unit" data-unit="1">
-                                <p>Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para mejorar el flujo de mercancías y garantizar la seguridad y eficiencia en las operaciones marítimas. Estos proyectos no solo impulsan el desarrollo del comercio exterior, sino que también contribuyen a dinamizar las economías regionales.</p>
+                                <p>{{ \App\Support\CmsText::get('business.construction.detail', 'Entre sus obras mas destacadas se incluyen la construccion y modernizacion de muelles, escolleras, terminales portuarias, y obras de dragado.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="2">
-                                <p>Nos especializamos en la ejecución de obras de prestación de servicios y concesiones, tanto a nivel estatal como federal, con un profundo conocimiento de las necesidades del sector público. Nuestro objetivo es ofrecer proyectos sostenibles y de alta calidad que contribuyan al desarrollo económico y social de México, garantizando eficiencia y estabilidad a largo plazo.</p>
+                                <p>{{ \App\Support\CmsText::get('business.infrastructure.detail', 'Nos especializamos en la ejecucion de obras de prestacion de servicios y concesiones.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <p>A lo largo de su trayectoria, ha ejecutado proyectos de alta complejidad técnica en diversos puertos estratégicos, que han fortalecido la capacidad operativa del sistema portuario mexicano. Entre sus obras más destacadas se incluyen la construcción y modernización de muelles, escolleras, terminales portuarias, y obras de dragado, todas diseñadas para garantizar la seguridad operativa.</p>
+                                <p>{{ \App\Support\CmsText::get('business.maritime.detail', 'A lo largo de su trayectoria, ha ejecutado proyectos de alta complejidad tecnica en diversos puertos estrategicos.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="4">
-                                <p>Nuestra capacidad técnica nos permite participar en proyectos estratégicos de conectividad masiva y transporte de carga, integrando soluciones de movilidad que transforman la dinámica de las metrópolis. Cada proyecto está respaldado por un enfoque riguroso en la calidad y la seguridad estructural de gran escala.</p>
+                                <p>{{ \App\Support\CmsText::get('business.railway.detail', 'Nuestra capacidad tecnica nos permite participar en proyectos estrategicos de conectividad masiva y transporte de carga.') }}</p>
                             </div>
                         </div>
                     </div>

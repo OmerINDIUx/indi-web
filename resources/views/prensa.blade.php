@@ -7,7 +7,7 @@
     <header class="indi-hero" style="background-image: url('{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
-                CONOCΞ LΛS ÚLTIMΛS<br>NOTICIΛS DΞ GRUPO INDI
+                {{ \App\Support\CmsText::get('press.title', 'CONOCE LAS ULTIMAS NOTICIAS DE GRUPO INDI') }}
             </h1>
         </div>
         
@@ -28,22 +28,22 @@
                 <div class="featured-row">
                     <div class="featured-visual notched-frame">
                         @if($featured->thumbnail)
-                            <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->title }}">
+                            <img src="{{ asset('storage/' . $featured->thumbnail) }}" alt="{{ $featured->localized_title }}">
                         @else
-                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $featured->title }}">
+                            <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $featured->localized_title }}">
                         @endif
                     </div>
                     <div class="featured-info">
                         <span class="featured-cat" style="text-transform: uppercase;">
-                            @if($featured->category === 'maritimo') MΛRÍTIMO @elseif($featured->category === 'construccion') CONSTRUCCIÓN @elseif($featured->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($featured->category === 'ferroviario') FΞRROVIΛRIO @else {{ $featured->category }} @endif
+                            {{ \App\Support\CmsText::get('category.' . $featured->category, __('site.categories.' . $featured->category)) }}
                         </span>
-                        <h2 class="featured-title">{{ $featured->title }}</h2>
+                        <h2 class="featured-title">{{ $featured->localized_title }}</h2>
                         <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
                             <span class="blog-tag {{ $featured->category }}" style="border-radius: 4px; text-transform: uppercase;">
-                                @if($featured->category === 'maritimo') MΛRÍTIMO @elseif($featured->category === 'construccion') CONSTRUCCIÓN @elseif($featured->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($featured->category === 'ferroviario') FΞRROVIΛRIO @else {{ $featured->category }} @endif
+                                {{ \App\Support\CmsText::get('category.' . $featured->category, __('site.categories.' . $featured->category)) }}
                             </span>
                         </div>
-                        <a href="{{ route('prensa.show', $featured->slug) }}" class="blog-read-btn" style="border-radius: 50px; padding: 1rem 3rem;">LΞΞR ΛRTÍCULO</a>
+                        <a href="{{ route('prensa.show', $featured->localized_slug) }}" class="blog-read-btn" style="border-radius: 50px; padding: 1rem 3rem;">{{ \App\Support\CmsText::get('press.read', 'LEER ARTICULO') }}</a>
                     </div>
                 </div>
             </div>
@@ -53,18 +53,18 @@
         <div class="indi-container" style="padding-top: 2rem;">
             <!-- Search Bar -->
             <div class="prensa-search-bar">
-                <input type="text" class="prensa-search-input" placeholder="BUSCΛ, NOSOTROS TΞ ΞXPLICΛMOS">
+                <input type="text" class="prensa-search-input" placeholder="{{ \App\Support\CmsText::get('press.search', 'BUSCA, NOSOTROS TE EXPLICAMOS') }}">
             </div>
 
             <!-- Filters -->
             <div class="prensa-filters" style="text-align: center; margin-bottom: 4rem;">
-                <span class="filter-label" style="display: block; font-family: 'usual', sans-serif; font-weight: 700; font-size: 0.8rem; color: #888; letter-spacing: 0.2em; margin-bottom: 1.5rem;">FILTRΛR POR UNIDΛDΞS DΞ NEGOCIO</span>
+                <span class="filter-label" style="display: block; font-family: 'usual', sans-serif; font-weight: 700; font-size: 0.8rem; color: #888; letter-spacing: 0.2em; margin-bottom: 1.5rem;">{{ \App\Support\CmsText::get('press.filter', 'FILTRAR POR UNIDADES DE NEGOCIO') }}</span>
                 <div class="filter-group" id="filterLinks">
-                    <button class="filter-pill active" data-filter="all">TODOS</button>
-                    <button class="filter-pill maritimo" data-filter="maritimo">MΛRÍTIMO</button>
-                    <button class="filter-pill construccion" data-filter="construccion">CONSTRUCCIÓN</button>
-                    <button class="filter-pill infraestructura" data-filter="infraestructura">INFRΛΞSTRUCTURΛ</button>
-                    <button class="filter-pill ferroviario" data-filter="ferroviario">FΞRROVIΛRIO</button>
+                    <button class="filter-pill active" data-filter="all">{{ \App\Support\CmsText::get('category.all', __('site.categories.all')) }}</button>
+                    <button class="filter-pill maritimo" data-filter="maritimo">{{ \App\Support\CmsText::get('category.maritimo', __('site.categories.maritimo')) }}</button>
+                    <button class="filter-pill construccion" data-filter="construccion">{{ \App\Support\CmsText::get('category.construccion', __('site.categories.construccion')) }}</button>
+                    <button class="filter-pill infraestructura" data-filter="infraestructura">{{ \App\Support\CmsText::get('category.infraestructura', __('site.categories.infraestructura')) }}</button>
+                    <button class="filter-pill ferroviario" data-filter="ferroviario">{{ \App\Support\CmsText::get('category.ferroviario', __('site.categories.ferroviario')) }}</button>
                 </div>
             </div>
 
@@ -75,26 +75,26 @@
                     <div class="blog-card" data-categories="{{ $post->category }}" style="border: 1px solid #f0f0f0;">
                         <div class="blog-tags">
                             <span class="blog-tag {{ $post->category }}">
-                                @if($post->category === 'maritimo') MΛRÍTIMO @elseif($post->category === 'construccion') CONSTRUCCIÓN @elseif($post->category === 'infraestructura') INFRΛΞSTRUCTURΛ @elseif($post->category === 'ferroviario') FΞRROVIΛRIO @else {{ $post->category }} @endif
+                                {{ \App\Support\CmsText::get('category.' . $post->category, __('site.categories.' . $post->category)) }}
                             </span>
                         </div>
                         <span class="blog-date">{{ $post->created_at->format('d . M . Y') }}</span>
-                        <h4 class="blog-title">{{ $post->title }}</h4>
+                        <h4 class="blog-title">{{ $post->localized_title }}</h4>
                         <div class="blog-footer">
-                            <a href="{{ route('prensa.show', $post->slug) }}" class="blog-read-btn">LΞΞR ΛRTÍCULO</a>
+                            <a href="{{ route('prensa.show', $post->localized_slug) }}" class="blog-read-btn">{{ \App\Support\CmsText::get('press.read', 'LEER ARTICULO') }}</a>
                         </div>
                         <div class="indi-card-notch">
                             @if($post->thumbnail)
-                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}">
+                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->localized_title }}">
                             @else
                                 @if($post->category === 'maritimo')
-                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $post->title }}">
+                                    <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="{{ $post->localized_title }}">
                                 @elseif($post->category === 'ferroviario')
-                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $post->title }}">
+                                    <img src="{{ asset('imagenes_indi/infraestructura/Tren-Maya-Tramos-3-y-5-a - copia.jpg') }}" alt="{{ $post->localized_title }}">
                                 @elseif($post->category === 'infraestructura')
-                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $post->title }}">
+                                    <img src="{{ asset('imagenes_indi/infraestructura/mexibus-lineas-1-2-cdmx - copia.webp') }}" alt="{{ $post->localized_title }}">
                                 @else
-                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $post->title }}">
+                                    <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="{{ $post->localized_title }}">
                                 @endif
                             @endif
                         </div>
@@ -102,8 +102,8 @@
                 @empty
                     @if(!$featured)
                         <div style="grid-column: 1 / -1; text-align: center; padding: 8rem 0; font-family: 'usual', sans-serif; color: #666; width: 100%;">
-                            <h3>PRÓXIMΛMΞNTΞ MÁS NOTICIΛS</h3>
-                            <p style="margin-top: 1rem;">Estamos preparando nuevos artículos y novedades de Grupo INDI.</p>
+                            <h3>{{ \App\Support\CmsText::get('press.coming_soon_title', 'PROXIMAMENTE MAS NOTICIAS') }}</h3>
+                            <p style="margin-top: 1rem;">{{ \App\Support\CmsText::get('press.coming_soon_text', 'Estamos preparando nuevos articulos y novedades de Grupo INDI.') }}</p>
                         </div>
                     @endif
                 @endforelse

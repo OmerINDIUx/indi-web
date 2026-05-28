@@ -19,7 +19,11 @@ class PrensaController extends Controller
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->where('is_published', true)->firstOrFail();
+        $post = Post::where('is_published', true)
+            ->where(function ($query) use ($slug) {
+                $query->where('slug', $slug)->orWhere('slug_en', $slug);
+            })
+            ->firstOrFail();
         
         // Cargar los últimos 3 artículos excluyendo el actual para la barra lateral
         $latest = Post::where('is_published', true)

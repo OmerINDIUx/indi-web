@@ -1,3 +1,7 @@
+@php
+    $currentLocale = app()->getLocale();
+    $nextLocale = $currentLocale === 'en' ? 'es' : 'en';
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -78,6 +82,14 @@
                         color: #ffffff !important; /* Pure elegant white */
                         opacity: 1 !important;
                         transform: translateY(-1px);
+                    }
+
+                    .language-switch-link {
+                        border: 1px solid rgba(255, 255, 255, 0.35) !important;
+                        border-radius: 999px !important;
+                        padding: 0.45rem 0.8rem !important;
+                        min-width: 42px;
+                        text-align: center;
                     }
 
                     /* Make sure SVG logo sits beautifully on top and has priority */
@@ -178,10 +190,11 @@
 
             <div class="menu-container" id="menuLinks">
                 <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
-                <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>PROYECTOS</span></a>
-                <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>NEGOCIOS</span></a>
-                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>PRENSA</span></a>
-                <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>SOCIAL</span></a>
+                <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.projects', 'PROYECTOS') }}</span></a>
+                <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.business', 'NEGOCIOS') }}</span></a>
+                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.press', 'PRENSA') }}</span></a>
+                <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.social', 'SOCIAL') }}</span></a>
+                <a href="{{ route('locale.switch', $nextLocale) }}" class="nav-link-item language-switch-link" aria-label="{{ $nextLocale }}">{{ \App\Support\CmsText::get('language.switch_to_' . $nextLocale, strtoupper($nextLocale)) }}</a>
                 
                 <!-- The "guiño" selector notch -->
                 <div class="menu-notch" id="menuNotch"></div>
@@ -197,7 +210,7 @@
             <section id="contacto" style="background: white; padding: 10rem 0; position: relative;">
                 <div class="indi-container">
                     <div style="margin-bottom: 6rem;">
-                        <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'usual', sans-serif;">CONSTRUYΛMOS<br>EL FUTURO</h2>
+                        <h2 class="indi-heading" style="font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0; color: #000; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('footer.cta', 'CONSTRUYAMOS EL FUTURO') }}</h2>
                         <div style="width: 150px; height: 5px; background: #0066f9; margin-top: 2rem;"></div>
                     </div>
 
@@ -206,9 +219,9 @@
                         <div style="display: flex; flex-direction: column; gap: 6rem;">
                             <!-- Conciencia Empresarial -->
                             <div class="contact-info-block">
-                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONCIENCIΛ EMPRESΛRIΛ</h4>
+                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('footer.business_awareness.title', 'CONCIENCIA EMPRESARIA') }}</h4>
                                 <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; margin-bottom: 3rem; font-family: 'usual', sans-serif;">
-                                    Certificamos nuestros procesos con los más altos estándares internacionales de calidad, para ofrecer a nuestros clientes la seguridad de una empresa altamente comprometida con cada proyecto.
+                                    {{ \App\Support\CmsText::get('footer.business_awareness.text', 'Certificamos nuestros procesos con los mas altos estandares internacionales de calidad, para ofrecer a nuestros clientes la seguridad de una empresa altamente comprometida con cada proyecto.') }}
                                 </p>
                                 
                                 <!-- Certification Logos -->
@@ -221,16 +234,16 @@
 
                             <!-- Conciencia Ambiental -->
                             <div class="contact-info-block">
-                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONCIENCIΛ ΛMBIENTΛL</h4>
+                                <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('footer.environmental_awareness.title', 'CONCIENCIA AMBIENTAL') }}</h4>
                                 <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; font-family: 'usual', sans-serif;">
-                                    Grupo Indi promueve activamente acciones que favorecen la conservación y el cuidado del medio ambiente, comprometiéndose a utilizar de manera racional y eficiente los recursos naturales en todos sus proyectos. Como parte de sus iniciativas, el grupo implementa la recolección de equipos, materiales y accesorios electrónicos, los cuales son enviados a centros de acopio y reciclaje certificados.
+                                    {{ \App\Support\CmsText::get('footer.environmental_awareness.text', 'Grupo Indi promueve activamente acciones que favorecen la conservacion y el cuidado del medio ambiente.') }}
                                 </p>
                             </div>
                         </div>
 
                         <!-- Right Column: Contact info box with technical shape -->
                         <div style="background: #0066f9; color: white; padding: 6rem 5rem; position: relative; -webkit-mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); mask-image: url('{{ asset('assets/stat-card-shape.svg') }}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; min-height: 650px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                            <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">CONTΛCTO</h4>
+                            <h4 class="indi-heading" style="color: rgba(255,255,255,0.7); font-size: 1rem; margin-bottom: 4rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('footer.contact', 'CONTACTO') }}</h4>
                             
                             <div style="font-family: 'usual', sans-serif;">
                                 <a href="tel:+525555406750" style="display: block; font-size: 2.5rem; color: white; text-decoration: none; margin-bottom: 3rem; font-weight: 700; letter-spacing: -0.02em;">+52 55 5540 6750</a>
@@ -263,32 +276,32 @@
                             <a href="{{ route('brochure') }}" class="footer-doc-btn">
                                 <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label">VΞR</span>
-                                    <span class="doc-name">BROCHURΞ INTERΛCTIVO</span>
+                                    <span class="doc-label">{{ \App\Support\CmsText::get('footer.view', 'VER') }}</span>
+                                    <span class="doc-name">{{ \App\Support\CmsText::get('footer.brochure', 'BROCHURE INTERACTIVO') }}</span>
                                 </div>
                             </a>
                             
                             <a href="{{ route('etica') }}" class="footer-doc-btn">
                                 <span class="doc-icon">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label">VΞR</span>
-                                    <span class="doc-name">CÓDIGO DΞ ÉTICΛ 2025</span>
+                                    <span class="doc-label">{{ \App\Support\CmsText::get('footer.view', 'VER') }}</span>
+                                    <span class="doc-name">{{ \App\Support\CmsText::get('footer.ethics', 'CODIGO DE ETICA 2025') }}</span>
                                 </div>
                             </a>
 
                             <a href="{{ route('talento.create') }}" class="footer-doc-btn" style="border-color: #0066f9;">
                                 <span class="doc-icon" style="color: #0066f9;">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label" style="color: #0066f9;">RECURSOS HUMΛNOS</span>
-                                    <span class="doc-name">BUSCΛMOS TΛLENTO</span>
+                                    <span class="doc-label" style="color: #0066f9;">{{ \App\Support\CmsText::get('footer.hr', 'RECURSOS HUMANOS') }}</span>
+                                    <span class="doc-name">{{ \App\Support\CmsText::get('footer.talent', 'BUSCAMOS TALENTO') }}</span>
                                 </div>
                             </a>
 
                             <a href="{{ route('quejas.create') }}" class="footer-doc-btn" style="border-color: #e74c3c;">
                                 <span class="doc-icon" style="color: #e74c3c;">!</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label" style="color: #e74c3c;">TRΛNSPΛRENCIΛ</span>
-                                    <span class="doc-name">QUEJΛS Y DENUNCIΛS</span>
+                                    <span class="doc-label" style="color: #e74c3c;">{{ \App\Support\CmsText::get('footer.transparency', 'TRANSPARENCIA') }}</span>
+                                    <span class="doc-name">{{ \App\Support\CmsText::get('footer.complaints', 'QUEJAS Y DENUNCIAS') }}</span>
                                 </div>
                             </a>
                         </div>
@@ -305,8 +318,8 @@
                             <span>&copy; {{ date('Y') }} GRUPO INDI — SISTEMΛS WG-INDI</span>
                             <div class="legal-links">
                                 <a href="{{ route('login') }}">CMS LOGIN</a>
-                                <a href="#">ΛVISO DΞ PRIVΛCIDΛD</a>
-                                <a href="#">TÉRMINOS</a>
+                                <a href="#">{{ \App\Support\CmsText::get('footer.privacy', 'AVISO DE PRIVACIDAD') }}</a>
+                                <a href="#">{{ \App\Support\CmsText::get('footer.terms', 'TERMINOS') }}</a>
                             </div>
                         </div>
                     </div>

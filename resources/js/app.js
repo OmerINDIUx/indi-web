@@ -333,9 +333,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         const targetMarker = mapSvg.querySelector(markerClass);
                         if (targetMarker) targetMarker.classList.add("highlighted");
                         let zoomX = 0, zoomY = 0, scale = 1.2;
-                        if (card.dataset.state === "cdmx") { scale = 2.5; zoomX = -80; zoomY = -120; }
-                        if (card.dataset.state === "southeast") { scale = 2.2; zoomX = -320; zoomY = -140; }
-                        if (card.dataset.state === "northeast") { scale = 2.4; zoomX = -120; zoomY = 80; }
+                        if (targetMarker) {
+                            const viewBox = mapSvg.viewBox.baseVal;
+                            const markerX = Number(targetMarker.getAttribute("cx"));
+                            const markerY = Number(targetMarker.getAttribute("cy"));
+
+                            if (viewBox && Number.isFinite(markerX) && Number.isFinite(markerY)) {
+                                scale = 2.15;
+                                zoomX = (viewBox.width / 2) - (markerX * scale);
+                                zoomY = (viewBox.height / 2) - (markerY * scale);
+                            }
+                        }
                         gsap.to(mapSvg, { scale: scale, x: zoomX, y: zoomY, duration: 1, ease: "power2.out", transformOrigin: "center center" });
                     }
                 } else { card.classList.remove("active"); }

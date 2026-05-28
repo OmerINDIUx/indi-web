@@ -12,7 +12,7 @@
     <div class="flipbook-wrapper" id="zoomContainer">
         <div class="flipbook-loading" id="bookLoading">
             <div class="loading-spinner"></div>
-            <p>GENERΛNDO ENTORNOL INTERΛCTIVO...</p>
+            <p>{{ \App\Support\CmsText::get('viewer.loading', 'GENERANDO ENTORNO INTERACTIVO...') }}</p>
         </div>
         
         <div id="flipbook" class="flipbook-canvas">
@@ -24,17 +24,17 @@
     <div class="viewer-controls">
         <div class="zoom-controls">
             <button id="zoomOut" class="control-btn mini">-</button>
-            <span class="zoom-level">ZOOM</span>
+            <span class="zoom-level">{{ \App\Support\CmsText::get('viewer.zoom', 'ZOOM') }}</span>
             <button id="zoomIn" class="control-btn mini">+</button>
         </div>
         
         <div class="nav-controls">
-            <button id="prevBtn" class="control-btn">← ΛNTERIOR</button>
+            <button id="prevBtn" class="control-btn">← {{ \App\Support\CmsText::get('viewer.previous', 'ANTERIOR') }}</button>
             <span class="page-indicator" id="pageIndicator">0 / 0</span>
-            <button id="nextBtn" class="control-btn">SIGUIENTΞ →</button>
+            <button id="nextBtn" class="control-btn">{{ \App\Support\CmsText::get('viewer.next', 'SIGUIENTE') }} →</button>
         </div>
 
-        <a href="{{ $pdf }}" download class="download-btn">DΞSCΛRGΛR PDF</a>
+        <a href="{{ $pdf }}" download class="download-btn">{{ \App\Support\CmsText::get('viewer.download', 'DESCARGAR PDF') }}</a>
     </div>
 </div>
 
@@ -166,7 +166,7 @@
         try {
             const pdf = await pdfjsLib.getDocument(pdfPath).promise;
             const totalPages = pdf.numPages;
-            indicatorEl.innerText = `CΛRGΛNDO 1 / ${totalPages}`;
+            indicatorEl.innerText = `{{ \App\Support\CmsText::get('viewer.loading', 'CARGANDO') }} 1 / ${totalPages}`;
 
             // Create Canvas for each page
             for (let i = 1; i <= totalPages; i++) {

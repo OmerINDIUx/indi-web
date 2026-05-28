@@ -54,6 +54,12 @@
                     <small style="color: #64748b; margin-top: 0.3rem; display: block;">Slug actual: <code>{{ $post->slug }}</code> (Se actualizará automáticamente si editas el título).</small>
                 </div>
 
+                <div style="margin-bottom: 2rem;">
+                    <label for="title_en" style="display: block; font-weight: 600; color: #334155; margin-bottom: 0.5rem; font-size: 0.95rem;">Título del Artículo en inglés</label>
+                    <input type="text" name="title_en" id="title_en" value="{{ old('title_en', $post->title_en) }}" placeholder="Example: Technology Advances on Section 5" style="width: 100%; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 1rem; font-family: 'usual', sans-serif; box-sizing: border-box;">
+                    <small style="color: #64748b; margin-top: 0.3rem; display: block;">Slug inglés actual: <code>{{ $post->slug_en ?: 'Sin versión en inglés' }}</code>. Si se deja vacío, el sitio mostrará el título en español.</small>
+                </div>
+
                 <!-- Categoría / Unidad de Negocio -->
                 <div style="margin-bottom: 2rem;">
                     <label for="category" style="display: block; font-weight: 600; color: #334155; margin-bottom: 0.5rem; font-size: 0.95rem;">Unidad de Negocio (Categoría)</label>
@@ -335,6 +341,12 @@
 
                     <!-- Original textarea hidden from sight but updated dynamically for Laravel form submission -->
                     <textarea name="content" id="content" style="display: none;">{{ old('content', $post->content) }}</textarea>
+                </div>
+
+                <div style="margin-bottom: 2.5rem;">
+                    <label for="content_en" style="display: block; font-weight: 700; color: #334155; margin-bottom: 0.5rem; font-size: 0.95rem;">Contenido del Artículo en inglés</label>
+                    <textarea name="content_en" id="content_en" placeholder="Write the English version here. You may paste formatted HTML from the Spanish editor if needed." style="width: 100%; min-height: 260px; padding: 1rem; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.95rem; font-family: 'usual', sans-serif; line-height: 1.6; box-sizing: border-box;">{{ old('content_en', $post->content_en) }}</textarea>
+                    <small style="color: #64748b; margin-top: 0.3rem; display: block;">Cuando el visitante elija inglés, se mostrará este contenido. Si queda vacío, se usará el español.</small>
                 </div>
 
                 <!-- Checkbox Publicar -->

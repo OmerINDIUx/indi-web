@@ -157,12 +157,25 @@
             <input id="title" name="title" type="text" value="{{ old('title', $project->title ?? '') }}" required placeholder="Cablebús Línea 1">
         </div>
 
+        <div class="project-field">
+            <label for="title_en">Título en inglés</label>
+            <input id="title_en" name="title_en" type="text" value="{{ old('title_en', $project->title_en ?? '') }}" placeholder="Cablebus Line 1">
+            <div class="project-help">Si se deja vacío, el sitio mostrará el título en español.</div>
+        </div>
+
         <div class="project-two-cols">
             <div class="project-field">
                 <label for="address">Ubicación</label>
                 <input id="address" name="address" type="text" value="{{ old('address', $project->address ?? '') }}" required placeholder="Ciudad de México">
             </div>
 
+            <div class="project-field">
+                <label for="address_en">Ubicación en inglés</label>
+                <input id="address_en" name="address_en" type="text" value="{{ old('address_en', $project->address_en ?? '') }}" placeholder="Mexico City">
+            </div>
+        </div>
+
+        <div class="project-two-cols">
             <div class="project-field">
                 <label for="category">Tipo</label>
                 <select id="category" name="category" required>
@@ -175,9 +188,27 @@
             </div>
         </div>
 
+        <div class="project-two-cols">
+            <div class="project-field">
+                <label for="home_order">Posición en inicio</label>
+                <select id="home_order" name="home_order">
+                    <option value="">No mostrar en inicio</option>
+                    @for($position = 1; $position <= 5; $position++)
+                        <option value="{{ $position }}" @selected((string) old('home_order', $project->home_order ?? '') === (string) $position)>Posición {{ $position }}</option>
+                    @endfor
+                </select>
+                <div class="project-help">La portada usa de 3 a 5 proyectos. Si asignas una posición ocupada, el proyecto anterior sale del carrusel de inicio.</div>
+            </div>
+        </div>
+
         <div class="project-field">
             <label for="description">Descripción</label>
             <textarea id="description" name="description" placeholder="Describe el alcance, impacto o datos relevantes del proyecto.">{{ old('description', $project->description ?? '') }}</textarea>
+        </div>
+
+        <div class="project-field">
+            <label for="description_en">Descripción en inglés</label>
+            <textarea id="description_en" name="description_en" placeholder="Describe the scope, impact, or relevant project facts.">{{ old('description_en', $project->description_en ?? '') }}</textarea>
         </div>
 
         <div class="project-two-cols">

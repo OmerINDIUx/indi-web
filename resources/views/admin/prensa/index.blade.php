@@ -23,6 +23,48 @@
                 </div>
             </div>
 
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 1rem 1.2rem; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; font-family: 'usual', sans-serif; color: #9a3412; flex-wrap: wrap;">
+                <div style="font-weight: 700;">Destacados activos: {{ $featuredCount ?? 0 }} / 3</div>
+                <div style="font-size: 0.95rem;">La portada de Pensamiento Estratégico solo muestra hasta 3 artículos destacados y publicados.</div>
+            </div>
+
+            <form method="GET" action="{{ route('admin.prensa.index') }}" style="display: grid; grid-template-columns: minmax(260px, 2fr) repeat(3, minmax(180px, 1fr)) auto; gap: 1rem; margin-bottom: 2rem; font-family: 'usual', sans-serif; align-items: end;">
+                <div>
+                    <label for="search" style="display: block; margin-bottom: 0.45rem; font-size: 0.85rem; font-weight: 700; color: #475569;">Buscar</label>
+                    <input id="search" name="search" type="text" value="{{ $filters['search'] ?? '' }}" placeholder="Título o slug" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; color: #0f172a;">
+                </div>
+                <div>
+                    <label for="category" style="display: block; margin-bottom: 0.45rem; font-size: 0.85rem; font-weight: 700; color: #475569;">Categoría</label>
+                    <select id="category" name="category" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; color: #0f172a; background: white;">
+                        <option value="">Todas</option>
+                        <option value="maritimo" @selected(($filters['category'] ?? '') === 'maritimo')>Marítimo</option>
+                        <option value="construccion" @selected(($filters['category'] ?? '') === 'construccion')>Construcción</option>
+                        <option value="infraestructura" @selected(($filters['category'] ?? '') === 'infraestructura')>Infraestructura</option>
+                        <option value="ferroviario" @selected(($filters['category'] ?? '') === 'ferroviario')>Ferroviario</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="status" style="display: block; margin-bottom: 0.45rem; font-size: 0.85rem; font-weight: 700; color: #475569;">Estado</label>
+                    <select id="status" name="status" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; color: #0f172a; background: white;">
+                        <option value="">Todos</option>
+                        <option value="published" @selected(($filters['status'] ?? '') === 'published')>Publicados</option>
+                        <option value="draft" @selected(($filters['status'] ?? '') === 'draft')>Borradores</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="featured" style="display: block; margin-bottom: 0.45rem; font-size: 0.85rem; font-weight: 700; color: #475569;">Destacado</label>
+                    <select id="featured" name="featured" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px; color: #0f172a; background: white;">
+                        <option value="">Todos</option>
+                        <option value="featured" @selected(($filters['featured'] ?? '') === 'featured')>Destacados</option>
+                        <option value="not_featured" @selected(($filters['featured'] ?? '') === 'not_featured')>No destacados</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                    <button type="submit" style="background: #0f172a; color: white; padding: 0.85rem 1.2rem; border: none; border-radius: 6px; font-weight: 700; cursor: pointer;">Filtrar</button>
+                    <a href="{{ route('admin.prensa.index') }}" style="display: inline-flex; align-items: center; justify-content: center; padding: 0.85rem 1.2rem; border-radius: 6px; border: 1px solid #cbd5e1; text-decoration: none; color: #475569; font-weight: 700;">Limpiar</a>
+                </div>
+            </form>
+
             <div style="overflow-x: auto; font-family: 'usual', sans-serif;">
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
@@ -31,8 +73,9 @@
                             <th style="padding: 1.2rem; font-weight: 600;">Título</th>
                             <th style="padding: 1.2rem; font-weight: 600; width: 150px;">Categoría</th>
                             <th style="padding: 1.2rem; font-weight: 600; width: 120px;">Estado</th>
+                            <th style="padding: 1.2rem; font-weight: 600; width: 130px;">Destacado</th>
                             <th style="padding: 1.2rem; font-weight: 600; width: 120px;">Fecha</th>
-                            <th style="padding: 1.2rem; font-weight: 600; width: 230px; text-align: center;">Acciones</th>
+                            <th style="padding: 1.2rem; font-weight: 600; width: 250px; text-align: center;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody style="color: #475569;">
@@ -71,6 +114,23 @@
                                         </button>
                                     </form>
                                 </td>
+                                <td style="padding: 1.2rem;">
+                                    <form method="POST" action="{{ route('admin.prensa.toggle-featured', $post->id) }}" style="margin:0;">
+                                        @csrf
+                                        <button
+                                            type="submit"
+                                            @disabled(! $post->is_published || (($featuredCount ?? 0) >= 3 && ! $post->is_featured))
+                                            title="{{ ! $post->is_published ? 'Publica el artículo para destacarlo.' : ((($featuredCount ?? 0) >= 3 && ! $post->is_featured) ? 'Ya tienes 3 destacados activos.' : 'Mostrar en Pensamiento Estratégico') }}"
+                                            style="background: none; border: none; padding: 0; cursor: {{ (! $post->is_published || (($featuredCount ?? 0) >= 3 && ! $post->is_featured)) ? 'not-allowed' : 'pointer' }}; text-align: left; opacity: {{ (! $post->is_published || (($featuredCount ?? 0) >= 3 && ! $post->is_featured)) ? '0.55' : '1' }};"
+                                        >
+                                            @if($post->is_featured)
+                                                <span style="background: #fef3c7; color: #b45309; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8em; font-weight: 700; border: 1px solid #fde68a; display: inline-block;">Destacado</span>
+                                            @else
+                                                <span style="background: #f8fafc; color: #64748b; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8em; font-weight: 600; border: 1px solid #cbd5e1; display: inline-block;">Destacar</span>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </td>
                                 <td style="padding: 1.2rem; font-size: 0.9em;">
                                     {{ $post->created_at->format('d/m/Y') }}
                                 </td>
@@ -90,7 +150,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" style="padding: 3rem; text-align: center; color: #64748b;">No hay artículos registrados aún en el módulo de prensa.</td>
+                                <td colspan="7" style="padding: 3rem; text-align: center; color: #64748b;">No hay artículos registrados aún en el módulo de prensa.</td>
                             </tr>
                         @endforelse
                     </tbody>

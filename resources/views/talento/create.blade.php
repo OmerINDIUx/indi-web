@@ -9,10 +9,10 @@
         <div style="background: white; padding: 5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-radius: 8px;">
             <div style="text-align: center; margin-bottom: 4rem;">
                 <h1 class="indi-heading" style="font-size: 3rem; margin-bottom: 1rem; color: var(--indi-dark);">
-                    ÚNETE Λ <span style="color: var(--indi-blue);">INDI</span>
+                    {{ \App\Support\CmsText::get('talent.title', 'UNETE A INDI') }}
                 </h1>
                 <p style="font-family: 'usual', sans-serif; font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
-                    Forma parte del equipo que está construyendo el futuro de México. Compártenos tus datos y nos pondremos en contacto contigo.
+                    {{ \App\Support\CmsText::get('talent.intro', 'Forma parte del equipo que esta construyendo el futuro de Mexico.') }}
                 </p>
             </div>
 
@@ -26,12 +26,12 @@
                 @csrf
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>
-                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Nombre Completo *</label>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.name', 'Nombre Completo *') }}</label>
                         <input type="text" name="name" required style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fafafa;">
                         @error('name') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Correo Electrónico *</label>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.email', 'Correo Electronico *') }}</label>
                         <input type="email" name="email" required style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fafafa;">
                         @error('email') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
@@ -39,17 +39,17 @@
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>
-                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Teléfono</label>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.phone', 'Telefono') }}</label>
                         <input type="text" name="phone" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fafafa;">
                         @error('phone') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                     </div>
                     <div>
-                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Área de Interés</label>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.area', 'Area de Interes') }}</label>
                         <select name="area_of_interest" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fafafa;">
-                            <option value="">Selecciona un área</option>
-                            <option value="Construcción">Construcción</option>
-                            <option value="Ingeniería">Ingeniería</option>
-                            <option value="Marítimo">Marítimo</option>
+                            <option value="">{{ \App\Support\CmsText::get('talent.area_placeholder', 'Selecciona un area') }}</option>
+                            <option value="Construcción">{{ \App\Support\CmsText::get('category.construccion', 'Construccion') }}</option>
+                            <option value="Ingeniería">Ingenieria</option>
+                            <option value="Marítimo">{{ \App\Support\CmsText::get('category.maritimo', 'Maritimo') }}</option>
                             <option value="Administrativo">Administrativo</option>
                             <option value="Otro">Otro</option>
                         </select>
@@ -58,19 +58,19 @@
                 </div>
 
                 <div style="margin-bottom: 2rem;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Adjunta tu CV (PDF, DOCX)</label>
+                        <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.cv', 'Adjunta tu CV (PDF, DOCX)') }}</label>
                     <input type="file" name="resume_path" accept=".pdf,.doc,.docx" style="width: 100%; padding: 1rem; border: 1px dashed #bbb; border-radius: 4px; background: #fafafa; cursor: pointer;">
                     @error('resume_path') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                 </div>
 
                 <div style="margin-bottom: 3rem;">
-                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">Mensaje Adicional</label>
+                    <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">{{ \App\Support\CmsText::get('talent.message', 'Mensaje Adicional') }}</label>
                     <textarea name="message" rows="4" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; background: #fafafa; resize: vertical;"></textarea>
                     @error('message') <span style="color: red; font-size: 0.8rem;">{{ $message }}</span> @enderror
                 </div>
 
                 <button type="submit" style="width: 100%; padding: 1.2rem; background: var(--indi-blue); color: white; border: none; border-radius: 4px; font-weight: 700; font-size: 1.2rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.3s ease;">
-                    Enviar Solicitud
+                    {{ \App\Support\CmsText::get('talent.submit', 'Enviar Solicitud') }}
                 </button>
             </form>
         </div>
