@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PrensaController;
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\AdminProjectController;
 
 Route::get('/', function () {
     // $posts = \App\Models\Post::where('is_published', true)->latest()->take(3)->get();
@@ -57,6 +58,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/talento', [AdminController::class, 'talents'])->name('talento.index');
     Route::get('/quejas', [AdminController::class, 'complaints'])->name('quejas.index');
+    Route::resource('/proyectos', AdminProjectController::class)->except(['show']);
     
     // CRUD Prensa (Blogs)
     Route::get('/prensa', [AdminPostController::class, 'index'])->name('prensa.index');

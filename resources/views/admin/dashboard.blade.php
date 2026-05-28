@@ -46,6 +46,13 @@
                     <a href="{{ route('admin.prensa.index') }}" style="display: inline-block; background: #ffa608; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif; font-size: 0.9rem;">Gestionar Prensa</a>
                 </div>
 
+                <div style="border: 1px solid #eaeaea; padding: 2.5rem; border-radius: 6px; text-align: center; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                    <div style="font-size: 2.5rem; color: #64b032; margin-bottom: 1rem;">📍</div>
+                    <h3 style="font-family: 'usual', sans-serif; font-size: 1.2rem; color: #111; margin-bottom: 1rem;">PROYECTOS</h3>
+                    <p style="font-family: 'usual', sans-serif; color: #666; margin-bottom: 2rem;">Sube lugares con imagen, tipo, descripción y coordenadas.</p>
+                    <a href="{{ route('admin.proyectos.index') }}" style="display: inline-block; background: #64b032; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 600; font-family: 'usual', sans-serif; font-size: 0.9rem;">Gestionar Proyectos</a>
+                </div>
+
             </div>
 
         </div>

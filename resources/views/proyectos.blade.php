@@ -1234,7 +1234,7 @@
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
             document.getElementById('overlayStatus').innerText = project.status == 1 ? 'COMPLETΛDO' : 'ΞN PROCESO';
-            document.getElementById('overlayDescription').innerText = cat.desc;
+            document.getElementById('overlayDescription').innerText = project.description || cat.desc;
             
             // Update HUD Coordinates dynamically
             const hudCoords = document.querySelector('.hud-bottom-right .hud-label');
