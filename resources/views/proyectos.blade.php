@@ -18,7 +18,7 @@
             <!-- Floating Titles Overlay -->
             <div class="map-titles-overlay">
                 {{-- <div class="hero-pretitle">PORTAFOLIO FEDERAL & PRIVADO</div> --}}
-                <h1 class="indi-heading-large hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">NUΞSTROS<br>PROYΞCTOS</h1>
+                <h1 class="indi-heading-large hero-typer-text" style="color: #0066f9; font-family: 'usual', sans-serif;">NUΞSTROS<br>PROYΞCTOS</h1>
                 <p class="hero-subtitle">MÁS DΞ 50 ΛÑOS CONSTRUYΞNDO LΛ INFRΛESTRUCTURΛ DΞ MÉXICO</p>
             </div>
 
@@ -64,10 +64,7 @@
             </div>
             
             <!-- Tech HUD Elements -->
-            <div class="map-hud hud-top-left">
-                <div class="hud-line"></div>
-                <div class="hud-label">SATELLITE_LINK: ACTIVE</div>
-            </div>
+            
             <div class="map-hud hud-bottom-right">
                 <div class="hud-label">COORDINATES: LAT/LONG</div>
                 <div class="hud-line"></div>

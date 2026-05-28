@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <form method="GET" action="{{ route('admin.proyectos.index') }}" class="projects-admin-filter">
+            <form method="GET" action="{{ route('admin.proyectos.index') }}" class="projects-admin-filter" id="projectsFilterForm">
                 <div>
                     <label for="search">Buscar</label>
                     <input id="search" type="search" name="search" value="{{ $filters['search'] ?? '' }}" placeholder="Título, ubicación o descripción">
@@ -162,77 +162,157 @@
                 <a href="{{ route('admin.proyectos.index') }}" class="projects-admin-btn" style="background: #e2e8f0; color: #334155;">Limpiar</a>
             </form>
 
-            <div style="overflow-x: auto; font-family: 'usual', sans-serif;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
-                    <thead>
-                        <tr style="background: #f1f5f9; color: #334155; border-bottom: 2px solid #e2e8f0;">
-                            <th style="padding: 1.2rem; font-weight: 600; width: 90px;">Imagen</th>
-                            <th style="padding: 1.2rem; font-weight: 600;">Título</th>
-                            <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Ubicación</th>
-                            <th style="padding: 1.2rem; font-weight: 600; width: 150px;">Tipo</th>
-                            <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Coordenadas</th>
-                            <th style="padding: 1.2rem; font-weight: 600; width: 160px; text-align: center;">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody style="color: #475569;">
-                        @forelse($projects as $project)
-                            <tr style="border-bottom: 1px solid #e2e8f0; vertical-align: middle;">
-                                <td style="padding: 1.2rem;">
-                                    @if($project->marker_image)
-                                        <img src="{{ asset('storage/' . $project->marker_image) }}" alt="{{ $project->title }}" style="width: 68px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;">
-                                    @else
-                                        <div style="width: 68px; height: 50px; background: #eaeaea; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #888; border: 1px solid #e2e8f0;">N/A</div>
-                                    @endif
-                                </td>
-                                <td style="padding: 1.2rem; font-weight: 700; color: #0f172a;">{{ $project->title }}</td>
-                                <td style="padding: 1.2rem;">{{ $project->address }}</td>
-                                <td style="padding: 1.2rem;">
-                                    @php($category = $categories[$project->category] ?? $categories[1])
-                                    <span style="background: {{ $category['bg'] }}; color: {{ $category['color'] }}; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8em; font-weight: 700; text-transform: uppercase;">{{ $category['label'] }}</span>
-                                </td>
-                                <td style="padding: 1.2rem; font-size: 0.86rem;">{{ $project->latitude }}, {{ $project->longitude }}</td>
-                                <td style="padding: 1.2rem; text-align: center;">
-                                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                                        <a href="{{ route('admin.proyectos.edit', $project) }}" style="background: #fef3c7; color: #d97706; padding: 0.4rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.8em; font-weight: 600; border: 1px solid #fde68a;">Editar</a>
-                                        <form method="POST" action="{{ route('admin.proyectos.destroy', $project) }}" onsubmit="return confirm('¿Eliminar este proyecto? Esta acción no se puede deshacer.');" style="margin: 0; display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8em; font-weight: 600; cursor: pointer;">Eliminar</button>
-                                        </form>
-                                    </div>
-                                </td>
+            <div id="projectsResults">
+                <div style="overflow-x: auto; font-family: 'usual', sans-serif;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="background: #f1f5f9; color: #334155; border-bottom: 2px solid #e2e8f0;">
+                                <th style="padding: 1.2rem; font-weight: 600; width: 90px;">Imagen</th>
+                                <th style="padding: 1.2rem; font-weight: 600;">Título</th>
+                                <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Ubicación</th>
+                                <th style="padding: 1.2rem; font-weight: 600; width: 150px;">Tipo</th>
+                                <th style="padding: 1.2rem; font-weight: 600; width: 170px;">Coordenadas</th>
+                                <th style="padding: 1.2rem; font-weight: 600; width: 160px; text-align: center;">Acciones</th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" style="padding: 3rem; text-align: center; color: #64748b;">No hay proyectos que coincidan con la búsqueda o filtros actuales.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody style="color: #475569;">
+                            @forelse($projects as $project)
+                                <tr style="border-bottom: 1px solid #e2e8f0; vertical-align: middle;">
+                                    <td style="padding: 1.2rem;">
+                                        @if($project->marker_image)
+                                            <img src="{{ asset('storage/' . $project->marker_image) }}" alt="{{ $project->title }}" style="width: 68px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;">
+                                        @else
+                                            <div style="width: 68px; height: 50px; background: #eaeaea; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #888; border: 1px solid #e2e8f0;">N/A</div>
+                                        @endif
+                                    </td>
+                                    <td style="padding: 1.2rem; font-weight: 700; color: #0f172a;">{{ $project->title }}</td>
+                                    <td style="padding: 1.2rem;">{{ $project->address }}</td>
+                                    <td style="padding: 1.2rem;">
+                                        @php($category = $categories[$project->category] ?? $categories[1])
+                                        <span style="background: {{ $category['bg'] }}; color: {{ $category['color'] }}; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.8em; font-weight: 700; text-transform: uppercase;">{{ $category['label'] }}</span>
+                                    </td>
+                                    <td style="padding: 1.2rem; font-size: 0.86rem;">{{ $project->latitude }}, {{ $project->longitude }}</td>
+                                    <td style="padding: 1.2rem; text-align: center;">
+                                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                            <a href="{{ route('admin.proyectos.edit', $project) }}" style="background: #fef3c7; color: #d97706; padding: 0.4rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.8em; font-weight: 600; border: 1px solid #fde68a;">Editar</a>
+                                            <form method="POST" action="{{ route('admin.proyectos.destroy', $project) }}" onsubmit="return confirm('¿Eliminar este proyecto? Esta acción no se puede deshacer.');" style="margin: 0; display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8em; font-weight: 600; cursor: pointer;">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" style="padding: 3rem; text-align: center; color: #64748b;">No hay proyectos que coincidan con la búsqueda o filtros actuales.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                @if($projects->hasPages())
+                    <div class="projects-admin-pagination">
+                        <div style="color: #64748b; font-size: 0.9rem;">
+                            Mostrando {{ $projects->firstItem() }}-{{ $projects->lastItem() }} de {{ $projects->total() }} proyectos
+                        </div>
+
+                        <div class="projects-admin-pages">
+                            <a class="projects-admin-page {{ $projects->onFirstPage() ? 'disabled' : '' }}" href="{{ $projects->previousPageUrl() ?? '#' }}">&lt;</a>
+
+                            @foreach($projects->getUrlRange(1, $projects->lastPage()) as $page => $url)
+                                <a class="projects-admin-page {{ $projects->currentPage() === $page ? 'active' : '' }}" href="{{ $url }}">{{ $page }}</a>
+                            @endforeach
+
+                            <a class="projects-admin-page {{ $projects->hasMorePages() ? '' : 'disabled' }}" href="{{ $projects->nextPageUrl() ?? '#' }}">&gt;</a>
+                        </div>
+                    </div>
+                @else
+                    <div style="margin-top: 2rem; color: #64748b; font-size: 0.9rem; font-family: 'usual', sans-serif;">
+                        Mostrando {{ $projects->total() }} proyectos
+                    </div>
+                @endif
             </div>
-
-            @if($projects->hasPages())
-                <div class="projects-admin-pagination">
-                    <div style="color: #64748b; font-size: 0.9rem;">
-                        Mostrando {{ $projects->firstItem() }}-{{ $projects->lastItem() }} de {{ $projects->total() }} proyectos
-                    </div>
-
-                    <div class="projects-admin-pages">
-                        <a class="projects-admin-page {{ $projects->onFirstPage() ? 'disabled' : '' }}" href="{{ $projects->previousPageUrl() ?? '#' }}">&lt;</a>
-
-                        @foreach($projects->getUrlRange(1, $projects->lastPage()) as $page => $url)
-                            <a class="projects-admin-page {{ $projects->currentPage() === $page ? 'active' : '' }}" href="{{ $url }}">{{ $page }}</a>
-                        @endforeach
-
-                        <a class="projects-admin-page {{ $projects->hasMorePages() ? '' : 'disabled' }}" href="{{ $projects->nextPageUrl() ?? '#' }}">&gt;</a>
-                    </div>
-                </div>
-            @else
-                <div style="margin-top: 2rem; color: #64748b; font-size: 0.9rem; font-family: 'usual', sans-serif;">
-                    Mostrando {{ $projects->total() }} proyectos
-                </div>
-            @endif
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('projectsFilterForm');
+        const results = document.getElementById('projectsResults');
+        if (!form || !results) return;
+
+        let timer = null;
+        let controller = null;
+
+        const buildUrl = (pageUrl = null) => {
+            const url = new URL(pageUrl || form.action, window.location.origin);
+            const formData = new FormData(form);
+
+            url.search = '';
+            formData.forEach((value, key) => {
+                if (String(value).trim() !== '') {
+                    url.searchParams.set(key, value);
+                }
+            });
+
+            if (pageUrl) {
+                const requestedPage = new URL(pageUrl, window.location.origin).searchParams.get('page');
+                if (requestedPage) url.searchParams.set('page', requestedPage);
+            }
+
+            return url;
+        };
+
+        const refreshProjects = async (pageUrl = null) => {
+            const url = buildUrl(pageUrl);
+
+            if (controller) controller.abort();
+            controller = new AbortController();
+            results.style.opacity = '0.55';
+
+            try {
+                const response = await fetch(url, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    signal: controller.signal,
+                });
+                const html = await response.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const nextResults = doc.getElementById('projectsResults');
+
+                if (nextResults) {
+                    results.innerHTML = nextResults.innerHTML;
+                    window.history.replaceState({}, '', url);
+                }
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    form.submit();
+                }
+            } finally {
+                results.style.opacity = '1';
+            }
+        };
+
+        form.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => refreshProjects(), 250);
+        });
+
+        form.addEventListener('change', () => refreshProjects());
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            refreshProjects();
+        });
+
+        results.addEventListener('click', (event) => {
+            const link = event.target.closest('.projects-admin-page');
+            if (!link || link.classList.contains('disabled')) return;
+
+            event.preventDefault();
+            refreshProjects(link.href);
+        });
+    });
+</script>
 @endsection

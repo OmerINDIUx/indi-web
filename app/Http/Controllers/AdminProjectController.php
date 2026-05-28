@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdminProjectController extends Controller
 {
@@ -16,19 +19,14 @@ class AdminProjectController extends Controller
             'status' => 'nullable|in:completed,process',
         ]);
 
-        $projects = Project::query()
-            ->when($filters['search'] ?? null, function ($query, string $search) {
-                $query->where(function ($query) use ($search) {
-                    $query->where('title', 'like', "%{$search}%")
-                        ->orWhere('address', 'like', "%{$search}%")
-                        ->orWhere('description', 'like', "%{$search}%");
-                });
-            })
+        $projectsQuery = Project::query()
             ->when($filters['category'] ?? null, fn ($query, int $category) => $query->where('category', $category))
             ->when($filters['status'] ?? null, fn ($query, string $status) => $query->where('status', $status === 'completed'))
-            ->latest()
-            ->paginate(12)
-            ->withQueryString();
+            ->latest();
+
+        $projects = $filters['search'] ?? null
+            ? $this->searchProjects($projectsQuery->get(), $filters['search'], $request)
+            : $projectsQuery->paginate(12)->withQueryString();
 
         return view('admin.proyectos.index', compact('projects', 'filters'));
     }
@@ -100,5 +98,42 @@ class AdminProjectController extends Controller
             'longitude' => 'required|numeric|between:-180,180',
             'marker_image' => ($imageRequired ? 'required' : 'nullable') . '|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
         ]);
+    }
+
+    private function searchProjects(Collection $projects, string $search, Request $request): LengthAwarePaginator
+    {
+        $needle = $this->normalizeSearchText($search);
+        $filtered = $projects->filter(function (Project $project) use ($needle) {
+            $haystack = $this->normalizeSearchText(implode(' ', [
+                $project->title,
+                $project->address,
+                $project->description,
+            ]));
+
+            return str_contains($haystack, $needle);
+        })->values();
+
+        $page = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 12;
+
+        return (new LengthAwarePaginator(
+            $filtered->forPage($page, $perPage),
+            $filtered->count(),
+            $perPage,
+            $page,
+            [
+                'path' => $request->url(),
+                'query' => $request->query(),
+            ]
+        ));
+    }
+
+    private function normalizeSearchText(?string $text): string
+    {
+        return Str::of($text ?? '')
+            ->ascii()
+            ->lower()
+            ->squish()
+            ->toString();
     }
 }
