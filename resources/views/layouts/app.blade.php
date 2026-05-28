@@ -16,6 +16,10 @@
                     {!! file_get_contents(public_path('assets/indi brand-01.svg')) !!}
                 </div>
                 <style>
+                    :root {
+                        --logo-menu-gap: 140px;
+                    }
+
                     /* Make sure SVG can overflow its viewBox */
                     .single-logo svg {
                         overflow: visible !important;
@@ -88,7 +92,7 @@
                     /* Push the menu container correctly to the right of the logo group */
                     .logo-menu-wrapper.active .logo-group,
                     .logo-menu-wrapper:hover:not(.active) .logo-group {
-                        margin-right: 127px !important;
+                        margin-right: var(--logo-menu-gap) !important;
                     }
                     .logo-menu-wrapper.active .logo-svg-wrapper,
                     .logo-menu-wrapper:hover:not(.active) .logo-svg-wrapper {
@@ -101,7 +105,7 @@
                             min-height: 65px !important;
                         }
                         .logo-menu-wrapper.active .logo-group {
-                            margin-right: 127px !important; /* Keep original spacing to prevent logo overlaps */
+                            margin-right: var(--logo-menu-gap) !important; /* Keep spacing to prevent logo overlaps */
                         }
                         .logo-menu-wrapper.active .logo-svg-wrapper {
                             margin-right: 0 !important;
@@ -125,7 +129,7 @@
                             width: 91% !important; /* Perfectly centered with the left: 4.5% */
                         }
                         .logo-menu-wrapper.active .logo-group {
-                            margin-right: 127px !important; /* Ensure the logo letters IN and DI separate fully without overlapping */
+                            margin-right: var(--logo-menu-gap) !important; /* Ensure the logo letters IN and DI separate fully without overlapping */
                         }
                         .logo-menu-wrapper.active .logo-svg-wrapper {
                             margin-right: 0 !important;
@@ -156,7 +160,7 @@
                             gap: 1rem !important;
                         }
                         .logo-menu-wrapper.active .logo-group {
-                            margin-right: 127px !important;
+                            margin-right: var(--logo-menu-gap) !important;
                         }
                         .logo-menu-wrapper.active .logo-svg-wrapper {
                             margin-right: 0 !important;

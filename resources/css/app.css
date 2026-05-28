@@ -215,7 +215,7 @@ body {
 .logo-menu-wrapper.active .logo-svg-wrapper {
     width: 140px;
     height: 200px;
-    margin-right: 127px; /* Matches the exact overflow of DI */
+    margin-right: 180px; /* Matches the exact overflow of DI */
 }
 
 /* Also give it space on just hover, so the menu moves smoothly if it opens on hover */

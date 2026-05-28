@@ -1339,8 +1339,33 @@
 
         const searchInput = document.getElementById('projectSearchInput');
 
+        function normalizeSearchText(text) {
+            if (!text) return '';
+
+            return text
+                .toString()
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/ñ/g, 'n')
+                .replace(/λ/g, 'a')
+                .replace(/ξ/g, 'e')
+                .trim();
+        }
+
+        function projectMatchesSearch(project, searchTerm) {
+            if (!searchTerm) return true;
+
+            return [
+                project.title,
+                project.address,
+                project.category,
+                project.description
+            ].some(value => normalizeSearchText(value).includes(searchTerm));
+        }
+
         function applyFilters() {
-            const searchTerm = searchInput.value.toLowerCase();
+            const searchTerm = normalizeSearchText(searchInput.value);
             const activeCategoryBtn = document.querySelector('.filter-link.active');
             const category = activeCategoryBtn ? activeCategoryBtn.getAttribute('data-category') : 'all';
 
@@ -1350,7 +1375,7 @@
             markerGroup.clearLayers();
             projects.forEach(p => {
                 const matchesCategory = (category === 'all' || p.category == category);
-                const matchesSearch = p.title.toLowerCase().includes(searchTerm) || p.address.toLowerCase().includes(searchTerm);
+                const matchesSearch = projectMatchesSearch(p, searchTerm);
                 
                 if (matchesCategory && matchesSearch) {
                     markerGroup.addLayer(markerMap.get(p.id));
@@ -1364,7 +1389,7 @@
                 const project = projects.find(p => p.id == id);
                 
                 const matchesCategory = (category === 'all' || card.getAttribute('data-category') == category);
-                const matchesSearch = project && (project.title.toLowerCase().includes(searchTerm) || project.address.toLowerCase().includes(searchTerm));
+                const matchesSearch = project && projectMatchesSearch(project, searchTerm);
 
                 if (matchesCategory && matchesSearch) {
                     card.style.display = 'flex';
