@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Buscamos Talento | GRUPO INDI')
+@section('title', 'Buscamos Talento | INDI')
 
 @section('content')
 <div class="indi-section-wrap" style="padding-top: 15rem; min-height: 80vh; background: #f9fafb;">

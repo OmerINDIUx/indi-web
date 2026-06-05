@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $title . ' | GRUPO INDI')
+@section('title', $title . ' | INDI')
 
 @section('content')
 <!-- PDF.js and PageFlip Libraries -->

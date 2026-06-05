@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'RESPONSABILIDAD SOCIAL | GRUPO INDI')
+@section('title', 'RESPONSABILIDAD SOCIAL | INDI')
 
 @section('content')
 <div class="social-page">
@@ -30,7 +30,7 @@
                 <div style="max-width: 900px; margin: 0 auto; text-align: center;">
                     <h4 style="font-family: 'usual', sans-serif; color: var(--indi-blue); letter-spacing: 0.4em; margin-bottom: 2rem; font-weight: 700; font-size: 0.9rem;">{{ \App\Support\CmsText::get('social.intro_tag', 'WE INDI') }}</h4>
                     <p style="font-size: 1.6rem; line-height: 1.8; color: #333; font-family: 'usual', sans-serif; font-weight: 300;">
-                        {{ \App\Support\CmsText::get('social.intro_text', 'Mediante esta division y con la trayectoria y formalidad que le caracterizan, Grupo Indi busca incidir con proyectos que contribuyan al desarrollo sostenible del pais.') }}
+                        {{ \App\Support\CmsText::get('social.intro_text', 'Mediante esta division y con la trayectoria y formalidad que le caracterizan, INDI busca incidir con proyectos que contribuyan al desarrollo sostenible del pais.') }}
                     </p>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                         <h2 class="indi-heading-large" style="font-size: clamp(1.8rem, 4vw, 3.2rem); color: #171717; line-height: 1.1; margin: 0 0 2rem; font-family: 'usual', sans-serif;">
                             {{ \App\Support\CmsText::get('social.environment.title', 'COMPROMISO CON EL ACUARIO DEL MUNDO') }}
                         </h2>
-                        <p>{{ \App\Support\CmsText::get('social.environment.text', 'En Grupo Indi nos preocupa cada detalle por lo que una de nuestras principales metas es trabajar cada obra con conciencia ambiental.') }}</p>
+                        <p>{{ \App\Support\CmsText::get('social.environment.text', 'En INDI nos preocupa cada detalle por lo que una de nuestras principales metas es trabajar cada obra con conciencia ambiental.') }}</p>
                         
                         <div class="project-mini-cards">
                             <div class="mini-card">

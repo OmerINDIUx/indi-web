@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GRUPO INDI | Infraestructura y Tecnología')
+@section('title', 'INDI | Infraestructura y Tecnología')
 
 @section('content')
     <!-- Hero Section -->
@@ -269,11 +269,11 @@
                     <div class="unit-box-trigger" data-unit="0" style="--indi-unit-color: #0066f9;">
                         <div class="unit-identity">
                             <span class="u-num">01</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.title', 'INDI MARITIMO') }}</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.title', 'INDI MARÍTIMO') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.text', 'Dominio tecnico en ingenieria portuaria, escolleras monumentales y obras de dragado.') }}</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.text', 'Dominio técnico en ingeniería portuaria, escolleras monumentales y obras de dragado.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Maritimo">
+                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Marítimo">
                         </div>
                     </div>
 
@@ -283,7 +283,7 @@
                             <span class="u-num">02</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.title', 'INDI INFRAESTRUCTURA') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.text', 'Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precision tecnica.') }}</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.text', 'Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precisión técnica.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
                         </div>
@@ -293,11 +293,11 @@
                     <div class="unit-box-trigger" data-unit="2" style="--indi-unit-color: #ffa608;">
                         <div class="unit-identity">
                             <span class="u-num">03</span>
-                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.title', 'INDI CONSTRUCCION') }}</h2>
+                            <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.title', 'INDI CONSTRUCCIÓN') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.text', 'Especialistas en ingenieria civil de alta complejidad y cimentacion profunda.') }}</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.text', 'Especialistas en ingeniería civil de alta complejidad y cimentación profunda.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construccion">
+                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construcción">
                         </div>
                     </div>
 
@@ -307,7 +307,7 @@
                             <span class="u-num">04</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.title', 'INDI FERROVIARIA') }}</h2>
                         </div>
-                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.text', 'Ingenieria avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala.') }}</p>
+                        <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.text', 'Ingeniería avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala.') }}</p>
                         <div class="u-visual-mobile">
                             <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
                         </div>

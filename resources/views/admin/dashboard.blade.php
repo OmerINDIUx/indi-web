@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'CMS Dashboard | GRUPO INDI')
+@section('title', 'CMS Dashboard | INDI')
 
 @section('content')
 <div class="indi-section-wrap" style="padding-top: 15rem; min-height: 80vh; background: #f9fafb;">

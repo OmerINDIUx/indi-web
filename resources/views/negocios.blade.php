@@ -53,7 +53,7 @@
                                 <p>{{ \App\Support\CmsText::get('business.infrastructure.desc', 'Somos inversionistas, constructores y operadores de proyectos clave en Mexico.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="3">
-                                <p>{{ \App\Support\CmsText::get('business.maritime.desc', 'Grupo INDI ha sido un actor clave en el desarrollo de la infraestructura maritima y portuaria en Mexico.') }}</p>
+                                <p>{{ \App\Support\CmsText::get('business.maritime.desc', 'INDI ha sido un actor clave en el desarrollo de la infraestructura maritima y portuaria en Mexico.') }}</p>
                             </div>
                             <div class="text-unit" data-unit="4">
                                 <p>{{ \App\Support\CmsText::get('business.railway.desc', 'Ingenieria ferroviaria avanzada para sistemas de transporte de carga y pasajeros a gran escala.') }}</p>
@@ -92,26 +92,47 @@
 <style>
 :root {
     --indi-yellow: #FFB800;
+    --negocios-vh: 100vh;
 }
 
 .negocios-page {
     background: #fff;
-    overflow: visible; /* Required for position: sticky to work */
+    overflow: visible;
 }
 
 .negocios-pin-wrapper {
     position: relative;
     width: 100%;
+    height: calc(var(--negocios-vh) * 5);
 }
 
 .negocios-sticky-stage {
-    position: sticky;
+    position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: 100vh;
+    height: var(--negocios-vh);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: #fff;
+    z-index: 5;
+}
+
+.negocios-pin-wrapper.is-fixed .negocios-sticky-stage {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0;
+    right: 0;
+}
+
+.negocios-pin-wrapper.is-after .negocios-sticky-stage {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /* Visual Layer: Fixed 70% height */
@@ -289,6 +310,11 @@
     transition: color 0.1s ease;
 }
 
+.unit-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 
 .text-unit p {
     font-family: 'usual', sans-serif;
@@ -298,85 +324,181 @@
     font-weight: 300;
 }
 
-/* Scroll Trigger Areas: Balanced for fast response without skipping the first slide */
+/* Scroll Trigger Areas: one full viewport per business unit while the stage remains pinned */
 .scroll-trigger-sections {
-    width: 100%;
-    margin-top: -40vh; /* Pulled up slightly to eliminate the header gap, but keeping first trigger active */
-    position: relative;
-    pointer-events: none;
+    display: none;
 }
 
 .trigger {
-    height: 40vh; /* Keeps the quick-switching feel */
+    height: 0;
 }
 
 /* Tablets (1080px) */
 @media (max-width: 1080px) {
+    .negocios-page .negocios-sticky-stage {
+        height: var(--negocios-vh) !important;
+        min-height: var(--negocios-vh);
+        overflow: hidden !important;
+    }
+
     .unit-info-grid { 
         grid-template-columns: 1fr; 
         gap: 1.5rem; 
         padding: 1.5rem 0;
     }
-    .visual-layer { height: 45vh; }
-    .content-layer { 
-        height: 55vh; 
+    .negocios-page .visual-layer {
+        height: clamp(300px, 46svh, 480px) !important;
+        min-height: 300px;
+        flex: 0 0 auto;
+    }
+    .negocios-page .content-layer { 
+        height: auto !important;
+        flex: 1 1 auto;
+        min-height: 0 !important;
         align-items: flex-start;
-        padding-top: 2rem;
+        padding: 2.5rem 0 4rem !important;
+        overflow: hidden !important;
+    }
+    .negocios-page .indi-container {
+        width: min(90%, 760px);
+        max-width: min(90%, 760px);
     }
     .text-unit p {
         font-size: clamp(0.9rem, 1.5vw, 1.05rem);
         line-height: 1.6;
     }
+
+    .scroll-trigger-sections {
+        display: none;
+    }
+
+    .trigger {
+        height: 0;
+    }
 }
 
 /* Teléfonos Grandes (720px) */
 @media (max-width: 720px) {
-    .visual-layer { height: 40vh; }
-    .content-layer { 
-        height: 60vh; 
-        padding-top: 1rem;
+    .negocios-page .negocios-sticky-stage {
+        height: var(--negocios-vh) !important;
+        min-height: var(--negocios-vh);
     }
-    .unit-main-name { font-size: clamp(1.8rem, 5vw, 2.5rem); }
-    .unit-info-grid { gap: 1rem; }
+
+    .negocios-page .visual-layer {
+        height: clamp(245px, 40svh, 340px) !important;
+        min-height: 260px;
+    }
+    .negocios-page .content-layer { 
+        height: auto !important;
+        flex: 1 1 auto;
+        min-height: 0 !important;
+        padding: 1.65rem 0 2rem !important;
+        overflow: hidden !important;
+    }
+    .negocios-page .unit-main-name {
+        font-size: clamp(1.65rem, 8vw, 2.35rem) !important;
+        line-height: 1;
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+    .negocios-page .unit-info-grid {
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .negocios-page .text-swap-container {
+        min-height: auto;
+        width: 100%;
+    }
+
+    .negocios-page .text-unit.active {
+        position: relative;
+    }
+
+    .negocios-page .text-unit p {
+        font-size: clamp(0.92rem, 4.2vw, 1rem);
+        line-height: 1.55;
+    }
 }
 
 /* Teléfonos Pequeños (500px) */
 @media (max-width: 500px) {
-    .visual-layer { height: 35vh; }
-    .content-layer { 
-        height: 65vh; 
-        overflow-y: auto; /* Allow scrolling if it still overflows */
+    .negocios-page .visual-layer {
+        height: clamp(140px, 24svh, 210px) !important;
+        min-height: 140px;
     }
-    .negocios-notch-divider { height: 50px; }
-    
-    /* Hide the third detailed text swap block to prevent content overlap */
+    .negocios-page .content-layer { 
+        height: auto !important;
+        flex: 1 1 auto;
+        min-height: 0 !important;
+        padding: 0.8rem 0 1.1rem !important;
+        overflow: hidden !important;
+    }
+    .negocios-page .negocios-notch-divider {
+        height: 44px;
+    }
+    .negocios-page .visual-notched-frame {
+        border-bottom-left-radius: 24px;
+        border-bottom-right-radius: 24px;
+    }
+    .negocios-page .unit-index {
+        margin-bottom: 0.65rem;
+        font-size: 0.82rem;
+        padding: 0.42rem 0.9rem;
+    }
+    .negocios-page .unit-main-name {
+        font-size: clamp(1.24rem, 7vw, 1.65rem) !important;
+    }
+
+    .negocios-page .unit-info-grid {
+        gap: 0.48rem;
+    }
+
+    .negocios-page .text-unit p {
+        font-size: clamp(0.76rem, 3.45vw, 0.88rem);
+        line-height: 1.32;
+    }
+
     #detail-swap {
-        display: none !important;
+        display: block !important;
     }
+
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const triggers = document.querySelectorAll('.trigger');
+    document.documentElement.classList.add('negocios-js-ready');
+
     const images = document.querySelectorAll('.stage-img');
     const textUnits = document.querySelectorAll('.text-unit');
 
+    const getViewportHeight = () => {
+        return Math.round(window.visualViewport?.height || window.innerHeight);
+    };
+
+    const setResponsiveViewportHeight = () => {
+        document.documentElement.style.setProperty('--negocios-vh', `${getViewportHeight()}px`);
+    };
+
+    setResponsiveViewportHeight();
+
+    images.forEach(video => {
+        video.muted = true;
+        video.playsInline = true;
+        video.play().catch(() => {});
+    });
+
     const updateUnit = (unit) => {
+        document.documentElement.setAttribute('data-negocios-unit', unit);
+
         // Update Images (Videos)
         images.forEach(img => {
             const isActive = img.dataset.unit == unit;
             img.classList.toggle('active', isActive);
             
-            // Interaction logic for videos: Play only if active
-            if (isActive) {
-                if (img.paused) {
-                    img.play().catch(e => console.log("Video play interrupted or browser blocked: ", e));
-                }
-            } else {
-                img.pause();
-                // Optional: reset to beginning? (user said "inician")
-                // img.currentTime = 0; 
+            if (isActive && img.paused) {
+                img.play().catch(() => {});
             }
         });
 
@@ -388,10 +510,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tu.classList.toggle('active', isActive);
             
             if (isActive) {
+                const gsapApi = window.gsap;
+
                 // Trigger Rolling Number Animation
                 const indexNum = tu.querySelector('.num-roll');
-                if (indexNum) {
-                    gsap.fromTo(indexNum, 
+                if (indexNum && gsapApi) {
+                    gsapApi.fromTo(indexNum, 
                         { y: '100%', opacity: 0, filter: 'grow(2px)' },
                         { y: '0%', opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: "power4.out" }
                     );
@@ -403,19 +527,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const chars = tu.querySelectorAll('.unit-main-name .char');
 
                 // GSAP Writing/Color Reveal
-                gsap.killTweensOf(chars);
-                gsap.fromTo(chars, 
-                    { color: '#ccc', opacity: 0.2 },
-                    { 
-                        color: (i, target) => {
-                            return target.closest('[class^="highlight-unit"]') ? targetColor : '#000';
-                        },
-                        opacity: 1,
-                        duration: 0.3,
-                        stagger: 0.02,
-                        ease: "none"
-                    }
-                );
+                if (chars.length === 0) {
+                    return;
+                }
+
+                if (gsapApi) {
+                    gsapApi.killTweensOf(chars);
+                    gsapApi.fromTo(chars, 
+                        { color: '#ccc', opacity: 0.2 },
+                        { 
+                            color: (i, target) => {
+                                return target.closest('[class^="highlight-unit"]') ? targetColor : '#000';
+                            },
+                            opacity: 1,
+                            duration: 0.3,
+                            stagger: 0.02,
+                            ease: "none"
+                        }
+                    );
+                } else {
+                    chars.forEach(char => {
+                        char.style.color = char.closest('[class^="highlight-unit"]') ? targetColor : '#000';
+                        char.style.opacity = '1';
+                    });
+                }
             }
         });
     };
@@ -428,14 +563,29 @@ document.addEventListener('DOMContentLoaded', () => {
         while(node = walker.nextNode()) nodes.push(node);
 
         nodes.forEach(textNode => {
-            const chars = textNode.nodeValue.split('');
             const fragment = document.createDocumentFragment();
-            chars.forEach(char => {
-                const span = document.createElement('span');
-                span.className = 'char';
-                span.textContent = char;
-                fragment.appendChild(span);
+
+            textNode.nodeValue.split(/(\s+)/).forEach(part => {
+                if (!part) return;
+
+                if (/^\s+$/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
+
+                const word = document.createElement('span');
+                word.className = 'unit-word';
+
+                part.split('').forEach(char => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.textContent = char;
+                    word.appendChild(span);
+                });
+
+                fragment.appendChild(word);
             });
+
             textNode.parentNode.replaceChild(fragment, textNode);
         });
     };
@@ -443,19 +593,57 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize titles
     document.querySelectorAll('.unit-main-name').forEach(title => wrapChars(title));
 
-    // Using GSAP ScrollTrigger
-    triggers.forEach((trigger, i) => {
-        ScrollTrigger.create({
-            trigger: trigger,
-            start: "top 95%", // Trigger as early as possible
-            end: "bottom 95%",
-            onEnter: () => updateUnit(i + 1),
-            onEnterBack: () => updateUnit(i + 1),
-        });
-    });
-
     // Forced initial state for Unit 01
     updateUnit(1);
+
+    const pinWrapper = document.querySelector('.negocios-pin-wrapper');
+    let activeUnit = 1;
+    let ticking = false;
+
+    const syncUnitFromScroll = () => {
+        if (!pinWrapper) return;
+
+        const pageTop = window.scrollY || window.pageYOffset;
+        const wrapperTop = pinWrapper.getBoundingClientRect().top + pageTop;
+        const viewportHeight = getViewportHeight();
+        const wrapperHeight = pinWrapper.offsetHeight;
+        const scrollableDistance = Math.max(1, wrapperHeight - viewportHeight);
+        const localScroll = pageTop - wrapperTop;
+        const progress = Math.min(1, Math.max(0, localScroll / scrollableDistance));
+        const nextUnit = Math.min(4, Math.max(1, Math.floor(progress * 4) + 1));
+
+        pinWrapper.classList.toggle('is-fixed', localScroll >= 0 && localScroll < scrollableDistance);
+        pinWrapper.classList.toggle('is-after', localScroll >= scrollableDistance);
+
+        if (nextUnit !== activeUnit) {
+            activeUnit = nextUnit;
+            updateUnit(activeUnit);
+        }
+    };
+
+    const requestSync = () => {
+        if (ticking) return;
+
+        ticking = true;
+        window.requestAnimationFrame(() => {
+            syncUnitFromScroll();
+            ticking = false;
+        });
+    };
+
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', () => {
+        setResponsiveViewportHeight();
+        requestSync();
+    });
+    window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+            setResponsiveViewportHeight();
+            requestSync();
+        }, 300);
+    });
+
+    requestSync();
 });
 </script>
 @endsection

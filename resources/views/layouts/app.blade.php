@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', 'GRUPO INDI')</title>
+        <title>@yield('title', 'INDI')</title>
         <link rel="stylesheet" href="https://use.typekit.net/iyv7knh.css">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -192,6 +192,7 @@
                 <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
                 <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.projects', 'PROYECTOS') }}</span></a>
                 <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.business', 'NEGOCIOS') }}</span></a>
+                <a href="/historia" class="nav-link-item {{ request()->is('historia*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.history', 'HISTORIA') }}</span></a>
                 <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.press', 'PRENSA') }}</span></a>
                 <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.social', 'SOCIAL') }}</span></a>
                 <a href="{{ route('locale.switch', $nextLocale) }}" class="nav-link-item language-switch-link" aria-label="{{ $nextLocale }}">{{ \App\Support\CmsText::get('language.switch_to_' . $nextLocale, strtoupper($nextLocale)) }}</a>
@@ -236,7 +237,7 @@
                             <div class="contact-info-block">
                                 <h4 class="indi-heading" style="color: #0066f9; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.4em; font-family: 'usual', sans-serif;">{{ \App\Support\CmsText::get('footer.environmental_awareness.title', 'CONCIENCIA AMBIENTAL') }}</h4>
                                 <p style="color: #666; line-height: 1.8; font-size: 1.2rem; font-weight: 400; font-family: 'usual', sans-serif;">
-                                    {{ \App\Support\CmsText::get('footer.environmental_awareness.text', 'Grupo Indi promueve activamente acciones que favorecen la conservacion y el cuidado del medio ambiente.') }}
+                                    {{ \App\Support\CmsText::get('footer.environmental_awareness.text', 'INDI promueve activamente acciones que favorecen la conservacion y el cuidado del medio ambiente.') }}
                                 </p>
                             </div>
                         </div>
@@ -315,7 +316,7 @@
 
                         <!-- Simplified Bottom Bar -->
                         <div class="footer-bottom-bar">
-                            <span>&copy; {{ date('Y') }} GRUPO INDI — SISTEMΛS WG-INDI</span>
+                            <span>&copy; {{ date('Y') }} INDI — SISTEMΛS WG-INDI</span>
                             <div class="legal-links">
                                 <a href="{{ route('login') }}">CMS LOGIN</a>
                                 <a href="#">{{ \App\Support\CmsText::get('footer.privacy', 'AVISO DE PRIVACIDAD') }}</a>

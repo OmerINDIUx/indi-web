@@ -15,12 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (logoMenu) {
         let autoCollapseTimer;
+        const hasMechanicalLogo = Boolean(document.querySelector(".logo-part") && document.querySelector(".part-bottom"));
 
         // Initialize Mechanical Baseline (Stacked small version)
-        gsap.set(".logo-part", { width: 100, height: 70 });
-        gsap.set(".part-bottom", { marginLeft: -100, y: 80 });
+        if (hasMechanicalLogo) {
+            gsap.set(".logo-part", { width: 100, height: 70 });
+            gsap.set(".part-bottom", { marginLeft: -100, y: 80 });
+            gsap.set(".part-bottom .logo-svg-wrapper", { y: -70 });
+        }
         gsap.set(".logo-svg-wrapper", { width: 100, height: 140 });
-        gsap.set(".part-bottom .logo-svg-wrapper", { y: -70 });
 
         // Unified state applier to prevent "trabado" (collisions) between animations
         const updateLogoVisuals = (collisionRequested, duration = 0.4) => {
@@ -60,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, duration: 0.4, overwrite: true });
 
                 const tl = gsap.timeline();
-                tl.to(".logo-part", { width: 140, height: 100, duration: 0.8, ease: "expo.out" }, 0);
+                if (hasMechanicalLogo) {
+                    tl.to(".logo-part", { width: 140, height: 100, duration: 0.8, ease: "expo.out" }, 0);
+                    tl.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.8, ease: "expo.out" }, 0);
+                    tl.to(".part-bottom", { marginLeft: 10, y: 0, duration: 0.9, ease: "elastic.out(1, 0.75)" }, 0.1);
+                }
                 tl.to(".logo-svg-wrapper", { width: 140, height: 200, duration: 0.8, ease: "expo.out" }, 0);
-                tl.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.8, ease: "expo.out" }, 0);
-                tl.to(".part-bottom", { marginLeft: 10, y: 0, duration: 0.9, ease: "elastic.out(1, 0.75)" }, 0.1);
                 
                 tl.fromTo(".nav-link-item",
                     { opacity: 0, y: 30, rotateX: -45, filter: "blur(10px)" },
@@ -87,10 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 tl.to(".nav-link-item", { opacity: 0, y: -20, filter: "blur(5px)", duration: 0.3, ease: "power2.in" }, 0);
-                tl.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.6, ease: "power2.inOut" }, 0.1);
-                tl.to(".logo-part", { width: 100, height: 70, duration: 0.6, ease: "power2.inOut" }, 0.1);
+                if (hasMechanicalLogo) {
+                    tl.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.6, ease: "power2.inOut" }, 0.1);
+                    tl.to(".logo-part", { width: 100, height: 70, duration: 0.6, ease: "power2.inOut" }, 0.1);
+                    tl.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.6, ease: "power2.inOut" }, 0.1);
+                }
                 tl.to(".logo-svg-wrapper", { width: 100, height: 140, duration: 0.6, ease: "power2.inOut" }, 0.1);
-                tl.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.6, ease: "power2.inOut" }, 0.1);
             }
         };
 
@@ -102,10 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
         logoMenu.addEventListener("mouseenter", () => {
             if (!isMenuOpen) {
                 gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, duration: 0.3, overwrite: true });
-                gsap.to(".logo-part", { width: 140, height: 100, duration: 0.5, ease: "power2.out" });
+                if (hasMechanicalLogo) {
+                    gsap.to(".logo-part", { width: 140, height: 100, duration: 0.5, ease: "power2.out" });
+                    gsap.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.5, ease: "power2.out" });
+                    gsap.to(".part-bottom", { marginLeft: 10, y: 0, duration: 0.6, ease: "elastic.out(1, 0.8)" });
+                }
                 gsap.to(".logo-svg-wrapper", { width: 140, height: 200, duration: 0.5, ease: "power2.out" });
-                gsap.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.5, ease: "power2.out" });
-                gsap.to(".part-bottom", { marginLeft: 10, y: 0, duration: 0.6, ease: "elastic.out(1, 0.8)" });
                 gsap.to(".logo-svg-wrapper .cls-1", { fill: "#0066FF", duration: 0.3 });
             }
         });
@@ -113,10 +122,12 @@ document.addEventListener("DOMContentLoaded", () => {
         logoMenu.addEventListener("mouseleave", () => {
             if (!isMenuOpen) {
                 if (isCollided) updateLogoVisuals(true, 0.5);
-                gsap.to(".logo-part", { width: 100, height: 70, duration: 0.4, ease: "power2.inOut" });
+                if (hasMechanicalLogo) {
+                    gsap.to(".logo-part", { width: 100, height: 70, duration: 0.4, ease: "power2.inOut" });
+                    gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
+                    gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
+                }
                 gsap.to(".logo-svg-wrapper", { width: 100, height: 140, duration: 0.4, ease: "power2.inOut" });
-                gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
-                gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
                 gsap.to(".logo-svg-wrapper .cls-1", { fill: "#ffffff", duration: 0.3 });
             }
         });
@@ -294,7 +305,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const stageImages = gsap.utils.toArray(".stage-img");
     const stage = document.querySelector(".units-sticky-stage");
     if (boxes.length > 0) {
-        if (stage) {
+        const unitsMedia = gsap.matchMedia();
+        unitsMedia.add("(min-width: 901px)", () => {
+            if (! stage) {
+                return;
+            }
+
+            const setStageState = (state) => {
+                stage.classList.toggle("is-fixed", state === "fixed");
+                stage.classList.toggle("is-bottom", state === "bottom");
+            };
+
+            ScrollTrigger.create({
+                trigger: ".indi-units-module",
+                start: "top top",
+                end: "bottom bottom",
+                onEnter: () => setStageState("fixed"),
+                onEnterBack: () => setStageState("fixed"),
+                onLeave: () => setStageState("bottom"),
+                onLeaveBack: () => setStageState("top"),
+                invalidateOnRefresh: true,
+            });
+
             gsap.to(stage, {
                 scrollTrigger: { trigger: ".units-layout-grid", start: "top top", end: "bottom bottom", scrub: 1, onUpdate: (self) => {
                     const progress = self.progress;
@@ -304,7 +336,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.set(stage, { clipPath: notchPath });
                 }},
             });
-        }
+        });
+
         boxes.forEach((box, i) => {
             ScrollTrigger.create({ trigger: box, start: "top center", end: "bottom center", onEnter: () => { stageImages.forEach((img) => img.classList.remove("active")); if (stageImages[i]) stageImages[i].classList.add("active"); }, onEnterBack: () => { stageImages.forEach((img) => img.classList.remove("active")); if (stageImages[i]) stageImages[i].classList.add("active"); } });
             const content = box.querySelectorAll(".u-num, .u-title, .u-detail");
@@ -316,39 +349,191 @@ document.addEventListener("DOMContentLoaded", () => {
     // 10. Interactive Projects Map (No changes)
     const projectCards = gsap.utils.toArray(".project-data-card");
     const mapSvg = document.getElementById("mexicoMap");
+    const mapStage = document.querySelector(".project-map-stage");
     const markers = document.querySelectorAll(".mexico-map-svg .project-marker");
     if (projectCards.length > 0) {
         let mm = gsap.matchMedia();
         mm.add("(min-width: 721px)", () => {
             ScrollTrigger.create({ trigger: ".projects-layout", start: "top top", end: "bottom bottom", snap: { snapTo: 1 / (projectCards.length - 1), duration: { min: 0.1, max: 0.3 }, delay: 0, ease: "power1.inOut" } });
         });
+        mm.add("(min-width: 901px)", () => {
+            if (! mapStage) {
+                return;
+            }
+
+            const setMapStageState = (state) => {
+                mapStage.classList.toggle("is-fixed", state === "fixed");
+                mapStage.classList.toggle("is-bottom", state === "bottom");
+            };
+
+            ScrollTrigger.create({
+                trigger: ".projects-layout",
+                start: "top top",
+                end: "bottom bottom",
+                onEnter: () => setMapStageState("fixed"),
+                onEnterBack: () => setMapStageState("fixed"),
+                onLeave: () => setMapStageState("bottom"),
+                onLeaveBack: () => setMapStageState("top"),
+                invalidateOnRefresh: true,
+            });
+        });
         splitTextIntoChars(".project-data-scroll .indi-scroll-text");
+        const firstCard = projectCards[0];
+        if (firstCard && mapSvg) {
+            const firstMarker = mapSvg.querySelector(".marker-" + firstCard.dataset.state);
+            firstMarker?.classList.add("highlighted");
+        }
         projectCards.forEach((card, i) => {
             const markerClass = ".marker-" + card.dataset.state;
             ScrollTrigger.create({ trigger: card, start: "top center", end: "bottom center", onToggle: (self) => {
                 if (self.isActive) {
                     card.classList.add("active");
                     if (mapSvg) {
-                        markers.forEach((m) => m.classList.remove("highlighted"));
+                        markers.forEach((m) => {
+                            m.classList.remove("highlighted");
+                            m.classList.remove("is-pulsing");
+                        });
                         const targetMarker = mapSvg.querySelector(markerClass);
-                        if (targetMarker) targetMarker.classList.add("highlighted");
-                        let zoomX = 0, zoomY = 0, scale = 1.2;
                         if (targetMarker) {
+                            targetMarker.classList.add("highlighted");
+                            targetMarker.classList.add("is-pulsing");
+                            window.setTimeout(() => targetMarker.classList.remove("is-pulsing"), 1200);
+                        }
+                        let mapOrigin = "center center";
+                        if (targetMarker && mapSvg.viewBox.baseVal) {
                             const viewBox = mapSvg.viewBox.baseVal;
                             const markerX = Number(targetMarker.getAttribute("cx"));
                             const markerY = Number(targetMarker.getAttribute("cy"));
-
-                            if (viewBox && Number.isFinite(markerX) && Number.isFinite(markerY)) {
-                                scale = 2.15;
-                                zoomX = (viewBox.width / 2) - (markerX * scale);
-                                zoomY = (viewBox.height / 2) - (markerY * scale);
+                            if (viewBox.width && viewBox.height && Number.isFinite(markerX) && Number.isFinite(markerY)) {
+                                mapOrigin = `${(markerX / viewBox.width) * 100}% ${(markerY / viewBox.height) * 100}%`;
                             }
                         }
-                        gsap.to(mapSvg, { scale: scale, x: zoomX, y: zoomY, duration: 1, ease: "power2.out", transformOrigin: "center center" });
+                        gsap.fromTo(
+                            mapSvg,
+                            { scale: 1.02, x: 0, y: 0 },
+                            { scale: 1.16, x: 0, y: 0, duration: 0.9, ease: "power2.out", yoyo: true, repeat: 1, transformOrigin: mapOrigin }
+                        );
                     }
                 } else { card.classList.remove("active"); }
             }});
         });
         ScrollTrigger.create({ trigger: ".indi-interactive-projects", start: "top bottom", end: "bottom top", onLeave: () => { gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 }); }, onLeaveBack: () => { gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 }); } });
+    }
+
+    // 11. Historia image-sequence scroll
+    const historySequence = document.querySelector(".history-scroll-sequence");
+    if (historySequence) {
+        const historyStage = historySequence.querySelector(".history-sticky-stage");
+        const frameA = document.getElementById("historyFrameA");
+        const frameB = document.getElementById("historyFrameB");
+        const progressBar = document.getElementById("historyProgressBar");
+        const milestones = gsap.utils.toArray(".history-milestone");
+        const frames = JSON.parse(historySequence.dataset.historyFrames || "[]");
+        const frameCache = new Map();
+        const frameLayers = [frameA, frameB].filter(Boolean);
+        let currentFrame = 0;
+        let desiredFrame = 0;
+        let activeLayer = 0;
+        let idlePreloadIndex = 0;
+
+        const preloadFrame = (index) => {
+            if (!frames[index] || frameCache.has(index)) return;
+
+            const image = new Image();
+            image.decoding = "async";
+            image.src = frames[index];
+            frameCache.set(index, image);
+        };
+
+        const preloadAllFrames = () => {
+            const loadNext = () => {
+                if (idlePreloadIndex >= frames.length) return;
+
+                preloadFrame(idlePreloadIndex);
+                idlePreloadIndex += 1;
+
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(loadNext, { timeout: 250 });
+                } else {
+                    window.setTimeout(loadNext, 24);
+                }
+            };
+
+            loadNext();
+        };
+
+        const showFrame = (index, source) => {
+            if (!frameLayers.length || index === currentFrame || index !== desiredFrame) return;
+
+            const nextLayer = activeLayer === 0 ? 1 : 0;
+            const incoming = frameLayers[nextLayer];
+            const outgoing = frameLayers[activeLayer];
+
+            incoming.src = source;
+            incoming.classList.add("is-active");
+            outgoing.classList.remove("is-active");
+
+            activeLayer = nextLayer;
+            currentFrame = index;
+        };
+
+        const setFrame = (index) => {
+            const nextFrame = Math.max(0, Math.min(frames.length - 1, index));
+            if (nextFrame === currentFrame || !frames[nextFrame]) return;
+            desiredFrame = nextFrame;
+
+            preloadFrame(nextFrame);
+            const cachedFrame = frameCache.get(nextFrame);
+
+            if (cachedFrame?.complete) {
+                showFrame(nextFrame, frames[nextFrame]);
+            } else if (cachedFrame) {
+                cachedFrame.onload = () => showFrame(nextFrame, frames[nextFrame]);
+            }
+
+            for (let offset = -24; offset <= 24; offset += 1) {
+                preloadFrame(nextFrame + offset);
+            }
+        };
+
+        frames.slice(0, 36).forEach((_, index) => {
+            preloadFrame(index);
+            idlePreloadIndex = index + 1;
+        });
+        preloadAllFrames();
+
+        ScrollTrigger.create({
+            trigger: historySequence,
+            start: "top top",
+            end: "bottom bottom",
+            pin: historyStage,
+            pinSpacing: false,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            scrub: 0.35,
+            onUpdate: (self) => {
+                const index = Math.round(self.progress * (frames.length - 1));
+                setFrame(index);
+                if (progressBar) {
+                    progressBar.style.width = `${self.progress * 100}%`;
+                }
+            },
+        });
+
+        milestones.forEach((milestone) => {
+            gsap.to(milestone, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: milestone,
+                    start: "top 65%",
+                    end: "bottom 42%",
+                    toggleClass: "is-active",
+                    scrub: 0.8,
+                },
+            });
+        });
     }
 });

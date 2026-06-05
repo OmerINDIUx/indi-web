@@ -45,6 +45,10 @@ Route::get('/negocios', function () {
     return view('negocios');
 })->name('negocios');
 
+Route::get('/historia', function () {
+    return view('historia');
+})->name('historia');
+
 // Dynamic Prensa Routes
 Route::get('/prensa', [PrensaController::class, 'index'])->name('prensa');
 Route::get('/prensa/{slug}', [PrensaController::class, 'show'])->name('prensa.show');

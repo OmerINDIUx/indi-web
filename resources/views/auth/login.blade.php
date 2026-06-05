@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Iniciar Sesión | GRUPO INDI')
+@section('title', 'Iniciar Sesión | INDI')
 
 @section('content')
 <div class="indi-section-wrap" style="padding-top: 15rem; min-height: 80vh; background: #f9fafb;">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'PROYECTOS | GRUPO INDI')
+@section('title', 'PROYECTOS | INDI')
 
 @section('content')
 <!-- usual Font from Reference -->
@@ -100,49 +100,6 @@
         </div>
     </section>
 
-    <!-- Project List / Filter Section -->
-    <section class="projects-list-section" style="background: #050505;">
-        <div class="indi-container">
-            <div class="list-header" style="flex-wrap: wrap; gap: 2rem;">
-                <div class="header-left">
-                    <span class="u-num">{{ \App\Support\CmsText::get('projects.archive', 'ARCHIVE_01') }}</span>
-                    <h3 class="indi-heading">{{ \App\Support\CmsText::get('projects.technical_domain', 'DOMINIO TECNICO') }}</h3>
-                </div>
-
-                <div class="list-count">
-                    <span class="count-num" id="projectCount">{{ count($projects) }}</span>
-                    <span class="count-label">{{ \App\Support\CmsText::get('projects.active_locations', 'LOCALIZACIONES ACTIVAS') }}</span>
-                </div>
-            </div>
-            
-            <div class="projects-grid">
-                @foreach($projects as $project)
-                <div class="project-card-mini reveal-card" 
-                     data-lat="{{ $project['latitude'] }}" 
-                     data-lng="{{ $project['longitude'] }}" 
-                     data-id="{{ $project['id'] }}"
-                     data-category="{{ $project['category'] }}">
-                    <div class="card-inner">
-                        <div class="card-top">
-                            <span class="project-id" style="color: var(--color-{{ 
-                                [1=>'infraestructura', 2=>'construccion', 3=>'maritimo', 4=>'ferroviaria'][$project['category']] ?? 'infraestructura' 
-                            }});">ID_{{ str_pad($project['id'], 2, '0', STR_PAD_LEFT) }}</span>
-                            <div class="card-corner"></div>
-                        </div>
-                        <h4 class="project-title">{{ $project['title'] }}</h4>
-                        <div class="card-footer">
-                            <span class="project-loc">{{ $project['address'] }}</span>
-                            <span class="view-btn">{{ \App\Support\CmsText::get('projects.locate', 'LOCALIZAR +') }}</span>
-                        </div>
-                    </div>
-                    <div class="card-glow" style="background: radial-gradient(circle at center, var(--color-{{ 
-                                [1=>'infraestructura', 2=>'construccion', 3=>'maritimo', 4=>'ferroviaria'][$project['category']] ?? 'infraestructura' 
-                            }}), transparent);"></div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 </div>
 
 <!-- Leaflet CSS & JS -->
@@ -182,10 +139,11 @@
     }
 
     .projects-page-wrapper {
-        background: #000;
+        background: var(--map-bg);
         color: #fff;
-        height: 100vh;
-        overflow: hidden;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
 
     .hero-subtitle {
@@ -308,6 +266,7 @@
     #projectsMap {
         height: 100%;
         width: 100%;
+        min-height: 100%;
     }
 
     /* Technical Grid Overlay */
@@ -354,6 +313,9 @@
     .filter-bar-premium {
         pointer-events: auto;
         transition: all 1s var(--transition);
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
     }
 
     .filter-container-blue {
@@ -565,7 +527,7 @@
 
     .project-overlay-sidebar.active {
         transform: translateX(0);
-        width: 40%;
+        width: 50vw !important;
     }
 
     .project-white-card {
@@ -706,182 +668,6 @@
         transform: rotate(90deg);
     }
 
-    /* List Section */
-    .projects-list-section {
-        padding: 10rem 0;
-    }
-
-    .list-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: 5rem;
-    }
-
-    .header-left .u-num {
-        color: var(--indi-blue);
-        letter-spacing: 0.4em;
-        font-size: 0.8rem;
-        margin-bottom: 1.5rem;
-        display: block;
-    }
-
-    .list-count {
-        text-align: right;
-    }
-
-    .count-num {
-        display: block;
-        font-family: 'usual', sans-serif;
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        font-weight: 700;
-        color: #fff;
-        line-height: 1;
-    }
-
-    .count-label {
-        font-family: 'usual', sans-serif;
-        font-size: 0.7rem;
-        color: #666;
-        letter-spacing: 0.2em;
-    }
-
-    /* Projects Grid with modern notched cards */
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 2rem;
-    }
-
-    .project-card-mini {
-        background: rgba(10, 10, 10, 0.6);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        position: relative;
-        padding: 3rem 2.5rem;
-        cursor: pointer;
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
-        overflow: hidden;
-        min-height: 280px;
-    }
-
-    .project-card-mini::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 4px; height: 100%;
-        transform: scaleY(0);
-        transform-origin: bottom;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .project-card-mini:hover::before {
-        transform: scaleY(1);
-    }
-
-    .project-card-mini[data-category="1"]::before { background: var(--color-infraestructura); }
-    .project-card-mini[data-category="2"]::before { background: var(--color-construccion); }
-    .project-card-mini[data-category="3"]::before { background: var(--color-maritimo); }
-    .project-card-mini[data-category="4"]::before { background: var(--color-ferroviaria); }
-
-    .project-card-mini:hover {
-        transform: translateY(-8px);
-        background: rgba(20, 20, 20, 0.85);
-        z-index: 10;
-    }
-
-    .project-card-mini[data-category="1"]:hover { border-color: var(--color-infraestructura); box-shadow: 0 15px 30px rgba(100, 176, 50, 0.15); }
-    .project-card-mini[data-category="2"]:hover { border-color: var(--color-construccion); box-shadow: 0 15px 30px rgba(255, 166, 8, 0.15); }
-    .project-card-mini[data-category="3"]:hover { border-color: var(--color-maritimo); box-shadow: 0 15px 30px rgba(0, 102, 249, 0.15); }
-    .project-card-mini[data-category="4"]:hover { border-color: var(--color-ferroviaria); box-shadow: 0 15px 30px rgba(255, 48, 0, 0.15); }
-
-    .card-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2.5rem;
-    }
-
-    .project-id {
-        font-family: 'usual', sans-serif;
-        font-weight: 700;
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-    }
-
-    .card-corner {
-        width: 10px; height: 10px;
-        border-top: 1px solid #333;
-        border-right: 1px solid #333;
-        transition: border-color 0.4s ease;
-    }
-
-    .project-card-mini:hover .card-corner {
-        border-color: var(--indi-blue);
-    }
-
-    .project-title {
-        font-family: 'usual', sans-serif;
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        line-height: 1.4;
-        margin-bottom: 2.5rem;
-        text-transform: uppercase;
-        color: #fff;
-        transition: color 0.3s ease;
-    }
-
-    .project-card-mini:hover .project-title {
-        color: var(--indi-blue);
-    }
-
-    .card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .project-loc {
-        font-family: 'usual', sans-serif;
-        font-size: 0.75rem;
-        color: #888;
-        letter-spacing: 0.05em;
-    }
-
-    .view-btn {
-        font-family: 'usual', sans-serif;
-        font-size: 0.65rem;
-        color: var(--indi-blue);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.4s ease;
-    }
-
-    .project-card-mini:hover .view-btn {
-        opacity: 1;
-        transform: translateX(0);
-        text-shadow: none;
-    }
-
-    .card-glow {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        transition: opacity 0.6s ease;
-        pointer-events: none;
-    }
-
-    .project-card-mini:hover .card-glow {
-        opacity: 0.08;
-    }
-
     /* --- RESPONSIVE / BREAKPOINTS SYSTEM --- */
     
     /* BREAKPOINT: 1080px (Desktop Estándar / Tabletas Grandes) */
@@ -911,7 +697,7 @@
         }
 
         .project-overlay-sidebar.active {
-            width: 45% !important;
+            width: 50vw !important;
         }
 
         .project-white-card {
@@ -943,49 +729,71 @@
         }
     }
 
-    /* BREAKPOINT: 720px (Tabletas en Vertical / Teléfonos en Horizontal) */
-    @media (max-width: 720px) {
+    /* BREAKPOINT: 900px (Tabletas en Vertical / Teléfonos en Horizontal) */
+    @media (max-width: 900px) {
+        .projects-page-wrapper {
+            height: 100svh;
+            min-height: 100svh;
+            background: var(--map-bg);
+            overflow: hidden;
+        }
+
         .map-section-premium {
             flex-direction: column;
-            height: auto;
-            min-height: 100vh;
+            height: 100svh !important;
+            min-height: 100svh !important;
+            overflow: hidden;
+            border-bottom: 0;
         }
 
         .map-side {
-            height: 60vh;
+            height: 100svh !important;
+            min-height: 100svh !important;
             width: 100%;
+            overflow: hidden;
+        }
+
+        #projectsMap {
+            height: 100% !important;
+            min-height: 100svh;
         }
 
         .map-titles-overlay {
-            top: 100px;
-            left: 5%;
-            width: 90%;
+            top: 8.2rem;
+            left: 1rem;
+            right: 1rem;
+            width: auto;
+            max-width: 20rem;
         }
 
         .map-titles-overlay h1 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            font-size: clamp(1.65rem, 8vw, 2.15rem);
+            line-height: 0.95;
+            margin-bottom: 0.55rem;
+            color: var(--indi-blue);
+            text-shadow: 0 1px 0 rgba(255,255,255,0.75);
         }
 
         .hero-subtitle {
-            font-size: 0.75rem;
-            max-width: 380px;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.68rem;
+            max-width: 15rem;
+            line-height: 1.35;
+            letter-spacing: 0.08em;
+            color: rgba(0, 0, 0, 0.54);
         }
 
         .map-controls-overlay {
-            bottom: 20px;
-            left: 2%;
-            width: 96%;
-            gap: 0.75rem;
+            bottom: calc(env(safe-area-inset-bottom, 0px) + 0.85rem);
+            left: 1rem !important;
+            right: 1rem !important;
+            width: auto !important;
+            gap: 0.65rem;
         }
 
         .project-search-container {
             width: 100%;
             max-width: none;
-            min-height: 48px;
+            min-height: 46px;
             padding: 0 1rem;
         }
 
@@ -996,20 +804,54 @@
 
         .filter-container-blue {
             clip-path: none;
-            border-radius: 4px;
+            border-radius: 0;
+            display: flex;
             overflow-x: auto;
+            overflow-y: hidden;
             white-space: nowrap;
             justify-content: flex-start;
-            padding: 0 1rem;
-            height: 48px;
+            gap: 0.35rem;
+            padding: 0 0.75rem;
+            height: 46px;
             width: 100%;
+            max-width: 100%;
+            scroll-snap-type: x proximity;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            touch-action: pan-x;
+        }
+
+        .filter-container-blue::-webkit-scrollbar {
+            display: none;
         }
 
         .filter-link {
-            padding: 0 0.8rem;
-            font-size: 0.65rem;
+            flex: 0 0 auto;
+            min-width: clamp(86px, 27vw, 132px);
+            max-width: 148px;
+            padding: 0 0.7rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.05em;
             display: inline-flex;
-            flex-shrink: 0;
+            height: 100%;
+            text-align: center;
+            line-height: 1.05;
+            white-space: normal;
+            overflow-wrap: normal;
+            word-break: normal;
+            scroll-snap-align: start;
+        }
+
+        .filter-link .f-text {
+            display: block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hud-bottom-right,
+        .map-scanner-line {
+            display: none;
         }
 
         /* Sidebar Overlay transitions bottom-to-top */
@@ -1054,49 +896,31 @@
             font-size: 1.2rem;
         }
 
-        .projects-list-section {
-            padding: 6rem 0;
-        }
-
-        .list-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .list-count {
-            text-align: left;
-        }
-
-        .projects-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-        
-        .project-card-mini {
-            padding: 2.5rem 2rem;
-            min-height: 220px;
-        }
     }
 
     /* BREAKPOINT: 500px (Teléfonos Móviles en Vertical) */
     @media (max-width: 500px) {
         .map-side {
-            height: 50vh;
+            height: 100svh !important;
+            min-height: 100svh !important;
+        }
+
+        #projectsMap {
+            min-height: 100svh;
         }
 
         .map-titles-overlay {
-            top: 75px;
+            top: 8.75rem;
+            max-width: 18rem;
         }
 
         .map-titles-overlay h1 {
-            font-size: 1.8rem;
+            font-size: clamp(1.45rem, 9vw, 1.9rem);
+            margin-bottom: 0;
         }
 
         .hero-subtitle {
-            font-size: 0.65rem;
-            max-width: 280px;
+            display: none;
         }
 
         .project-search-container {
@@ -1105,7 +929,22 @@
         }
 
         .project-search-input-wrapper input {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.02em;
+        }
+
+        .filter-link {
+            min-width: clamp(78px, 31vw, 112px);
+            max-width: 118px;
+            font-size: 0.54rem;
+            padding: 0 0.55rem;
+            letter-spacing: 0.035em;
+        }
+
+        .filter-container-blue {
+            height: 44px;
+            gap: 0.25rem;
+            padding: 0 0.55rem;
         }
 
         .project-overlay-sidebar {
@@ -1146,36 +985,38 @@
             right: 1rem;
         }
 
-        .count-num {
-            font-size: 2.5rem;
-        }
-
-        .project-title {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-        }
     }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const projects = @json($projects);
+        const defaultMapCenter = [23.6345, -102.5528];
+        const isCompactMap = () => window.matchMedia('(max-width: 900px)').matches;
+        const getBaseZoom = () => isCompactMap() ? 4 : 5;
         
         // Initialize Map
         const map = L.map('projectsMap', {
-            center: [23.6345, -102.5528],
-            zoom: 5,
+            center: defaultMapCenter,
+            zoom: getBaseZoom(),
+            zoomSnap: 0.25,
             zoomControl: false,
             attributionControl: false
         });
 
-        // Fix for Leaflet loading at a quarter size due to container CSS resolving late
-        setTimeout(() => {
-            map.invalidateSize();
-        }, 400);
+        const invalidateProjectMap = () => {
+            window.requestAnimationFrame(() => map.invalidateSize(false));
+        };
+
+        // Fix for Leaflet loading before responsive container dimensions settle.
+        setTimeout(invalidateProjectMap, 100);
+        setTimeout(invalidateProjectMap, 450);
+        setTimeout(invalidateProjectMap, 900);
+        window.addEventListener('resize', invalidateProjectMap);
+        window.addEventListener('orientationchange', () => setTimeout(invalidateProjectMap, 300));
 
         // Custom attribution (minimalist)
-        L.control.attribution({position: 'bottomleft'}).setPrefix('GRUPO INDI OSINT-MAP').addTo(map);
+        L.control.attribution({position: 'bottomleft'}).setPrefix('INDI OSINT-MAP').addTo(map);
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; CartoDB',
@@ -1192,6 +1033,28 @@
         });
 
         const markerGroup = L.featureGroup().addTo(map);
+
+        function getMapPaddingOptions(isOverlayActive = false) {
+            if (isCompactMap()) {
+                return isOverlayActive
+                    ? { paddingTopLeft: [24, 130], paddingBottomRight: [24, Math.min(window.innerHeight * 0.48, 360)] }
+                    : { paddingTopLeft: [24, 145], paddingBottomRight: [24, 180] };
+            }
+
+            return isOverlayActive
+                ? { paddingTopLeft: [50, 50], paddingBottomRight: [window.innerWidth * 0.52, 50] }
+                : { padding: [100, 100] };
+        }
+
+        function fitVisibleMarkers() {
+            if (markerGroup.getLayers().length === 0) return;
+
+            const isOverlayActive = document.getElementById('projectOverlay').classList.contains('active');
+
+            try {
+                map.fitBounds(markerGroup.getBounds(), getMapPaddingOptions(isOverlayActive));
+            } catch(e) {}
+        }
 
         function showProject(project) {
             const overlay = document.getElementById('projectOverlay');
@@ -1252,12 +1115,15 @@
             }
 
             overlay.classList.add('active');
+            setTimeout(invalidateProjectMap, 120);
             
-            // Map camera update: Offset marker to the left side
-            const zoom = 12;
+            // Map camera update: desktop offsets for side panel; mobile keeps the marker visible above bottom sheet.
+            const zoom = isCompactMap() ? 8 : 12;
             const markerPoint = map.project([project.latitude, project.longitude], zoom);
-            // Shift the center coordinates to the right, pushing the marker to the left
-            const targetPoint = L.point(markerPoint.x + 225, markerPoint.y);
+            const overlayWidth = overlay.getBoundingClientRect().width || (window.innerWidth * 0.5);
+            const targetPoint = isCompactMap()
+                ? markerPoint
+                : L.point(markerPoint.x + (overlayWidth / 2), markerPoint.y);
             const targetLatLng = map.unproject(targetPoint, zoom);
 
             map.flyTo(targetLatLng, zoom, {
@@ -1270,8 +1136,12 @@
             const overlay = document.getElementById('projectOverlay');
             overlay.classList.remove('active');
             setTimeout(() => {
-                map.invalidateSize();
-                map.setZoom(5);
+                invalidateProjectMap();
+                if (markerGroup.getLayers().length > 0) {
+                    fitVisibleMarkers();
+                } else {
+                    map.setView(defaultMapCenter, getBaseZoom());
+                }
             }, 600);
         });
 
@@ -1302,6 +1172,16 @@
                 .on('click', () => showProject(project));
             
             markerMap.set(project.id, marker);
+        });
+
+        setTimeout(fitVisibleMarkers, 700);
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                invalidateProjectMap();
+                if (!document.getElementById('projectOverlay').classList.contains('active')) {
+                    fitVisibleMarkers();
+                }
+            }, 220);
         });
 
         // Filtering Logic with Notch Animation
@@ -1379,36 +1259,7 @@
                 }
             });
 
-            // Filter Cards (mini grid)
-            document.querySelectorAll('.project-card-mini').forEach(card => {
-                const id = card.getAttribute('data-id');
-                const project = projects.find(p => p.id == id);
-                
-                const matchesCategory = (category === 'all' || card.getAttribute('data-category') == category);
-                const matchesSearch = project && projectMatchesSearch(project, searchTerm);
-
-                if (matchesCategory && matchesSearch) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Update Counter
-            const countEl = document.getElementById('projectCount');
-            if(countEl) countEl.innerText = visibleCount;
-
-            // Fit map bounds if there are markers
-            if (markerGroup.getLayers().length > 0) {
-                const isOverlayActive = document.getElementById('projectOverlay').classList.contains('active');
-                const paddingOptions = isOverlayActive ? 
-                    { paddingTopLeft: [50, 50], paddingBottomRight: [window.innerWidth * 0.45, 50] } : 
-                    { padding: [100, 100] };
-                
-                try {
-                    map.fitBounds(markerGroup.getBounds(), paddingOptions);
-                } catch(e) {}
-            }
+            fitVisibleMarkers();
         }
 
         searchInput.addEventListener('input', applyFilters);
@@ -1421,20 +1272,9 @@
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 updateFilterNotch(btn);
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 
                 applyFilters();
-            });
-        });
-
-        // Card clicks
-        document.querySelectorAll('.project-card-mini').forEach(card => {
-            card.addEventListener('click', () => {
-                const id = card.getAttribute('data-id');
-                const project = projects.find(p => p.id == id);
-                if (project) {
-                    showProject(project);
-                    window.scrollTo({ top: document.querySelector('.map-section-premium').offsetTop - 50, behavior: 'smooth' });
-                }
             });
         });
 
@@ -1446,22 +1286,6 @@
                 duration: 1.5,
                 ease: "expo.out",
                 stagger: 0.2
-            });
-
-            gsap.from(".reveal-card", {
-                scrollTrigger: {
-                    trigger: ".projects-grid",
-                    start: "top 80%"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: {
-                    amount: 0.8,
-                    grid: "auto",
-                    from: "start"
-                },
-                ease: "power3.out"
             });
         }
     });

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'PRENSA | GRUPO INDI')
+@section('title', 'PRENSA | INDI')
 
 @section('content')
     <!-- Prensa Hero Section -->
     <header class="indi-hero" style="background-image: url('{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
-                {{ \App\Support\CmsText::get('press.title', 'CONOCE LAS ULTIMAS NOTICIAS DE GRUPO INDI') }}
+                {{ \App\Support\CmsText::get('press.title', 'CONOCE LAS ULTIMAS NOTICIAS DE INDI') }}
             </h1>
         </div>
         
@@ -103,7 +103,7 @@
                     @if(!$featured)
                         <div style="grid-column: 1 / -1; text-align: center; padding: 8rem 0; font-family: 'usual', sans-serif; color: #666; width: 100%;">
                             <h3>{{ \App\Support\CmsText::get('press.coming_soon_title', 'PROXIMAMENTE MAS NOTICIAS') }}</h3>
-                            <p style="margin-top: 1rem;">{{ \App\Support\CmsText::get('press.coming_soon_text', 'Estamos preparando nuevos articulos y novedades de Grupo INDI.') }}</p>
+                            <p style="margin-top: 1rem;">{{ \App\Support\CmsText::get('press.coming_soon_text', 'Estamos preparando nuevos articulos y novedades de INDI.') }}</p>
                         </div>
                     @endif
                 @endforelse

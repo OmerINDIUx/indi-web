@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Quejas y Denuncias | GRUPO INDI')
+@section('title', 'Quejas y Denuncias | INDI')
 
 @section('content')
 <div class="indi-section-wrap" style="padding-top: 15rem; min-height: 80vh; background: #f9fafb;">

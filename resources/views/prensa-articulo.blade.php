@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $post->localized_title . ' | GRUPO INDI')
+@section('title', $post->localized_title . ' | INDI')
 
 @section('content')
 <style>
