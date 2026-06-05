@@ -15,12 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $admin = User::query()
+            ->where('email', 'omer.tenahua@grupoindi.com')
+            ->first();
 
-        User::factory()->create([
-            'name' => 'Administrador INDI',
-            'email' => 'admin@grupoindi.com',
-            'password' => bcrypt('AdminINDI2026!'), // Puedes cambiar la contraseña después
-        ]);
+        if (! $admin) {
+            User::query()
+                ->where('email', 'admin@grupoindi.com')
+                ->first()?->delete();
+
+            User::query()->create([
+                'name' => 'Omer Tenahua',
+                'email' => 'omer.tenahua@grupoindi.com',
+                'password' => bcrypt('Zmka6679.'),
+            ]);
+        }
+
+        $this->call(ProjectSeeder::class);
     }
 }
