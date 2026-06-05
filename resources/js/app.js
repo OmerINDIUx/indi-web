@@ -267,11 +267,25 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(selector).forEach((el) => {
             const text = el.innerText;
             el.innerHTML = "";
-            text.split("").forEach((char) => {
-                const span = document.createElement("span");
-                span.innerText = char === " " ? "\u00A0" : char;
-                span.classList.add("char");
-                el.appendChild(span);
+            text.split(/(\s+)/).forEach((part) => {
+                if (!part) return;
+
+                if (/^\s+$/.test(part)) {
+                    el.appendChild(document.createTextNode(" "));
+                    return;
+                }
+
+                const wordSpan = document.createElement("span");
+                wordSpan.classList.add("indi-scroll-word");
+
+                part.split("").forEach((char) => {
+                    const span = document.createElement("span");
+                    span.innerText = char;
+                    span.classList.add("char");
+                    wordSpan.appendChild(span);
+                });
+
+                el.appendChild(wordSpan);
             });
         });
     }
