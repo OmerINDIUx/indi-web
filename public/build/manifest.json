@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-IlL6jqV0.css",
+    "file": "assets/app-BwgBLf_B.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -8,8 +8,17 @@
       "app.css"
     ]
   },
+  "resources/css/logo-menu.css": {
+    "file": "assets/logo-menu-CGdRa5_o.css",
+    "src": "resources/css/logo-menu.css",
+    "isEntry": true,
+    "name": "logo-menu",
+    "names": [
+      "logo-menu.css"
+    ]
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DmlkAstP.js",
+    "file": "assets/app-Buh5L_NE.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

@@ -138,7 +138,7 @@
 /* Visual Layer: Fixed 70% height */
 .visual-layer {
     width: 100%;
-    height: 70vh;
+    height: 66vh;
     background: #fff;
     z-index: 2;
 }
@@ -196,7 +196,7 @@
 
 /* Content Layer: Fixed 30% height (Exactly 30vh) */
 .content-layer {
-    height: 30vh;
+    height: 34vh;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -211,14 +211,15 @@
 
 .unit-info-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.1fr 1.1fr; /* Optimized for symmetrical column height */
-    gap: 4rem;
+    grid-template-columns: minmax(380px, 1.18fr) minmax(260px, 0.91fr) minmax(260px, 0.91fr) !important;
+    gap: clamp(2rem, 4vw, 4rem);
     align-items: center; /* Vertical alignment for a balanced look */
     padding: 2rem 0;
 }
 
 .text-swap-container {
     position: relative;
+    min-width: 0;
 }
 
 .text-unit {
@@ -292,11 +293,14 @@
 
 .unit-main-name {
     font-family: 'usual', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 3.45vw, 3.35rem);
     font-weight: 700;
     color: #000;
     line-height: 1;
     text-transform: uppercase;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
 }
 
 .highlight-unit-1 { color: #ffa608; --unit-color: #ffa608; }
@@ -342,12 +346,17 @@
     }
 
     .unit-info-grid { 
-        grid-template-columns: 1fr; 
-        gap: 1.5rem; 
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-areas:
+            "title"
+            "desc"
+            "detail";
+        gap: 1.25rem; 
         padding: 1.5rem 0;
+        align-items: start;
     }
     .negocios-page .visual-layer {
-        height: clamp(300px, 46svh, 480px) !important;
+        height: clamp(300px, 44svh, 480px) !important;
         min-height: 300px;
         flex: 0 0 auto;
     }
@@ -360,8 +369,21 @@
         overflow: hidden !important;
     }
     .negocios-page .indi-container {
-        width: min(90%, 760px);
-        max-width: min(90%, 760px);
+        width: min(86%, 860px);
+        max-width: min(86%, 860px);
+    }
+    #title-swap {
+        grid-area: title;
+    }
+    #desc-swap {
+        grid-area: desc;
+    }
+    #detail-swap {
+        grid-area: detail;
+    }
+    .negocios-page .unit-main-name {
+        font-size: clamp(2rem, 4.2vw, 2.8rem) !important;
+        line-height: 0.98;
     }
     .text-unit p {
         font-size: clamp(0.9rem, 1.5vw, 1.05rem);
@@ -374,6 +396,49 @@
 
     .trigger {
         height: 0;
+    }
+}
+
+/* Tablet vertical / 900px: preserve the original stage, only arrange text better */
+@media (min-width: 721px) and (max-width: 900px) {
+    .negocios-page .content-layer {
+        flex: 1 1 auto;
+        align-items: flex-start;
+        padding: clamp(2rem, 4vw, 3rem) 0 3.5rem !important;
+        overflow: hidden !important;
+    }
+
+    .negocios-page .indi-container {
+        width: min(86%, 860px);
+        max-width: min(86%, 860px);
+    }
+
+    .negocios-page .unit-info-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+        grid-template-areas:
+            "title title"
+            "desc detail";
+        column-gap: clamp(1.4rem, 3vw, 2.4rem);
+        row-gap: 1.1rem;
+        align-items: start;
+        padding: 0;
+    }
+
+    .negocios-page .unit-index {
+        margin-bottom: 1rem;
+    }
+
+    .negocios-page .unit-main-name {
+        font-size: clamp(2rem, 4.1vw, 2.7rem) !important;
+        line-height: 1;
+        max-width: 760px;
+    }
+
+    .negocios-page .text-unit p {
+        font-size: clamp(0.86rem, 1.35vw, 0.98rem);
+        line-height: 1.55;
+        max-width: 100%;
     }
 }
 
@@ -396,12 +461,17 @@
         overflow: hidden !important;
     }
     .negocios-page .unit-main-name {
-        font-size: clamp(1.65rem, 8vw, 2.35rem) !important;
+        font-size: clamp(1.65rem, 6.9vw, 2.15rem) !important;
         line-height: 1;
         overflow-wrap: normal;
         word-break: normal;
     }
     .negocios-page .unit-info-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-template-areas:
+            "title"
+            "desc"
+            "detail";
         gap: 1rem;
         padding: 0;
     }
@@ -447,7 +517,7 @@
         padding: 0.42rem 0.9rem;
     }
     .negocios-page .unit-main-name {
-        font-size: clamp(1.24rem, 7vw, 1.65rem) !important;
+        font-size: clamp(1.24rem, 6.6vw, 1.62rem) !important;
     }
 
     .negocios-page .unit-info-grid {

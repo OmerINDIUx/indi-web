@@ -368,9 +368,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if (projectCards.length > 0) {
         let mm = gsap.matchMedia();
         mm.add("(min-width: 721px)", () => {
-            ScrollTrigger.create({ trigger: ".projects-layout", start: "top top", end: "bottom bottom", snap: { snapTo: 1 / (projectCards.length - 1), duration: { min: 0.1, max: 0.3 }, delay: 0, ease: "power1.inOut" } });
+            const projectsLayout = document.querySelector(".projects-layout");
+            const getProjectSnapPoints = () => {
+                if (! projectsLayout || projectCards.length < 2) {
+                    return [0];
+                }
+
+                const scrollDistance = Math.max(1, projectsLayout.offsetHeight - window.innerHeight);
+                const fixedMapOffset = window.matchMedia("(max-width: 900px)").matches && mapStage
+                    ? mapStage.offsetHeight + 20
+                    : 0;
+
+                return projectCards.map((card) => Math.min(1, Math.max(0, (card.offsetTop - fixedMapOffset) / scrollDistance)));
+            };
+
+            ScrollTrigger.create({
+                trigger: ".projects-layout",
+                start: "top top",
+                end: "bottom bottom",
+                snap: {
+                    snapTo: (progress) => gsap.utils.snap(getProjectSnapPoints(), progress),
+                    duration: { min: 0.28, max: 0.65 },
+                    delay: 0.04,
+                    ease: "power3.inOut",
+                },
+                invalidateOnRefresh: true,
+            });
         });
-        mm.add("(min-width: 901px)", () => {
+        mm.add("(min-width: 721px)", () => {
             if (! mapStage) {
                 return;
             }
@@ -383,10 +408,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ScrollTrigger.create({
                 trigger: ".projects-layout",
                 start: "top top",
-                end: "bottom bottom",
+                end: () => window.matchMedia("(max-width: 900px)").matches ? "bottom top" : "bottom bottom",
                 onEnter: () => setMapStageState("fixed"),
                 onEnterBack: () => setMapStageState("fixed"),
-                onLeave: () => setMapStageState("bottom"),
+                onLeave: () => setMapStageState(window.matchMedia("(max-width: 900px)").matches ? "top" : "bottom"),
                 onLeaveBack: () => setMapStageState("top"),
                 invalidateOnRefresh: true,
             });
@@ -441,39 +466,55 @@ document.addEventListener("DOMContentLoaded", () => {
         const frameA = document.getElementById("historyFrameA");
         const frameB = document.getElementById("historyFrameB");
         const progressBar = document.getElementById("historyProgressBar");
+        const loader = document.getElementById("historyLoader");
+        const loaderBar = document.getElementById("historyLoaderBar");
+        const loaderPercent = document.getElementById("historyLoaderPercent");
         const milestones = gsap.utils.toArray(".history-milestone");
         const frames = JSON.parse(historySequence.dataset.historyFrames || "[]");
         const frameCache = new Map();
         const frameLayers = [frameA, frameB].filter(Boolean);
+        const preloadRadius = window.matchMedia("(max-width: 720px)").matches ? 6 : 10;
+        const criticalFrameCount = Math.min(frames.length, window.matchMedia("(max-width: 720px)").matches ? 6 : 12);
         let currentFrame = 0;
         let desiredFrame = 0;
         let activeLayer = 0;
-        let idlePreloadIndex = 0;
+        let frameRequest = null;
+        let pendingFrame = 0;
+        let loadedCriticalFrames = 0;
+
+        const updateLoader = () => {
+            if (!loaderBar || !loaderPercent || criticalFrameCount === 0) return;
+
+            const progress = Math.min(100, Math.round((loadedCriticalFrames / criticalFrameCount) * 100));
+            loaderBar.style.width = `${progress}%`;
+            loaderPercent.textContent = `${progress}%`;
+        };
+
+        const hideLoader = () => {
+            loader?.classList.add("is-hidden");
+        };
 
         const preloadFrame = (index) => {
-            if (!frames[index] || frameCache.has(index)) return;
+            if (!frames[index]) return Promise.resolve();
+
+            const cached = frameCache.get(index);
+            if (cached) return cached.promise;
 
             const image = new Image();
             image.decoding = "async";
+            image.loading = "eager";
+
+            const promise = new Promise((resolve) => {
+                const done = () => resolve(image);
+
+                image.addEventListener("load", done, { once: true });
+                image.addEventListener("error", done, { once: true });
+            });
+
             image.src = frames[index];
-            frameCache.set(index, image);
-        };
+            frameCache.set(index, { image, promise });
 
-        const preloadAllFrames = () => {
-            const loadNext = () => {
-                if (idlePreloadIndex >= frames.length) return;
-
-                preloadFrame(idlePreloadIndex);
-                idlePreloadIndex += 1;
-
-                if ("requestIdleCallback" in window) {
-                    window.requestIdleCallback(loadNext, { timeout: 250 });
-                } else {
-                    window.setTimeout(loadNext, 24);
-                }
-            };
-
-            loadNext();
+            return promise;
         };
 
         const showFrame = (index, source) => {
@@ -491,30 +532,55 @@ document.addEventListener("DOMContentLoaded", () => {
             currentFrame = index;
         };
 
+        const preloadNearbyFrames = (index) => {
+            const schedule = (callback) => {
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(callback, { timeout: 180 });
+                } else {
+                    window.setTimeout(callback, 32);
+                }
+            };
+
+            schedule(() => {
+                for (let offset = -preloadRadius; offset <= preloadRadius; offset += 1) {
+                    preloadFrame(index + offset);
+                }
+            });
+        };
+
         const setFrame = (index) => {
             const nextFrame = Math.max(0, Math.min(frames.length - 1, index));
             if (nextFrame === currentFrame || !frames[nextFrame]) return;
             desiredFrame = nextFrame;
 
-            preloadFrame(nextFrame);
-            const cachedFrame = frameCache.get(nextFrame);
-
-            if (cachedFrame?.complete) {
-                showFrame(nextFrame, frames[nextFrame]);
-            } else if (cachedFrame) {
-                cachedFrame.onload = () => showFrame(nextFrame, frames[nextFrame]);
-            }
-
-            for (let offset = -24; offset <= 24; offset += 1) {
-                preloadFrame(nextFrame + offset);
-            }
+            preloadFrame(nextFrame).then(() => showFrame(nextFrame, frames[nextFrame]));
+            preloadNearbyFrames(nextFrame);
         };
 
-        frames.slice(0, 36).forEach((_, index) => {
-            preloadFrame(index);
-            idlePreloadIndex = index + 1;
+        const queueFrame = (index) => {
+            pendingFrame = index;
+            if (frameRequest) return;
+
+            frameRequest = window.requestAnimationFrame(() => {
+                frameRequest = null;
+                setFrame(pendingFrame);
+            });
+        };
+
+        updateLoader();
+        if (criticalFrameCount === 0) {
+            hideLoader();
+        }
+
+        Promise.all(frames.slice(0, criticalFrameCount).map((_, index) => (
+            preloadFrame(index).then(() => {
+                loadedCriticalFrames += 1;
+                updateLoader();
+            })
+        ))).then(() => {
+            hideLoader();
+            preloadNearbyFrames(0);
         });
-        preloadAllFrames();
 
         ScrollTrigger.create({
             trigger: historySequence,
@@ -527,7 +593,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scrub: 0.35,
             onUpdate: (self) => {
                 const index = Math.round(self.progress * (frames.length - 1));
-                setFrame(index);
+                queueFrame(index);
                 if (progressBar) {
                     progressBar.style.width = `${self.progress * 100}%`;
                 }

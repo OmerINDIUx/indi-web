@@ -4,15 +4,21 @@
 
 @php
     $historyFrameDirectory = public_path('imagenes_indi/HISTORIA INDI');
-    $historyFrames = collect(\Illuminate\Support\Facades\File::files($historyFrameDirectory))->filter(function ($file) {
-        return preg_match('/^H-INDI\d+\.png$/', $file->getFilename()) === 1;
-    })->sortBy(function ($file) {
-        preg_match('/(\d+)/', $file->getFilename(), $matches);
+    $historyFrames = \Illuminate\Support\Facades\Cache::remember('history.frames', now()->addDay(), function () use ($historyFrameDirectory) {
+        if (! \Illuminate\Support\Facades\File::isDirectory($historyFrameDirectory)) {
+            return collect();
+        }
 
-        return (int) ($matches[1] ?? 0);
-    })->map(function ($file) {
-        return asset('imagenes_indi/HISTORIA INDI/' . $file->getFilename());
-    })->values();
+        return collect(\Illuminate\Support\Facades\File::files($historyFrameDirectory))->filter(function ($file) {
+            return preg_match('/^H-INDI\d+\.png$/', $file->getFilename()) === 1;
+        })->sortBy(function ($file) {
+            preg_match('/(\d+)/', $file->getFilename(), $matches);
+
+            return (int) ($matches[1] ?? 0);
+        })->map(function ($file) {
+            return asset('imagenes_indi/HISTORIA INDI/' . $file->getFilename());
+        })->values();
+    });
 
     $milestones = [
         [
@@ -46,6 +52,17 @@
 @section('content')
 <section class="history-scroll-sequence" style="--history-milestones: {{ count($milestones) }};" data-history-frames='@json($historyFrames)'>
     <div class="history-sticky-stage">
+        <div class="history-loader" id="historyLoader" aria-live="polite" aria-label="Cargando historia">
+            <div class="history-loader-mark">INDI</div>
+            <div class="history-loader-line">
+                <span id="historyLoaderBar"></span>
+            </div>
+            <div class="history-loader-meta">
+                <span>Cargando historia</span>
+                <strong id="historyLoaderPercent">0%</strong>
+            </div>
+        </div>
+
         <div class="history-frame-wrap">
             <img
                 id="historyFrameA"

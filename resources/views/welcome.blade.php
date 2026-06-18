@@ -193,7 +193,7 @@
 
                 /* Mobile visuals and sticky layouts */
                 .u-visual-mobile {
-                    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%) !important;
+                    clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%) !important;
                     border: 2px solid var(--indi-unit-color) !important;
                     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1), 0 0 5px var(--indi-unit-color) !important;
                     border-radius: 0 !important;
@@ -223,6 +223,22 @@
                     }
                     .unit-box-trigger {
                         padding: 0 5% !important;
+                    }
+                }
+
+                @media (max-width: 900px) {
+                    .unit-box-trigger {
+                        justify-content: flex-start !important;
+                        padding: 3.5rem 5% !important;
+                        scroll-margin-top: 1rem !important;
+                    }
+
+                    .indi-units-module .unit-box-trigger:last-child {
+                        padding-bottom: 5rem !important;
+                    }
+
+                    .u-visual-mobile {
+                        height: clamp(300px, 44vh, 420px) !important;
                     }
                 }
 
@@ -367,7 +383,7 @@
                 </svg>
             </div>
 
-            <div class="projects-layout">
+            <div class="projects-layout" style="--home-project-count: {{ $useDynamicHomeProjects ? $homeProjects->count() : 3 }};">
                 <!-- Left: Sticky Map -->
                 <div class="project-map-stage">
                     <div class="map-wrapper" id="mexicoMapContainer">

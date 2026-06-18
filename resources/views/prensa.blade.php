@@ -245,7 +245,7 @@
     }
 
     .featured-visual.notched-frame {
-        clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%) !important;
+        clip-path: polygon(0 0, 22% 0, 30% 5%, 58% 5%, 66% 0, 100% 0, 100% 100%, 0 100%) !important;
     }
 
     .featured-visual img {
@@ -513,10 +513,21 @@
 
     /* Image frame inside news card */
     .blog-card .indi-card-notch {
+        width: calc(100% + 4rem) !important;
+        max-width: none !important;
+        margin-left: -2rem !important;
+        margin-right: -2rem !important;
         margin-top: 1.5rem !important;
         clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%) !important;
         height: 220px !important;
         border-radius: 0 !important;
+    }
+
+    .blog-card .indi-card-notch img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     /* Responsive adjustments */
