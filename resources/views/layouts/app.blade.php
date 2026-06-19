@@ -9,7 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title', 'INDI')</title>
         <link rel="stylesheet" href="https://use.typekit.net/iyv7knh.css">
-        @vite(['resources/css/app.css', 'resources/css/logo-menu.css', 'resources/js/app.js'])
+        @vite([
+            'resources/css/app.css',
+            'resources/css/logo-menu.css',
+            'resources/js/logo.js',
+            'resources/js/app.js',
+        ])
     </head>
     <body class="antialiased">
         <!-- High-Tech Mechanical Logo Menu -->
