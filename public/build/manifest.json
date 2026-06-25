@@ -1,6 +1,10 @@
 {
+  "_ScrollTrigger-B2uKOqL4.js": {
+    "file": "assets/ScrollTrigger-B2uKOqL4.js",
+    "name": "ScrollTrigger"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-BwgBLf_B.css",
+    "file": "assets/app-CS8gXu7w.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +13,7 @@
     ]
   },
   "resources/css/logo-menu.css": {
-    "file": "assets/logo-menu-xYjRfcJA.css",
+    "file": "assets/logo-menu-CcYi15yR.css",
     "src": "resources/css/logo-menu.css",
     "isEntry": true,
     "name": "logo-menu",
@@ -18,9 +22,21 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Buh5L_NE.js",
+    "file": "assets/app-Cz7EOEDn.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_ScrollTrigger-B2uKOqL4.js"
+    ]
+  },
+  "resources/js/logo.js": {
+    "file": "assets/logo-CswCzWvD.js",
+    "name": "logo",
+    "src": "resources/js/logo.js",
+    "isEntry": true,
+    "imports": [
+      "_ScrollTrigger-B2uKOqL4.js"
+    ]
   }
 }

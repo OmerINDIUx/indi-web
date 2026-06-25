@@ -534,6 +534,11 @@
  * Reduce nuevamente el logo expandido, los espacios y la tipografia.
  */
 @media (max-width: 500px) {
+    :root {
+        /* El logo abierto usa un lienzo de 120px en este rango. */
+        --logo-menu-stack-canvas-height: 120px;
+    }
+
     .logo-menu-wrapper.active {
         gap: 1rem !important;
     }

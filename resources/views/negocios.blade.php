@@ -513,11 +513,12 @@
     }
     .negocios-page .unit-index {
         margin-bottom: 0.65rem;
-        font-size: 0.82rem;
+        font-size: 0.9rem;
         padding: 0.42rem 0.9rem;
     }
     .negocios-page .unit-main-name {
-        font-size: clamp(1.24rem, 6.6vw, 1.62rem) !important;
+        font-size: clamp(1.55rem, 7.6vw, 1.95rem) !important;
+        line-height: 1.04;
     }
 
     .negocios-page .unit-info-grid {
@@ -525,14 +526,28 @@
     }
 
     .negocios-page .text-unit p {
-        font-size: clamp(0.76rem, 3.45vw, 0.88rem);
-        line-height: 1.32;
+        font-size: clamp(0.9rem, 3.9vw, 1rem);
+        line-height: 1.42;
     }
 
     #detail-swap {
         display: block !important;
     }
 
+}
+
+@media (max-width: 420px) {
+    .negocios-page .unit-index {
+        font-size: 0.86rem;
+    }
+
+    .negocios-page .unit-main-name {
+        font-size: clamp(1.5rem, 8.2vw, 1.8rem) !important;
+    }
+
+    .negocios-page .text-unit p {
+        font-size: clamp(0.88rem, 4.1vw, 0.96rem);
+    }
 }
 </style>
 

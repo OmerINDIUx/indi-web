@@ -182,7 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const markers = document.querySelectorAll(".mexico-map-svg .project-marker");
     if (projectCards.length > 0) {
         let mm = gsap.matchMedia();
-        mm.add("(min-width: 721px)", () => {
+        // Keep the same map-above-cards experience at every responsive width.
+        // CSS owns the fluid dimensions; the scroll behavior no longer changes
+        // at the nearby 720/560/500/420px breakpoints.
+        mm.add("(min-width: 0px)", () => {
             const projectsLayout = document.querySelector(".projects-layout");
             const getProjectSnapPoints = () => {
                 if (! projectsLayout || projectCards.length < 2) {
@@ -210,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 invalidateOnRefresh: true,
             });
         });
-        mm.add("(min-width: 721px)", () => {
+        mm.add("(min-width: 0px)", () => {
             if (! mapStage) {
                 return;
             }
@@ -275,38 +278,87 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 11. Historia image-sequence scroll
-    const historySequence = document.querySelector(".history-scroll-sequence");
-    if (historySequence) {
+    const historySequences = gsap.utils.toArray(".history-scroll-sequence");
+    if (historySequences.length) {
+        const orientationNotice = document.getElementById("historyOrientationNotice");
+        const orientationNoticeClose = document.getElementById("historyOrientationNoticeClose");
+        const portraitDevice = window.matchMedia("(max-width: 1024px) and (orientation: portrait)");
+        let orientationNoticeDismissed = false;
+        let orientationNoticeTimer = null;
+
+        const hideOrientationNotice = () => {
+            if (!orientationNotice) return;
+
+            orientationNotice.classList.remove("is-visible");
+            window.setTimeout(() => {
+                orientationNotice.hidden = true;
+            }, 300);
+        };
+
+        const dismissOrientationNotice = () => {
+            orientationNoticeDismissed = true;
+            window.clearTimeout(orientationNoticeTimer);
+            hideOrientationNotice();
+        };
+
+        const syncOrientationNotice = () => {
+            if (!orientationNotice || orientationNoticeDismissed) return;
+
+            if (!portraitDevice.matches) {
+                orientationNotice.hidden = true;
+                orientationNotice.classList.remove("is-visible");
+                return;
+            }
+
+            orientationNotice.hidden = false;
+            window.requestAnimationFrame(() => orientationNotice.classList.add("is-visible"));
+            window.clearTimeout(orientationNoticeTimer);
+            orientationNoticeTimer = window.setTimeout(dismissOrientationNotice, 5000);
+        };
+
+        orientationNoticeClose?.addEventListener("click", dismissOrientationNotice);
+        portraitDevice.addEventListener("change", syncOrientationNotice);
+        syncOrientationNotice();
+    }
+
+    historySequences.forEach((historySequence) => {
         const historyStage = historySequence.querySelector(".history-sticky-stage");
-        const frameA = document.getElementById("historyFrameA");
-        const frameB = document.getElementById("historyFrameB");
-        const progressBar = document.getElementById("historyProgressBar");
-        const loader = document.getElementById("historyLoader");
-        const loaderBar = document.getElementById("historyLoaderBar");
-        const loaderPercent = document.getElementById("historyLoaderPercent");
-        const milestones = gsap.utils.toArray(".history-milestone");
+        const progressBar = historySequence.querySelector(".history-progress span");
+        const loader = historySequence.querySelector(".history-loader");
+        const loaderBar = historySequence.querySelector(".history-loader-line span");
+        const loaderPercent = historySequence.querySelector(".history-loader-meta strong");
+        const milestones = gsap.utils.toArray(historySequence.querySelectorAll(".history-milestone"));
         const frames = JSON.parse(historySequence.dataset.historyFrames || "[]");
         const frameCache = new Map();
-        const frameLayers = [frameA, frameB].filter(Boolean);
-        const preloadRadius = window.matchMedia("(max-width: 720px)").matches ? 6 : 10;
-        const criticalFrameCount = Math.min(frames.length, window.matchMedia("(max-width: 720px)").matches ? 6 : 12);
+        const frameLayers = gsap.utils.toArray(historySequence.querySelectorAll(".history-frame-image"));
+        const totalFrameCount = frames.length;
         let currentFrame = 0;
         let desiredFrame = 0;
         let activeLayer = 0;
         let frameRequest = null;
         let pendingFrame = 0;
-        let loadedCriticalFrames = 0;
+        let loadedFrames = 0;
 
         const updateLoader = () => {
-            if (!loaderBar || !loaderPercent || criticalFrameCount === 0) return;
+            if (!loaderBar || !loaderPercent || totalFrameCount === 0) return;
 
-            const progress = Math.min(100, Math.round((loadedCriticalFrames / criticalFrameCount) * 100));
+            const progress = Math.min(100, Math.round((loadedFrames / totalFrameCount) * 100));
             loaderBar.style.width = `${progress}%`;
             loaderPercent.textContent = `${progress}%`;
         };
 
         const hideLoader = () => {
             loader?.classList.add("is-hidden");
+        };
+
+        const decodeImage = async (image) => {
+            if (!image || !image.complete || !image.naturalWidth) return image;
+
+            if (typeof image.decode === "function") {
+                await image.decode().catch(() => {});
+            }
+
+            return image;
         };
 
         const preloadFrame = (index) => {
@@ -320,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
             image.loading = "eager";
 
             const promise = new Promise((resolve) => {
-                const done = () => resolve(image);
+                const done = () => resolve(decodeImage(image));
 
                 image.addEventListener("load", done, { once: true });
                 image.addEventListener("error", done, { once: true });
@@ -332,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return promise;
         };
 
-        const showFrame = (index, source) => {
+        const showFrame = async (index, source) => {
             if (!frameLayers.length || index === currentFrame || index !== desiredFrame) return;
 
             const nextLayer = activeLayer === 0 ? 1 : 0;
@@ -340,6 +392,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const outgoing = frameLayers[activeLayer];
 
             incoming.src = source;
+            await decodeImage(incoming);
+            if (index !== desiredFrame || !incoming.complete || !incoming.naturalWidth) return;
+
             incoming.classList.add("is-active");
             outgoing.classList.remove("is-active");
 
@@ -347,29 +402,16 @@ document.addEventListener("DOMContentLoaded", () => {
             currentFrame = index;
         };
 
-        const preloadNearbyFrames = (index) => {
-            const schedule = (callback) => {
-                if ("requestIdleCallback" in window) {
-                    window.requestIdleCallback(callback, { timeout: 180 });
-                } else {
-                    window.setTimeout(callback, 32);
-                }
-            };
-
-            schedule(() => {
-                for (let offset = -preloadRadius; offset <= preloadRadius; offset += 1) {
-                    preloadFrame(index + offset);
-                }
-            });
-        };
-
         const setFrame = (index) => {
             const nextFrame = Math.max(0, Math.min(frames.length - 1, index));
             if (nextFrame === currentFrame || !frames[nextFrame]) return;
             desiredFrame = nextFrame;
 
-            preloadFrame(nextFrame).then(() => showFrame(nextFrame, frames[nextFrame]));
-            preloadNearbyFrames(nextFrame);
+            preloadFrame(nextFrame).then((image) => {
+                if (image?.naturalWidth) {
+                    showFrame(nextFrame, frames[nextFrame]);
+                }
+            });
         };
 
         const queueFrame = (index) => {
@@ -383,52 +425,139 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         updateLoader();
-        if (criticalFrameCount === 0) {
+        if (totalFrameCount === 0) {
             hideLoader();
         }
 
-        Promise.all(frames.slice(0, criticalFrameCount).map((_, index) => (
-            preloadFrame(index).then(() => {
-                loadedCriticalFrames += 1;
-                updateLoader();
-            })
-        ))).then(() => {
-            hideLoader();
-            preloadNearbyFrames(0);
-        });
+        const startHistoryAnimation = () => {
+            const syncMilestonePositions = () => {
+                const scrollRange = Math.max(0, historySequence.offsetHeight - window.innerHeight);
+                const frameStep = frames.length > 1 ? scrollRange / (frames.length - 1) : 0;
+                const lastTextFrame = historySequence.dataset.historyLastTextFrame;
+                const lastTextFrameIndex = lastTextFrame
+                    ? frames.findIndex((frame) => frame.includes(lastTextFrame))
+                    : -1;
+                const lastTextFrameOffset = lastTextFrameIndex >= 0
+                    ? lastTextFrameIndex * frameStep
+                    : scrollRange;
 
-        ScrollTrigger.create({
-            trigger: historySequence,
-            start: "top top",
-            end: "bottom bottom",
-            pin: historyStage,
-            pinSpacing: false,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            scrub: 0.35,
-            onUpdate: (self) => {
-                const index = Math.round(self.progress * (frames.length - 1));
-                queueFrame(index);
-                if (progressBar) {
-                    progressBar.style.width = `${self.progress * 100}%`;
-                }
-            },
-        });
+                milestones.forEach((milestone, index) => {
+                    const progress = milestones.length > 1 ? index / (milestones.length - 1) : 0;
+                    const top = lastTextFrameOffset * progress;
+                    milestone.style.setProperty("--history-milestone-top", `${top}px`);
+                });
+            };
 
-        milestones.forEach((milestone) => {
-            gsap.to(milestone, {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
+            syncMilestonePositions();
+
+            ScrollTrigger.create({
+                trigger: historySequence,
+                start: "top top",
+                end: "bottom bottom",
+                pin: historyStage,
+                pinSpacing: false,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                scrub: 0.7,
+                onUpdate: (self) => {
+                    const index = Math.round(self.progress * (frames.length - 1));
+                    queueFrame(index);
+                    if (progressBar) {
+                        progressBar.style.width = `${self.progress * 100}%`;
+                    }
+                },
+            });
+
+            ScrollTrigger.addEventListener("refreshInit", syncMilestonePositions);
+
+            milestones.forEach((milestone) => {
+                gsap.to(milestone, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: milestone,
-                    start: "top 65%",
-                    end: "bottom 42%",
+                    start: "top 45%",
+                    end: "top top",
                     toggleClass: "is-active",
                     scrub: 0.8,
                 },
+                });
             });
+        };
+
+        const preloadAllFrames = async () => {
+            const concurrency = window.matchMedia("(max-width: 720px)").matches ? 3 : 5;
+            let nextFrameIndex = 0;
+
+            const preloadNext = async () => {
+                while (nextFrameIndex < frames.length) {
+                    const frameIndex = nextFrameIndex;
+                    nextFrameIndex += 1;
+                    await preloadFrame(frameIndex);
+                    loadedFrames += 1;
+                    updateLoader();
+                }
+            };
+
+            await Promise.all(Array.from({ length: Math.min(concurrency, frames.length) }, preloadNext));
+        };
+
+        preloadAllFrames().then(() => {
+            hideLoader();
+            startHistoryAnimation();
+            ScrollTrigger.refresh();
         });
-    }
+    });
+
+    const historyTextSequences = gsap.utils.toArray(".history-text-sequence");
+    historyTextSequences.forEach((textSequence) => {
+        const textStage = textSequence.querySelector(".history-text-stage");
+        const textProgress = textSequence.querySelector(".history-text-stage__progress span");
+        const textPanels = gsap.utils.toArray(textSequence.querySelectorAll(".history-text-panel"));
+
+        if (!textStage || !textPanels.length) return;
+
+        const renderTimeline = (progress) => {
+            const activeIndex = progress * Math.max(0, textPanels.length - 1);
+            const spacing = window.matchMedia("(max-width: 720px)").matches ? window.innerWidth * 0.72 : window.innerWidth * 0.34;
+
+            textPanels.forEach((panel, index) => {
+                const distance = index - activeIndex;
+                const opacity = Math.max(0.2, 1 - (Math.abs(distance) * 0.8));
+                const scale = Math.max(0.86, 1 - (Math.abs(distance) * 0.08));
+
+                panel.classList.toggle("is-active", Math.abs(distance) < 0.5);
+                gsap.set(panel, {
+                    x: distance * spacing,
+                    yPercent: -50,
+                    xPercent: -50,
+                    opacity,
+                    scale,
+                    zIndex: Math.round(100 - Math.abs(distance) * 10),
+                });
+            });
+        };
+
+        renderTimeline(0);
+
+        ScrollTrigger.create({
+            trigger: textSequence,
+            start: "top top",
+            end: "bottom bottom",
+            pin: textStage,
+            pinSpacing: false,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            scrub: 0.6,
+            onUpdate: (self) => {
+                renderTimeline(self.progress);
+                if (textProgress) {
+                    textProgress.style.width = `${self.progress * 100}%`;
+                }
+            },
+            onRefresh: (self) => renderTimeline(self.progress),
+        });
+    });
 });

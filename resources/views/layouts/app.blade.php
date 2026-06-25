@@ -105,55 +105,55 @@
             </section>
 
             <!-- Part 2: Dark Bottom Footer -->
-            <div style="background: #000; padding: 10rem 0 4rem; border-top: 1px solid #1a1a1a;">
+            <div class="footer-lower">
                 <div class="indi-container">
-                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6rem;">
-                        
+                    <div class="footer-lower-inner">
+
                         <!-- Documentation & Key Links -->
-                        <div style="display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;">
-                            <a href="{{ route('brochure') }}" class="footer-doc-btn">
-                                <span class="doc-icon">↗</span>
+                        <nav class="footer-docs-grid" aria-label="Enlaces importantes">
+                            <a href="{{ route('brochure') }}" class="footer-doc-btn footer-doc-btn--brochure">
+                                <span class="doc-icon" aria-hidden="true">↗</span>
                                 <div class="doc-meta">
                                     <span class="doc-label">{{ \App\Support\CmsText::get('footer.view', 'VER') }}</span>
                                     <span class="doc-name">{{ \App\Support\CmsText::get('footer.brochure', 'BROCHURE INTERACTIVO') }}</span>
                                 </div>
                             </a>
-                            
-                            <a href="{{ route('etica') }}" class="footer-doc-btn">
-                                <span class="doc-icon">↗</span>
+
+                            <a href="{{ route('etica') }}" class="footer-doc-btn footer-doc-btn--ethics">
+                                <span class="doc-icon" aria-hidden="true">↗</span>
                                 <div class="doc-meta">
                                     <span class="doc-label">{{ \App\Support\CmsText::get('footer.view', 'VER') }}</span>
                                     <span class="doc-name">{{ \App\Support\CmsText::get('footer.ethics', 'CODIGO DE ETICA 2025') }}</span>
                                 </div>
                             </a>
 
-                            <a href="{{ route('talento.create') }}" class="footer-doc-btn" style="border-color: #0066f9;">
-                                <span class="doc-icon" style="color: #0066f9;">↗</span>
+                            <a href="{{ route('talento.create') }}" class="footer-doc-btn footer-doc-btn--talent">
+                                <span class="doc-icon" aria-hidden="true">↗</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label" style="color: #0066f9;">{{ \App\Support\CmsText::get('footer.hr', 'RECURSOS HUMANOS') }}</span>
+                                    <span class="doc-label">{{ \App\Support\CmsText::get('footer.hr', 'RECURSOS HUMANOS') }}</span>
                                     <span class="doc-name">{{ \App\Support\CmsText::get('footer.talent', 'BUSCAMOS TALENTO') }}</span>
                                 </div>
                             </a>
 
-                            <a href="{{ route('quejas.create') }}" class="footer-doc-btn" style="border-color: #e74c3c;">
-                                <span class="doc-icon" style="color: #e74c3c;">!</span>
+                            <a href="{{ route('quejas.create') }}" class="footer-doc-btn footer-doc-btn--complaints">
+                                <span class="doc-icon" aria-hidden="true">!</span>
                                 <div class="doc-meta">
-                                    <span class="doc-label" style="color: #e74c3c;">{{ \App\Support\CmsText::get('footer.transparency', 'TRANSPARENCIA') }}</span>
+                                    <span class="doc-label">{{ \App\Support\CmsText::get('footer.transparency', 'TRANSPARENCIA') }}</span>
                                     <span class="doc-name">{{ \App\Support\CmsText::get('footer.complaints', 'QUEJAS Y DENUNCIAS') }}</span>
                                 </div>
                             </a>
-                        </div>
+                        </nav>
 
                         <!-- Social Networks -->
-                        <div style="display: flex; gap: 4rem; align-items: center;">
-                            <a href="https://mx.linkedin.com/company/grupo-indi" target="_blank" class="social-link">LINΚΞDIN</a>
-                            <a href="https://www.facebook.com/IndiGrupo" target="_blank" class="social-link">FΛCΞBOOΚ</a>
-                            <a href="https://www.instagram.com/grupoindi" target="_blank" class="social-link">INSTΛGRΛM</a>
-                        </div>
+                        <nav class="footer-social-row" aria-label="Redes sociales">
+                            <a href="https://mx.linkedin.com/company/grupo-indi" target="_blank" rel="noopener noreferrer" class="social-link">LINKEDIN</a>
+                            <a href="https://www.facebook.com/IndiGrupo" target="_blank" rel="noopener noreferrer" class="social-link">FACEBOOK</a>
+                            <a href="https://www.instagram.com/grupoindi" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+                        </nav>
 
                         <!-- Simplified Bottom Bar -->
                         <div class="footer-bottom-bar">
-                            <span>&copy; {{ date('Y') }} INDI — SISTEMΛS WG-INDI</span>
+                            <span>&copy; {{ date('Y') }} INDI - SISTEMAS WG-INDI</span>
                             <div class="legal-links">
                                 <a href="{{ route('login') }}">CMS LOGIN</a>
                                 <a href="#">{{ \App\Support\CmsText::get('footer.privacy', 'AVISO DE PRIVACIDAD') }}</a>
@@ -297,82 +297,6 @@
                 opacity: 0.15;
             }
 
-            /* Previous styles updated for documentation row */
-            .footer-docs-row {
-                display: flex;
-                gap: 3rem;
-                flex-wrap: wrap;
-                justify-content: center;
-                padding-top: 6rem;
-                border-top: 1px solid #1a1a1a;
-                margin-bottom: 6rem;
-            }
-
-            .footer-doc-btn {
-                display: flex;
-                align-items: center;
-                gap: 1.5rem;
-                padding: 1.5rem 2.5rem;
-                border: 1px solid #222;
-                color: white;
-                text-decoration: none;
-                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            .footer-social-row {
-                display: flex;
-                gap: 4rem;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 6rem;
-            }
-
-            .footer-bottom-bar {
-                width: 100%;
-                border-top: 1px solid #333;
-                padding-top: 4rem;
-                margin-top: 4rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                color: #9ca3af;
-                font-size: 0.85rem;
-                font-family: 'usual', sans-serif;
-                font-weight: 500;
-                letter-spacing: 0.05em;
-            }
-
-            .legal-links {
-                display: flex;
-                gap: 2rem;
-                font-family: 'usual', sans-serif;
-            }
-
-            .legal-links a { 
-                color: inherit; 
-                text-decoration: none; 
-                transition: color 0.3s ease;
-            }
-
-            .legal-links a:hover {
-                color: #ffffff;
-            }
-
-            .social-link {
-                font-family: 'usual', sans-serif;
-                color: #666;
-                text-decoration: none;
-                font-size: 0.8rem;
-                font-weight: 700;
-                letter-spacing: 0.2em;
-                transition: all 0.3s ease;
-            }
-
-            .footer-doc-btn:hover { background: white; color: black; border-color: white; transform: translateY(-5px); }
-            .doc-label { font-family: 'usual', sans-serif; font-size: 0.6rem; color: #0066f9; letter-spacing: 0.2em; margin-bottom: 0.2rem; }
-            .doc-name { font-family: 'usual', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
-            .social-link:hover { color: white; letter-spacing: 0.3em; }
-
             /* ----- RESOLUCIONES RESPONSIVAS ----- */
             @media (max-width: 1080px) {
                 .footer-corporate-grid { grid-template-columns: 1fr; gap: 4rem; }
@@ -383,11 +307,7 @@
             
             @media (max-width: 720px) {
                 #contacto { padding: 6rem 0; }
-                .footer-docs-row { flex-direction: column; align-items: stretch; gap: 1.5rem; padding-top: 4rem; margin-bottom: 4rem; }
-                .footer-doc-btn { justify-content: center; }
-                .footer-social-row { flex-wrap: wrap; gap: 2rem; }
                 .contact-big-phone { font-size: 2rem; margin-bottom: 2rem; }
-                .footer-bottom-bar { flex-direction: column; gap: 1.5rem; text-align: center; }
                 .iso-logos img { height: 75px; }
             }
             
