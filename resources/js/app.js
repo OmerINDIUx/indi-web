@@ -280,11 +280,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // 11. Historia image-sequence scroll
     const historySequences = gsap.utils.toArray(".history-scroll-sequence");
     if (historySequences.length) {
+        const historyPageProgress = document.querySelector(".history-page-progress span");
         const orientationNotice = document.getElementById("historyOrientationNotice");
         const orientationNoticeClose = document.getElementById("historyOrientationNoticeClose");
         const portraitDevice = window.matchMedia("(max-width: 1024px) and (orientation: portrait)");
         let orientationNoticeDismissed = false;
         let orientationNoticeTimer = null;
+
+        if (historyPageProgress) {
+            ScrollTrigger.create({
+                start: 0,
+                end: () => ScrollTrigger.maxScroll(window),
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    historyPageProgress.style.width = `${self.progress * 100}%`;
+                },
+            });
+        }
 
         const hideOrientationNotice = () => {
             if (!orientationNotice) return;
@@ -323,7 +335,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     historySequences.forEach((historySequence) => {
         const historyStage = historySequence.querySelector(".history-sticky-stage");
-        const progressBar = historySequence.querySelector(".history-progress span");
         const loader = historySequence.querySelector(".history-loader");
         const loaderBar = historySequence.querySelector(".history-loader-line span");
         const loaderPercent = historySequence.querySelector(".history-loader-meta strong");
@@ -462,9 +473,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 onUpdate: (self) => {
                     const index = Math.round(self.progress * (frames.length - 1));
                     queueFrame(index);
-                    if (progressBar) {
-                        progressBar.style.width = `${self.progress * 100}%`;
-                    }
                 },
             });
 
@@ -514,18 +522,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const historyTextSequences = gsap.utils.toArray(".history-text-sequence");
     historyTextSequences.forEach((textSequence) => {
         const textStage = textSequence.querySelector(".history-text-stage");
-        const textProgress = textSequence.querySelector(".history-text-stage__progress span");
         const textPanels = gsap.utils.toArray(textSequence.querySelectorAll(".history-text-panel"));
 
         if (!textStage || !textPanels.length) return;
 
         const renderTimeline = (progress) => {
             const activeIndex = progress * Math.max(0, textPanels.length - 1);
-            const spacing = window.matchMedia("(max-width: 720px)").matches ? window.innerWidth * 0.72 : window.innerWidth * 0.34;
+            const spacing = window.matchMedia("(max-width: 720px)").matches ? window.innerWidth * 0.78 : window.innerWidth * 0.36;
 
             textPanels.forEach((panel, index) => {
                 const distance = index - activeIndex;
-                const opacity = Math.max(0.2, 1 - (Math.abs(distance) * 0.8));
+                const opacity = Math.max(0.12, 1 - (Math.abs(distance) * 0.86));
                 const scale = Math.max(0.86, 1 - (Math.abs(distance) * 0.08));
 
                 panel.classList.toggle("is-active", Math.abs(distance) < 0.5);
@@ -553,9 +560,6 @@ document.addEventListener("DOMContentLoaded", () => {
             scrub: 0.6,
             onUpdate: (self) => {
                 renderTimeline(self.progress);
-                if (textProgress) {
-                    textProgress.style.width = `${self.progress * 100}%`;
-                }
             },
             onRefresh: (self) => renderTimeline(self.progress),
         });

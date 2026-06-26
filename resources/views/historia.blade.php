@@ -156,6 +156,10 @@
     </div>
 </aside>
 
+<div class="history-page-progress" aria-hidden="true">
+    <span></span>
+</div>
+
 @foreach($historySections as $index => $section)
     <section
         class="history-scroll-sequence"
@@ -202,10 +206,6 @@
                 <span>{{ $section['eyebrow'] }}</span>
                 <h1>{{ $section['title'] }}</h1>
             </div>
-
-            <div class="history-progress" aria-hidden="true">
-                <span></span>
-            </div>
         </div>
 
         <div class="history-copy-track">
@@ -222,6 +222,10 @@
     @if($index === 0)
         <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocks) }};" aria-label="Historia sin fotografias">
             <div class="history-text-stage">
+                <div class="history-text-heading">
+                    <span>INDI</span>
+                    <h2>Otra parte de la historia</h2>
+                </div>
                 <div class="history-text-track">
                     @foreach($historyTextBlocks as $block)
                         <article class="history-text-panel">
@@ -230,9 +234,6 @@
                             <p>{{ $block['text'] }}</p>
                         </article>
                     @endforeach
-                </div>
-                <div class="history-text-stage__progress" aria-hidden="true">
-                    <span></span>
                 </div>
             </div>
         </section>
