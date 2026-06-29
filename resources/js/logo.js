@@ -42,7 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
         let autoCollapseTimer;
         let resizeFrame;
         const logoCanvas = logoMenu.querySelector(".logo-svg-wrapper");
+        const logoFillTargets = logoMenu.querySelectorAll(".logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1");
         const hasMechanicalLogo = Boolean(document.querySelector(".logo-part") && document.querySelector(".part-bottom"));
+
+        const animateLogoFill = (fill) => {
+            if (!logoFillTargets.length) return;
+
+            gsap.to(logoFillTargets, { fill, duration: 0.3 });
+        };
 
         /* Estado inicial para la variante mecanica, cuando existe en la vista. */
         if (hasMechanicalLogo) {
@@ -145,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 /* El menu siempre se abre con el logo en su escala normal. */
                 gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.4, overwrite: true });
-                gsap.to(".logo-svg-wrapper .cls-1", { fill: "#0066FF", duration: 0.3 });
+                animateLogoFill("#0066FF");
 
                 const tl = gsap.timeline();
                 if (hasMechanicalLogo) {
@@ -176,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     onComplete: () => {
                         menuLinks.classList.remove("active");
                         logoMenu.classList.remove("active");
-                        gsap.to(".logo-svg-wrapper .cls-1", { fill: "#ffffff", duration: 0.3 });
+                        animateLogoFill("#ffffff");
                         /* Recupera la reduccion si el usuario sigue debajo del umbral. */
                         if (isCollided) updateLogoVisuals(true);
                     }
@@ -206,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.5, ease: "power2.out" });
                     gsap.to(".part-bottom", { marginLeft: 10, y: 0, duration: 0.6, ease: "elastic.out(1, 0.8)" });
                 }
-                gsap.to(".logo-svg-wrapper .cls-1", { fill: "#0066FF", duration: 0.3 });
+                animateLogoFill("#0066FF");
             }
         });
 
@@ -220,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
                     gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
                 }
-                gsap.to(".logo-svg-wrapper .cls-1", { fill: "#ffffff", duration: 0.3 });
+                animateLogoFill("#ffffff");
             }
         });
 
