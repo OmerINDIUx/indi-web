@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    overflow: hidden;
+}
+
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at 30% 50%, rgba(0, 102, 249, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 30%, rgba(0, 102, 249, 0.04) 0%, transparent 50%),
+        #050505;
+}
+
+.hero-logo {
+    width: 160px;
+    height: 230px;
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+.hero-logo svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.hero-logo .logo-fill {
+    fill: #0066f9;
+}
