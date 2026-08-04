@@ -5,7 +5,7 @@
 @php
     $getHistoryFrames = function (string $directoryName) {
         $historyFrameDirectory = public_path('imagenes_indi/' . $directoryName);
-        $cacheKey = 'history.frames.' . \Illuminate\Support\Str::slug($directoryName);
+        $cacheKey = 'history.frames.v3.' . \Illuminate\Support\Str::slug($directoryName);
 
         return \Illuminate\Support\Facades\Cache::remember($cacheKey, now()->addDay(), function () use ($historyFrameDirectory, $directoryName) {
             if (! \Illuminate\Support\Facades\File::isDirectory($historyFrameDirectory)) {
@@ -165,7 +165,7 @@
         class="history-scroll-sequence"
         style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 1.8;"
         data-history-frames='@json($section['frames'])'
-        @if($index === 1) data-history-last-text-frame="indi-historia240434" @endif
+        @if($index === 1) data-history-last-text-frame="indi-historia435" @endif
     >
         <div class="history-sticky-stage">
             <div class="history-loader" aria-live="polite" aria-label="Cargando historia">

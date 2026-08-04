@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const done = () => resolve(decodeImage(image));
 
                 image.addEventListener("load", done, { once: true });
-                image.addEventListener("error", done, { once: true });
+                image.addEventListener("error", () => resolve(null), { once: true });
             });
 
             image.src = frames[index];
@@ -421,6 +421,12 @@ document.addEventListener("DOMContentLoaded", () => {
             preloadFrame(nextFrame).then((image) => {
                 if (image?.naturalWidth) {
                     showFrame(nextFrame, frames[nextFrame]);
+                    return;
+                }
+
+                // Skip stale cache entries or deleted files instead of freezing the sequence.
+                if (nextFrame === desiredFrame && nextFrame < frames.length - 1) {
+                    setFrame(nextFrame + 1);
                 }
             });
         };

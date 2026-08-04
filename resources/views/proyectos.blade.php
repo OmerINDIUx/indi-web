@@ -80,10 +80,6 @@
                         <span class="stat-value" id="overlayAddress">Address</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
-                        <span class="stat-value" id="overlayStatus">COMPLETΛDO</span>
-                    </div>
-                    <div class="stat-item">
                         <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
                         <span class="stat-value" id="overlayType">INFRΛESTRUCTURΛ</span>
                     </div>
@@ -534,7 +530,7 @@
         width: 100%;
         height: 100%;
         background: var(--indi-gray);
-        padding: 4.5rem;
+        padding: 2.5rem 3rem 0;
         display: flex;
         flex-direction: column;
         position: relative;
@@ -561,21 +557,23 @@
         font-weight: 700;
         font-size: clamp(1.6rem, 3vw, 2.5rem);
         line-height: 1.1;
-        margin-top: 1.5rem;
-        margin-bottom: 2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1.25rem;
         color: var(--indi-dark);
         text-transform: uppercase;
         letter-spacing: 0.08em;
+        flex: 0 0 auto;
+        overflow-wrap: anywhere;
     }
 
     .project-overlay-sidebar .project-stats-grid {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         border-top: 1px solid var(--indi-border);
         border-bottom: 2px solid var(--indi-blue);
-        margin-bottom: 2.5rem;
-        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        padding: 1.25rem 0;
         gap: 1rem;
     }
 
@@ -585,6 +583,7 @@
         align-items: flex-start;
         border-right: 1px solid var(--indi-border);
         padding-left: 0.8rem;
+        min-width: 0;
     }
 
     .project-overlay-sidebar .stat-item:first-child {
@@ -613,21 +612,27 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
         line-height: 1.2;
+        overflow-wrap: anywhere;
     }
 
     .project-overlay-sidebar .project-description {
         font-size: clamp(0.95rem, 1.8vw, 1.15rem);
         line-height: 1.7;
         color: #333;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         font-family: 'usual', sans-serif;
         font-weight: 400;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-wrap: anywhere;
     }
 
     .project-overlay-sidebar .project-visual-notched {
         width: calc(100% + 9rem);
-        margin: 0 -4.5rem;
-        height: 45vh;
+        margin: 0 -3rem;
+        height: clamp(180px, 27vh, 300px);
+        flex: 0 0 clamp(180px, 27vh, 300px);
         margin-top: auto;
         clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%);
         overflow: hidden;
@@ -701,7 +706,7 @@
         }
 
         .project-white-card {
-            padding: 3rem 2rem;
+            padding: 2rem 2rem 0;
         }
 
         .project-overlay-sidebar .project-stats-grid {
@@ -725,7 +730,8 @@
         .project-overlay-sidebar .project-visual-notched {
             margin: 0 -2rem;
             width: calc(100% + 4rem);
-            height: 38vh;
+            height: clamp(180px, 26vh, 280px);
+            flex-basis: clamp(180px, 26vh, 280px);
         }
     }
 
@@ -873,12 +879,12 @@
         }
 
         .project-white-card {
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem 0;
             display: block; /* Disables flex column to avoid layout conflicts */
         }
 
         .project-overlay-sidebar .project-stats-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.5rem;
         }
 
@@ -974,10 +980,13 @@
         .project-overlay-sidebar .project-description {
             font-size: 0.88rem;
             margin-bottom: 2rem;
+            max-height: 20vh;
+            overflow-y: auto;
         }
 
         .project-overlay-sidebar .project-visual-notched {
-            height: 30vh;
+            height: 26vh;
+            min-height: 160px;
         }
 
         .close-overlay {
@@ -1089,7 +1098,6 @@
 
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
-            document.getElementById('overlayStatus').innerText = project.status == 1 ? @json(\App\Support\CmsText::get('projects.completed', 'COMPLETADO')) : @json(\App\Support\CmsText::get('projects.in_progress', 'EN PROCESO'));
             document.getElementById('overlayDescription').innerText = project.description || cat.desc;
             
             // Update HUD Coordinates dynamically
