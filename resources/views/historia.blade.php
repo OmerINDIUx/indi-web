@@ -5,7 +5,7 @@
 @php
     $getHistoryFrames = function (string $directoryName) {
         $historyFrameDirectory = public_path('imagenes_indi/' . $directoryName);
-        $cacheKey = 'history.frames.v3.' . \Illuminate\Support\Str::slug($directoryName);
+        $cacheKey = 'history.frames.v4.' . \Illuminate\Support\Str::slug($directoryName);
 
         return \Illuminate\Support\Facades\Cache::remember($cacheKey, now()->addDay(), function () use ($historyFrameDirectory, $directoryName) {
             if (! \Illuminate\Support\Facades\File::isDirectory($historyFrameDirectory)) {
@@ -55,6 +55,11 @@
                     'title' => 'Terminal Portuaria de Michoacán',
                     'text' => 'Construimos la Terminal Portuaria de Michoacán, fortaleciendo la infraestructura logística del país.',
                 ],
+                [
+                    'year' => '2009',
+                    'title' => 'Puente de rodamiento aeronáutico ASUR Cancún',
+                    'text' => 'Construimos el puente de rodamiento aeronáutico de ASUR Cancún.',
+                ],
             ],
         ],
         [
@@ -73,9 +78,9 @@
                     'text' => 'Construimos la nueva sede del Senado de la República, obra galardonada como la primera megaestructura en América Latina y presentada en Megaestructuras de National Geographic.',
                 ],
                 [
-                    'year' => '2017',
-                    'title' => 'Circuito Exterior CDMX',
-                    'text' => 'Asumimos la operación y el mantenimiento del Circuito Exterior CDMX.',
+                    'year' => '2016',
+                    'title' => 'Poder Judicial de la Ciudad de México',
+                    'text' => 'Construimos el Poder Judicial de la Ciudad de México.',
                 ],
                 [
                     'year' => '2018',
@@ -88,9 +93,9 @@
                     'text' => 'Participamos en la construcción de las fases 2 y 3 del Puerto de Manzanillo.',
                 ],
                 [
-                    'year' => '2021',
-                    'title' => 'Cablebús Línea 1',
-                    'text' => 'Construimos y pusimos en marcha la primera línea del Cablebús en la Ciudad de México.',
+                    'year' => '2021-2024',
+                    'title' => 'Cablebús Línea 1 y 3',
+                    'text' => 'Construimos y pusimos en marcha las líneas 1 y 3 del Cablebús en la Ciudad de México.',
                 ],
                 [
                     'year' => '2023',
@@ -165,7 +170,7 @@
         class="history-scroll-sequence"
         style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 1.8;"
         data-history-frames='@json($section['frames'])'
-        @if($index === 1) data-history-last-text-frame="indi-historia435" @endif
+        @if($index === 1) data-history-last-text-frame="part2_428" @endif
     >
         <div class="history-sticky-stage">
             <div class="history-loader" aria-live="polite" aria-label="Cargando historia">
