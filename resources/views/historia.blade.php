@@ -5,7 +5,7 @@
 @php
     $getHistoryFrames = function (string $directoryName) {
         $historyFrameDirectory = public_path('imagenes_indi/' . $directoryName);
-        $cacheKey = 'history.frames.v4.' . \Illuminate\Support\Str::slug($directoryName);
+        $cacheKey = 'history.frames.v5.' . \Illuminate\Support\Str::slug($directoryName);
 
         return \Illuminate\Support\Facades\Cache::remember($cacheKey, now()->addDay(), function () use ($historyFrameDirectory, $directoryName) {
             if (! \Illuminate\Support\Facades\File::isDirectory($historyFrameDirectory)) {
@@ -31,9 +31,9 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-1'),
             'milestones' => [
                 [
-                    'year' => '1979',
+                    'year' => '1977 - 1980',
                     'title' => 'INDI inicia operaciones',
-                    'text' => 'Comenzamos construyendo hospitales y obras clave para el desarrollo del país.',
+                    'text' => 'Comenzamos construyendo escuelas, hospitales y obras clave para el desarrollo del país.',
                 ],
                 [
                     'year' => '1994',
@@ -68,19 +68,23 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-2'),
             'milestones' => [
                 [
-                    'year' => '2011',
-                    'title' => 'Mexibús',
-                    'text' => 'Fuimos pioneros en el modelo operativo APP para sistemas BRT.',
-                ],
-                [
-                    'year' => '2011',
+                     'year' => '2010',
                     'title' => 'Senado de la República',
                     'text' => 'Construimos la nueva sede del Senado de la República, obra galardonada como la primera megaestructura en América Latina y presentada en Megaestructuras de National Geographic.',
                 ],
+
                 [
-                    'year' => '2016',
-                    'title' => 'Poder Judicial de la Ciudad de México',
-                    'text' => 'Construimos el Poder Judicial de la Ciudad de México.',
+
+                'year' => '2011',
+                    'title' => 'Mexibús',
+                    'text' => 'Fuimos pioneros en el modelo operativo APP para sistemas BRT.',
+                                    ],
+
+
+                [
+                    'year' => '2014',
+                    'title' => 'Tribunal Superior de Justicia',
+                    'text' => 'Construimos el Tribunal Superior de Justicia de la Ciudad de México.',
                 ],
                 [
                     'year' => '2018',
@@ -133,7 +137,44 @@
             'text' => 'Grupo INDI se convierte en una de las firmas de infraestructura más grandes de México.',
         ],
     ];
-@endphp
+
+    $historyTextBlocksAfterVideo = [
+        [
+            'kicker' => 'Innovación en infraestructura',
+            'title' => '2002',
+            'text' => 'Pioneros en la construcción de autopistas elevadas.',
+        ],
+        [
+            'kicker' => 'Innovación constructiva',
+            'title' => '2008',
+            'text' => 'Pioneros en la implementación de cimentación Top Down, así como en edificaciones inteligentes en México.',
+        ],
+        [
+            'kicker' => 'Reconocimiento internacional',
+            'title' => '2012',
+            'text' => 'Ganadores del premio Deal Of the Year en la categoría Latin America Social Infrastructure.',
+        ],
+        [
+            'kicker' => 'Certificaciones',
+            'title' => '2015',
+            'text' => 'Certificación ISO 9000, 14000 y 18000.',
+        ],
+        [
+            'kicker' => 'Infraestructura portuaria',
+            'title' => '2017',
+            'text' => 'Rompeolas en Isla del Carmen, Campeche.',
+        ],
+        [
+            'kicker' => 'Expansión internacional',
+            'title' => '2020',
+            'text' => 'INDI USA.',
+        ],
+        [
+            'kicker' => 'Responsabilidad social',
+            'title' => '2025',
+            'text' => 'Obtención de Distintivo Empresa Socialmente Responsable.',
+        ],
+    ];@endphp
 
 @section('content')
 <aside
@@ -170,7 +211,7 @@
         class="history-scroll-sequence"
         style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 1.8;"
         data-history-frames='@json($section['frames'])'
-        @if($index === 1) data-history-last-text-frame="part2_428" @endif
+        data-history-last-text-frame="{{ $index === 0 ? 'part1301' : 'part2428' }}"
     >
         <div class="history-sticky-stage">
             <div class="history-loader" aria-live="polite" aria-label="Cargando historia">
@@ -233,6 +274,26 @@
                 </div>
                 <div class="history-text-track">
                     @foreach($historyTextBlocks as $block)
+                        <article class="history-text-panel">
+                            <span>{{ $block['kicker'] }}</span>
+                            <h2>{{ $block['title'] }}</h2>
+                            <p>{{ $block['text'] }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if($index === 1)
+        <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocksAfterVideo) }};" aria-label="Continuación de la historia">
+            <div class="history-text-stage">
+                <div class="history-text-heading">
+                    <span>INDI</span>
+                    <h2>Continuación de la historia</h2>
+                </div>
+                <div class="history-text-track">
+                    @foreach($historyTextBlocksAfterVideo as $block)
                         <article class="history-text-panel">
                             <span>{{ $block['kicker'] }}</span>
                             <h2>{{ $block['title'] }}</h2>

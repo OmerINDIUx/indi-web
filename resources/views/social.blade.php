@@ -79,7 +79,6 @@
         <section style="padding: 10rem 0; background: white; color: var(--indi-text); position: relative; z-index: 20;">
             <div class="indi-container">
                 <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-                    <img class="social-intro-logo" src="{{ asset('imagenes_social/weindi-Logo.png') }}" alt="{{ \App\Support\CmsText::get('social.intro_tag', 'WE INDI') }}">
                     <p style="font-size: 1.6rem; line-height: 1.8; color: #333; font-family: 'usual', sans-serif; font-weight: 300;">
                         {{ \App\Support\CmsText::get('social.intro_text', 'Mediante esta division y con la trayectoria y formalidad que le caracterizan, INDI busca incidir con proyectos que contribuyan al desarrollo sostenible del pais.') }}
                     </p>
