@@ -631,18 +631,22 @@
     .project-overlay-sidebar .project-visual-notched {
         width: calc(100% + 9rem);
         margin: 0 -3rem;
-        height: clamp(180px, 27vh, 300px);
-        flex: 0 0 clamp(180px, 27vh, 300px);
+        height: auto;
+        flex: 0 0 auto;
         margin-top: auto;
         clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%);
         overflow: hidden;
         border-top: 1px solid var(--indi-border);
+        background: #e8ebf2;
     }
 
     .project-overlay-sidebar .project-visual-notched img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center;
+        display: block;
     }
 
     .close-overlay {
@@ -730,8 +734,8 @@
         .project-overlay-sidebar .project-visual-notched {
             margin: 0 -2rem;
             width: calc(100% + 4rem);
-            height: clamp(180px, 26vh, 280px);
-            flex-basis: clamp(180px, 26vh, 280px);
+            height: auto;
+            flex-basis: auto;
         }
     }
 
@@ -891,7 +895,7 @@
         .project-overlay-sidebar .project-visual-notched {
             margin: 2rem -1.5rem 0 -1.5rem;
             width: calc(100% + 3rem);
-            height: 35vh;
+            height: auto;
         }
 
         .close-overlay {
@@ -985,8 +989,8 @@
         }
 
         .project-overlay-sidebar .project-visual-notched {
-            height: 26vh;
-            min-height: 160px;
+            height: auto;
+            min-height: 0;
         }
 
         .close-overlay {

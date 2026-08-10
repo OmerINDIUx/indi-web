@@ -14,6 +14,30 @@ use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AdminProjectController;
 use App\Http\Controllers\AdminTranslationController;
 
+Route::get('/acceso', function () {
+    return view('site-access');
+})->name('site.access');
+
+Route::post('/acceso', function (Request $request) {
+    $request->validate(['password' => ['required', 'string']]);
+
+    if (! hash_equals((string) config('site.password', 'GRUPO123'), $request->string('password')->toString())) {
+        return back()->withErrors(['password' => 'La contraseña no es correcta.']);
+    }
+
+    $request->session()->put('site_access_granted', true);
+    $request->session()->regenerate();
+
+    return redirect()->intended('/');
+})->name('site.access.submit');
+
+Route::post('/salir-del-sitio', function (Request $request) {
+    $request->session()->forget('site_access_granted');
+
+    return redirect()->route('site.access');
+})->name('site.access.logout');
+
+Route::middleware('site.password')->group(function () {
 Route::get('/', function () {
     $posts = \App\Models\Post::where('is_published', true)
         ->where('is_featured', true)
@@ -71,6 +95,7 @@ Route::post('/talento', [TalentController::class, 'store'])->name('talento.store
 
 Route::get('/quejas', [ComplaintController::class, 'create'])->name('quejas.create');
 Route::post('/quejas', [ComplaintController::class, 'store'])->name('quejas.store');
+});
 
 // Custom Authentication and CMS Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
