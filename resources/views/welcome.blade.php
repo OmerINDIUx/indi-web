@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <header class="indi-hero">
         <video autoplay muted loop playsinline id="heroVideo" class="hero-video">
-            <source src="{{ asset('videos_indi/edificaciones.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos_indi/portada.mp4') }}" type="video/mp4">
         </video>
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">

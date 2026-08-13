@@ -5,7 +5,7 @@
 @php
     $getHistoryFrames = function (string $directoryName) {
         $historyFrameDirectory = public_path('imagenes_indi/' . $directoryName);
-        $cacheKey = 'history.frames.v5.' . \Illuminate\Support\Str::slug($directoryName);
+        $cacheKey = 'history.frames.v6.' . \Illuminate\Support\Str::slug($directoryName);
 
         return \Illuminate\Support\Facades\Cache::remember($cacheKey, now()->addDay(), function () use ($historyFrameDirectory, $directoryName) {
             if (! \Illuminate\Support\Facades\File::isDirectory($historyFrameDirectory)) {
@@ -31,14 +31,24 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-1'),
             'milestones' => [
                 [
-                    'year' => '1977 - 1980',
+                    'year' => '1997',
                     'title' => 'INDI inicia operaciones',
-                    'text' => 'Comenzamos construyendo escuelas, hospitales y obras clave para el desarrollo del país.',
+                    'text' => '',
+                ],
+                [
+                    'year' => '1980',
+                    'title' => 'Comenzamos construyendo hospitales y escuelas',
+                    'text' => '',
+                ],
+                [
+                    'year' => '1989',
+                    'title' => 'Construcción de Torres Gemelas TSJ',
+                    'text' => '',
                 ],
                 [
                     'year' => '1994',
-                    'title' => 'Centro Nacional de las Artes',
-                    'text' => 'Participamos en la construcción de uno de los complejos culturales más importantes de México.',
+                    'title' => 'Construcción del Centro Nacional de las Artes',
+                    'text' => '',
                 ],
                 [
                     'year' => '2003',
@@ -211,7 +221,7 @@
         class="history-scroll-sequence"
         style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 1.8;"
         data-history-frames='@json($section['frames'])'
-        data-history-last-text-frame="{{ $index === 0 ? 'part1301' : 'part2428' }}"
+        data-history-last-text-frame="{{ $index === 0 ? 'part1424' : 'part2428' }}"
     >
         <div class="history-sticky-stage">
             <div class="history-loader" aria-live="polite" aria-label="Cargando historia">
