@@ -335,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     historySequences.forEach((historySequence) => {
         const historyStage = historySequence.querySelector(".history-sticky-stage");
+        const historyScrollCue = historySequence.querySelector(".history-scroll-cue");
         const loader = historySequence.querySelector(".history-loader");
         const loaderBar = historySequence.querySelector(".history-loader-line span");
         const loaderPercent = historySequence.querySelector(".history-loader-meta strong");
@@ -479,6 +480,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 onUpdate: (self) => {
                     const index = Math.round(self.progress * (frames.length - 1));
                     queueFrame(index);
+                    const cueHideOffset = Math.min(120, window.innerHeight * 0.12);
+                    historyScrollCue?.classList.toggle("is-hidden", self.scroll() - self.start > cueHideOffset);
+
                 },
             });
 
@@ -520,6 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         preloadAllFrames().then(() => {
             hideLoader();
+            window.requestAnimationFrame(() => historyScrollCue?.classList.remove("is-loading"));
             startHistoryAnimation();
             ScrollTrigger.refresh();
         });

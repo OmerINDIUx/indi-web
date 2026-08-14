@@ -1356,6 +1356,80 @@ body {
     text-transform: uppercase;
 }
 
+.history-scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 6.5rem;
+    z-index: 7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    color: #fff;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) !important;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
+    will-change: opacity, transform;
+}
+.history-scroll-cue.is-loading,
+.history-scroll-cue.is-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translate(-50%, 1rem) !important;
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s 0.35s;
+}
+
+
+.history-scroll-cue span {
+    font-family: "usual", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.history-scroll-cue i {
+    position: relative;
+    display: block;
+    width: 1px;
+    height: 3rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.history-scroll-cue i::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #7dd3fc;
+    animation: history-scroll-cue 1.8s ease-in-out infinite;
+}
+
+@keyframes history-scroll-cue {
+    0% { transform: translateY(0); }
+    65%, 100% { transform: translateY(200%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .history-scroll-cue i::after {
+        animation: none;
+        transform: translateY(100%);
+    }
+}
+
+.history-scroll-cue img {
+    display: block;
+    width: clamp(5rem, 7vw, 7rem);
+    height: auto;
+}
+
 .history-copy-track {
     position: relative;
     z-index: 3;
@@ -1506,7 +1580,9 @@ body {
     width: min(90%, 1320px);
     height: 100svh;
     margin: 0 auto;
-    transform: translateX(-50%);
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) !important;
     pointer-events: none;
 }
 

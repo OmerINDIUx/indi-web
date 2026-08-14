@@ -262,6 +262,18 @@
                 <span>{{ $section['eyebrow'] }}</span>
                 <h1>{{ $section['title'] }}</h1>
             </div>
+
+            @if($index === 0)
+                <div class="history-scroll-cue is-loading" aria-hidden="true">
+                    <span>Scrollea para descubrir más</span>
+                    <img
+                        src="{{ asset('imagenes_indi/scroll.gif') }}"
+                        alt=""
+                        width="180"
+                        height="150"
+                    >
+                </div>
+            @endif
         </div>
 
         <div class="history-copy-track">
