@@ -4030,3 +4030,31 @@ textarea {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* Portada: zona segura permanente para los títulos de unidades frente al logo. */
+.indi-units-module .unit-box-trigger {
+    position: relative;
+    z-index: 6;
+    padding-left: max(10%, 7rem) !important;
+}
+
+.indi-units-module .u-title,
+.indi-units-module .u-detail {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 720px) {
+    .indi-units-module .unit-box-trigger {
+        padding-left: clamp(6.5rem, 24vw, 8rem) !important;
+        padding-right: 5% !important;
+    }
+}
+/* Las unidades de la portada permanecen estáticas y legibles durante el scroll. */
+.indi-units-module .u-title {
+    color: #111827 !important;
+}
+
+.indi-units-module .u-detail {
+    color: #4b5563 !important;
+}

@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         /* Hover: CSS controla los tamanos responsive; GSAP anima color y estado. */
-        logoMenu.addEventListener("mouseenter", () => {
+        logoMenu.addEventListener("pointerenter", () => {
             /* Una entrada nueva siempre comienza con hover habilitado. */
             logoMenu.classList.remove("logo-hover-locked");
             if (!isMenuOpen) {
@@ -216,22 +216,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        logoMenu.addEventListener("pointerleave", () => {
-            /* Al salir del componente, el siguiente hover vuelve a ser valido. */
-            logoMenu.classList.remove("logo-hover-locked");
-            if (!isMenuOpen) {
-                if (isCollided) updateLogoVisuals(true, 0.5);
-                if (hasMechanicalLogo) {
-                    gsap.to(".logo-part", { width: 100, height: 70, duration: 0.4, ease: "power2.inOut" });
-                    gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
-                    gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
-                }
-                animateLogoFill("#ffffff");
-            } else {
-                toggleMenu(false);
-            }
+        /* Clic/toque en el logo como respaldo para abrir y cerrar el menú. */
+        logoMenu.addEventListener("click", (event) => {
+            if (event.target.closest(".nav-link-item")) return;
+            if (!isMenuOpen) toggleMenu(true);
         });
-
+        logoMenu.addEventListener("pointerleave", () => {
+            /* Espera un instante para no cerrar por el reacomodo de la caja al abrir. */
+            window.setTimeout(() => {
+                if (logoMenu.matches(":hover")) return;
+                logoMenu.classList.remove("logo-hover-locked");
+                if (!isMenuOpen) {
+                    if (isCollided) updateLogoVisuals(true, 0.5);
+                    if (hasMechanicalLogo) {
+                        gsap.to(".logo-part", { width: 100, height: 70, duration: 0.4, ease: "power2.inOut" });
+                        gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
+                        gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
+                    }
+                    gsap.set(logoMenu, { mixBlendMode: "difference" });
+                    animateLogoFill("#ffffff");
+                } else {
+                    toggleMenu(false);
+                }
+            }, 120);
+        });
         /* Evita que el panel quede abierto tras cambiar de pestaña o perder el foco. */
         document.addEventListener("visibilitychange", () => {
             if (document.hidden && isMenuOpen) toggleMenu(false);
