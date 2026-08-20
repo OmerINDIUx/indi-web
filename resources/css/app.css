@@ -1680,11 +1680,12 @@ body {
 
 .history-text-panel__media {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    /* Todas las imágenes históricas se presentan en formato cuadrado (1080 × 1080). */
+    aspect-ratio: 1 / 1;
     margin: 0;
     overflow: hidden;
     background: #dce3ec;
-    clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+    clip-path: polygon(0% 0%, 35% 0%, 42% 5%, 58% 5%, 65% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .history-text-panel__media img {
@@ -1706,7 +1707,7 @@ body {
     }
 
     .history-text-panel__media {
-        aspect-ratio: 16 / 8.5;
+        aspect-ratio: 1 / 1;
     }
 }
 
@@ -4109,4 +4110,16 @@ textarea {
     transform: none !important;
     clip-path: none !important;
     filter: none !important;
+}
+/* Historia: separar el contenido visual del encabezado de cada sección. */
+@media (min-width: 721px) {
+    .history-text-panel {
+        top: 80%;
+    }
+}
+
+@media (max-width: 720px) {
+    .history-text-panel {
+        top: 72%;
+    }
 }

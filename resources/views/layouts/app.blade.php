@@ -28,11 +28,11 @@
 
             <div class="menu-container" id="menuLinks">
                 <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>
+                <a href="/historia" class="nav-link-item {{ request()->is('historia*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.history', 'HISTORIA') }}</span></a>
                 <a href="/proyectos" class="nav-link-item {{ request()->is('proyectos*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.projects', 'PROYECTOS') }}</span></a>
                 <a href="/negocios" class="nav-link-item {{ request()->is('negocios*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.business', 'NEGOCIOS') }}</span></a>
-                <a href="/historia" class="nav-link-item {{ request()->is('historia*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.history', 'HISTORIA') }}</span></a>
-                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.press', 'PRENSA') }}</span></a>
                 <a href="/social" class="nav-link-item {{ request()->is('social*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.social', 'SOCIAL') }}</span></a>
+                <a href="/prensa" class="nav-link-item {{ request()->is('prensa*') ? 'active-page' : '' }}"><span>{{ \App\Support\CmsText::get('nav.press', 'PRENSA') }}</span></a>
                 <a href="{{ route('locale.switch', $nextLocale) }}" class="nav-link-item language-switch-link" aria-label="{{ $nextLocale }}">{{ \App\Support\CmsText::get('language.switch_to_' . $nextLocale, strtoupper($nextLocale)) }}</a>
                 
                 <!-- The "guiño" selector notch -->

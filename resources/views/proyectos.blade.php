@@ -1231,8 +1231,8 @@
     }
     @media (min-width: 901px) {
         .projects-page-wrapper.has-project-selection .map-controls-overlay {
-            width: calc(50vw - 7%);
-            max-width: 390px;
+            width: calc(75vw - 7%);
+            max-width: 585px;
         }
         .projects-page-wrapper.has-project-selection .filter-bar-premium,
         .projects-page-wrapper.has-project-selection .filter-container-blue {
@@ -1263,6 +1263,18 @@
         .project-search-toggle { min-width: 124px; min-height: 40px; }
         .filter-container-blue { height: 40px; }
         .filter-link { min-width: auto; max-width: none; padding: 0 0.72rem; font-size: 0.56rem; }
+    }
+    /* Filtros ampliados cuando hay un proyecto seleccionado. */
+    @media (min-width: 901px) {
+        .projects-page-wrapper.has-project-selection .filter-container-blue {
+            height: 63px;
+            padding: 0 0.4rem;
+        }
+        .projects-page-wrapper.has-project-selection .filter-link {
+            padding: 0 0.3rem;
+            font-size: 0.69rem;
+            letter-spacing: 0.02em;
+        }
     }
 </style>
 
@@ -1457,7 +1469,7 @@
             markerMap.set(project.id, marker);
         });
 
-        setTimeout(fitVisibleMarkers, 700);
+        // Se conserva la vista inicial del mapa; no se hace zoom automático al cargar.
         window.addEventListener('resize', () => {
             setTimeout(() => {
                 invalidateProjectMap();

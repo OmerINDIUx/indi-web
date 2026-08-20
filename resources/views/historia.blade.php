@@ -30,7 +30,7 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-1'),
             'milestones' => [
                 [
-                    'year' => '1997',
+                    'year' => '1977',
                     'title' => 'INDI inicia operaciones',
                     'text' => '',
                 ],
@@ -127,25 +127,25 @@
         [
             'kicker' => 'Crecimiento institucional',
             'title' => '1981',
-            'image' => asset('imagenes_indi/Construccion/universidad-de-la-ciudad-de-mexico - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/Oficinas naucalpan.JPG'),
             'text' => 'Abrimos oficinas en Naucalpan, Estado de México.',
         ],
         [
             'kicker' => 'Reconocimiento empresarial',
             'title' => '1987',
-            'image' => asset('imagenes_indi/Construccion/tribunal-superior-de-justicia-cdmx - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/1987.jpeg'),
             'text' => 'Por primera vez, INDI figura entre las 500 empresas más importantes de México.',
         ],
         [
             'kicker' => 'Nueva etapa',
             'title' => '1993',
-            'image' => asset('imagenes_indi/Construccion/centro-nacional-de-las-artes - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/1993.JPG'),
             'text' => 'Se crea Grupo INDI, que se consolida como uno de los principales constructores de puentes urbanos en la Ciudad de México.',
         ],
         [
             'kicker' => 'Consolidación nacional',
             'title' => '1997',
-            'image' => asset('imagenes_indi/Construccion/Sistema-Cutzamala - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/1997.JPG'),
             'text' => 'Grupo INDI se convierte en una de las firmas de infraestructura más grandes de México.',
         ],
     ];
@@ -154,13 +154,13 @@
         [
             'kicker' => 'Innovación en infraestructura',
             'title' => '2002',
-            'image' => asset('imagenes_indi/Construccion/Segundo-Piso-Periferico-San-Jeronimo-Las-Flores - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/2002.JPG'),
             'text' => 'Pioneros en la construcción de autopistas elevadas.',
         ],
         [
             'kicker' => 'Innovación constructiva',
             'title' => '2008',
-            'image' => asset('imagenes_indi/Construccion/Cimentacion-Espacio-Condesa - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/2008.JPG'),
             'text' => 'Pioneros en la implementación de cimentación Top Down, así como en edificaciones inteligentes en México.',
         ],
         [
@@ -172,25 +172,25 @@
         [
             'kicker' => 'Certificaciones',
             'title' => '2015',
-            'image' => asset('imagenes_indi/infraestructura/Tren-Interurbano-Mexico-Toluca - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/2015.png'),
             'text' => 'Certificación ISO 9000, 14000 y 18000.',
         ],
         [
             'kicker' => 'Infraestructura portuaria',
             'title' => '2017',
-            'image' => asset('imagenes_indi/Maritimo/morro-rompeolas-isla-del-carmen - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/Rompeolas campeche 2017.jpg'),
             'text' => 'Rompeolas en Isla del Carmen, Campeche.',
         ],
         [
             'kicker' => 'Expansión internacional',
             'title' => '2020',
-            'image' => asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.webp'),
+            'image' => asset('imagenes_indi/imagenes_historia/2020.jpeg'),
             'text' => 'INDI USA.',
         ],
         [
             'kicker' => 'Responsabilidad social',
             'title' => '2025',
-            'image' => asset('assets/social/support.png'),
+            'image' => asset('imagenes_indi/imagenes_historia/2025.png'),
             'text' => 'Obtención de Distintivo Empresa Socialmente Responsable.',
         ],
     ];@endphp
@@ -308,7 +308,7 @@
                         <article class="history-text-panel {{ ! empty($block['image']) ? 'history-text-panel--with-image' : 'history-text-panel--copy-only' }}">
                             @if(! empty($block['image']))
                                 <figure class="history-text-panel__media">
-                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="lazy" decoding="async">
+                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="eager" decoding="async">
                                 </figure>
                             @endif
                             <div class="history-text-panel__copy">
@@ -335,7 +335,7 @@
                         <article class="history-text-panel {{ ! empty($block['image']) ? 'history-text-panel--with-image' : 'history-text-panel--copy-only' }}">
                             @if(! empty($block['image']))
                                 <figure class="history-text-panel__media">
-                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="lazy" decoding="async">
+                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="eager" decoding="async">
                                 </figure>
                             @endif
                             <div class="history-text-panel__copy">
