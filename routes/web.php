@@ -77,6 +77,10 @@ Route::get('/historia', function () {
 Route::get('/prensa', [PrensaController::class, 'index'])->name('prensa');
 Route::get('/prensa/{slug}', [PrensaController::class, 'show'])->name('prensa.show');
 
+Route::get('/aviso-de-privacidad', function () {
+    return view('privacy');
+})->name('privacy');
+
 Route::get('/social', function () {
     return view('social');
 })->name('social');

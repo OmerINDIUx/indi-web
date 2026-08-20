@@ -315,28 +315,6 @@
  * reservado coincide con el ancho visual de las piezas abiertas del SVG.
  */
 /* En escritorio el panel se abre al pasar el cursor, sin requerir click. */
-@media (hover: hover) and (min-width: 821px) {
-    .logo-menu-wrapper:hover:not(.logo-hover-locked) .menu-container {
-        position: relative;
-        z-index: 1002;
-        pointer-events: auto;
-        flex: 0 1 auto !important;
-        width: max-content !important;
-        max-width: calc(100vw - 22rem) !important;
-        min-width: 0 !important;
-        height: 81px !important;
-        margin-top: 5.3px !important;
-        padding: 0 1rem;
-        opacity: 1;
-        border: 1px solid rgba(0, 102, 249, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
-    .logo-menu-wrapper:hover:not(.logo-hover-locked) .nav-link-item {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 @media (min-width: 821px) and (max-width: 1080px) {
     :root {
         /*
@@ -601,6 +579,13 @@
         min-height: 38px;
     }
 }
+/* Color de marca estable durante hover y apertura del menú. */
+.logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper .cls-1,
+.logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper .st1,
+.logo-menu-wrapper.active .logo-svg-wrapper .cls-1,
+.logo-menu-wrapper.active .logo-svg-wrapper .st1 {
+    fill: var(--indi-blue);
+}
 /* 1081-1280 px: compact closed brand so it does not cover page copy. */
 @media (min-width: 1081px) and (max-width: 1280px) {
     body:not(.page-proyectos) .logo-menu-wrapper:not(.active) {
@@ -617,5 +602,22 @@
     body:not(.page-proyectos) .logo-menu-wrapper:hover:not(.active):not(.logo-hover-locked) .logo-svg-wrapper {
         width: 126px;
         height: 180px;
+    }
+}
+
+/* El logo conserva su escala al desplegar la navegación horizontal. */
+@media (min-width: 821px) {
+    .logo-menu-wrapper.active .logo-svg-wrapper,
+    .logo-menu-wrapper:hover:not(.active):not(.logo-hover-locked) .logo-svg-wrapper {
+        width: 100px;
+        height: 140px;
+    }
+}
+
+@media (min-width: 1081px) and (max-width: 1280px) {
+    body:not(.page-proyectos) .logo-menu-wrapper.active .logo-svg-wrapper,
+    body:not(.page-proyectos) .logo-menu-wrapper:hover:not(.active):not(.logo-hover-locked) .logo-svg-wrapper {
+        width: 78px;
+        height: 110px;
     }
 }

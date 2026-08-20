@@ -302,7 +302,6 @@
                     <!-- Unit 01: Marítimo (Blue) -->
                     <div class="unit-box-trigger" data-unit="0" style="--indi-unit-color: #0066f9;">
                         <div class="unit-identity">
-                            <span class="u-num">01</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.title', 'INDI MARÍTIMO') }}</h2>
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.text', 'Dominio técnico en ingeniería portuaria, escolleras monumentales y obras de dragado.') }}</p>
@@ -314,7 +313,6 @@
                     <!-- Unit 02: Infraestructura (Green) -->
                     <div class="unit-box-trigger" data-unit="1" style="--indi-unit-color: #64b032;">
                         <div class="unit-identity">
-                            <span class="u-num">02</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.title', 'INDI INFRAESTRUCTURA') }}</h2>
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.text', 'Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precisión técnica.') }}</p>
@@ -326,7 +324,6 @@
                     <!-- Unit 03: Construcción (Orange) -->
                     <div class="unit-box-trigger" data-unit="2" style="--indi-unit-color: #ffa608;">
                         <div class="unit-identity">
-                            <span class="u-num">03</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.title', 'INDI CONSTRUCCIÓN') }}</h2>
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.text', 'Especialistas en ingeniería civil de alta complejidad y cimentación profunda.') }}</p>
@@ -338,7 +335,6 @@
                     <!-- Unit 04: Ferroviaria (Red) -->
                     <div class="unit-box-trigger" data-unit="3" style="--indi-unit-color: #ff3000;">
                         <div class="unit-identity">
-                            <span class="u-num">04</span>
                             <h2 class="indi-heading u-title indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.title', 'INDI FERROVIARIA') }}</h2>
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.text', 'Ingeniería avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala.') }}</p>

@@ -15,6 +15,7 @@
             'resources/js/logo.js',
             'resources/js/app.js',
         ])
+        @stack('styles')
     </head>
     <body class="antialiased {{ request()->is('proyectos*') ? 'page-proyectos' : '' }}">
         <!-- High-Tech Mechanical Logo Menu -->
@@ -146,18 +147,18 @@
 
                         <!-- Social Networks -->
                         <nav class="footer-social-row" aria-label="Redes sociales">
-                            <a href="https://mx.linkedin.com/company/grupo-indi" target="_blank" rel="noopener noreferrer" class="social-link">LINKEDIN</a>
-                            <a href="https://www.facebook.com/IndiGrupo" target="_blank" rel="noopener noreferrer" class="social-link">FACEBOOK</a>
-                            <a href="https://www.instagram.com/grupoindi" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+                            <a href="https://www.linkedin.com/company/grupoindi/posts/?feedView=all" target="_blank" rel="noopener noreferrer" class="social-link">LINKEDIN</a>
+                            <a href="https://www.facebook.com/grupoindimexico" target="_blank" rel="noopener noreferrer" class="social-link">FACEBOOK</a>
+                            <a href="https://www.instagram.com/grupo_indi/" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+                            <a href="https://x.com/GrupoIndi" target="_blank" rel="noopener noreferrer" class="social-link">X</a>
                         </nav>
 
                         <!-- Simplified Bottom Bar -->
                         <div class="footer-bottom-bar">
-                            <span>&copy; {{ date('Y') }} INDI - SISTEMAS WG-INDI</span>
+                            <span>&copy; {{ date('Y') }} INDI - By <a href="https://indi-lab.com/" target="_blank" rel="noopener noreferrer" class="social-link">INDI Lab</a> </span>
                             <div class="legal-links">
                                 <a href="{{ route('login') }}">CMS LOGIN</a>
-                                <a href="#">{{ \App\Support\CmsText::get('footer.privacy', 'AVISO DE PRIVACIDAD') }}</a>
-                                <a href="#">{{ \App\Support\CmsText::get('footer.terms', 'TERMINOS') }}</a>
+                                <a href="{{ route('privacy') }}">{{ \App\Support\CmsText::get('footer.privacy', 'AVISO DE PRIVACIDAD') }}</a>
                             </div>
                         </div>
                     </div>

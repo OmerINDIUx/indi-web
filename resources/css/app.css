@@ -2917,7 +2917,7 @@ textarea {
 
 .footer-social-row {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
     width: min(100%, 720px);
     margin: 0 auto;
@@ -3067,7 +3067,7 @@ textarea {
 
     .project-stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0;
     }
 
@@ -3218,7 +3218,7 @@ textarea {
 
     .indi-interactive-projects .project-stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0;
         margin-bottom: 1.35rem;
         padding: 0.85rem 0;

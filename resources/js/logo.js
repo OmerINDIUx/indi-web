@@ -151,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 logoMenu.classList.add("active");
                 
                 /* El menu siempre se abre con el logo en su escala normal. */
+                gsap.set(logoMenu, { mixBlendMode: "normal" });
                 gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.4, overwrite: true });
                 animateLogoFill("#0066FF");
 
@@ -183,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     onComplete: () => {
                         menuLinks.classList.remove("active");
                         logoMenu.classList.remove("active");
+                        gsap.set(logoMenu, { mixBlendMode: "difference" });
                         animateLogoFill("#ffffff");
                         /* Recupera la reduccion si el usuario sigue debajo del umbral. */
                         if (isCollided) updateLogoVisuals(true);
@@ -214,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        logoMenu.addEventListener("mouseleave", () => {
+        logoMenu.addEventListener("pointerleave", () => {
             /* Al salir del componente, el siguiente hover vuelve a ser valido. */
             logoMenu.classList.remove("logo-hover-locked");
             if (!isMenuOpen) {
@@ -230,6 +232,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        /* Evita que el panel quede abierto tras cambiar de pestaña o perder el foco. */
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && isMenuOpen) toggleMenu(false);
+        });
+        window.addEventListener("blur", () => {
+            if (isMenuOpen) toggleMenu(false);
+        });
         /* Mueve la muesca al centro del enlace activo o bajo el cursor. */
         const navLinks = document.querySelectorAll(".nav-link-item");
         function updateNotch(element) {
