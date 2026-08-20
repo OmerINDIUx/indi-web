@@ -4123,3 +4123,10 @@ textarea {
         top: 72%;
     }
 }
+
+/* Historia: tarjetas centradas en pantallas compactas de escritorio. */
+@media (min-width: 1081px) and (max-width: 1280px) {
+    .history-text-panel {
+        top: 54%;
+    }
+}
