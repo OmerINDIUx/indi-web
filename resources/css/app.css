@@ -4089,3 +4089,24 @@ textarea {
 .stats-solid-grid .stat-box-solid:nth-child(3) .stat-txt {
     color: #4b5563 !important;
 }
+/* Garantía de visibilidad para los títulos de unidades. */
+.indi-units-module .unit-identity {
+    display: block !important;
+    position: relative;
+    z-index: 8;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.indi-units-module .u-title {
+    display: block !important;
+    position: relative;
+    z-index: 9;
+    min-height: 1em;
+    color: var(--indi-unit-color, #111827) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+}
