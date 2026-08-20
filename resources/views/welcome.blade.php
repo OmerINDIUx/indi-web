@@ -37,9 +37,9 @@
                 </div>
 
                 <!-- 02: Ciudades -->
-                <div class="stat-box-solid" style="background: white; border-right: 1px solid #eee;">
+                <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
-                        <span class="stat-num" style="color: var(--indi-blue);">+25</span>
+                        <span class="stat-num" style="color: white; opacity: 0.9;">+25</span>
                         <h4 class="stat-tit">{{ \App\Support\CmsText::get('home.stats.cities.title', 'CIUDADES') }}</h4>
                         <p class="stat-txt">{{ \App\Support\CmsText::get('home.stats.cities.text', 'IMPULSADAS POR NUESTRA INNOVACION') }}</p>
                     </div>

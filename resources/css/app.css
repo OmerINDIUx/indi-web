@@ -4058,3 +4058,34 @@ textarea {
 .indi-units-module .u-detail {
     color: #4b5563 !important;
 }
+/* Estadísticas de portada: alternancia blanco / azul. */
+.stats-solid-grid .stat-box-solid:nth-child(1),
+.stats-solid-grid .stat-box-solid:nth-child(3) {
+    background: #fff !important;
+}
+
+.stats-solid-grid .stat-box-solid:nth-child(2),
+.stats-solid-grid .stat-box-solid:nth-child(4) {
+    background: var(--indi-blue) !important;
+}
+
+.stats-solid-grid .stat-box-solid:nth-child(2) .stat-num,
+.stats-solid-grid .stat-box-solid:nth-child(2) .stat-tit,
+.stats-solid-grid .stat-box-solid:nth-child(2) .stat-txt,
+.stats-solid-grid .stat-box-solid:nth-child(4) .stat-num,
+.stats-solid-grid .stat-box-solid:nth-child(4) .stat-tit,
+.stats-solid-grid .stat-box-solid:nth-child(4) .stat-txt {
+    color: #fff !important;
+}
+
+.stats-solid-grid .stat-box-solid:nth-child(1) .stat-num,
+.stats-solid-grid .stat-box-solid:nth-child(3) .stat-num {
+    color: var(--indi-blue) !important;
+}
+
+.stats-solid-grid .stat-box-solid:nth-child(1) .stat-tit,
+.stats-solid-grid .stat-box-solid:nth-child(1) .stat-txt,
+.stats-solid-grid .stat-box-solid:nth-child(3) .stat-tit,
+.stats-solid-grid .stat-box-solid:nth-child(3) .stat-txt {
+    color: #4b5563 !important;
+}
