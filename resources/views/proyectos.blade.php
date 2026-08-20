@@ -31,9 +31,12 @@
             <!-- Search and filters, aligned to the platform identity -->
             <div class="map-controls-overlay">
                 <div class="project-search-container">
-                    <div class="project-search-input-wrapper">
+                    <button type="button" class="project-search-toggle" id="projectSearchToggle" aria-expanded="false" aria-controls="projectSearchInput">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        <input type="text" id="projectSearchInput" placeholder="{{ \App\Support\CmsText::get('projects.search', 'BUSCAR PROYECTO O UBICACION...') }}">
+                        <span>{{ \App\Support\CmsText::get('projects.search_button', 'BUSCAR') }}</span>
+                    </button>
+                    <div class="project-search-input-wrapper">
+                        <input type="text" id="projectSearchInput" aria-label="{{ \App\Support\CmsText::get('projects.search', 'BUSCAR PROYECTO O UBICACION...') }}" placeholder="{{ \App\Support\CmsText::get('projects.search', 'BUSCAR PROYECTO O UBICACION...') }}">
                     </div>
                 </div>
 
@@ -999,6 +1002,268 @@
         }
 
     }
+
+    /* Desktop compacto: replica las proporciones del diseño de 1080px. */
+    @media (min-width: 1081px) and (max-width: 1280px) {
+        .map-titles-overlay {
+            top: 180px;
+            left: 3%;
+            max-width: 460px;
+        }
+
+        .map-titles-overlay h1 {
+            font-size: clamp(2rem, 4.8vw, 3.5rem);
+            margin-bottom: 0.9rem;
+        }
+
+        .hero-subtitle {
+            max-width: 360px;
+            font-size: 0.68rem;
+            line-height: 1.4;
+            letter-spacing: 0.11em;
+        }
+
+        .map-controls-overlay {
+            bottom: 40px;
+            left: 3%;
+            gap: 0.65rem;
+        }
+
+        .project-search-container {
+            width: min(360px, 78vw);
+            max-width: 360px;
+            min-height: 48px;
+            padding: 0 1rem;
+        }
+
+        .project-search-input-wrapper {
+            gap: 0.55rem;
+        }
+
+        .project-search-input-wrapper svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .project-search-input-wrapper input {
+            font-size: 0.7rem;
+            padding: 0.65rem 0;
+            letter-spacing: 0.035em;
+        }
+
+        .filter-container-blue {
+            height: 54px;
+            padding: 0 1rem;
+            --notch-w: 48px;
+        }
+
+        .filter-link {
+            padding: 0 0.9rem;
+            font-size: 0.64rem;
+            letter-spacing: 0.08em;
+        }
+
+        .marker-pin {
+            width: 15px;
+            height: 15px;
+            border-width: 3px;
+        }
+
+        .marker-pin.active {
+            transform: scale(1.45);
+            border-width: 4px;
+        }
+
+        .marker-label {
+            bottom: 21px;
+            font-size: 0.6rem;
+            padding: 3px 6px;
+        }
+
+        .project-overlay-sidebar.active {
+            width: 50vw !important;
+        }
+
+        .project-white-card {
+            padding: 2rem 2rem 0;
+        }
+
+        .project-overlay-sidebar .project-name {
+            font-size: clamp(1.35rem, 2.5vw, 2rem);
+            margin-top: 0.25rem;
+            margin-bottom: 0.9rem;
+            letter-spacing: 0.06em;
+        }
+
+        .project-overlay-sidebar .project-stats-grid {
+            padding: 0.8rem 0;
+            margin-bottom: 1rem;
+            gap: 0.6rem;
+        }
+
+        .project-overlay-sidebar .stat-label {
+            font-size: 0.58rem;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.12em;
+        }
+
+        .project-overlay-sidebar .stat-value {
+            font-size: 0.82rem;
+            letter-spacing: 0.035em;
+        }
+
+        .project-overlay-sidebar .project-description {
+            font-size: 0.84rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .project-overlay-sidebar .project-visual-notched {
+            margin: 0 -2rem;
+            width: calc(100% + 4rem);
+        }
+
+        .hud-bottom-right {
+            bottom: 28px;
+            right: 3%;
+        }
+
+        .hud-label {
+            font-size: 0.48rem;
+            letter-spacing: 0.14em;
+        }
+
+        .hud-line {
+            width: 78px;
+        }
+    }
+
+    /* Compact project controls and a stronger selected state. */
+    .projects-page-wrapper.has-project-selection .map-titles-overlay {
+        top: auto !important;
+        bottom: 156px !important;
+        max-width: 420px !important;
+        transition: opacity 0.35s ease, transform 0.35s var(--transition), visibility 0.35s ease;
+    }
+    .projects-page-wrapper.has-project-selection .map-titles-overlay h1 {
+        margin-bottom: 0.4rem !important;
+        font-size: clamp(0.78rem, 1.15vw, 0.95rem) !important;
+        line-height: 1.1 !important;
+        letter-spacing: 0.18em;
+        text-shadow: none !important;
+    }
+    .projects-page-wrapper.has-project-selection .hero-subtitle {
+        max-width: 350px;
+        font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+        line-height: 1.35;
+        letter-spacing: 0.1em;
+    }
+    .projects-page-wrapper.has-project-selection .map-titles-overlay {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    .map-controls-overlay {
+        bottom: 38px;
+        gap: 0.5rem;
+    }
+    .project-search-container {
+        width: 132px;
+        max-width: min(420px, 84vw);
+        min-height: 44px;
+        padding: 0;
+        overflow: hidden;
+        transition: width 0.4s var(--transition), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-search-container.is-open { width: min(420px, 84vw); }
+    .project-search-toggle {
+        min-width: 130px;
+        min-height: 42px;
+        padding: 0 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+        background: transparent;
+        border: 0;
+        color: var(--indi-dark);
+        font-family: 'usual', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        cursor: pointer;
+    }
+    .project-search-toggle svg { color: var(--indi-blue); flex: 0 0 auto; }
+    .project-search-input-wrapper {
+        width: 0;
+        min-width: 0;
+        gap: 0;
+        opacity: 0;
+        transition: width 0.4s var(--transition), opacity 0.2s ease;
+    }
+    .project-search-container.is-open .project-search-input-wrapper { width: 100%; opacity: 1; }
+    .project-search-input-wrapper input { min-width: 0; padding: 0.65rem 1rem 0.65rem 0; }
+    .filter-container-blue { height: 42px; padding: 0 0.65rem; }
+    .filter-link {
+        min-width: 0;
+        padding: 0 0.85rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+    }
+    .marker-pin.active {
+        z-index: 9999;
+        opacity: 1;
+        transform: scale(1.95);
+        border-width: 4px;
+        border-color: #fff;
+        box-shadow: 0 0 0 3px currentColor, 0 16px 42px rgba(0, 102, 249, 0.55) !important;
+    }
+    .projects-page-wrapper.has-project-selection .leaflet-marker-icon.custom-div-icon {
+        opacity: 0.7 !important;
+        transition: opacity 0.35s ease;
+    }
+    .projects-page-wrapper.has-project-selection .leaflet-marker-icon.custom-div-icon.is-selected-project {
+        opacity: 1 !important;
+    }
+    .projects-page-wrapper.has-project-selection .marker-pin:not(.active) {
+        transform: scale(0.82);
+        filter: saturate(0.72);
+    }
+    @media (min-width: 901px) {
+        .projects-page-wrapper.has-project-selection .map-controls-overlay {
+            width: calc(50vw - 7%);
+            max-width: 390px;
+        }
+        .projects-page-wrapper.has-project-selection .filter-bar-premium,
+        .projects-page-wrapper.has-project-selection .filter-container-blue {
+            width: 100%;
+        }
+        .projects-page-wrapper.has-project-selection .filter-container-blue {
+            padding: 0 0.25rem;
+        }
+        .projects-page-wrapper.has-project-selection .filter-link {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 0 0.15rem;
+            font-size: 0.46rem;
+            letter-spacing: 0;
+        }
+    }
+    @media (max-width: 900px) {
+        .projects-page-wrapper.has-project-selection .map-titles-overlay {
+            top: auto !important;
+            bottom: calc(env(safe-area-inset-bottom, 0px) + 142px) !important;
+            left: 1rem !important;
+        }
+        .projects-page-wrapper.has-project-selection .map-titles-overlay h1 { font-size: 0.72rem !important; }
+        .projects-page-wrapper.has-project-selection .hero-subtitle { max-width: 17rem; font-size: 0.58rem; }
+        .map-controls-overlay { gap: 0.45rem; }
+        .project-search-container { width: 126px; min-height: 42px; }
+        .project-search-container.is-open { width: 100%; }
+        .project-search-toggle { min-width: 124px; min-height: 40px; }
+        .filter-container-blue { height: 40px; }
+        .filter-link { min-width: auto; max-width: none; padding: 0 0.72rem; font-size: 0.56rem; }
+    }
 </style>
 
 <script>
@@ -1120,13 +1385,16 @@
             
             // Highlight Active Marker
             document.querySelectorAll('.marker-pin').forEach(pin => pin.classList.remove('active'));
+            document.querySelectorAll('.custom-div-icon').forEach(icon => icon.classList.remove('is-selected-project'));
             const marker = markerMap.get(project.id);
             if (marker && marker._icon) {
+                marker._icon.classList.add('is-selected-project');
                 const pin = marker._icon.querySelector('.marker-pin');
                 if (pin) pin.classList.add('active');
             }
 
             overlay.classList.add('active');
+            document.querySelector('.projects-page-wrapper').classList.add('has-project-selection');
             setTimeout(invalidateProjectMap, 120);
             
             // Map camera update: desktop offsets for side panel; mobile keeps the marker visible above bottom sheet.
@@ -1147,6 +1415,9 @@
         document.getElementById('closeOverlay').addEventListener('click', () => {
             const overlay = document.getElementById('projectOverlay');
             overlay.classList.remove('active');
+            document.querySelector('.projects-page-wrapper').classList.remove('has-project-selection');
+            document.querySelectorAll('.marker-pin').forEach(pin => pin.classList.remove('active'));
+            document.querySelectorAll('.custom-div-icon').forEach(icon => icon.classList.remove('is-selected-project'));
             setTimeout(() => {
                 invalidateProjectMap();
                 if (markerGroup.getLayers().length > 0) {
@@ -1172,7 +1443,7 @@
                 html: `
                     <div class="marker-label-container">
                         <span class="marker-label" style="color: ${color}">${project.title}</span>
-                        <div class="marker-pin" style="background: ${color}; box-shadow: 0 0 15px ${color};"></div>
+                        <div class="marker-pin" style="color: ${color}; background: ${color}; box-shadow: 0 0 15px ${color};"></div>
                     </div>
                 `,
                 iconSize: [20, 20],
@@ -1226,6 +1497,23 @@
         });
 
         const searchInput = document.getElementById('projectSearchInput');
+        const searchContainer = document.querySelector('.project-search-container');
+        const searchToggle = document.getElementById('projectSearchToggle');
+
+        searchToggle.addEventListener('click', () => {
+            const isOpen = searchContainer.classList.toggle('is-open');
+            searchToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (isOpen) window.setTimeout(() => searchInput.focus(), 280);
+        });
+
+        searchInput.addEventListener('keydown', event => {
+            if (event.key !== 'Escape') return;
+            searchInput.value = '';
+            searchContainer.classList.remove('is-open');
+            searchToggle.setAttribute('aria-expanded', 'false');
+            searchToggle.focus();
+            applyFilters();
+        });
 
         function normalizeSearchText(text) {
             if (!text) return '';

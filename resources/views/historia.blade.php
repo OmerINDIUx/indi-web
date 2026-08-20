@@ -26,7 +26,6 @@
 
     $historySections = [
         [
-            'eyebrow' => 'INDI',
             'title' => 'Historia',
             'frames' => $getHistoryFrames('HISTORIA-INDI-1'),
             'milestones' => [
@@ -73,7 +72,6 @@
             ],
         ],
         [
-            'eyebrow' => 'INDI',
             'title' => 'hISTORIA',
             'frames' => $getHistoryFrames('HISTORIA-INDI-2'),
             'milestones' => [
@@ -129,21 +127,25 @@
         [
             'kicker' => 'Crecimiento institucional',
             'title' => '1981',
+            'image' => asset('imagenes_indi/Construccion/universidad-de-la-ciudad-de-mexico - copia.webp'),
             'text' => 'Abrimos oficinas en Naucalpan, Estado de México.',
         ],
         [
             'kicker' => 'Reconocimiento empresarial',
             'title' => '1987',
+            'image' => asset('imagenes_indi/Construccion/tribunal-superior-de-justicia-cdmx - copia.webp'),
             'text' => 'Por primera vez, INDI figura entre las 500 empresas más importantes de México.',
         ],
         [
             'kicker' => 'Nueva etapa',
             'title' => '1993',
+            'image' => asset('imagenes_indi/Construccion/centro-nacional-de-las-artes - copia.webp'),
             'text' => 'Se crea Grupo INDI, que se consolida como uno de los principales constructores de puentes urbanos en la Ciudad de México.',
         ],
         [
             'kicker' => 'Consolidación nacional',
             'title' => '1997',
+            'image' => asset('imagenes_indi/Construccion/Sistema-Cutzamala - copia.webp'),
             'text' => 'Grupo INDI se convierte en una de las firmas de infraestructura más grandes de México.',
         ],
     ];
@@ -152,36 +154,43 @@
         [
             'kicker' => 'Innovación en infraestructura',
             'title' => '2002',
+            'image' => asset('imagenes_indi/Construccion/Segundo-Piso-Periferico-San-Jeronimo-Las-Flores - copia.webp'),
             'text' => 'Pioneros en la construcción de autopistas elevadas.',
         ],
         [
             'kicker' => 'Innovación constructiva',
             'title' => '2008',
+            'image' => asset('imagenes_indi/Construccion/Cimentacion-Espacio-Condesa - copia.webp'),
             'text' => 'Pioneros en la implementación de cimentación Top Down, así como en edificaciones inteligentes en México.',
         ],
         [
             'kicker' => 'Reconocimiento internacional',
             'title' => '2012',
+            'image' => asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg'),
             'text' => 'Ganadores del premio Deal Of the Year en la categoría Latin America Social Infrastructure.',
         ],
         [
             'kicker' => 'Certificaciones',
             'title' => '2015',
+            'image' => asset('imagenes_indi/infraestructura/Tren-Interurbano-Mexico-Toluca - copia.webp'),
             'text' => 'Certificación ISO 9000, 14000 y 18000.',
         ],
         [
             'kicker' => 'Infraestructura portuaria',
             'title' => '2017',
+            'image' => asset('imagenes_indi/Maritimo/morro-rompeolas-isla-del-carmen - copia.webp'),
             'text' => 'Rompeolas en Isla del Carmen, Campeche.',
         ],
         [
             'kicker' => 'Expansión internacional',
             'title' => '2020',
+            'image' => asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.webp'),
             'text' => 'INDI USA.',
         ],
         [
             'kicker' => 'Responsabilidad social',
             'title' => '2025',
+            'image' => asset('assets/social/support.png'),
             'text' => 'Obtención de Distintivo Empresa Socialmente Responsable.',
         ],
     ];@endphp
@@ -225,7 +234,6 @@
     >
         <div class="history-sticky-stage">
             <div class="history-loader" aria-live="polite" aria-label="Cargando historia">
-                <div class="history-loader-mark">INDI</div>
                 <div class="history-loader-line">
                     <span></span>
                 </div>
@@ -259,7 +267,9 @@
             <div class="history-overlay"></div>
 
             <div class="history-fixed-copy">
-                <span>{{ $section['eyebrow'] }}</span>
+                @if(! empty($section['eyebrow']))
+                    <span>{{ $section['eyebrow'] }}</span>
+                @endif
                 <h1>{{ $section['title'] }}</h1>
             </div>
 
@@ -291,15 +301,21 @@
         <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocks) }};" aria-label="Historia sin fotografias">
             <div class="history-text-stage">
                 <div class="history-text-heading">
-                    <span>INDI</span>
                     <h2>Otra parte de la historia</h2>
                 </div>
                 <div class="history-text-track">
                     @foreach($historyTextBlocks as $block)
-                        <article class="history-text-panel">
-                            <span>{{ $block['kicker'] }}</span>
-                            <h2>{{ $block['title'] }}</h2>
-                            <p>{{ $block['text'] }}</p>
+                        <article class="history-text-panel {{ ! empty($block['image']) ? 'history-text-panel--with-image' : 'history-text-panel--copy-only' }}">
+                            @if(! empty($block['image']))
+                                <figure class="history-text-panel__media">
+                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="lazy" decoding="async">
+                                </figure>
+                            @endif
+                            <div class="history-text-panel__copy">
+                                <span>{{ $block['kicker'] }}</span>
+                                <h2>{{ $block['title'] }}</h2>
+                                <p>{{ $block['text'] }}</p>
+                            </div>
                         </article>
                     @endforeach
                 </div>
@@ -311,15 +327,22 @@
         <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocksAfterVideo) }};" aria-label="Continuación de la historia">
             <div class="history-text-stage">
                 <div class="history-text-heading">
-                    <span>INDI</span>
+                    <!-- <span>INDI</span> -->
                     <h2>Continuación de la historia</h2>
                 </div>
                 <div class="history-text-track">
                     @foreach($historyTextBlocksAfterVideo as $block)
-                        <article class="history-text-panel">
-                            <span>{{ $block['kicker'] }}</span>
-                            <h2>{{ $block['title'] }}</h2>
-                            <p>{{ $block['text'] }}</p>
+                        <article class="history-text-panel {{ ! empty($block['image']) ? 'history-text-panel--with-image' : 'history-text-panel--copy-only' }}">
+                            @if(! empty($block['image']))
+                                <figure class="history-text-panel__media">
+                                    <img src="{{ $block['image'] }}" alt="{{ $block['title'] }}" loading="lazy" decoding="async">
+                                </figure>
+                            @endif
+                            <div class="history-text-panel__copy">
+                                <span>{{ $block['kicker'] }}</span>
+                                <h2>{{ $block['title'] }}</h2>
+                                <p>{{ $block['text'] }}</p>
+                            </div>
                         </article>
                     @endforeach
                 </div>

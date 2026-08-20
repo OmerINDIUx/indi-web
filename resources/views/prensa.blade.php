@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Prensa Hero Section -->
-    <header class="indi-hero" style="background-image: url('{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
+    <header class="indi-hero prensa-main-hero" style="background-image: url('{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
                 {{ \App\Support\CmsText::get('press.title', 'CONOCE LAS ULTIMAS NOTICIAS DE INDI') }}
@@ -411,9 +411,32 @@
     /* Grid & Cards Redesign */
     #newsGrid {
         display: grid !important;
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
         gap: 2.5rem !important;
         align-items: start;
+    }
+
+    /* Keep the press heading clear of the compact logo on medium desktops. */
+    @media (min-width: 1081px) and (max-width: 1280px) {
+        .prensa-page-wrap .indi-container {
+            width: auto;
+            max-width: none;
+            margin-left: 6.75rem;
+            margin-right: 3rem;
+        }
+
+        .prensa-main-hero .indi-hero-content {
+            align-self: stretch;
+            width: auto;
+            padding-left: 6.75rem;
+            padding-right: 4rem;
+            box-sizing: border-box;
+        }
+
+        .prensa-main-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            max-width: 60rem;
+        }
     }
 
     .blog-card {

@@ -108,6 +108,7 @@
                     line-height: 1;
                     margin-bottom: 2rem;
                     letter-spacing: -0.05em;
+                    white-space: nowrap;
                 }
 
                 .stat-tit {
@@ -191,6 +192,23 @@
                     box-shadow: 0 0 10px rgba(0, 102, 249, 0.5) !important;
                 }
 
+                /* Escritorio compacto: evita que la cifra de familias se corte. */
+                @media (min-width: 1081px) and (max-width: 1280px) {
+                    .stat-box-solid {
+                        min-width: 0;
+                        padding: 4rem 1.25rem;
+                    }
+                    .stat-num {
+                        font-size: clamp(2.5rem, 4vw, 4rem);
+                    }
+                    .stat-tit {
+                        letter-spacing: 0.25em;
+                    }
+                    .stat-txt {
+                        max-width: 175px;
+                        font-size: 0.75rem;
+                    }
+                }
                 /* Mobile visuals and sticky layouts */
                 .u-visual-mobile {
                     clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%) !important;
@@ -412,15 +430,12 @@
                         @foreach($homeProjects as $project)
                             <div class="project-data-card" data-state="project-{{ $project->id }}">
                                 <div class="project-white-card">
+                                    <div class="projects-card-heading">{{ \App\Support\CmsText::get('home.projects.featured_title', 'PROYECTOS DESTACADOS') }}</div>
                                     <h2 class="project-name">{{ mb_strtoupper($project->localized_title) }}</h2>
                                     <div class="project-stats-grid">
                                         <div class="stat-item">
                                             <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
                                             <span class="stat-value indi-scroll-text">{{ mb_strtoupper($project->localized_address) }}</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
-                                            <span class="stat-value indi-scroll-text">{{ $project->status ? \App\Support\CmsText::get('projects.completed', 'COMPLETADO') : \App\Support\CmsText::get('projects.in_progress', 'EN PROCESO') }}</span>
                                         </div>
                                         <div class="stat-item">
                                             <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
@@ -438,21 +453,19 @@
                                             <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="{{ $project->localized_title }}">
                                         @endif
                                     </div>
+                                                    <a class="projects-all-link" href="/proyectos">{{ \App\Support\CmsText::get('home.projects.view_all', 'CONOCE TODOS NUESTROS PROYECTOS') }} <span aria-hidden="true">→</span></a>
                                 </div>
                             </div>
                         @endforeach
                     @else
                         <div class="project-data-card" data-state="southeast">
                             <div class="project-white-card">
+                                    <div class="projects-card-heading">{{ \App\Support\CmsText::get('home.projects.featured_title', 'PROYECTOS DESTACADOS') }}</div>
                                 <h2 class="project-name">ROMPE OLΛS SΛLINΛ CRUZ (OΛXΛCΛ)</h2>
                                 <div class="project-stats-grid">
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
                                         <span class="stat-value indi-scroll-text">OΛXΛCΛ</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
-                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
                                     </div>
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
@@ -464,20 +477,18 @@ Rehabilitación estratégica de la vía férrea que conecta el Océano Pacífico
                                 <div class="project-visual-notched">
                                     <img src="{{ asset('imagenes_indi/Maritimo/Rompe-Olas-Salina-Cruz-Oaxaca-3 - copia.jpg') }}" alt="Rompe Olas">
                                 </div>
-                            </div>
+                                                <a class="projects-all-link" href="/proyectos">{{ \App\Support\CmsText::get('home.projects.view_all', 'CONOCE TODOS NUESTROS PROYECTOS') }} <span aria-hidden="true">→</span></a>
+                                </div>
                         </div>
 
                         <div class="project-data-card" data-state="cdmx">
                             <div class="project-white-card">
+                                    <div class="projects-card-heading">{{ \App\Support\CmsText::get('home.projects.featured_title', 'PROYECTOS DESTACADOS') }}</div>
                                 <h2 class="project-name">CΛBLΞBÚS LÍNΞΛ 1 (CDMX)</h2>
                                 <div class="project-stats-grid">
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
                                         <span class="stat-value indi-scroll-text">CIUDAD DE MÉXICO</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
-                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
                                     </div>
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
@@ -489,20 +500,18 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                                 <div class="project-visual-notched">
                                     <img src="{{ asset('imagenes_indi/infraestructura/primer-cablebus-cdmx-l1-estacion - copia.jpg') }}" alt="Mexibus">
                                 </div>
-                            </div>
+                                                <a class="projects-all-link" href="/proyectos">{{ \App\Support\CmsText::get('home.projects.view_all', 'CONOCE TODOS NUESTROS PROYECTOS') }} <span aria-hidden="true">→</span></a>
+                                </div>
                         </div>
 
                         <div class="project-data-card" data-state="northeast">
                             <div class="project-white-card">
+                                    <div class="projects-card-heading">{{ \App\Support\CmsText::get('home.projects.featured_title', 'PROYECTOS DESTACADOS') }}</div>
                                 <h2 class="project-name">ΛDUΛNΛ MODELO (RΞYNOSΛ)</h2>
                                 <div class="project-stats-grid">
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('home.projects.location', 'Ubicacion') }}</span>
                                         <span class="stat-value indi-scroll-text">TΛMΛULIPΛS</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">{{ \App\Support\CmsText::get('projects.status', 'ESTADO') }}</span>
-                                        <span class="stat-value indi-scroll-text">{{ \App\Support\CmsText::get('projects.completed', 'COMPLETADO') }}</span>
                                     </div>
                                     <div class="stat-item">
                                         <span class="stat-label">{{ \App\Support\CmsText::get('projects.type', 'TIPO') }}</span>
@@ -515,7 +524,8 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                                 <div class="project-visual-notched">
                                     <img src="{{ asset('imagenes_indi/Construccion/Aduana-Modelo-Reynosa - copia.webp') }}" alt="Aduana">
                                 </div>
-                            </div>
+                                                <a class="projects-all-link" href="/proyectos">{{ \App\Support\CmsText::get('home.projects.view_all', 'CONOCE TODOS NUESTROS PROYECTOS') }} <span aria-hidden="true">→</span></a>
+                                </div>
                         </div>
                     @endif
                 </div>

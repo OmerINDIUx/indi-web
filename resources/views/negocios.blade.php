@@ -337,6 +337,50 @@
     height: 0;
 }
 
+
+/* Desktop compacto: reserve enough vertical space for all business copy. */
+@media (min-width: 1081px) and (max-width: 1280px) {
+    .negocios-page .visual-layer {
+        height: 52vh;
+        flex: 0 0 52vh;
+    }
+
+    .negocios-page .content-layer {
+        height: 48vh;
+        flex: 0 0 48vh;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .negocios-page .indi-container {
+        width: 92%;
+        max-width: 92%;
+    }
+
+    .negocios-page .unit-info-grid {
+        grid-template-columns: minmax(280px, 1.05fr) minmax(0, 0.95fr) minmax(0, 0.95fr) !important;
+        gap: clamp(1.25rem, 2.4vw, 2rem);
+        padding: 1rem 0;
+        align-items: start;
+    }
+
+    .negocios-page .unit-index {
+        margin-bottom: 0.7rem;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .negocios-page .unit-main-name {
+        font-size: clamp(1.7rem, 2.65vw, 2.45rem);
+        line-height: 0.98;
+    }
+
+    .negocios-page .text-unit p {
+        font-size: clamp(0.75rem, 1vw, 0.84rem);
+        line-height: 1.42;
+    }
+}
+
 /* Tablets (1080px) */
 @media (max-width: 1080px) {
     .negocios-page .negocios-sticky-stage {

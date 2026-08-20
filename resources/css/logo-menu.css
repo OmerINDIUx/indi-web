@@ -288,7 +288,8 @@
  */
 @media (max-width: 1280px) {
     :root {
-        --logo-menu-gap: 126px;
+        /* El wordmark expandido necesita aire antes de iniciar el panel. */
+        --logo-menu-gap: 150px;
     }
 
     .logo-menu-wrapper.active {
@@ -313,6 +314,29 @@
  * Conserva el menu a la derecha y reduce el logo expandido un 25%. El espacio
  * reservado coincide con el ancho visual de las piezas abiertas del SVG.
  */
+/* En escritorio el panel se abre al pasar el cursor, sin requerir click. */
+@media (hover: hover) and (min-width: 821px) {
+    .logo-menu-wrapper:hover:not(.logo-hover-locked) .menu-container {
+        position: relative;
+        z-index: 1002;
+        pointer-events: auto;
+        flex: 0 1 auto !important;
+        width: max-content !important;
+        max-width: calc(100vw - 22rem) !important;
+        min-width: 0 !important;
+        height: 81px !important;
+        margin-top: 5.3px !important;
+        padding: 0 1rem;
+        opacity: 1;
+        border: 1px solid rgba(0, 102, 249, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo-menu-wrapper:hover:not(.logo-hover-locked) .nav-link-item {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 @media (min-width: 821px) and (max-width: 1080px) {
     :root {
         /*
@@ -322,7 +346,7 @@
         --logo-menu-tablet-logo-width: 105px;
         --logo-menu-tablet-logo-height: 150px;
         --logo-menu-tablet-bar-height: 63px;
-        --logo-menu-tablet-layout-gap: 116px;
+        --logo-menu-tablet-layout-gap: 140px;
         --logo-menu-gap: var(--logo-menu-tablet-layout-gap);
     }
 
@@ -575,5 +599,23 @@
 
     .nav-link-item {
         min-height: 38px;
+    }
+}
+/* 1081-1280 px: compact closed brand so it does not cover page copy. */
+@media (min-width: 1081px) and (max-width: 1280px) {
+    body:not(.page-proyectos) .logo-menu-wrapper:not(.active) {
+        min-width: 96px;
+        min-height: 128px;
+        padding: 0.55rem;
+    }
+
+    body:not(.page-proyectos) .logo-menu-wrapper:not(.active) .logo-svg-wrapper {
+        width: 78px;
+        height: 110px;
+    }
+
+    body:not(.page-proyectos) .logo-menu-wrapper:hover:not(.active):not(.logo-hover-locked) .logo-svg-wrapper {
+        width: 126px;
+        height: 180px;
     }
 }

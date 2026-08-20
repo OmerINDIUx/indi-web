@@ -16,7 +16,7 @@
             'resources/js/app.js',
         ])
     </head>
-    <body class="antialiased">
+    <body class="antialiased {{ request()->is('proyectos*') ? 'page-proyectos' : '' }}">
         <!-- High-Tech Mechanical Logo Menu -->
         <div class="logo-menu-wrapper" id="logoMenu">
             <div class="logo-group">

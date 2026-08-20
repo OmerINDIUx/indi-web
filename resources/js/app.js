@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         gsap.fromTo(
                             mapSvg,
                             { scale: 1.02, x: 0, y: 0 },
-                            { scale: 1.16, x: 0, y: 0, duration: 0.9, ease: "power2.out", yoyo: true, repeat: 1, transformOrigin: mapOrigin }
+                            { scale: 1.34, x: 0, y: 0, duration: 0.9, ease: "power2.out", yoyo: true, repeat: 1, transformOrigin: mapOrigin }
                         );
                     }
                 } else { card.classList.remove("active"); }
@@ -336,6 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
     historySequences.forEach((historySequence) => {
         const historyStage = historySequence.querySelector(".history-sticky-stage");
         const historyScrollCue = historySequence.querySelector(".history-scroll-cue");
+        const historyFixedCopy = historySequence.querySelector(".history-fixed-copy");
         const loader = historySequence.querySelector(".history-loader");
         const loaderBar = historySequence.querySelector(".history-loader-line span");
         const loaderPercent = historySequence.querySelector(".history-loader-meta strong");
@@ -480,8 +481,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 onUpdate: (self) => {
                     const index = Math.round(self.progress * (frames.length - 1));
                     queueFrame(index);
+                    const scrollOffset = self.scroll() - self.start;
                     const cueHideOffset = Math.min(120, window.innerHeight * 0.12);
-                    historyScrollCue?.classList.toggle("is-hidden", self.scroll() - self.start > cueHideOffset);
+                    historyScrollCue?.classList.toggle("is-hidden", scrollOffset > cueHideOffset);
+                    historySequence.classList.toggle("is-history-progressing", scrollOffset > 36);
 
                 },
             });
@@ -539,11 +542,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const renderTimeline = (progress) => {
             const activeIndex = progress * Math.max(0, textPanels.length - 1);
-            const spacing = window.matchMedia("(max-width: 720px)").matches ? window.innerWidth * 0.78 : window.innerWidth * 0.36;
+            const isMobile = window.matchMedia("(max-width: 720px)").matches;
+            const widestPanel = Math.max(...textPanels.map((panel) => panel.getBoundingClientRect().width));
+            const spacing = isMobile
+                ? Math.max(window.innerWidth * 0.9, widestPanel + 24)
+                : Math.max(window.innerWidth * 0.72, widestPanel + Math.min(96, window.innerWidth * 0.06));
 
             textPanels.forEach((panel, index) => {
                 const distance = index - activeIndex;
-                const opacity = Math.max(0.12, 1 - (Math.abs(distance) * 0.86));
+                const opacity = Math.max(0, 1 - (Math.abs(distance) * 1.5));
                 const scale = Math.max(0.86, 1 - (Math.abs(distance) * 0.08));
 
                 panel.classList.toggle("is-active", Math.abs(distance) < 0.5);

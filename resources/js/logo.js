@@ -198,15 +198,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        logoMenu.addEventListener("click", (e) => {
-            if (!e.target.closest(".nav-link-item")) toggleMenu();
-        });
-
         /* Hover: CSS controla los tamanos responsive; GSAP anima color y estado. */
         logoMenu.addEventListener("mouseenter", () => {
             /* Una entrada nueva siempre comienza con hover habilitado. */
             logoMenu.classList.remove("logo-hover-locked");
             if (!isMenuOpen) {
+                toggleMenu(true);
                 gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.3, overwrite: true });
                 if (hasMechanicalLogo) {
                     gsap.to(".logo-part", { width: 140, height: 100, duration: 0.5, ease: "power2.out" });
@@ -228,6 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
                 }
                 animateLogoFill("#ffffff");
+            } else {
+                toggleMenu(false);
             }
         });
 
@@ -252,15 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
         /* Inicializacion comun para todas las paginas. */
         gsap.set(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0 });
 
-        /* Abre el menu durante tres segundos cuando la pagina inicia arriba. */
-        if (window.scrollY < 100) {
-            toggleMenu(true);
-            setTimeout(() => {
-                if (window.scrollY < 150) {
-                    toggleMenu(false);
-                }
-            }, 3000);
-        }
+        /* En desktop el estado inicial permanece cerrado hasta el hover. */
 
         /* Umbrales de scroll: inicio reduce antes que las paginas interiores. */
         const isHomePage = window.location.pathname === "/" || window.location.pathname === "" || window.location.pathname.includes("/index");
