@@ -367,17 +367,17 @@
     .negocios-page .unit-index {
         margin-bottom: 0.7rem;
         padding: 0.4rem 0.9rem;
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .negocios-page .unit-main-name {
-        font-size: clamp(1.7rem, 2.65vw, 2.45rem);
+        font-size: clamp(1.8rem, 2.8vw, 2.55rem);
         line-height: 0.98;
     }
 
     .negocios-page .text-unit p {
-        font-size: clamp(0.75rem, 1vw, 0.84rem);
-        line-height: 1.42;
+        font-size: clamp(0.86rem, 1.1vw, 0.98rem);
+        line-height: 1.46;
     }
 }
 
@@ -557,7 +557,7 @@
     }
     .negocios-page .unit-index {
         margin-bottom: 0.65rem;
-        font-size: 0.9rem;
+        font-size: 1rem;
         padding: 0.42rem 0.9rem;
     }
     .negocios-page .unit-main-name {
@@ -571,7 +571,7 @@
 
     .negocios-page .text-unit p {
         font-size: clamp(0.9rem, 3.9vw, 1rem);
-        line-height: 1.42;
+        line-height: 1.46;
     }
 
     #detail-swap {
