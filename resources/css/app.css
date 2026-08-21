@@ -1225,6 +1225,14 @@ body {
     background: rgba(255, 255, 255, 0.24);
     overflow: hidden;
     pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.history-page-progress.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .history-page-progress span {
@@ -4157,5 +4165,66 @@ textarea {
 @media (max-width: 720px) {
     .history-text-heading {
         left: max(5%, 6.5rem) !important;
+    }
+}
+
+/* Historia: centra cada hito dentro del espacio visible real. */
+.history-text-stage {
+    --history-panel-shift: clamp(1.5rem, 4svh, 3.25rem);
+}
+
+.history-text-heading {
+    top: clamp(2.25rem, 8svh, 5.25rem);
+}
+
+.history-text-panel {
+    top: calc(50% + var(--history-panel-shift)) !important;
+}
+
+.history-text-panel--with-image {
+    grid-template-columns: minmax(240px, min(36vw, 56svh)) minmax(280px, 1fr);
+}
+
+.history-text-panel__media {
+    width: min(100%, 56svh);
+    justify-self: end;
+}
+
+/* En monitores bajos se reduce la tarjeta antes de desplazarla hacia arriba. */
+@media (min-width: 721px) and (max-height: 760px) {
+    .history-text-stage {
+        --history-panel-shift: clamp(1rem, 3svh, 1.75rem);
+    }
+
+    .history-text-heading {
+        top: clamp(1.5rem, 5svh, 2.5rem);
+    }
+
+    .history-text-panel--with-image {
+        grid-template-columns: minmax(210px, min(34vw, 50svh)) minmax(260px, 1fr);
+        gap: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .history-text-panel__media {
+        width: min(100%, 50svh);
+    }
+}
+
+@media (max-width: 720px) {
+    .history-text-stage {
+        --history-panel-shift: clamp(2.75rem, 8svh, 4.5rem);
+    }
+
+    .history-text-heading {
+        top: clamp(4.5rem, 10svh, 6rem);
+    }
+
+    .history-text-panel--with-image {
+        grid-template-columns: 1fr;
+    }
+
+    .history-text-panel__media {
+        width: min(100%, 38svh);
+        justify-self: center;
     }
 }

@@ -303,21 +303,31 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (historySequences.length) {
-        const historyPageProgress = document.querySelector(".history-page-progress span");
+        const historyPageProgress = document.querySelector(".history-page-progress");
+        const historyPageProgressFill = historyPageProgress?.querySelector("span");
+        const historyStorySections = gsap.utils.toArray(
+            ".history-scroll-sequence, .history-text-sequence",
+        );
         const orientationNotice = document.getElementById("historyOrientationNotice");
         const orientationNoticeClose = document.getElementById("historyOrientationNoticeClose");
         const portraitDevice = window.matchMedia("(max-width: 1024px) and (orientation: portrait)");
         let orientationNoticeDismissed = false;
         let orientationNoticeTimer = null;
 
-        if (historyPageProgress) {
+        if (historyPageProgress && historyPageProgressFill && historyStorySections.length) {
             ScrollTrigger.create({
-                start: 0,
-                end: () => ScrollTrigger.maxScroll(window),
+                trigger: historyStorySections[0],
+                start: "top top",
+                endTrigger: historyStorySections.at(-1),
+                end: "bottom bottom",
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
-                    historyPageProgress.style.width = `${self.progress * 100}%`;
+                    historyPageProgressFill.style.width = `${self.progress * 100}%`;
                 },
+                onEnter: () => historyPageProgress.classList.add("is-visible"),
+                onEnterBack: () => historyPageProgress.classList.add("is-visible"),
+                onLeave: () => historyPageProgress.classList.remove("is-visible"),
+                onLeaveBack: () => historyPageProgress.classList.remove("is-visible"),
             });
         }
 
