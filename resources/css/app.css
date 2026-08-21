@@ -4285,3 +4285,43 @@ textarea {
         margin-right: 4vw;
     }
 }
+
+/* Footer global: todo el contenido libra el logotipo fijo. */
+@media (min-width: 821px) and (max-width: 2080px) {
+    .indi-footer .indi-container {
+        width: auto;
+        max-width: 1440px;
+        margin-left: max(7.75rem, calc((100vw - 1440px) / 2));
+        margin-right: max(5vw, calc((100vw - 1440px) / 2));
+    }
+}
+
+@media (max-width: 820px) {
+    .indi-footer .indi-container {
+        width: auto;
+        margin-left: 6rem;
+        margin-right: 4vw;
+    }
+}
+
+.indi-footer #contacto .indi-container > div:first-child {
+    container-type: inline-size;
+}
+
+.indi-footer #contacto .indi-container > div:first-child h2 {
+    font-size: clamp(1.75rem, 8cqi, 4rem) !important;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    text-wrap: balance;
+}
+
+/* En tablet y movil la caja visual del logo es mayor que su SVG visible. */
+@media (max-width: 1080px) {
+    .indi-footer .indi-container {
+        width: auto !important;
+        max-width: none !important;
+        margin-left: clamp(7.5rem, 14vw, 9rem) !important;
+        margin-right: 4vw !important;
+    }
+}

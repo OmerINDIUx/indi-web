@@ -199,6 +199,34 @@
             font-size: 2.5rem;
         }
     }
+
+    /* El contenido y la portada del articulo libran el logotipo fijo. */
+    @media (min-width: 821px) {
+        .article-hero + .indi-container {
+            width: auto;
+            max-width: 1440px;
+            margin-left: max(7.5rem, calc((100vw - 1440px) / 2));
+            margin-right: max(5vw, calc((100vw - 1440px) / 2));
+        }
+    }
+
+    @media (max-width: 820px) {
+        .article-hero-content {
+            flex: 1 1 auto;
+            width: auto;
+            max-width: none;
+            margin-left: 6rem;
+            margin-right: 4vw;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .article-hero + .indi-container {
+            width: auto;
+            margin-left: 6rem;
+            margin-right: 4vw;
+        }
+    }
 </style>
 
 <!-- Hero Section -->

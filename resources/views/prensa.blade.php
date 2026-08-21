@@ -620,5 +620,39 @@
             grid-template-columns: minmax(0, 1fr) !important;
         }
     }
+
+    /* Carril seguro permanente para el logotipo fijo en toda la portada. */
+    @media (min-width: 821px) {
+        .prensa-page-wrap .indi-container {
+            width: auto;
+            max-width: 1440px;
+            margin-left: max(7.5rem, calc((100vw - 1440px) / 2));
+            margin-right: max(5vw, calc((100vw - 1440px) / 2));
+        }
+
+        .prensa-main-hero .indi-hero-content {
+            align-self: stretch;
+            width: auto;
+            padding-left: max(0px, calc(7.5rem - 5vw));
+            padding-right: 0;
+            box-sizing: border-box;
+        }
+    }
+
+    @media (max-width: 820px) {
+        .prensa-page-wrap .indi-container {
+            width: auto;
+            margin-left: 6rem;
+            margin-right: 4vw;
+        }
+
+        .prensa-main-hero .indi-hero-content {
+            align-self: stretch;
+            width: auto;
+            padding-left: max(0px, calc(6rem - 5vw));
+            padding-right: 0;
+            box-sizing: border-box;
+        }
+    }
     </style>
 @endsection
