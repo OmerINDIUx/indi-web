@@ -228,7 +228,7 @@
 @foreach($historySections as $index => $section)
     <section
         class="history-scroll-sequence"
-        style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 2.4;"
+        style="--history-milestones: {{ count($section['milestones']) }}; --history-scroll-factor: 3.2;"
         data-history-frames='@json($section['frames'])'
         data-history-last-text-frame="{{ $index === 0 ? 'part1424' : 'part2428' }}"
     >

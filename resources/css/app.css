@@ -4130,3 +4130,19 @@ textarea {
         top: 54%;
     }
 }
+/* Historia: encabezados centrados horizontalmente en todos los breakpoints. */
+.history-text-heading {
+    left: 50% !important;
+    right: auto;
+    width: min(90vw, 1200px);
+    max-width: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+.history-text-heading h2 {
+    width: 100%;
+    text-align: center;
+}

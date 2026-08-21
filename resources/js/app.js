@@ -279,6 +279,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 11. Historia image-sequence scroll
     const historySequences = gsap.utils.toArray(".history-scroll-sequence");
+    const snapByScrollDirection = (points, progress, direction, threshold = 0.12) => {
+        const sortedPoints = [...new Set(points)].sort((a, b) => a - b);
+
+        if (sortedPoints.length < 2) return progress;
+        if (progress <= sortedPoints[0]) return sortedPoints[0];
+        if (progress >= sortedPoints.at(-1)) return sortedPoints.at(-1);
+
+        for (let index = 0; index < sortedPoints.length - 1; index += 1) {
+            const previousPoint = sortedPoints[index];
+            const nextPoint = sortedPoints[index + 1];
+
+            if (progress > nextPoint) continue;
+
+            const intervalProgress = (progress - previousPoint) / (nextPoint - previousPoint);
+
+            return direction < 0
+                ? (intervalProgress <= 1 - threshold ? previousPoint : nextPoint)
+                : (intervalProgress >= threshold ? nextPoint : previousPoint);
+        }
+
+        return sortedPoints.at(-1);
+    };
+
     if (historySequences.length) {
         const historyPageProgress = document.querySelector(".history-page-progress span");
         const orientationNotice = document.getElementById("historyOrientationNotice");
@@ -492,11 +515,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 snap: window.matchMedia("(prefers-reduced-motion: reduce)").matches
                     ? false
                     : {
-                        snapTo: (progress) => gsap.utils.snap(milestoneSnapPoints, progress),
+                        snapTo: (progress, self) => snapByScrollDirection(
+                            milestoneSnapPoints,
+                            progress,
+                            self.direction,
+                        ),
                         delay: 0.12,
-                        duration: { min: 0.22, max: 0.55 },
-                        ease: "power2.out",
-                        directional: true,
+                        duration: { min: 0.55, max: 1.4 },
+                        ease: "power1.inOut",
+                        directional: false,
                     },
                 onUpdate: (self) => {
                     const index = Math.round(self.progress * (frames.length - 1));
@@ -557,6 +584,9 @@ document.addEventListener("DOMContentLoaded", () => {
     historyTextSequences.forEach((textSequence) => {
         const textStage = textSequence.querySelector(".history-text-stage");
         const textPanels = gsap.utils.toArray(textSequence.querySelectorAll(".history-text-panel"));
+        const textSnapPoints = textPanels.map((_, index) => (
+            textPanels.length > 1 ? index / (textPanels.length - 1) : 0
+        ));
 
         if (!textStage || !textPanels.length) return;
 
@@ -599,11 +629,15 @@ document.addEventListener("DOMContentLoaded", () => {
             snap: window.matchMedia("(prefers-reduced-motion: reduce)").matches || textPanels.length < 2
                 ? false
                 : {
-                    snapTo: 1 / (textPanels.length - 1),
+                    snapTo: (progress, self) => snapByScrollDirection(
+                        textSnapPoints,
+                        progress,
+                        self.direction,
+                    ),
                     delay: 0.12,
-                    duration: { min: 0.22, max: 0.5 },
-                    ease: "power2.out",
-                    directional: true,
+                    duration: { min: 0.5, max: 1.1 },
+                    ease: "power1.inOut",
+                    directional: false,
                 },
             onUpdate: (self) => {
                 renderTimeline(self.progress);
