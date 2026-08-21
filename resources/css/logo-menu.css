@@ -188,7 +188,7 @@
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
     flex-grow: 0;
-    background: var(--indi-blue);
+    background: linear-gradient(105deg, #004bbd 0%, var(--indi-blue) 62%, #0b75ff 100%);
     height: 85px;
     --notch-x: 50%;
     --notch-w: var(--logo-menu-notch-width);
@@ -219,8 +219,8 @@
     margin-top: 0 !important;
     padding: 0 0rem;
     opacity: 1;
-    border: 1px solid rgba(0, 102, 249, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    box-shadow: inset 0 0 0 1px rgba(0, 38, 120, 0.18), 0 10px 30px rgba(0, 28, 90, 0.32);
 }
 
 /*
@@ -644,8 +644,8 @@
         margin-top: 0 !important;
         padding: 0 1rem;
         opacity: 1;
-        border: 1px solid rgba(0, 102, 249, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        box-shadow: inset 0 0 0 1px rgba(0, 38, 120, 0.18), 0 10px 30px rgba(0, 28, 90, 0.32);
     }
 
     .logo-menu-wrapper:hover:not(.logo-hover-locked) .nav-link-item {

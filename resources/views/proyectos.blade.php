@@ -1231,7 +1231,8 @@
     }
     @media (min-width: 901px) {
         .projects-page-wrapper.has-project-selection .map-controls-overlay {
-            width: calc(75vw - 7%);
+            /* Keep the controls inside the map's left half while the card is open. */
+            width: calc(50vw - 7%);
             max-width: 585px;
         }
         .projects-page-wrapper.has-project-selection .filter-bar-premium,

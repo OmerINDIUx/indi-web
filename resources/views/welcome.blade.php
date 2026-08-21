@@ -532,7 +532,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
         </section>
 
         <!-- Blog Section with Gray Background -->
-        <section style="background: var(--indi-gray); padding: 10rem 0; position: relative;">
+        <section class="home-thinking-section" style="background: var(--indi-gray); padding: 10rem 0; position: relative;">
             <div class="indi-notch-divider gray">
                 <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                     <path d="M 0 100 V 40 H 420 L 450 0 H 550 L 580 40 H 1000 V 100 Z" />
@@ -548,7 +548,7 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                     <a href="/prensa" class="indi-heading" style="color: var(--indi-blue); font-size: 0.9rem; text-decoration: none; border-bottom: 2px solid var(--indi-blue); padding-bottom: 5px;">{{ \App\Support\CmsText::get('home.projects.visit_news', 'Visita las Noticias') }} ↓</a>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+                <div class="home-thinking-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
                     @forelse($posts ?? [] as $post)
                     <div class="blog-card">
                         <div class="blog-tags">

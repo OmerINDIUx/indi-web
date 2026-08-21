@@ -4251,3 +4251,19 @@ textarea {
         justify-self: center;
     }
 }
+
+/* Portada: el encabezado de Pensamiento Estrategico libra el logotipo fijo. */
+.home-thinking-section .blog-header-container > div:first-child,
+.home-thinking-section .home-thinking-grid {
+    padding-left: max(
+        0px,
+        calc(clamp(7rem, 10vw, 8rem) - 5vw)
+    );
+}
+
+@media (max-width: 820px) {
+    .home-thinking-section .blog-header-container > div:first-child,
+    .home-thinking-section .home-thinking-grid {
+        padding-left: max(0px, calc(6rem - 5vw));
+    }
+}
