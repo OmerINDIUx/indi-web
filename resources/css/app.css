@@ -4130,19 +4130,19 @@ textarea {
         top: 54%;
     }
 }
-/* Historia: encabezados centrados horizontalmente en todos los breakpoints. */
+/* Historia: el título libra el logotipo y las tarjetas quedan al centro vertical. */
 .history-text-heading {
-    left: 50% !important;
-    right: auto;
-    width: min(90vw, 1200px);
+    left: max(6%, 7.5rem) !important;
+    right: 5%;
     max-width: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transform: translateX(-50%);
 }
 
-.history-text-heading h2 {
-    width: 100%;
-    text-align: center;
+.history-text-panel {
+    top: 50% !important;
+}
+
+@media (max-width: 720px) {
+    .history-text-heading {
+        left: max(5%, 6.5rem) !important;
+    }
 }
