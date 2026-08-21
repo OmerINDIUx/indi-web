@@ -449,6 +449,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const startHistoryAnimation = () => {
+            let milestoneSnapPoints = [0, 1];
+
             const syncMilestonePositions = () => {
                 const scrollRange = Math.max(0, historySequence.offsetHeight - window.innerHeight);
                 const frameStep = frames.length > 1 ? scrollRange / (frames.length - 1) : 0;
@@ -465,6 +467,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     const top = lastTextFrameOffset * progress;
                     milestone.style.setProperty("--history-milestone-top", `${top}px`);
                 });
+
+                const milestoneProgress = milestones.map((_, index) => {
+                    const progress = milestones.length > 1 ? index / (milestones.length - 1) : 0;
+                    const top = lastTextFrameOffset * progress;
+
+                    return scrollRange > 0 ? top / scrollRange : 0;
+                });
+
+                milestoneSnapPoints = [...new Set([...milestoneProgress, 1])];
             };
 
             syncMilestonePositions();
@@ -478,6 +489,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
                 scrub: 0.7,
+                snap: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    ? false
+                    : {
+                        snapTo: (progress) => gsap.utils.snap(milestoneSnapPoints, progress),
+                        delay: 0.12,
+                        duration: { min: 0.22, max: 0.55 },
+                        ease: "power2.out",
+                        directional: true,
+                    },
                 onUpdate: (self) => {
                     const index = Math.round(self.progress * (frames.length - 1));
                     queueFrame(index);
@@ -576,6 +596,15 @@ document.addEventListener("DOMContentLoaded", () => {
             anticipatePin: 1,
             invalidateOnRefresh: true,
             scrub: 0.6,
+            snap: window.matchMedia("(prefers-reduced-motion: reduce)").matches || textPanels.length < 2
+                ? false
+                : {
+                    snapTo: 1 / (textPanels.length - 1),
+                    delay: 0.12,
+                    duration: { min: 0.22, max: 0.5 },
+                    ease: "power2.out",
+                    directional: true,
+                },
             onUpdate: (self) => {
                 renderTimeline(self.progress);
             },
