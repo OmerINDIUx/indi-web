@@ -112,6 +112,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/quejas', [AdminController::class, 'complaints'])->name('quejas.index');
     Route::get('/traducciones', [AdminTranslationController::class, 'index'])->name('traducciones.index');
     Route::put('/traducciones', [AdminTranslationController::class, 'update'])->name('traducciones.update');
+    Route::post('/traducciones/imagenes/{siteMedia}', [AdminTranslationController::class, 'updateMedia'])->name('traducciones.media.update');
     Route::resource('/proyectos', AdminProjectController::class)->except(['show']);
     Route::post('/proyectos/{proyecto}/toggle-home', [AdminProjectController::class, 'toggleHome'])->name('proyectos.toggle-home');
     

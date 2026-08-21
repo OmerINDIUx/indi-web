@@ -227,6 +227,19 @@ body {
     font-weight: 700;
 }
 
+.indi-hero-subtitle {
+    max-width: 48rem;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: 'usual', sans-serif;
+    font-size: clamp(0.8rem, 1.3vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.55);
+}
+
 .indi-hero h1 span.blue {
     color: var(--indi-blue);
 }

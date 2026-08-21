@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SiteMedia;
 use App\Models\SiteTranslation;
+use App\Support\CmsMedia;
 use App\Support\CmsText;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminTranslationController extends Controller
 {
@@ -15,7 +18,12 @@ class AdminTranslationController extends Controller
             ->get()
             ->groupBy('group');
 
-        return view('admin.translations.index', compact('translations'));
+        $media = SiteMedia::orderBy('group')
+            ->orderBy('id')
+            ->get()
+            ->groupBy('group');
+
+        return view('admin.translations.index', compact('translations', 'media'));
     }
 
     public function update(Request $request)
@@ -57,5 +65,27 @@ class AdminTranslationController extends Controller
             ->with('success', $updated > 0
                 ? "Traducciones actualizadas correctamente ({$updated} cambios guardados)."
                 : 'No habia cambios nuevos por guardar.');
+    }
+
+    public function updateMedia(Request $request, SiteMedia $siteMedia)
+    {
+        $data = $request->validate([
+            'image' => ['required', 'file', 'image', 'mimes:webp,jpeg,jpg,png', 'max:12288'],
+        ]);
+
+        $extension = strtolower($data['image']->getClientOriginalExtension());
+        $extension = in_array($extension, ['webp', 'jpg', 'jpeg', 'png'], true) ? $extension : 'webp';
+        $filename = Str::slug($siteMedia->key).'-'.now()->format('YmdHis').'.'.$extension;
+        $path = $data['image']->storeAs('site-media', $filename, 'public');
+
+        abort_unless($path, 500, 'No se pudo guardar la imagen.');
+
+        $siteMedia->update(['path' => $path]);
+        CmsMedia::clearCache();
+
+        return response()->json([
+            'message' => 'Imagen optimizada y guardada.',
+            'url' => $siteMedia->fresh()->url,
+        ]);
     }
 }

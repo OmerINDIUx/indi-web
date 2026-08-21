@@ -12,6 +12,9 @@
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
               {{ \App\Support\CmsText::get('home.hero.title', 'PASION POR EL PROGRESO') }}
             </h1>
+            <p class="indi-hero-subtitle">
+                {{ \App\Support\CmsText::get('home.hero.subtitle', 'MÁS DE 50 AÑOS CONSTRUYENDO MÉXICO') }}
+            </p>
         </div>
     </header>
 
@@ -306,7 +309,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.maritime.text', 'Dominio técnico en ingeniería portuaria, escolleras monumentales y obras de dragado.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" alt="Marítimo">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.maritime.image', 'imagenes_indi/Maritimo.png') }}" alt="Marítimo">
                         </div>
                     </div>
 
@@ -317,7 +320,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.infrastructure.text', 'Desarrollo de sistemas de movilidad urbana y transporte masivo de alta precisión técnica.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.infrastructure.image', 'imagenes_indi/Infraestructura.png') }}" alt="Infraestructura">
                         </div>
                     </div>
 
@@ -328,7 +331,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.construction.text', 'Especialistas en ingeniería civil de alta complejidad y cimentación profunda.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construcción">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.construction.image', 'imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" alt="Construcción">
                         </div>
                     </div>
 
@@ -339,7 +342,7 @@
                         </div>
                         <p class="u-detail indi-scroll-text">{{ \App\Support\CmsText::get('home.unit.railway.text', 'Ingeniería avanzada para sistemas de transporte ferroviario de carga y pasajeros a gran escala.') }}</p>
                         <div class="u-visual-mobile">
-                            <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.railway.image', 'imagenes_indi/Ferroviario.png') }}" alt="Ferroviaria">
                         </div>
                     </div>
                 </div>
@@ -354,10 +357,10 @@
                         </div>
                         
                         <div class="unit-images-stack">
-                            <img src="{{ asset('imagenes_indi/Maritimo.png') }}" class="stage-img active" alt="M">
-                            <img src="{{ asset('imagenes_indi/Infraestructura.png') }}" class="stage-img" alt="I">
-                            <img src="{{ asset('imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="stage-img" alt="C">
-                            <img src="{{ asset('imagenes_indi/Ferroviario.png') }}" class="stage-img" alt="F">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.maritime.image', 'imagenes_indi/Maritimo.png') }}" class="stage-img active" alt="M">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.infrastructure.image', 'imagenes_indi/Infraestructura.png') }}" class="stage-img" alt="I">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.construction.image', 'imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg') }}" class="stage-img" alt="C">
+                            <img src="{{ \App\Support\CmsMedia::url('home.unit.railway.image', 'imagenes_indi/Ferroviario.png') }}" class="stage-img" alt="F">
                         </div>
                     </div>
                 </div>

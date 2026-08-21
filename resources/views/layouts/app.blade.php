@@ -19,7 +19,7 @@
         ])
         @stack('styles')
     </head>
-    <body class="antialiased {{ request()->is('proyectos*') ? 'page-proyectos' : '' }}">
+    <body class="antialiased {{ request()->is('proyectos*') ? 'page-proyectos' : '' }} {{ request()->is('admin/traducciones*') ? 'page-admin-translations' : '' }}">
         <!-- High-Tech Mechanical Logo Menu -->
         <div class="logo-menu-wrapper" id="logoMenu">
             <div class="logo-group">

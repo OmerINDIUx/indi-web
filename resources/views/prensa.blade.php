@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Prensa Hero Section -->
-    <header class="indi-hero prensa-main-hero" style="background-image: url('{{ asset('imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
+    <header class="indi-hero prensa-main-hero" style="background-image: url('{{ \App\Support\CmsMedia::url('press.hero.image', 'imagenes_indi/Maritimo/a-terminal-portuaria-puerto-veracruz - copia.webp') }}');">
         <div class="indi-hero-content">
             <h1 class="indi-heading hero-typer-text" style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'usual', sans-serif;">
                 {{ \App\Support\CmsText::get('press.title', 'CONOCE LAS ULTIMAS NOTICIAS DE INDI') }}

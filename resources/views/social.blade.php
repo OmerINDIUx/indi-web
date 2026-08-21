@@ -177,7 +177,7 @@
                         </div>
                         <div class="foundation-body">
                             <div class="foundation-logos" aria-label="Logotipos de programas sociales">
-                                <img src="{{ asset('imagenes_social/Fundación_MMC-Logo.png') }}" alt="Fundacion MMC">
+                                <img src="{{ \App\Support\CmsMedia::url('social.foundation.logo', 'imagenes_social/Fundación_MMC-Logo.png') }}" alt="Fundacion MMC">
                             </div>
                             <p>{{ \App\Support\CmsText::get('social.foundation.text', 'Honramos la memoria del Ingeniero Manuel Ruben Munoz Cano Cardoso.') }}</p>
                             <div class="topic">
