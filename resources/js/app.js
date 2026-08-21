@@ -256,25 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             targetMarker.classList.add("is-pulsing");
                             window.setTimeout(() => targetMarker.classList.remove("is-pulsing"), 1200);
                         }
-                        let mapOrigin = "center center";
-                        if (targetMarker && mapSvg.viewBox.baseVal) {
-                            const viewBox = mapSvg.viewBox.baseVal;
-                            const markerX = Number(targetMarker.getAttribute("cx"));
-                            const markerY = Number(targetMarker.getAttribute("cy"));
-                            if (viewBox.width && viewBox.height && Number.isFinite(markerX) && Number.isFinite(markerY)) {
-                                mapOrigin = `${(markerX / viewBox.width) * 100}% ${(markerY / viewBox.height) * 100}%`;
-                            }
-                        }
-                        gsap.fromTo(
-                            mapSvg,
-                            { scale: 1.02, x: 0, y: 0 },
-                            { scale: 1.34, x: 0, y: 0, duration: 0.9, ease: "power2.out", yoyo: true, repeat: 1, transformOrigin: mapOrigin }
-                        );
                     }
                 } else { card.classList.remove("active"); }
             }});
         });
-        ScrollTrigger.create({ trigger: ".indi-interactive-projects", start: "top bottom", end: "bottom top", onLeave: () => { gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 }); }, onLeaveBack: () => { gsap.to(mapSvg, { scale: 1, x: 0, y: 0, duration: 1 }); } });
     }
 
     // 11. Historia image-sequence scroll
@@ -603,6 +588,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const renderTimeline = (progress) => {
             const activeIndex = progress * Math.max(0, textPanels.length - 1);
             const isMobile = window.matchMedia("(max-width: 720px)").matches;
+            const stageRect = textStage.getBoundingClientRect();
+            const heading = textStage.querySelector(".history-text-heading");
+            const headingRect = heading?.getBoundingClientRect();
+            const stageHeight = textStage.clientHeight || window.innerHeight;
+            const headingBottom = headingRect
+                ? Math.max(0, headingRect.bottom - stageRect.top)
+                : stageHeight * 0.16;
+            const contentTop = Math.max(
+                stageHeight * (isMobile ? 0.2 : 0.16),
+                headingBottom + (isMobile ? 18 : 32),
+            );
+            const contentBottom = Math.max(isMobile ? 24 : 36, stageHeight * 0.06);
+            const availableHeight = Math.max(0, stageHeight - contentTop - contentBottom);
+            const panelCenter = contentTop + (availableHeight / 2);
+
+            textStage.style.setProperty("--history-panel-center", `${panelCenter}px`);
+
             const widestPanel = Math.max(...textPanels.map((panel) => panel.getBoundingClientRect().width));
             const spacing = isMobile
                 ? Math.max(window.innerWidth * 0.9, widestPanel + 24)
