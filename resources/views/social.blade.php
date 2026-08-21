@@ -676,6 +676,7 @@
         justify-content: center;
         padding-right: clamp(2rem, 4vw, 4rem);
         border-right: 1px solid rgba(17, 17, 17, 0.12);
+        container-type: inline-size;
     }
 
     .foundation-tag {
@@ -688,6 +689,11 @@
         color: #171717;
         max-width: 740px;
         margin-bottom: 0;
+        font-size: clamp(1.5rem, 12cqi, 3.8rem) !important;
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
+        text-wrap: balance;
     }
 
     .foundation-body {

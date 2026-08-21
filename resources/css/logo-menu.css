@@ -41,8 +41,8 @@
 
 /*
  * Contenedor fijo del encabezado.
- * mix-blend-mode mantiene visible el logo blanco sobre fondos claros y oscuros
- * mientras el menu permanece cerrado.
+ * El modo de mezcla vive solo en el lienzo del logo para que nunca altere
+ * los colores del panel de navegacion.
  */
 .logo-menu-wrapper {
     position: fixed;
@@ -57,7 +57,7 @@
     border-radius: 4px;
     transition: background 0.4s ease;
     cursor: pointer;
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
     min-width: 120px;
     min-height: 154px;
 }
@@ -86,6 +86,16 @@
         width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
         height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
         margin 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* El contraste automatico se limita al logo cuando el menu esta cerrado. */
+.logo-menu-wrapper:not(.active) .logo-svg-wrapper {
+    mix-blend-mode: difference;
+}
+
+.logo-menu-wrapper.active .logo-svg-wrapper,
+.logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper {
+    mix-blend-mode: normal;
 }
 
 /* El SVG ocupa siempre todo el lienzo definido por su contenedor. */
@@ -189,6 +199,7 @@
     opacity: 0;
     flex-grow: 0;
     background: linear-gradient(105deg, #004bbd 0%, var(--indi-blue) 62%, #0b75ff 100%);
+    mix-blend-mode: normal !important;
     height: 85px;
     --notch-x: 50%;
     --notch-w: var(--logo-menu-notch-width);

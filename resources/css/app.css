@@ -4267,3 +4267,21 @@ textarea {
         padding-left: max(0px, calc(6rem - 5vw));
     }
 }
+
+/* Social: reserva un carril permanente para el logotipo fijo. */
+@media (min-width: 821px) {
+    .social-page .indi-container {
+        width: auto;
+        max-width: 1440px;
+        margin-left: max(7.5rem, calc((100vw - 1440px) / 2));
+        margin-right: max(5vw, calc((100vw - 1440px) / 2));
+    }
+}
+
+@media (max-width: 820px) {
+    .social-page .indi-container {
+        width: auto;
+        margin-left: 6rem;
+        margin-right: 4vw;
+    }
+}
