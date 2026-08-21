@@ -41,8 +41,8 @@
 
 /*
  * Contenedor fijo del encabezado.
- * El modo de mezcla vive solo en el lienzo del logo para que nunca altere
- * los colores del panel de navegacion.
+ * El modo de mezcla se usa en el wrapper solo mientras el menu esta cerrado;
+ * los estados abierto y hover fuerzan composicion normal.
  */
 .logo-menu-wrapper {
     position: fixed;
@@ -57,7 +57,7 @@
     border-radius: 4px;
     transition: background 0.4s ease;
     cursor: pointer;
-    mix-blend-mode: normal;
+    mix-blend-mode: difference;
     min-width: 120px;
     min-height: 154px;
 }
@@ -88,9 +88,9 @@
         margin 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* El contraste automatico se limita al logo cuando el menu esta cerrado. */
+/* El SVG no crea un contexto aislado: el wrapper calcula el filtro del fondo. */
 .logo-menu-wrapper:not(.active) .logo-svg-wrapper {
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
 }
 
 .logo-menu-wrapper.active .logo-svg-wrapper,
@@ -104,8 +104,9 @@
     height: 100%;
 }
 
-/* Color inicial de las piezas del logo y transicion al azul institucional. */
-.logo-svg-wrapper .cls-1 {
+/* El blanco sirve como base para el filtro adaptativo del logo cerrado. */
+.logo-svg-wrapper .cls-1,
+.logo-svg-wrapper .st1 {
     fill: #ffffff;
     transition: fill 0.6s ease;
 }
@@ -146,7 +147,7 @@
  */
 .logo-menu-wrapper.active {
     background: transparent;
-    mix-blend-mode: normal;
+    mix-blend-mode: normal !important;
     padding: 0;
     box-shadow: none;
     display: flex;
@@ -635,7 +636,7 @@
 /* Al abrirse por hover, el panel y el logo dejan de mezclar colores con el mapa. */
 @media (hover: hover) and (min-width: 821px) {
     .logo-menu-wrapper:hover:not(.logo-hover-locked) {
-        mix-blend-mode: normal;
+        mix-blend-mode: normal !important;
     }
     .logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper .cls-1 {
         fill: var(--indi-blue);

@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     onComplete: () => {
                         menuLinks.classList.remove("active");
                         logoMenu.classList.remove("active");
-                        gsap.set(logoMenu, { mixBlendMode: "normal" });
+                        gsap.set(logoMenu, { mixBlendMode: "difference" });
                         animateLogoFill("#ffffff");
                         /* Recupera la reduccion si el usuario sigue debajo del umbral. */
                         if (isCollided) updateLogoVisuals(true);
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
                         gsap.to(".part-bottom", { marginLeft: -100, y: 80, duration: 0.5, ease: "power2.inOut" });
                     }
-                    gsap.set(logoMenu, { mixBlendMode: "normal" });
+                    gsap.set(logoMenu, { mixBlendMode: "difference" });
                     animateLogoFill("#ffffff");
                 } else {
                     toggleMenu(false);
