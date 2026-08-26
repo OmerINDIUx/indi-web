@@ -69,6 +69,25 @@ class AdminTranslationController extends Controller
 
     public function updateMedia(Request $request, SiteMedia $siteMedia)
     {
+        if (Str::endsWith($siteMedia->key, '.pdf')) {
+            $data = $request->validate([
+                'document' => ['required', 'file', 'mimes:pdf', 'max:51200'],
+            ]);
+
+            $filename = Str::slug($siteMedia->key).'-'.now()->format('YmdHis').'.pdf';
+            $path = $data['document']->storeAs('site-documents', $filename, 'public');
+
+            abort_unless($path, 500, 'No se pudo guardar el documento.');
+
+            $siteMedia->update(['path' => $path]);
+            CmsMedia::clearCache();
+
+            return response()->json([
+                'message' => 'Documento PDF guardado correctamente.',
+                'url' => $siteMedia->fresh()->url,
+            ]);
+        }
+
         $data = $request->validate([
             'image' => ['required', 'file', 'image', 'mimes:webp,jpeg,jpg,png', 'max:12288'],
         ]);

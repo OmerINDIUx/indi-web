@@ -91,6 +91,7 @@
                 <p class="project-description" id="overlayDescription">
                     Desarrollo de infraestructura estratégica con los más altos estándares de calidad y tecnología, impulsando el progreso de México conforme a los objetivos de sostenibilidad y eficiencia.
                 </p>
+                <button class="project-description-toggle" id="overlayDescriptionToggle" type="button" aria-expanded="false" hidden>Leer más</button>
 
                 <div class="project-visual-notched">
                     <img id="overlayImage" src="" alt="Project Image">
@@ -107,7 +108,7 @@
 
 <style>
     :root {
-        --map-bg: #e8ebf2; 
+        --map-bg: #f2f2f2;
         --card-bg: #0a0a0a;
         --card-border: rgba(255, 255, 255, 0.08);
         --indi-blue: #0066f9;
@@ -130,11 +131,7 @@
         height: 100%;
         pointer-events: none;
         z-index: 501;
-        background: radial-gradient(
-          circle at center,
-          transparent 40%,
-          rgba(10, 15, 30, 0.35) 130%
-        );
+        background: transparent;
     }
 
     .projects-page-wrapper {
@@ -258,7 +255,7 @@
         flex: 1;
         position: relative;
         height: 100%;
-        background: #f0f0f5;
+        background: var(--map-bg);
         transition: all 0.6s var(--transition);
     }
 
@@ -278,7 +275,7 @@
             linear-gradient(rgba(0,102,249,0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0,102,249,0.03) 1px, transparent 1px);
         background-size: 80px 80px;
-        opacity: 0.4;
+        opacity: 0.16;
     }
 
     .map-scanner-line {
@@ -287,8 +284,8 @@
         left: 0;
         width: 100%;
         height: 150px;
-        background: linear-gradient(180deg, transparent, rgba(0,102,249,0.03), transparent);
-        opacity: 1;
+        background: linear-gradient(180deg, transparent, rgba(0,102,249,0.018), transparent);
+        opacity: 0.45;
         z-index: 501;
         pointer-events: none;
         animation: scanLines 12s linear infinite;
@@ -304,7 +301,9 @@
     }
 
     .leaflet-tile {
-        filter: brightness(1.05) contrast(1.05);
+        /* Base OSM clara con límites y vialidades legibles, sin color innecesario. */
+        filter: grayscale(1) brightness(1.02) contrast(0.72);
+        opacity: 0.7 !important;
         transition: opacity 0.5s ease;
     }
 
@@ -1231,23 +1230,37 @@
     }
     @media (min-width: 901px) {
         .projects-page-wrapper.has-project-selection .map-controls-overlay {
-            /* Keep the controls inside the map's left half while the card is open. */
-            width: calc(50vw - 7%);
-            max-width: 585px;
+            /* Aprovecha casi todo el panel del mapa mientras la ficha está abierta. */
+            width: min(44vw, 650px);
+            max-width: 650px;
         }
         .projects-page-wrapper.has-project-selection .filter-bar-premium,
         .projects-page-wrapper.has-project-selection .filter-container-blue {
             width: 100%;
         }
         .projects-page-wrapper.has-project-selection .filter-container-blue {
-            padding: 0 0.25rem;
+            justify-content: normal;
+            padding: 0 0.6rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .projects-page-wrapper.has-project-selection .filter-container-blue::-webkit-scrollbar {
+            display: none;
         }
         .projects-page-wrapper.has-project-selection .filter-link {
-            flex: 1 1 0;
-            min-width: 0;
-            padding: 0 0.15rem;
-            font-size: 0.46rem;
-            letter-spacing: 0;
+            flex: 1 0 20%;
+            min-width: 100px;
+            padding: 0 0.35rem;
+            font-size: 0.64rem;
+            letter-spacing: 0.015em;
+            white-space: nowrap;
+            text-align: center;
+        }
+    }
+    @media (min-width: 1081px) and (max-width: 2080px) {
+        /* La ficha lateral no debe ocultar la barra de filtros en escritorio. */
+        .projects-page-wrapper.has-project-selection .map-controls-overlay {
+            z-index: 2110;
         }
     }
     @media (max-width: 900px) {
@@ -1272,9 +1285,183 @@
             padding: 0 0.4rem;
         }
         .projects-page-wrapper.has-project-selection .filter-link {
-            padding: 0 0.3rem;
-            font-size: 0.69rem;
+            padding: 0 0.55rem;
+            font-size: 0.64rem;
             letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+    }
+
+    /* Tarjeta de detalle optimizada para las nuevas imagenes 16:9. */
+    .project-overlay-sidebar .project-white-card {
+        align-items: stretch;
+        text-align: left;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .project-overlay-sidebar .project-name {
+        width: 85%;
+        margin: 0.25rem auto 1.1rem;
+        padding: 0;
+        font-size: clamp(1.35rem, 2vw, 2rem);
+        line-height: 1.06;
+        letter-spacing: 0.035em;
+        text-align: center;
+        text-wrap: balance;
+    }
+
+    .project-overlay-sidebar .project-stats-grid {
+        flex: 0 0 auto;
+        width: 85%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 1.25rem;
+        padding: 0.9rem 0;
+    }
+
+    .project-overlay-sidebar .stat-item {
+        align-items: flex-start;
+        padding: 0 1.25rem;
+    }
+
+    .project-overlay-sidebar .stat-item:first-child {
+        padding-left: 0;
+    }
+
+    .project-overlay-sidebar .stat-label {
+        margin-bottom: 0.35rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.16em;
+    }
+
+    .project-overlay-sidebar .stat-value {
+        font-size: clamp(0.88rem, 1.25vw, 1.05rem);
+        line-height: 1.3;
+    }
+
+    .project-overlay-sidebar .project-description {
+        flex: 0 0 auto;
+        width: 85%;
+        min-height: auto;
+        max-height: none;
+        margin: 0 auto 0.55rem;
+        padding: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        font-size: clamp(0.92rem, 1.15vw, 1.03rem);
+        line-height: 1.68;
+        color: #374151;
+    }
+
+    .project-overlay-sidebar .project-description.is-expanded {
+        display: block;
+        overflow: visible;
+    }
+
+    .project-description-toggle {
+        align-self: center;
+        width: 85%;
+        margin: 0 auto 1.1rem;
+        padding: 0.35rem 0;
+        border: 0;
+        border-bottom: 1px solid rgba(0, 102, 249, 0.35);
+        background: transparent;
+        color: var(--indi-blue);
+        font-family: 'usual', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-align: left;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .project-description-toggle:hover {
+        border-bottom-color: var(--indi-blue);
+        color: #004dbd;
+    }
+
+    .project-overlay-sidebar .project-visual-notched {
+        flex: 0 0 auto;
+        width: 85%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        min-height: 0;
+        margin: auto auto 0;
+        background: #e8ebf2;
+    }
+
+    .project-overlay-sidebar .project-visual-notched img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    @media (max-width: 900px) {
+        .project-overlay-sidebar .project-white-card {
+            display: flex;
+            padding: 1.5rem 1.25rem 0;
+        }
+
+        .project-overlay-sidebar .project-name {
+            width: 85%;
+            margin: 0 auto 1rem;
+            padding: 0;
+            font-size: clamp(1.3rem, 5.4vw, 2rem);
+        }
+
+        .project-overlay-sidebar .project-stats-grid {
+            width: 100%;
+            margin-bottom: 1.15rem;
+            padding: 0.8rem 0;
+        }
+
+        .project-overlay-sidebar .project-description {
+            width: 100%;
+            max-height: none;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            line-height: 1.62;
+        }
+
+        .project-overlay-sidebar .project-description.is-expanded {
+            overflow: visible;
+        }
+
+        .project-description-toggle {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .project-overlay-sidebar .project-visual-notched {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .project-overlay-sidebar .project-name {
+            margin-top: 0;
+            margin-bottom: 0.85rem;
+            font-size: clamp(1.2rem, 6.2vw, 1.55rem);
+        }
+
+        .project-overlay-sidebar .project-stats-grid {
+            margin-bottom: 1rem;
+        }
+
+        .project-overlay-sidebar .project-description {
+            margin-bottom: 0.45rem;
+            font-size: 0.9rem;
+            line-height: 1.58;
+            -webkit-line-clamp: 3;
         }
     }
 </style>
@@ -1309,8 +1496,8 @@
         // Custom attribution (minimalist)
         L.control.attribution({position: 'bottomleft'}).setPrefix('INDI OSINT-MAP').addTo(map);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; CartoDB',
+        L.tileLayer(@json(config('services.maps.tiles_url')), {
+            attribution: @json(config('services.maps.attribution')),
             maxZoom: 19
         }).addTo(map);
 
@@ -1349,6 +1536,8 @@
 
         function showProject(project) {
             const overlay = document.getElementById('projectOverlay');
+            const description = document.getElementById('overlayDescription');
+            const descriptionToggle = document.getElementById('overlayDescriptionToggle');
             
             // Helper to tech-ify text (Disabled to maintain clean Usual font)
             const techify = (text) => text.toUpperCase();
@@ -1380,7 +1569,14 @@
 
             document.getElementById('overlayTitle').innerText = techify(project.title);
             document.getElementById('overlayAddress').innerText = techify(project.address);
-            document.getElementById('overlayDescription').innerText = project.description || cat.desc;
+            description.innerText = project.description || cat.desc;
+            description.classList.remove('is-expanded');
+            descriptionToggle.setAttribute('aria-expanded', 'false');
+            descriptionToggle.innerText = 'Leer más';
+            descriptionToggle.hidden = true;
+            window.requestAnimationFrame(() => {
+                descriptionToggle.hidden = description.scrollHeight <= description.clientHeight + 2;
+            });
             
             // Update HUD Coordinates dynamically
             const hudCoords = document.querySelector('.hud-bottom-right .hud-label');
@@ -1424,6 +1620,13 @@
                 easeLinearity: 0.1
             });
         }
+
+        document.getElementById('overlayDescriptionToggle').addEventListener('click', function() {
+            const description = document.getElementById('overlayDescription');
+            const expanded = description.classList.toggle('is-expanded');
+            this.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            this.innerText = expanded ? 'Leer menos' : 'Leer más';
+        });
 
         document.getElementById('closeOverlay').addEventListener('click', () => {
             const overlay = document.getElementById('projectOverlay');

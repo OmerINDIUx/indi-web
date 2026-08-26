@@ -74,7 +74,7 @@
      * El SVG puede desbordar visualmente su lienzo, pero su caja transparente
      * no debe bloquear los enlaces del menu colocados debajo.
      */
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 /* Tamano base del lienzo SVG; la proporcion vertical forma parte del logo. */
@@ -686,5 +686,12 @@
 @media (min-width: 821px) {
     .logo-menu-wrapper.active {
         align-items: flex-start !important;
+    }
+
+    /* Alinea la barra con la parte visible del logotipo, no con su lienzo alto. */
+    .logo-menu-wrapper.active .menu-container,
+    .logo-menu-wrapper:hover:not(.logo-hover-locked) .menu-container {
+        align-self: flex-start;
+        margin-top: 0.1rem !important;
     }
 }

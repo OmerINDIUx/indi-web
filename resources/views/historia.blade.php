@@ -276,12 +276,7 @@
             @if($index === 0)
                 <div class="history-scroll-cue is-loading" aria-hidden="true">
                     <span>Scrollea para descubrir más</span>
-                    <img
-                        src="{{ asset('imagenes_indi/scroll.gif') }}"
-                        alt=""
-                        width="180"
-                        height="150"
-                    >
+                    <span class="scroll-arrows history-scroll-arrows"><span></span><span></span></span>
                 </div>
             @endif
         </div>

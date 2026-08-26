@@ -144,6 +144,8 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
 .admin-media-upload{width:100%;min-height:40px;border:0;border-radius:8px;color:#fff;background:#0667f9;font:inherit;font-size:.72rem;font-weight:900;cursor:pointer}
 .admin-media-upload:disabled{cursor:default;opacity:.45}
 .admin-media-message{min-height:18px;margin-top:.45rem;color:#067647;font-size:.68rem;font-weight:800}
+.admin-document-preview{height:116px;display:grid;place-items:center;color:#d92d20;background:linear-gradient(135deg,#fff1f0,#fff);font-size:1.1rem;font-weight:900;letter-spacing:.16em}
+.admin-document-current{display:inline-flex;margin-bottom:.75rem;color:#0759d5;font-size:.7rem;font-weight:800;text-decoration:none}
 @media(max-width:1450px){
  .admin-translations-workspace{grid-template-columns:245px minmax(430px,500px) minmax(460px,1fr)}
 }
@@ -211,7 +213,7 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
                     </div>
                     <div class="admin-content-tabs" aria-label="Tipo de contenido">
                         <button type="button" class="active" data-content-mode="texts">Textos</button>
-                        <button type="button" data-content-mode="media">Imagenes <span>{{ $media->flatten(1)->count() }}</span></button>
+                        <button type="button" data-content-mode="media">Archivos <span>{{ $media->flatten(1)->count() }}</span></button>
                     </div>
 
 
@@ -326,13 +328,31 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
                     <section class="admin-media-group" data-media-group-section="{{ Str::slug($group) }}" hidden>
                         <div class="admin-group-heading">
                             <div>
-                                <span>Imagenes de</span>
+                                <span>Archivos de</span>
                                 <h2>{{ $translationPages[$group]['name'] ?? $group }}</h2>
                             </div>
-                            <strong>{{ $items->count() }} imagenes</strong>
+                            <strong>{{ $items->count() }} archivos</strong>
                         </div>
                         <div class="admin-media-cards">
                             @foreach($items as $image)
+                                @if(Str::endsWith($image->key, '.pdf'))
+                                    <article class="admin-media-card" data-document-card data-upload-url="{{ route('admin.traducciones.media.update', $image) }}">
+                                        <div class="admin-document-preview">PDF</div>
+                                        <div class="admin-media-body">
+                                            <div class="admin-media-title">
+                                                <div><h3>{{ $image->label }}</h3><code>{{ $image->key }}</code></div>
+                                                <span>Archivo PDF · maximo 50 MB</span>
+                                            </div>
+                                            <a class="admin-document-current" href="{{ $image->url }}" target="_blank" rel="noopener">Ver documento actual</a>
+                                            <label class="admin-media-picker">
+                                                <input type="file" accept="application/pdf,.pdf" data-document-input>
+                                                <span>Elegir nuevo PDF</span>
+                                            </label>
+                                            <button type="button" class="admin-media-upload" data-document-upload disabled>Guardar documento</button>
+                                            <div class="admin-media-message" data-document-message></div>
+                                        </div>
+                                    </article>
+                                @else
                                 <article class="admin-media-card" data-media-card data-upload-url="{{ route('admin.traducciones.media.update', $image) }}">
                                     <img class="admin-media-preview" src="{{ $image->url }}" alt="{{ $image->label }}">
                                     <div class="admin-media-body">
@@ -363,6 +383,7 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
                                         <div class="admin-media-message" data-media-message></div>
                                     </div>
                                 </article>
+                                @endif
                             @endforeach
                         </div>
                     </section>
@@ -458,9 +479,9 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
 
             if (isMediaMode) {
                 const activeMediaSection = mediaSections.find((section) => section.dataset.mediaGroupSection === activeGroup);
-                const count = activeMediaSection?.querySelectorAll('[data-media-card]').length || 0;
+                const count = activeMediaSection?.querySelectorAll('[data-media-card], [data-document-card]').length || 0;
                 mediaEmptyState.hidden = count > 0;
-                visibleCount.textContent = `${count} ${count === 1 ? 'imagen' : 'imagenes'}`;
+                visibleCount.textContent = `${count} ${count === 1 ? 'archivo' : 'archivos'}`;
                 search.closest('.admin-search-row').hidden = true;
                 return;
             }
@@ -679,6 +700,49 @@ body:has(.admin-translations-page)>.logo-menu-wrapper,body:has(.admin-translatio
                 } finally {
                     upload.textContent = 'Comprimir y guardar';
                     upload.disabled = !card.compressedBlob;
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-document-card]').forEach((card) => {
+            const input = card.querySelector('[data-document-input]');
+            const upload = card.querySelector('[data-document-upload]');
+            const message = card.querySelector('[data-document-message]');
+
+            input.addEventListener('change', () => {
+                const file = input.files?.[0];
+                upload.disabled = !file;
+                message.textContent = file ? `${file.name} · ${formatBytes(file.size)}` : '';
+            });
+
+            upload.addEventListener('click', async () => {
+                const file = input.files?.[0];
+                if (!file) return;
+
+                const data = new FormData();
+                data.append('document', file);
+                upload.disabled = true;
+                upload.textContent = 'Guardando...';
+                message.textContent = '';
+
+                try {
+                    const response = await fetch(card.dataset.uploadUrl, {
+                        method: 'POST',
+                        headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                        credentials: 'same-origin',
+                        body: data,
+                    });
+                    const payload = await response.json();
+                    if (!response.ok) throw new Error(payload.message || 'No se pudo guardar el documento.');
+                    card.querySelector('.admin-document-current').href = `${payload.url}?v=${Date.now()}`;
+                    message.textContent = payload.message;
+                    input.value = '';
+                    refreshPreview.click();
+                } catch (error) {
+                    message.textContent = error.message || 'No se pudo guardar el documento.';
+                } finally {
+                    upload.textContent = 'Guardar documento';
+                    upload.disabled = !input.files?.[0];
                 }
             });
         });

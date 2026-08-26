@@ -86,11 +86,11 @@ Route::get('/social', function () {
 })->name('social');
 
 Route::get('/brochure', function () {
-    return view('viewer', ['pdf' => asset('assets/Brochure-Grupo-Indi.pdf'), 'title' => \App\Support\CmsText::get('footer.brochure', 'BROCHURE INTERACTIVO')]);
+    return view('viewer', ['pdf' => \App\Support\CmsMedia::url('viewer.brochure.pdf', 'assets/Brochure-Grupo-Indi.pdf'), 'title' => \App\Support\CmsText::get('footer.brochure', 'BROCHURE INTERACTIVO')]);
 })->name('brochure');
 
 Route::get('/etica', function () {
-    return view('viewer', ['pdf' => asset('assets/codigo-de-etica-y-conducta-2025.pdf'), 'title' => \App\Support\CmsText::get('footer.ethics', 'CODIGO DE ETICA 2025')]);
+    return view('viewer', ['pdf' => \App\Support\CmsMedia::url('viewer.ethics.pdf', 'assets/codigo-de-etica-y-conducta-2025.pdf'), 'title' => \App\Support\CmsText::get('footer.ethics', 'CODIGO DE ETICA 2025')]);
 })->name('etica');
 
 // Forms for Talent & Quejas

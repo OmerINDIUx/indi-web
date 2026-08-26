@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="negocios-page-progress" aria-hidden="true"><span></span></div>
 <main class="negocios-page">
     <div class="negocios-pin-wrapper">
         <div class="negocios-sticky-stage">
@@ -15,14 +16,17 @@
                     <!-- Inverted SVG Notch: White wings that let the image protrude in the center -->
                     <div class="negocios-notch-divider">
                         <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
-                            <path d="M 0 0 H 150 C 180 0 190 60 200 60 H 800 C 810 60 820 0 850 0 H 1000 V 100 H 0 Z" />
+                            <path d="M 0 60 H 150 C 180 60 190 0 200 0 H 800 C 810 0 820 60 850 60 H 1000 V 100 H 0 Z" />
                         </svg>
                     </div>
+                    <a class="negocios-scroll-cue" href="#negocios-content" aria-label="Desplazarse al contenido">
+                        <span class="scroll-arrows" aria-hidden="true"><span></span><span></span></span>
+                    </a>
                 </div>
             </div>
 
             <!-- Content Layer -->
-            <div class="content-layer">
+            <div id="negocios-content" class="content-layer">
                 <div class="indi-container">
                     <div class="unit-info-grid">
                         <!-- All texts stacked, cross-faded by GSAP -->
@@ -103,7 +107,7 @@
 .negocios-pin-wrapper {
     position: relative;
     width: 100%;
-    height: calc(var(--negocios-vh) * 5);
+    height: calc(var(--negocios-vh) * 4.75);
 }
 
 .negocios-sticky-stage {
@@ -133,6 +137,34 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+.negocios-page-progress {
+    position: fixed;
+    left: 6%;
+    right: 6%;
+    bottom: 0.75rem;
+    z-index: 40;
+    height: 3px;
+    background: rgba(0, 102, 255, 0.18);
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.negocios-page-progress.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.negocios-page-progress span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: var(--indi-blue);
+    transform-origin: left center;
 }
 
 /* Visual Layer: Fixed 70% height */
@@ -165,6 +197,33 @@
     width: 100%;
     height: 100%;
     fill: #fff; /* Matches the content background */
+}
+
+.negocios-scroll-cue {
+    position: absolute;
+    bottom: 0.35rem;
+    left: 50%;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    color: var(--indi-blue);
+    transform: translateX(-50%);
+    text-decoration: none;
+    transition: transform 0.25s ease, opacity 0.35s ease, visibility 0s;
+}
+
+.negocios-scroll-cue:hover {
+    transform: translateX(-50%) translateY(0.2rem);
+}
+
+.negocios-scroll-cue.scroll-cue-scrolled {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(0.8rem);
 }
 
 .stage-img {
@@ -488,6 +547,12 @@
 
 /* Teléfonos Grandes (720px) */
 @media (max-width: 720px) {
+    .negocios-page-progress {
+        left: 5%;
+        right: 5%;
+        bottom: 0.75rem;
+    }
+
     .negocios-page .negocios-sticky-stage {
         height: var(--negocios-vh) !important;
         min-height: var(--negocios-vh);
@@ -537,6 +602,12 @@
 
 /* Teléfonos Pequeños (500px) */
 @media (max-width: 500px) {
+    .negocios-scroll-cue {
+        bottom: 0.2rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
     .negocios-page .visual-layer {
         height: clamp(140px, 24svh, 210px) !important;
         min-height: 140px;
@@ -726,6 +797,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUnit(1);
 
     const pinWrapper = document.querySelector('.negocios-pin-wrapper');
+    const pageProgress = document.querySelector('.negocios-page-progress');
+    const pageProgressFill = pageProgress?.querySelector('span');
     let activeUnit = 1;
     let ticking = false;
 
@@ -739,10 +812,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollableDistance = Math.max(1, wrapperHeight - viewportHeight);
         const localScroll = pageTop - wrapperTop;
         const progress = Math.min(1, Math.max(0, localScroll / scrollableDistance));
-        const nextUnit = Math.min(4, Math.max(1, Math.floor(progress * 4) + 1));
+        const firstUnitProgress = (viewportHeight * 0.75) / scrollableDistance;
+        const unitProgressStops = [firstUnitProgress, firstUnitProgress + (viewportHeight / scrollableDistance), firstUnitProgress + ((viewportHeight * 2) / scrollableDistance)];
+        const nextUnit = progress < unitProgressStops[0]
+            ? 1
+            : progress < unitProgressStops[1]
+                ? 2
+                : progress < unitProgressStops[2]
+                    ? 3
+                    : 4;
+        const isInsideExperience = localScroll >= 0 && localScroll < scrollableDistance;
 
-        pinWrapper.classList.toggle('is-fixed', localScroll >= 0 && localScroll < scrollableDistance);
+        pinWrapper.classList.toggle('is-fixed', isInsideExperience);
         pinWrapper.classList.toggle('is-after', localScroll >= scrollableDistance);
+        pageProgress?.classList.toggle('is-visible', isInsideExperience);
+
+        if (pageProgressFill) {
+            pageProgressFill.style.width = `${progress * 100}%`;
+        }
 
         if (nextUnit !== activeUnit) {
             activeUnit = nextUnit;

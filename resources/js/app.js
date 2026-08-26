@@ -657,4 +657,17 @@ document.addEventListener("DOMContentLoaded", () => {
             onRefresh: (self) => renderTimeline(self.progress),
         });
     });
+
+    const scrollCues = document.querySelectorAll(
+        ".home-scroll-cue, .negocios-scroll-cue, .history-scroll-cue",
+    );
+    if (scrollCues.length) {
+        const updateScrollCues = () => {
+            const shouldFade = window.scrollY > 8;
+            scrollCues.forEach((cue) => cue.classList.toggle("scroll-cue-scrolled", shouldFade));
+        };
+
+        updateScrollCues();
+        window.addEventListener("scroll", updateScrollCues, { passive: true });
+    }
 });

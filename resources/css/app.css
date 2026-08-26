@@ -104,6 +104,53 @@ body {
     fill: var(--indi-gray);
 }
 
+/* Indicador de desplazamiento: dos flechas del SVG superpuestas y animadas. */
+.scroll-arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: clamp(2.25rem, 3.1vw, 3.1rem);
+    color: currentColor;
+}
+
+.scroll-arrows span {
+    display: block;
+    width: 100%;
+    aspect-ratio: 180 / 74.54;
+    background: currentColor;
+    -webkit-mask: url('/scrolling.svg') center / contain no-repeat;
+    mask: url('/scrolling.svg') center / contain no-repeat;
+    animation: scroll-arrow-fall 1.65s ease-in-out infinite;
+}
+
+.scroll-arrows span + span {
+    margin-top: clamp(-0.8rem, -1vw, -0.45rem);
+    animation-delay: -0.42s;
+}
+
+@keyframes scroll-arrow-fall {
+    0%, 18% {
+        opacity: 0.25;
+        transform: translateY(-0.25rem);
+    }
+    54% {
+        opacity: 1;
+        transform: translateY(0.3rem);
+    }
+    100% {
+        opacity: 0.25;
+        transform: translateY(0.7rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-arrows span {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* Technical Design Rule (Regla) */
 .indi-rule {
     width: 60%;
@@ -1432,6 +1479,13 @@ body {
 }
 .history-scroll-cue.is-loading,
 .history-scroll-cue.is-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translate(-50%, 1rem) !important;
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s 0.35s;
+}
+
+.history-scroll-cue.scroll-cue-scrolled {
     opacity: 0 !important;
     visibility: hidden !important;
     transform: translate(-50%, 1rem) !important;

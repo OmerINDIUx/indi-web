@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* Clic/toque en el logo como respaldo para abrir y cerrar el menú. */
         logoMenu.addEventListener("click", (event) => {
+            if (event.target.closest(".logo-group")) return;
             if (event.target.closest(".nav-link-item")) return;
             if (!isMenuOpen) toggleMenu(true);
         });

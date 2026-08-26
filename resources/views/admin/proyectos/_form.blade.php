@@ -68,12 +68,134 @@
 
     .project-preview-img {
         width: 100%;
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 16 / 9;
         object-fit: cover;
-        border-radius: 6px;
-        border: 1px solid #e2e8f0;
+        clip-path: polygon(0 0, 30% 0, 36% 6%, 64% 6%, 70% 0, 100% 0, 100% 100%, 0 100%);
         background: #f1f5f9;
         display: block;
+    }
+
+    .project-cropper {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #0f172a;
+        color: #fff;
+    }
+
+    .project-cropper.is-active {
+        display: block;
+    }
+
+    .project-crop-stage {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #020617;
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+    }
+
+    .project-crop-stage.is-dragging {
+        cursor: grabbing;
+    }
+
+    .project-crop-stage canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    .project-crop-notch-mask {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 30%;
+        width: 40%;
+        height: 6%;
+        background: rgba(15, 23, 42, 0.82);
+        clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+        pointer-events: none;
+    }
+
+    .project-crop-frame {
+        position: absolute;
+        z-index: 3;
+        inset: 0;
+        border: 2px solid #0066f9;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+        pointer-events: none;
+    }
+
+    .project-crop-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .project-crop-zoom {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0.85rem;
+        align-items: center;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .project-crop-zoom label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #e2e8f0;
+    }
+
+    .project-crop-zoom input[type="range"] {
+        width: 100%;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        accent-color: #0066f9;
+    }
+
+    .project-crop-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+        gap: 0.75rem;
+    }
+
+    .project-crop-btn {
+        border: 0;
+        border-radius: 4px;
+        padding: 0.7rem 0.9rem;
+        min-height: 44px;
+        font: inherit;
+        font-weight: 700;
+        line-height: 1.2;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .project-crop-btn-primary {
+        background: #0066f9;
+        color: #fff;
+    }
+
+    .project-crop-btn-secondary {
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .project-crop-instructions {
+        margin: 0.8rem 0 0;
+        color: #cbd5e1;
+        font-size: 0.8rem;
+        line-height: 1.45;
     }
 
     .project-image-status {
@@ -99,6 +221,10 @@
         overflow: hidden;
         background: #e2e8f0;
         margin-top: 1rem;
+    }
+
+    .project-location-map .leaflet-tile {
+        filter: saturate(0.22) brightness(1.08) contrast(0.82);
     }
 
     .project-map-toolbar {
@@ -145,6 +271,10 @@
     @media (max-width: 900px) {
         .project-form-grid,
         .project-two-cols {
+            grid-template-columns: 1fr;
+        }
+
+        .project-crop-actions {
             grid-template-columns: 1fr;
         }
     }
@@ -243,12 +373,32 @@
         <div class="project-field">
             <label for="marker_image">Imagen</label>
             <input id="marker_image" name="marker_image" type="file" accept="image/*" @if(empty($project)) required @endif>
-            <div class="project-help">La imagen se comprimirá automáticamente antes de guardarse. Formatos permitidos: JPG, PNG, GIF o WEBP.</div>
+            <div class="project-help">La imagen final debe ser 16:9. Al seleccionarla podrás moverla, centrarla y ajustar el zoom dentro de la máscara.</div>
             <div id="projectImageStatus" class="project-image-status" style="display: none;"></div>
+
+            <div id="projectImageCropper" class="project-cropper" aria-hidden="true">
+                <div id="projectCropStage" class="project-crop-stage">
+                    <canvas id="projectCropCanvas" width="1600" height="900"></canvas>
+                    <div class="project-crop-notch-mask" title="Esta zona queda oculta por la máscara del diseño"></div>
+                    <div class="project-crop-frame"></div>
+                </div>
+                <div class="project-crop-toolbar">
+                    <div class="project-crop-zoom">
+                        <label for="projectCropZoom">Zoom</label>
+                        <input id="projectCropZoom" type="range" min="1" max="3" step="0.01" value="1">
+                    </div>
+                    <div class="project-crop-actions">
+                        <button id="projectCropCancel" class="project-crop-btn project-crop-btn-secondary" type="button">Cancelar</button>
+                        <button id="projectCropApply" class="project-crop-btn project-crop-btn-primary" type="button">Usar recorte 16:9</button>
+                    </div>
+                </div>
+                <p class="project-crop-instructions">Arrastra la fotografía para centrarla. La zona oscura superior representa la muesca que se verá en la ficha del proyecto.</p>
+            </div>
         </div>
 
         @if(!empty($project?->marker_image))
             <img class="project-preview-img" id="projectImagePreview" src="{{ asset('storage/' . $project->marker_image) }}" alt="{{ $project->title }}">
+            <button id="projectCropExisting" class="project-map-btn" type="button" style="margin-top: 0.8rem;">Recortar imagen actual a 16:9</button>
         @else
             <div class="project-preview-img" id="projectImagePreviewEmpty" style="display: flex; align-items: center; justify-content: center; color: #94a3b8; font-weight: 700;">
                 Sin imagen cargada
@@ -301,8 +451,8 @@
             scrollWheelZoom: false,
         });
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; CartoDB',
+        L.tileLayer(@json(config('services.maps.tiles_url')), {
+            attribution: @json(config('services.maps.attribution')),
             maxZoom: 19,
         }).addTo(map);
 
@@ -343,11 +493,27 @@
         const status = document.getElementById('projectImageStatus');
         const preview = document.getElementById('projectImagePreview');
         const emptyPreview = document.getElementById('projectImagePreviewEmpty');
-        if (!input || !status || !preview) return;
+        const cropper = document.getElementById('projectImageCropper');
+        const stage = document.getElementById('projectCropStage');
+        const canvas = document.getElementById('projectCropCanvas');
+        const zoomInput = document.getElementById('projectCropZoom');
+        const applyButton = document.getElementById('projectCropApply');
+        const cancelButton = document.getElementById('projectCropCancel');
+        const existingButton = document.getElementById('projectCropExisting');
+        const form = input?.closest('form');
+        if (!input || !status || !preview || !cropper || !stage || !canvas || !zoomInput) return;
 
-        const maxWidth = 1800;
-        const maxHeight = 1200;
-        const quality = 0.82;
+        const context = canvas.getContext('2d');
+        const quality = 0.86;
+        let sourceImage = null;
+        let sourceFile = null;
+        let zoom = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        let dragging = false;
+        let lastPointerX = 0;
+        let lastPointerY = 0;
+        let previewUrl = null;
 
         const formatBytes = (bytes) => {
             if (!bytes) return '0 KB';
@@ -376,62 +542,172 @@
             image.src = url;
         });
 
-        const canvasToBlob = (canvas) => new Promise((resolve) => {
+        const canvasToBlob = () => new Promise((resolve) => {
             canvas.toBlob(resolve, 'image/jpeg', quality);
         });
 
-        input.addEventListener('change', async () => {
-            const file = input.files?.[0];
-            if (!file) return;
+        const drawCrop = () => {
+            if (!sourceImage) return;
 
+            const baseScale = Math.max(
+                canvas.width / sourceImage.naturalWidth,
+                canvas.height / sourceImage.naturalHeight
+            );
+            const scale = baseScale * zoom;
+            const drawWidth = sourceImage.naturalWidth * scale;
+            const drawHeight = sourceImage.naturalHeight * scale;
+            const maxOffsetX = Math.max(0, (drawWidth - canvas.width) / 2);
+            const maxOffsetY = Math.max(0, (drawHeight - canvas.height) / 2);
+
+            offsetX = Math.max(-maxOffsetX, Math.min(maxOffsetX, offsetX));
+            offsetY = Math.max(-maxOffsetY, Math.min(maxOffsetY, offsetY));
+
+            const x = (canvas.width - drawWidth) / 2 + offsetX;
+            const y = (canvas.height - drawHeight) / 2 + offsetY;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.imageSmoothingEnabled = true;
+            context.imageSmoothingQuality = 'high';
+            context.drawImage(sourceImage, x, y, drawWidth, drawHeight);
+        };
+
+        const openCropper = async (file) => {
             if (!file.type.startsWith('image/')) {
                 showStatus('El archivo seleccionado no es una imagen valida.');
+                input.value = '';
                 return;
             }
 
-            showStatus('Comprimiendo imagen...');
-
             try {
-                const image = await loadImage(file);
-                const scale = Math.min(maxWidth / image.width, maxHeight / image.height, 1);
-                const width = Math.round(image.width * scale);
-                const height = Math.round(image.height * scale);
-
-                const canvas = document.createElement('canvas');
-                canvas.width = width;
-                canvas.height = height;
-
-                const context = canvas.getContext('2d');
-                context.drawImage(image, 0, 0, width, height);
-
-                const blob = await canvasToBlob(canvas);
-                if (!blob) {
-                    showStatus('No se pudo comprimir la imagen. Se enviara el archivo original.');
-                    return;
-                }
-
-                const compressedFile = new File(
-                    [blob],
-                    file.name.replace(/\.[^.]+$/, '') + '.jpg',
-                    { type: 'image/jpeg', lastModified: Date.now() }
-                );
-
-                const transfer = new DataTransfer();
-                transfer.items.add(compressedFile);
-                input.files = transfer.files;
-
-                const saved = Math.max(0, file.size - compressedFile.size);
-                showStatus(
-                    `<strong>Imagen comprimida.</strong><br>` +
-                    `Original: ${formatBytes(file.size)} · Final: ${formatBytes(compressedFile.size)} · Ahorro: ${formatBytes(saved)}`
-                );
-
-                preview.src = URL.createObjectURL(compressedFile);
-                preview.style.display = 'block';
-                if (emptyPreview) emptyPreview.style.display = 'none';
+                sourceImage = await loadImage(file);
+                sourceFile = file;
+                zoom = 1;
+                offsetX = 0;
+                offsetY = 0;
+                zoomInput.value = '1';
+                cropper.classList.add('is-active');
+                cropper.setAttribute('aria-hidden', 'false');
+                showStatus('<strong>Ajusta el recorte 16:9.</strong><br>Mueve la imagen y confirma con “Usar recorte 16:9”.');
+                drawCrop();
             } catch (error) {
-                showStatus('No se pudo comprimir la imagen. Se enviara el archivo original.');
+                input.value = '';
+                showStatus('No se pudo leer la imagen seleccionada.');
             }
+        };
+
+        const closeCropper = () => {
+            cropper.classList.remove('is-active');
+            cropper.setAttribute('aria-hidden', 'true');
+            dragging = false;
+            stage.classList.remove('is-dragging');
+        };
+
+        input.addEventListener('change', () => {
+            const file = input.files?.[0];
+            if (file) openCropper(file);
+        });
+
+        zoomInput.addEventListener('input', () => {
+            zoom = Number(zoomInput.value);
+            drawCrop();
+        });
+
+        stage.addEventListener('pointerdown', (event) => {
+            if (!sourceImage) return;
+            dragging = true;
+            lastPointerX = event.clientX;
+            lastPointerY = event.clientY;
+            stage.classList.add('is-dragging');
+            stage.setPointerCapture(event.pointerId);
+        });
+
+        stage.addEventListener('pointermove', (event) => {
+            if (!dragging) return;
+            const scaleX = canvas.width / stage.clientWidth;
+            const scaleY = canvas.height / stage.clientHeight;
+            offsetX += (event.clientX - lastPointerX) * scaleX;
+            offsetY += (event.clientY - lastPointerY) * scaleY;
+            lastPointerX = event.clientX;
+            lastPointerY = event.clientY;
+            drawCrop();
+        });
+
+        const stopDragging = (event) => {
+            dragging = false;
+            stage.classList.remove('is-dragging');
+            if (event?.pointerId !== undefined && stage.hasPointerCapture(event.pointerId)) {
+                stage.releasePointerCapture(event.pointerId);
+            }
+        };
+
+        stage.addEventListener('pointerup', stopDragging);
+        stage.addEventListener('pointercancel', stopDragging);
+
+        applyButton.addEventListener('click', async () => {
+            if (!sourceImage || !sourceFile) return;
+
+            applyButton.disabled = true;
+            showStatus('Preparando recorte 16:9...');
+
+            const blob = await canvasToBlob();
+            applyButton.disabled = false;
+            if (!blob) {
+                showStatus('No se pudo generar el recorte. Intenta nuevamente.');
+                return;
+            }
+
+            const croppedFile = new File(
+                [blob],
+                sourceFile.name.replace(/\.[^.]+$/, '') + '-16x9.jpg',
+                { type: 'image/jpeg', lastModified: Date.now() }
+            );
+            const transfer = new DataTransfer();
+            transfer.items.add(croppedFile);
+            input.files = transfer.files;
+
+            if (previewUrl) URL.revokeObjectURL(previewUrl);
+            previewUrl = URL.createObjectURL(croppedFile);
+            preview.src = previewUrl;
+            preview.style.display = 'block';
+            if (emptyPreview) emptyPreview.style.display = 'none';
+
+            const saved = Math.max(0, sourceFile.size - croppedFile.size);
+            showStatus(
+                `<strong>Recorte 16:9 listo (1600 × 900 px).</strong><br>` +
+                `Archivo final: ${formatBytes(croppedFile.size)} · Ahorro: ${formatBytes(saved)}`
+            );
+            closeCropper();
+        });
+
+        cancelButton.addEventListener('click', () => {
+            input.value = '';
+            sourceImage = null;
+            sourceFile = null;
+            closeCropper();
+            showStatus('Recorte cancelado. Selecciona otra imagen para continuar.');
+        });
+
+        existingButton?.addEventListener('click', async () => {
+            existingButton.disabled = true;
+            showStatus('Cargando imagen actual en el recortador...');
+            try {
+                const response = await fetch(preview.src);
+                if (!response.ok) throw new Error('No se pudo cargar la imagen actual.');
+                const blob = await response.blob();
+                const file = new File([blob], 'imagen-actual.jpg', { type: blob.type || 'image/jpeg' });
+                await openCropper(file);
+            } catch (error) {
+                showStatus('No se pudo abrir la imagen actual. Puedes descargarla y volver a seleccionarla.');
+            } finally {
+                existingButton.disabled = false;
+            }
+        });
+
+        form?.addEventListener('submit', (event) => {
+            if (!cropper.classList.contains('is-active')) return;
+            event.preventDefault();
+            showStatus('<strong>Falta confirmar el recorte.</strong><br>Presiona “Usar recorte 16:9” antes de guardar el proyecto.');
+            cropper.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     });
 </script>

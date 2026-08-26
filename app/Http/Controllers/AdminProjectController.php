@@ -135,7 +135,9 @@ class AdminProjectController extends Controller
             'description_en' => 'nullable|string|max:3000',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
-            'marker_image' => ($imageRequired ? 'required' : 'nullable') . '|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
+            'marker_image' => ($imageRequired ? 'required' : 'nullable') . '|image|mimes:jpeg,png,jpg,gif,webp|max:20480|dimensions:ratio=16/9',
+        ], [
+            'marker_image.dimensions' => 'La imagen debe tener una proporción exacta de 16:9. Usa el recortador antes de guardarla.',
         ]);
     }
 

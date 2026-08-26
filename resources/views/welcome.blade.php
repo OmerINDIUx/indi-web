@@ -18,22 +18,25 @@
         </div>
     </header>
 
-    <div class="indi-section-wrap">
+    <div class="indi-section-wrap home-section-wrap">
         <!-- Main Morphing Notch -->
         <div class="indi-notch-divider">
             <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                 <path id="notchPath" d="M 0 100 V 60 H 150 C 180 60 190 0 200 0 H 800 C 810 0 820 60 850 60 H 1000 V 100 Z" />
             </svg>
         </div>
+        <a class="home-scroll-cue" href="#home-stats" aria-label="Desplazarse a las estadísticas">
+            <span class="scroll-arrows" aria-hidden="true"><span></span><span></span></span>
+        </a>
 
         <!-- Stats Section: Premium Bold Blocks -->
-        <section class="indi-stats-premium" style="background: white; position: relative; z-index: 20;">
+        <section id="home-stats" class="indi-stats-premium" style="background: white; position: relative; z-index: 20;">
             <div class="stats-solid-grid">
                 
                 <!-- 01: Años -->
                 <div class="stat-box-solid" style="background: white; border-right: 1px solid #eee;">
                     <div class="stat-inner">
-                        <span class="stat-num" style="color: var(--indi-blue);">+50</span>
+                        <span class="stat-num" style="color: var(--indi-blue);">{{ \App\Support\CmsText::get('home.stats.years.number', '+50') }}</span>
                         <h4 class="stat-tit">{{ \App\Support\CmsText::get('home.stats.years.title', 'ANOS') }}</h4>
                         <p class="stat-txt">{{ \App\Support\CmsText::get('home.stats.years.text', 'CONSTRUYENDO EL FUTURO DE MEXICO') }}</p>
                     </div>
@@ -42,7 +45,7 @@
                 <!-- 02: Ciudades -->
                 <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
-                        <span class="stat-num" style="color: white; opacity: 0.9;">+25</span>
+                        <span class="stat-num" style="color: white; opacity: 0.9;">{{ \App\Support\CmsText::get('home.stats.cities.number', '+25') }}</span>
                         <h4 class="stat-tit">{{ \App\Support\CmsText::get('home.stats.cities.title', 'CIUDADES') }}</h4>
                         <p class="stat-txt">{{ \App\Support\CmsText::get('home.stats.cities.text', 'IMPULSADAS POR NUESTRA INNOVACION') }}</p>
                     </div>
@@ -51,7 +54,7 @@
                 <!-- 03: Proyectos -->
                 <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
-                        <span class="stat-num" style="color: white; opacity: 0.9;">+325</span>
+                        <span class="stat-num" style="color: white; opacity: 0.9;">{{ \App\Support\CmsText::get('home.stats.projects.number', '+325') }}</span>
                         <h4 class="stat-tit" style="color: white;">{{ \App\Support\CmsText::get('home.stats.projects.title', 'PROYECTOS') }}</h4>
                         <p class="stat-txt" style="color: rgba(255,255,255,0.7);">{{ \App\Support\CmsText::get('home.stats.projects.text', 'TERMINADOS CON LA MAS ALTA CALIDAD') }}</p>
                     </div>
@@ -60,7 +63,7 @@
                 <!-- 04: Familias -->
                 <div class="stat-box-solid stat-card-notched" style="background: var(--indi-blue);">
                     <div class="stat-inner">
-                        <span class="stat-num" style="color: white; opacity: 0.9;">+1500</span>
+                        <span class="stat-num" style="color: white; opacity: 0.9;">{{ \App\Support\CmsText::get('home.stats.families.number', '+1500') }}</span>
                         <h4 class="stat-tit" style="color: white;">{{ \App\Support\CmsText::get('home.stats.families.title', 'FAMILIAS INDI') }}</h4>
                         <p class="stat-txt" style="color: rgba(255,255,255,0.7);">{{ \App\Support\CmsText::get('home.stats.families.text', 'NUESTROS COLABORADORES SON NUESTRO MOTOR') }}</p>
                     </div>
@@ -69,6 +72,57 @@
             </div>
 
             <style>
+                .indi-section-wrap.home-section-wrap {
+                    margin-top: -2rem;
+                }
+
+                .home-section-wrap .indi-stats-premium {
+                    padding-top: clamp(6rem, 12vh, 9rem);
+                }
+
+                .home-scroll-cue {
+                    position: absolute;
+                    top: -4.25rem;
+                    left: 50%;
+                    z-index: 30;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 4.5rem;
+                    height: 4.5rem;
+                    color: var(--indi-blue);
+                    transform: translateX(-50%);
+                    text-decoration: none;
+                    transition: transform 0.25s ease, opacity 0.35s ease, visibility 0s;
+                }
+
+                .home-scroll-cue:hover {
+                    transform: translateX(-50%) translateY(0.2rem);
+                }
+
+                .home-scroll-cue.scroll-cue-scrolled {
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transform: translateX(-50%) translateY(0.8rem);
+                }
+
+                @media (max-width: 720px) {
+                    .indi-section-wrap.home-section-wrap {
+                        margin-top: -1.25rem;
+                    }
+
+                    .home-section-wrap .indi-stats-premium {
+                        padding-top: 5rem;
+                    }
+
+                    .home-scroll-cue {
+                        top: -3.65rem;
+                        width: 3.75rem;
+                        height: 3.75rem;
+                    }
+                }
+
                 .stats-solid-grid {
                     display: grid;
                     grid-template-columns: repeat(4, 1fr);
@@ -393,6 +447,166 @@
                 ];
             };
         @endphp
+        <style>
+            /* Tarjetas de inicio ajustadas al formato de imagen 16:9. */
+            .indi-interactive-projects .project-white-card {
+                align-items: stretch;
+                text-align: left;
+            }
+
+            .indi-interactive-projects .projects-card-heading {
+                margin-bottom: 0.7rem;
+                font-size: clamp(0.78rem, 1vw, 1rem);
+            }
+
+            .indi-interactive-projects .project-name {
+                width: 85%;
+                margin: 0 auto 1rem;
+                font-size: clamp(1.45rem, 2.15vw, 2.15rem);
+                line-height: 1.05;
+                letter-spacing: 0.035em;
+                text-align: center;
+                text-wrap: balance;
+            }
+
+            .indi-interactive-projects .project-stats-grid {
+                width: 85%;
+                margin-right: auto;
+                margin-left: auto;
+                margin-bottom: 1rem;
+                padding: 0.75rem 0;
+            }
+
+            .indi-interactive-projects .stat-label {
+                margin-bottom: 0.3rem;
+                font-size: 0.62rem;
+                letter-spacing: 0.16em;
+            }
+
+            .indi-interactive-projects .stat-value {
+                font-size: clamp(0.85rem, 1.2vw, 1rem);
+                line-height: 1.25;
+            }
+
+            .indi-interactive-projects .project-description {
+                width: 85%;
+                max-height: none;
+                margin: 0 auto 1.15rem;
+                padding: 0;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 5;
+                font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+                line-height: 1.6;
+                color: #374151;
+                white-space: pre-line;
+            }
+
+            .indi-interactive-projects .project-description.is-expanded {
+                display: block;
+                overflow: visible;
+            }
+
+            .indi-interactive-projects .project-description-toggle {
+                width: 85%;
+                margin: -0.55rem auto 0.8rem;
+                padding: 0.3rem 0;
+                border: 0;
+                border-bottom: 1px solid rgba(0, 102, 249, 0.35);
+                background: transparent;
+                color: var(--indi-blue);
+                font-family: 'usual', sans-serif;
+                font-size: 0.68rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-align: left;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+            .indi-interactive-projects .project-white-card.has-expanded-description {
+                overflow-y: auto;
+                overscroll-behavior: contain;
+            }
+
+            .indi-interactive-projects .project-visual-notched {
+                flex: 0 0 auto;
+                align-self: center;
+                width: 85%;
+                max-width: min(70vh, 720px);
+                aspect-ratio: 16 / 9;
+                height: auto;
+                min-height: 0;
+                margin: 0 auto;
+            }
+
+            .indi-interactive-projects .project-visual-notched img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+                background: #e8ebf2;
+            }
+
+            .indi-interactive-projects .projects-all-link {
+                width: 85%;
+                max-width: min(70vh, 720px);
+                min-height: 52px;
+                margin: 0 auto;
+                padding: 0.85rem 1rem;
+            }
+
+            @media (min-width: 821px) {
+                .indi-interactive-projects .project-white-card {
+                    padding: clamp(1.35rem, 2.3vh, 2rem) clamp(2rem, 4vw, 4rem) 0;
+                    overflow: hidden;
+                }
+            }
+
+            @media (max-width: 820px) {
+                .indi-interactive-projects .project-white-card {
+                    padding: 1.5rem 1.25rem 0;
+                }
+
+                .indi-interactive-projects .project-name {
+                    width: 85%;
+                    margin-bottom: 0.9rem;
+                    font-size: clamp(1.45rem, 6vw, 2rem);
+                    text-align: left;
+                }
+
+                .indi-interactive-projects .project-description {
+                    display: block;
+                    width: 100%;
+                    max-height: none;
+                    overflow: visible;
+                    font-size: 0.94rem;
+                    line-height: 1.62;
+                }
+
+                .indi-interactive-projects .project-description-toggle {
+                    width: 100%;
+                    margin-top: -0.4rem;
+                }
+
+                .indi-interactive-projects .project-visual-notched,
+                .indi-interactive-projects .projects-all-link {
+                    width: 100% !important;
+                    max-width: none;
+                }
+
+                .indi-interactive-projects .project-visual-notched {
+                    height: auto !important;
+                    margin: 0 !important;
+                    aspect-ratio: 16 / 9;
+                }
+
+                .indi-interactive-projects .project-stats-grid {
+                    width: 100%;
+                }
+            }
+        </style>
         <section class="indi-interactive-projects">
             <div class="indi-notch-divider dark">
                 <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -442,9 +656,7 @@
                                             <span class="stat-value indi-scroll-text">{{ mb_strtoupper(\App\Support\CmsText::get('category.' . $projectCategoryKey, __('site.categories.' . $projectCategoryKey))) }}</span>
                                         </div>
                                     </div>
-                                    <p class="project-description">
-                                        {{ $project->localized_description }}
-                                    </p>
+                                    <p class="project-description">{{ $project->localized_description }}</p>
                                     <div class="project-visual-notched">
                                         @if($project->marker_image)
                                             <img src="{{ asset('storage/' . $project->marker_image) }}" alt="{{ $project->localized_title }}">
@@ -530,6 +742,32 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
                 </div>
             </div>
         </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.indi-interactive-projects .project-description').forEach((description) => {
+                    const toggle = document.createElement('button');
+                    toggle.type = 'button';
+                    toggle.className = 'project-description-toggle';
+                    toggle.textContent = 'Leer más';
+                    toggle.setAttribute('aria-expanded', 'false');
+                    description.insertAdjacentElement('afterend', toggle);
+
+                    const updateVisibility = () => {
+                        toggle.hidden = description.scrollHeight <= description.clientHeight + 2;
+                    };
+
+                    window.requestAnimationFrame(updateVisibility);
+                    toggle.addEventListener('click', () => {
+                        const expanded = description.classList.toggle('is-expanded');
+                        const card = description.closest('.project-white-card');
+                        card?.classList.toggle('has-expanded-description', expanded);
+                        toggle.textContent = expanded ? 'Leer menos' : 'Leer más';
+                        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                    });
+                });
+            });
+        </script>
 
         <!-- Blog Section with Gray Background -->
         <section class="home-thinking-section" style="background: var(--indi-gray); padding: 10rem 0; position: relative;">

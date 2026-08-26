@@ -4,7 +4,7 @@
     "name": "ScrollTrigger"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CmKstZl0.css",
+    "file": "assets/app-D3AzHRMY.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -13,7 +13,7 @@
     ]
   },
   "resources/css/logo-menu.css": {
-    "file": "assets/logo-menu-CTTI-_ws.css",
+    "file": "assets/logo-menu-D5QffAJ2.css",
     "src": "resources/css/logo-menu.css",
     "isEntry": true,
     "name": "logo-menu",
@@ -22,7 +22,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Cfw4wJe1.js",
+    "file": "assets/app-DDRwzKG5.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -31,7 +31,7 @@
     ]
   },
   "resources/js/logo.js": {
-    "file": "assets/logo-sCOaAOwp.js",
+    "file": "assets/logo-BRq8LgBN.js",
     "name": "logo",
     "src": "resources/js/logo.js",
     "isEntry": true,
