@@ -22,11 +22,11 @@
     <body class="antialiased {{ request()->is('proyectos*') ? 'page-proyectos' : '' }} {{ request()->is('admin/traducciones*') ? 'page-admin-translations' : '' }}">
         <!-- High-Tech Mechanical Logo Menu -->
         <div class="logo-menu-wrapper" id="logoMenu">
-            <a href="{{ url('/') }}" class="logo-group" aria-label="Ir al inicio">
+            <button type="button" class="logo-group" data-home-url="{{ url('/') }}" aria-label="Abrir menú">
                 <div class="logo-svg-wrapper single-logo">
                     {!! file_get_contents(public_path('assets/indi brand-01.svg')) !!}
                 </div>
-            </a>
+            </button>
 
             <div class="menu-container" id="menuLinks">
                 <a href="/" class="nav-link-item {{ request()->is('/') ? 'active-page' : '' }}">INDI</a>

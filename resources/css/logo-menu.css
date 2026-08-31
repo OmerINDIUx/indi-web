@@ -70,6 +70,11 @@
     flex-shrink: 0;
     position: relative;
     z-index: 1001 !important;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
     /*
      * El SVG puede desbordar visualmente su lienzo, pero su caja transparente
      * no debe bloquear los enlaces del menu colocados debajo.

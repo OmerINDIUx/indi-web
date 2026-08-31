@@ -13,7 +13,7 @@
     ]
   },
   "resources/css/logo-menu.css": {
-    "file": "assets/logo-menu-D5QffAJ2.css",
+    "file": "assets/logo-menu--GgQRgBu.css",
     "src": "resources/css/logo-menu.css",
     "isEntry": true,
     "name": "logo-menu",
@@ -31,7 +31,7 @@
     ]
   },
   "resources/js/logo.js": {
-    "file": "assets/logo-BRq8LgBN.js",
+    "file": "assets/logo-CrvsI168.js",
     "name": "logo",
     "src": "resources/js/logo.js",
     "isEntry": true,

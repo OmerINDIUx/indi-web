@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (logoMenu && menuLinks) {
         let autoCollapseTimer;
         let resizeFrame;
+        let lastLogoPointerType = null;
+        const desktopBreakpoint = window.matchMedia("(min-width: 1081px)");
+        const logoLink = logoMenu.querySelector(".logo-group");
         const logoCanvas = logoMenu.querySelector(".logo-svg-wrapper");
         const logoFillTargets = logoMenu.querySelectorAll(".logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1");
         const hasMechanicalLogo = Boolean(document.querySelector(".logo-part") && document.querySelector(".part-bottom"));
@@ -214,6 +217,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 animateLogoFill("#0066FF");
             }
+        });
+
+        /*
+         * Un toque siempre abre el menu, incluso en una computadora con
+         * pantalla tactil. Solo el clic de mouse en escritorio lleva al inicio.
+         * El boton no contiene un enlace HTML, asi que en movil/tableta nunca
+         * puede navegar por el comportamiento nativo de un enlace.
+         */
+        logoLink?.addEventListener("pointerdown", (event) => {
+            lastLogoPointerType = event.pointerType;
+        });
+
+        logoLink?.addEventListener("click", (event) => {
+            const isTouchInteraction = lastLogoPointerType === "touch";
+            lastLogoPointerType = null;
+
+            if (desktopBreakpoint.matches && !isTouchInteraction) {
+                const homeUrl = logoLink.dataset.homeUrl;
+                if (homeUrl) window.location.assign(homeUrl);
+                return;
+            }
+
+            event.preventDefault();
+            /* Un toque siempre muestra el menu; evita que un hover simulado lo cierre. */
+            toggleMenu(true);
         });
 
         /* Clic/toque en el logo como respaldo para abrir y cerrar el menú. */
