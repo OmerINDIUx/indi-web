@@ -3911,6 +3911,11 @@ textarea {
 
     .indi-interactive-projects .project-data-card {
         padding: 0 0 0 4%;
+        /* Las tarjetas no deben depender del callback de ScrollTrigger para
+           mostrarse: en algunos anchos el primer callback no se dispara y el
+           panel derecho queda invisible. */
+        opacity: 1;
+        transform: none;
     }
 
     .indi-interactive-projects .project-white-card {
