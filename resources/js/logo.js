@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let autoCollapseTimer;
         let resizeFrame;
         let lastLogoPointerType = null;
+        let menuOpenedByTouch = false;
         const desktopBreakpoint = window.matchMedia("(min-width: 1081px)");
         const logoLink = logoMenu.querySelector(".logo-group");
         const logoCanvas = logoMenu.querySelector(".logo-svg-wrapper");
@@ -144,6 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 isMenuOpen = !isMenuOpen;
             }
 
+            if (!isMenuOpen) menuOpenedByTouch = false;
+
             clearTimeout(autoCollapseTimer);
             window.dispatchEvent(new Event("scroll"));
 
@@ -240,8 +243,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             event.preventDefault();
-            /* Un toque siempre muestra el menu; evita que un hover simulado lo cierre. */
-            toggleMenu(true);
+            /* El primer toque abre; el siguiente toque en el logo lo cierra. */
+            if (isMenuOpen && menuOpenedByTouch) {
+                toggleMenu(false);
+            } else {
+                toggleMenu(true);
+                menuOpenedByTouch = true;
+            }
         });
 
         /* Clic/toque en el logo como respaldo para abrir y cerrar el menú. */
@@ -249,6 +257,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (event.target.closest(".logo-group")) return;
             if (event.target.closest(".nav-link-item")) return;
             if (!isMenuOpen) toggleMenu(true);
+        });
+
+        /* En táctil, un toque fuera del encabezado cierra el menú abierto. */
+        document.addEventListener("pointerdown", (event) => {
+            if (isMenuOpen && !logoMenu.contains(event.target)) {
+                toggleMenu(false);
+            }
         });
         logoMenu.addEventListener("pointerleave", () => {
             /* Espera un instante para no cerrar por el reacomodo de la caja al abrir. */
