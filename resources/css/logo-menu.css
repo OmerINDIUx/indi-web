@@ -694,9 +694,63 @@
     }
 
     /* Alinea la barra con la parte visible del logotipo, no con su lienzo alto. */
-    .logo-menu-wrapper.active .menu-container,
-    .logo-menu-wrapper:hover:not(.logo-hover-locked) .menu-container {
+.logo-menu-wrapper.active .menu-container,
+.logo-menu-wrapper:hover:not(.logo-hover-locked) .menu-container {
         align-self: flex-start;
         margin-top: 0.1rem !important;
+    }
+}
+
+/* Teléfono en horizontal: el logo conserva una presencia discreta. */
+@media (max-width: 1080px) and (max-height: 500px) and (orientation: landscape) {
+    .logo-menu-wrapper {
+        top: 0.4rem;
+        left: 0.5rem;
+        min-width: 60px;
+        min-height: 78px;
+        padding: 0.25rem;
+    }
+
+    .logo-svg-wrapper,
+    .logo-menu-wrapper.active .logo-svg-wrapper,
+    .logo-menu-wrapper:hover:not(.active):not(.logo-hover-locked) .logo-svg-wrapper {
+        width: 50px !important;
+        height: 70px !important;
+    }
+
+    /* El panel se despliega debajo del logotipo, desde el mismo margen izquierdo. */
+    .logo-menu-wrapper.active {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 5px !important;
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+
+    .menu-container.active {
+        flex: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 70px !important;
+        min-height: 70px !important;
+        /* Compensa el espacio transparente inferior del SVG del logo. */
+        margin-top: -2.6rem !important;
+        padding: 0.35rem !important;
+        display: grid !important;
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+        gap: 0.2rem !important;
+        align-items: center;
+    }
+
+    .menu-container.active .nav-link-item {
+        min-height: 0 !important;
+        padding: 0.35rem 0.1rem !important;
+        font-size: clamp(0.48rem, 1.4vw, 0.62rem) !important;
+        letter-spacing: 0.02em !important;
+        white-space: nowrap;
+    }
+
+    .menu-container.active .language-switch-link {
+        padding-inline: 0.25rem !important;
     }
 }
