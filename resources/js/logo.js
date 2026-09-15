@@ -47,6 +47,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const logoLink = logoMenu.querySelector(".logo-group");
         const logoCanvas = logoMenu.querySelector(".logo-svg-wrapper");
         const logoFillTargets = logoMenu.querySelectorAll(".logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1");
+        const footer = document.querySelector('.indi-footer');
+        let footerFrame = 0;
+        let footerUntil = 0;
+        const alignFooter = () => {
+            footerFrame = 0;
+            if (footer && innerWidth <= 1080 && !logoMenu.classList.contains('active') && !logoMenu.matches(':hover')) {
+                const right = Math.max(...[...logoFillTargets].map(part => part.getBoundingClientRect().right));
+                if (Number.isFinite(right)) footer.style.setProperty('--footer-logo-edge', `${right + 5}px`);
+            }
+            if (performance.now() < footerUntil) footerFrame = requestAnimationFrame(alignFooter);
+        };
+        const scheduleFooter = () => {
+            footerUntil = performance.now() + 650;
+            if (!footerFrame) footerFrame = requestAnimationFrame(alignFooter);
+        };
+        window.addEventListener('scroll', scheduleFooter, { passive: true });
+        window.addEventListener('resize', scheduleFooter);
+        logoMenu.addEventListener('mouseleave', scheduleFooter);
+        logoMenu.addEventListener('transitionend', scheduleFooter);
+        scheduleFooter();
         const hasMechanicalLogo = Boolean(document.querySelector(".logo-part") && document.querySelector(".part-bottom"));
 
         const animateLogoFill = (fill) => {
@@ -54,6 +74,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
             gsap.to(logoFillTargets, { fill, duration: 0.3 });
         };
+
+        // Check actual text lines, not the large containers around videos or images.
+        let haloFrame = 0;
+        const nearbyText = new Set();
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach(({ target, isIntersecting }) => {
+                if (isIntersecting) nearbyText.add(target);
+                else nearbyText.delete(target);
+            });
+            requestHaloUpdate();
+        });
+        const updateHalo = () => {
+            haloFrame = 0;
+            const opened = logoMenu.classList.contains("active") ||
+                (window.matchMedia("(hover: hover) and (min-width: 821px)").matches &&
+                    logoMenu.matches(":hover") && !logoMenu.classList.contains("logo-hover-locked"));
+            let collision = null;
+            if (opened) {
+                const menu = menuLinks.getBoundingClientRect();
+                const parts = [...logoFillTargets].map((part) => part.getBoundingClientRect());
+                const regions = [menu, ...parts].filter((rect) => rect.width && rect.height);
+                const area = { left: Math.min(...regions.map((rect) => rect.left)),
+                    right: Math.max(...regions.map((rect) => rect.right)),
+                    top: Math.min(...regions.map((rect) => rect.top)),
+                    bottom: Math.max(...regions.map((rect) => rect.bottom)) };
+                const wrapper = logoMenu.getBoundingClientRect();
+                const scaleX = wrapper.width / logoMenu.offsetWidth || 1;
+                const scaleY = wrapper.height / logoMenu.offsetHeight || 1;
+                logoMenu.style.setProperty("--menu-halo-left", `${(area.left - wrapper.left) / scaleX}px`);
+                logoMenu.style.setProperty("--menu-halo-top", `${(area.top - wrapper.top) / scaleY}px`);
+                logoMenu.style.setProperty("--menu-halo-width", `${(area.right - area.left) / scaleX}px`);
+                logoMenu.style.setProperty("--menu-halo-height", `${(area.bottom - area.top) / scaleY}px`);
+                const overlaps = (rect) => rect.width > 0 && rect.height > 0 && regions.some((area) =>
+                    rect.left < area.right && rect.right > area.left &&
+                    rect.top < area.bottom && rect.bottom > area.top);
+                for (const element of nearbyText) {
+                    if (!overlaps(element.getBoundingClientRect())) continue;
+                    let visible = true;
+                    for (let parent = element; parent; parent = parent.parentElement) {
+                        const style = getComputedStyle(parent);
+                        if (style.visibility === "hidden" || Number(style.opacity) < 0.05) {
+                            visible = false;
+                            break;
+                        }
+                    }
+                    if (!visible) continue;
+                    for (const node of element.childNodes) {
+                        if (node.nodeType !== Node.TEXT_NODE || !node.textContent.trim()) continue;
+                        const range = document.createRange();
+                        range.selectNodeContents(node);
+                        if ([...range.getClientRects()].some(overlaps)) {
+                            collision = element;
+                            break;
+                        }
+                    }
+                    if (collision) break;
+                }
+            }
+            logoMenu.classList.toggle("has-text-collision", Boolean(collision));
+        };
+        function requestHaloUpdate() {
+            if (!haloFrame) haloFrame = requestAnimationFrame(updateHalo);
+        }
+        requestAnimationFrame(() => {
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+            const elements = new Set();
+            while (walker.nextNode()) {
+                const element = walker.currentNode.parentElement;
+                if (walker.currentNode.textContent.trim() && element &&
+                    !element.closest("#logoMenu, script, style, svg, textarea, select")) elements.add(element);
+            }
+            elements.forEach((element) => textObserver.observe(element));
+        });
+        window.addEventListener("scroll", requestHaloUpdate, { passive: true });
+        window.addEventListener("resize", requestHaloUpdate);
+        const haloResizeObserver = new ResizeObserver(requestHaloUpdate);
+        haloResizeObserver.observe(menuLinks);
+        haloResizeObserver.observe(logoLink);
+        logoMenu.addEventListener("mouseenter", requestHaloUpdate);
+        logoMenu.addEventListener("mouseleave", requestHaloUpdate);
+        logoMenu.addEventListener("transitionend", requestHaloUpdate);
+        new MutationObserver(requestHaloUpdate).observe(logoMenu, { attributes: true, attributeFilter: ["class"] });
 
         /* Estado inicial para la variante mecanica, cuando existe en la vista. */
         if (hasMechanicalLogo) {

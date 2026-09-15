@@ -1464,6 +1464,95 @@
             -webkit-line-clamp: 3;
         }
     }
+    @media (max-width: 900px) {
+        .project-overlay-sidebar .project-white-card {
+            height: 100% !important;
+            min-height: 0;
+            overflow-y: auto;
+            overscroll-behavior-y: contain;
+            padding: 1rem 1rem 0.75rem !important;
+        }
+
+        .project-overlay-sidebar .project-name {
+            margin-bottom: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .project-overlay-sidebar .project-stats-grid {
+            margin-bottom: 0.6rem;
+            padding: 0.45rem 0;
+            flex-shrink: 0;
+        }
+
+        .project-overlay-sidebar .project-description {
+            -webkit-line-clamp: 3;
+            flex-shrink: 0;
+        }
+
+        .project-overlay-sidebar .project-description-toggle {
+            margin-bottom: 0.5rem;
+            min-height: 36px;
+            flex-shrink: 0;
+        }
+
+        .project-overlay-sidebar .project-visual-notched {
+            flex: none;
+            height: auto;
+            min-height: 0;
+            aspect-ratio: 16 / 9;
+        }
+    }
+    @media (max-width: 900px) {
+        .projects-page-wrapper:not(.has-project-selection) .map-titles-overlay h1 {
+            font-size: clamp(1.45rem, 6.8vw, 2rem) !important;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            overflow-wrap: normal;
+            word-break: normal;
+            hyphens: none;
+        }
+
+        .map-titles-overlay .hero-word {
+            white-space: nowrap;
+        }
+    }
+    @media (max-width: 900px) {
+        .projects-page-wrapper .filter-container-blue {
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            width: 100% !important;
+            max-width: 100%;
+            height: auto !important;
+            min-height: 0;
+            padding: 0.3rem !important;
+            gap: 0.2rem;
+            overflow: visible !important;
+            clip-path: none !important;
+        }
+
+        .projects-page-wrapper .filter-container-blue .filter-link {
+            width: 100%;
+            min-width: 0 !important;
+            height: auto !important;
+            min-height: 44px;
+            margin: 0 !important;
+            padding: 0.5rem 0.3rem !important;
+            justify-content: center;
+            font-size: clamp(0.6rem, 2.3vw, 0.75rem) !important;
+            letter-spacing: 0;
+        }
+
+        .projects-page-wrapper .filter-link:first-child {
+            grid-column: 1 / -1;
+        }
+
+        .projects-page-wrapper .filter-link .f-text {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            text-align: center;
+        }
+    }
 </style>
 
 <script>
@@ -1611,7 +1700,7 @@
             const markerPoint = map.project([project.latitude, project.longitude], zoom);
             const overlayWidth = overlay.getBoundingClientRect().width || (window.innerWidth * 0.5);
             const targetPoint = isCompactMap()
-                ? markerPoint
+                ? L.point(markerPoint.x, markerPoint.y + overlay.getBoundingClientRect().height / 2)
                 : L.point(markerPoint.x + (overlayWidth / 2), markerPoint.y);
             const targetLatLng = map.unproject(targetPoint, zoom);
 
@@ -1626,6 +1715,7 @@
             const expanded = description.classList.toggle('is-expanded');
             this.setAttribute('aria-expanded', expanded ? 'true' : 'false');
             this.innerText = expanded ? 'Leer menos' : 'Leer más';
+            if (!expanded) description.closest('.project-white-card').scrollTop = 0;
         });
 
         document.getElementById('closeOverlay').addEventListener('click', () => {

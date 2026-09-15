@@ -62,6 +62,34 @@
     min-height: 154px;
 }
 
+/* Halo blanco con bordes transparentes para separar el menú del texto. */
+.logo-menu-wrapper::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--menu-halo-left, 0px) - 40px);
+    top: calc(var(--menu-halo-top, 0px) - 28px);
+    width: calc(var(--menu-halo-width, 100%) + 80px);
+    height: calc(var(--menu-halo-height, 100%) + 56px);
+    z-index: 0;
+    border-radius: 12px;
+    background: #fff;
+    mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent), linear-gradient(to bottom, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+    mask-composite: intersect;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 450ms ease;
+}
+
+.logo-menu-wrapper.active.has-text-collision::before {
+    opacity: 1;
+}
+
+@media (hover: hover) and (min-width: 821px) {
+    .logo-menu-wrapper.has-text-collision:hover:not(.logo-hover-locked)::before {
+        opacity: 1;
+    }
+}
+
 /* Agrupa el SVG y evita que se comprima al abrirse el menu. */
 .logo-group {
     display: flex;
@@ -471,6 +499,11 @@
  * se distribuyan en varias filas sobre un fondo mas opaco y legible.
  */
 @media (max-width: 720px) {
+    /* En teléfono el menú ya tiene fondo propio; el halo del logo no es necesario. */
+    .logo-menu-wrapper::before {
+        display: none;
+    }
+
     .logo-menu-wrapper {
         top: var(--logo-menu-mobile-top);
         left: var(--logo-menu-mobile-left);
@@ -601,7 +634,18 @@
 .logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper .st1,
 .logo-menu-wrapper.active .logo-svg-wrapper .cls-1,
 .logo-menu-wrapper.active .logo-svg-wrapper .st1 {
-    fill: var(--indi-blue);
+    fill: var(--indi-blue, #0066f9) !important;
+}
+
+/* Conserva el azul de marca sin mezclarlo con el halo. */
+.logo-menu-wrapper.active .logo-group {
+    mix-blend-mode: normal;
+}
+
+@media (hover: hover) and (min-width: 821px) {
+    .logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-group {
+        mix-blend-mode: normal;
+    }
 }
 /* 1081-1280 px: compact closed brand so it does not cover page copy. */
 @media (min-width: 1081px) and (max-width: 1280px) {
@@ -752,5 +796,58 @@
 
     .menu-container.active .language-switch-link {
         padding-inline: 0.25rem !important;
+    }
+}
+
+/* En horizontal, logo y enlaces comparten una sola fila compacta. */
+@media (min-width: 600px) and (max-height: 500px) and (orientation: landscape) {
+    .logo-menu-wrapper.active {
+        top: 0.5rem !important;
+        left: 0.75rem !important;
+        right: 0.75rem !important;
+        width: calc(100vw - 1.5rem) !important;
+        max-width: none !important;
+        min-height: 48px !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 0.75rem !important;
+    }
+
+    .logo-menu-wrapper.active .logo-group {
+        width: 96px;
+        height: 48px;
+        margin-right: 0 !important;
+        flex: 0 0 96px;
+    }
+
+    .logo-menu-wrapper.active .logo-svg-wrapper {
+        width: 48px !important;
+        height: 68px !important;
+        margin: 0 !important;
+    }
+
+    .logo-menu-wrapper.active .menu-container {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        max-width: none !important;
+        height: 48px !important;
+        min-height: 48px !important;
+        margin: 0 !important;
+        padding: 0.25rem !important;
+        display: grid !important;
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+        gap: 0.15rem !important;
+        align-items: center;
+    }
+
+    .logo-menu-wrapper.active .nav-link-item {
+        width: 100%;
+        min-width: 0;
+        min-height: 40px;
+        padding: 0.25rem 0.1rem !important;
+        margin: 0 !important;
+        font-size: clamp(0.48rem, 1vw, 0.65rem) !important;
+        letter-spacing: 0 !important;
+        justify-content: center;
     }
 }

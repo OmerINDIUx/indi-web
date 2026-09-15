@@ -3410,8 +3410,8 @@ textarea {
         position: fixed !important;
         inset: auto 0 0 0 !important;
         width: 100% !important;
-        height: min(86svh, 760px) !important;
-        overflow-y: auto;
+        height: 60dvh !important;
+        overflow: visible;
     }
 
     .project-overlay-sidebar .project-white-card {
@@ -3665,7 +3665,7 @@ textarea {
     }
 
     .project-overlay-sidebar {
-        height: 90svh !important;
+        height: 60dvh !important;
     }
 
     .project-overlay-sidebar .project-white-card {
@@ -3746,19 +3746,21 @@ textarea {
     .indi-units-module .units-layout-grid {
         display: block !important;
         position: relative !important;
-        min-height: 400vh !important;
-        min-height: 400svh !important;
+        min-height: 200vh !important;
+        min-height: 200svh !important;
     }
 
     .indi-units-module .units-text-scroll {
         width: 50% !important;
         position: relative !important;
         z-index: 5 !important;
+        padding-top: 25vh;
+        padding-bottom: 75vh;
     }
 
     .indi-units-module .unit-box-trigger {
-        height: 50vh !important;
-        min-height: 100vh !important;
+        height: auto !important;
+        min-height: 50vh !important;
         padding: 3rem 10% !important;
     }
 
@@ -3809,6 +3811,13 @@ textarea {
         height: 100% !important;
         min-height: 100% !important;
         object-fit: cover !important;
+        transform: scale(1.025);
+        transition: opacity 1400ms ease-in-out, transform 1800ms ease-out, visibility 0s linear 1400ms;
+    }
+
+    .indi-units-module .stage-img.active {
+        transform: scale(1);
+        transition-delay: 0s;
     }
 
     .indi-interactive-projects {
@@ -4161,6 +4170,7 @@ textarea {
 
 .indi-units-module .u-detail {
     color: #4b5563 !important;
+    opacity: var(--unit-copy-opacity, 1);
 }
 /* Estadísticas de portada: alternancia blanco / azul. */
 .stats-solid-grid .stat-box-solid:nth-child(1),
@@ -4198,7 +4208,7 @@ textarea {
     display: block !important;
     position: relative;
     z-index: 8;
-    opacity: 1 !important;
+    opacity: var(--unit-copy-opacity, 1) !important;
     visibility: visible !important;
 }
 
@@ -4395,8 +4405,14 @@ textarea {
 @media (max-width: 820px) {
     .social-page .indi-container {
         width: auto;
-        margin-left: 6rem;
+        margin-left: 4vw;
         margin-right: 4vw;
+    }
+
+    .social-page .block-text,
+    .social-page .foundation-header,
+    .social-page .foundation-body {
+        padding-left: max(0px, calc(var(--social-logo-safe-left, 65px) - 4vw));
     }
 }
 
@@ -4435,7 +4451,7 @@ textarea {
     .indi-footer .indi-container {
         width: auto !important;
         max-width: none !important;
-        margin-left: clamp(7.5rem, 14vw, 9rem) !important;
+        margin-left: var(--footer-logo-edge, 65px) !important;
         margin-right: 4vw !important;
     }
 }

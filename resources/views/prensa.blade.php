@@ -642,8 +642,8 @@
     @media (max-width: 820px) {
         .prensa-page-wrap .indi-container {
             width: auto;
-            margin-left: 6rem;
-            margin-right: 4vw;
+            margin-left: 1rem;
+            margin-right: 1rem;
         }
 
         .prensa-main-hero .indi-hero-content {
@@ -654,5 +654,98 @@
             box-sizing: border-box;
         }
     }
+    @media (max-width: 820px) {
+        .prensa-main-hero {
+            min-height: 360px !important;
+            height: 58svh !important;
+            max-height: 520px;
+            padding: 7rem 1rem 3rem !important;
+        }
+
+        .prensa-main-hero .indi-hero-content {
+            padding: 0 !important;
+            align-self: center;
+        }
+
+        .prensa-main-hero h1 {
+            font-size: clamp(2rem, 9vw, 3.5rem) !important;
+            line-height: 1.05;
+            overflow-wrap: anywhere;
+        }
+
+        .prensa-featured-section { padding: 2rem 0; }
+        .featured-row { gap: 1.25rem; text-align: left; }
+        .featured-visual {
+            flex: none;
+            max-width: none;
+            height: auto !important;
+            aspect-ratio: 16 / 10;
+        }
+        .featured-info { width: 100%; align-items: flex-start; }
+        .featured-cat { margin-bottom: 0.65rem; letter-spacing: 0.1em; }
+        .featured-title { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 1rem; overflow-wrap: anywhere; }
+        .featured-info .blog-read-btn { padding: 0.85rem 1.5rem !important; }
+        .prensa-search-input { padding: 1rem; font-size: 0.78rem; }
+        .prensa-filters { margin-bottom: 1.5rem !important; }
+        .filter-label { letter-spacing: 0.08em !important; margin-bottom: 0.75rem !important; }
+        .filter-group { width: 100%; padding: 0.4rem; flex-wrap: wrap; height: auto; clip-path: none; justify-content: center; }
+        .filter-pill { min-width: 0; flex: 1 1 40%; height: 44px; padding: 0 0.5rem; font-size: 0.65rem; }
+        #newsGrid { grid-template-columns: minmax(0, 1fr) !important; gap: 1.5rem !important; margin-top: 1.5rem !important; padding-bottom: 3rem !important; }
+        .prensa-page-wrap .blog-card { padding: 1.25rem !important; min-width: 0; }
+        .prensa-page-wrap .blog-title { min-height: 0; font-size: 1.3rem !important; overflow-wrap: anywhere; }
+        /* Reserva solo en el texto el ancho del logo fijo; la foto conserva su ancho. */
+        .prensa-page-wrap {
+            --press-logo-text-inset: 20px;
+        }
+        .prensa-page-wrap .blog-card > .blog-tags,
+        .prensa-page-wrap .blog-card > .blog-date,
+        .prensa-page-wrap .blog-card > .blog-title,
+        .prensa-page-wrap .blog-card > .blog-footer {
+            margin-left: var(--press-logo-text-inset) !important;
+        }
+        .prensa-page-wrap .blog-title {
+            display: block;
+            -webkit-line-clamp: unset;
+            letter-spacing: 0.02em !important;
+            font-size: clamp(1.05rem, 4.4vw, 1.3rem) !important;
+        }
+        .prensa-page-wrap .featured-info {
+            padding-left: var(--press-logo-text-inset, 40px);
+            box-sizing: border-box;
+        }
+        .prensa-page-wrap .indi-card-notch { width: calc(100% + 2.5rem) !important; margin-left: -1.25rem !important; margin-right: -1.25rem !important; height: 210px !important; }
+    }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logoMenu');
+            const blocks = document.querySelectorAll('.prensa-page-wrap .blog-card, .prensa-page-wrap .featured-info');
+            if (!logo) return;
+            let frame = 0;
+            let until = 0;
+            const alignText = () => {
+                frame = 0;
+                if (window.innerWidth <= 820 && !logo.classList.contains('active') && !logo.matches(':hover')) {
+                    const parts = [...logo.querySelectorAll('.logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1')];
+                    const right = Math.max(...parts.map(part => part.getBoundingClientRect().right));
+                    if (Number.isFinite(right)) blocks.forEach(block => {
+                        const rect = block.getBoundingClientRect();
+                        const padding = block.classList.contains('blog-card') ? parseFloat(getComputedStyle(block).paddingLeft) : 0;
+                        const inset = Math.max(0, right + 5 - rect.left - padding - block.clientLeft);
+                        block.style.setProperty('--press-logo-text-inset', `${inset}px`);
+                    });
+                }
+                if (performance.now() < until) frame = requestAnimationFrame(alignText);
+            };
+            const schedule = () => {
+                until = performance.now() + 650;
+                if (!frame) frame = requestAnimationFrame(alignText);
+            };
+            window.addEventListener('scroll', schedule, { passive: true });
+            window.addEventListener('resize', schedule);
+            logo.addEventListener('mouseleave', schedule);
+            logo.addEventListener('transitionend', schedule);
+            schedule();
+        });
+    </script>
 @endsection

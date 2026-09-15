@@ -353,6 +353,56 @@
 
         <!-- Sticky Business Units Design -->
         <section class="indi-units-module">
+            <style>
+                @media (max-width: 900px) {
+                    .indi-units-module .unit-box-trigger {
+                        padding-left: 4vw !important;
+                        padding-right: 4vw !important;
+                    }
+                    .indi-units-module .unit-identity,
+                    .indi-units-module .u-detail {
+                        margin-left: max(0px, calc(var(--units-logo-edge, 65px) - 4vw));
+                    }
+                    .indi-units-module .u-title {
+                        font-size: clamp(1rem, 4.7vw, 1.75rem) !important;
+                        overflow-wrap: normal;
+                        word-break: normal;
+                        hyphens: none;
+                    }
+                    .indi-units-module .u-visual-mobile {
+                        width: 100%;
+                        margin-left: 0;
+                        margin-right: 0;
+                    }
+                }
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const module = document.querySelector('.indi-units-module');
+                    const logo = document.getElementById('logoMenu');
+                    if (!logo || !module) return;
+                    let frame = 0;
+                    let until = 0;
+                    const align = () => {
+                        frame = 0;
+                        if (innerWidth <= 900 && !logo.classList.contains('active') && !logo.matches(':hover')) {
+                            const parts = [...logo.querySelectorAll('.logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1')];
+                            const edge = Math.max(...parts.map(part => part.getBoundingClientRect().right));
+                            if (Number.isFinite(edge)) module.style.setProperty('--units-logo-edge', `${edge + 5}px`);
+                        }
+                        if (performance.now() < until) frame = requestAnimationFrame(align);
+                    };
+                    const schedule = () => {
+                        until = performance.now() + 650;
+                        if (!frame) frame = requestAnimationFrame(align);
+                    };
+                    window.addEventListener('scroll', schedule, { passive: true });
+                    window.addEventListener('resize', schedule);
+                    logo.addEventListener('mouseleave', schedule);
+                    logo.addEventListener('transitionend', schedule);
+                    schedule();
+                });
+            </script>
             <div class="units-layout-grid">
                 <!-- Left: Cinematic Text Flow -->
                 <div class="units-text-scroll">
@@ -566,28 +616,33 @@
 
             @media (max-width: 820px) {
                 .indi-interactive-projects .project-white-card {
-                    padding: 1.5rem 1.25rem 0;
+                    padding: 0.85rem 1rem 0;
+                    overflow: visible;
                 }
 
                 .indi-interactive-projects .project-name {
                     width: 85%;
-                    margin-bottom: 0.9rem;
-                    font-size: clamp(1.45rem, 6vw, 2rem);
+                    margin-bottom: 0.5rem;
+                    font-size: clamp(1.2rem, 5vw, 1.55rem);
                     text-align: left;
                 }
 
                 .indi-interactive-projects .project-description {
-                    display: block;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
                     width: 100%;
                     max-height: none;
-                    overflow: visible;
-                    font-size: 0.94rem;
-                    line-height: 1.62;
+                    overflow: hidden;
+                    font-size: 0.88rem;
+                    line-height: 1.5;
+                    margin-bottom: 0.5rem;
                 }
 
                 .indi-interactive-projects .project-description-toggle {
                     width: 100%;
                     margin-top: -0.4rem;
+                    min-height: 44px;
                 }
 
                 .indi-interactive-projects .project-visual-notched,
@@ -598,12 +653,67 @@
 
                 .indi-interactive-projects .project-visual-notched {
                     height: auto !important;
+                    min-height: 160px;
+                    flex: 1 0 160px;
                     margin: 0 !important;
-                    aspect-ratio: 16 / 9;
+                    aspect-ratio: auto;
+                    position: relative;
+                }
+
+                .indi-interactive-projects .project-visual-notched img {
+                    position: absolute;
+                    inset: 0;
+                    object-fit: cover;
                 }
 
                 .indi-interactive-projects .project-stats-grid {
                     width: 100%;
+                    padding: 0.4rem 0;
+                    margin-bottom: 0.5rem;
+                }
+
+                .indi-interactive-projects .project-name {
+                    width: 100%;
+                }
+
+                .indi-interactive-projects .projects-card-heading {
+                    font-size: 0.68rem;
+                    margin-bottom: 0.4rem;
+                }
+
+                .indi-interactive-projects .projects-all-link {
+                    min-height: 44px;
+                    padding: 0.5rem;
+                }
+
+                .indi-interactive-projects .project-map-stage {
+                    height: clamp(150px, 24svh, 230px) !important;
+                    min-height: 0 !important;
+                    padding: 0.75rem 5%;
+                }
+
+                .indi-interactive-projects .project-map-stage.is-fixed ~ .project-data-scroll {
+                    padding-top: calc(clamp(150px, 24svh, 230px) + 0.75rem);
+                }
+
+                .indi-interactive-projects .project-data-scroll {
+                    padding: 0.75rem 4% 0;
+                }
+
+                .indi-interactive-projects .project-data-card {
+                    min-height: calc(100svh - clamp(150px, 24svh, 230px)) !important;
+                    align-items: stretch;
+                    padding-bottom: 0.75rem;
+                }
+
+                .indi-interactive-projects .project-white-card {
+                    min-height: calc(100svh - clamp(150px, 24svh, 230px) - 1.5rem) !important;
+                    border-radius: 8px;
+                    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+                }
+
+                .indi-interactive-projects .project-visual-notched {
+                    margin-top: 0.35rem !important;
                 }
             }
         </style>
@@ -745,25 +855,42 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.indi-interactive-projects .project-description').forEach((description) => {
+                document.querySelectorAll('.indi-interactive-projects .project-description').forEach((description, index) => {
+                    const mobile = window.matchMedia('(max-width: 820px)');
+                    const english = document.documentElement.lang.startsWith('en');
+                    const updateLabel = () => {
+                        const expanded = description.classList.contains('is-expanded');
+                        toggle.textContent = english ? (expanded ? 'Read less' : 'Read more') :
+                            (expanded ? (mobile.matches ? 'Ver menos' : 'Leer menos') : (mobile.matches ? 'Ver más' : 'Leer más'));
+                    };
                     const toggle = document.createElement('button');
                     toggle.type = 'button';
                     toggle.className = 'project-description-toggle';
-                    toggle.textContent = 'Leer más';
+                    description.id ||= `project-description-${index}`;
+                    toggle.setAttribute('aria-controls', description.id);
+                    updateLabel();
                     toggle.setAttribute('aria-expanded', 'false');
                     description.insertAdjacentElement('afterend', toggle);
 
                     const updateVisibility = () => {
-                        toggle.hidden = description.scrollHeight <= description.clientHeight + 2;
+                        toggle.hidden = !description.classList.contains('is-expanded') && description.scrollHeight <= description.clientHeight + 2;
+                        updateLabel();
                     };
 
                     window.requestAnimationFrame(updateVisibility);
+                    new ResizeObserver(updateVisibility).observe(description);
+                    document.fonts.ready.then(updateVisibility);
+                    mobile.addEventListener('change', updateVisibility);
                     toggle.addEventListener('click', () => {
                         const expanded = description.classList.toggle('is-expanded');
                         const card = description.closest('.project-white-card');
                         card?.classList.toggle('has-expanded-description', expanded);
-                        toggle.textContent = expanded ? 'Leer menos' : 'Leer más';
+                        updateLabel();
                         toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                        if (!expanded && description.getBoundingClientRect().top < 0) {
+                            description.scrollIntoView({ block: 'center', behavior: 'instant' });
+                        }
+                        window.ScrollTrigger?.refresh();
                     });
                 });
             });
@@ -771,6 +898,82 @@ Sistema de transporte público por teleférico urbano diseñado para zonas de al
 
         <!-- Blog Section with Gray Background -->
         <section class="home-thinking-section" style="background: var(--indi-gray); padding: 10rem 0; position: relative;">
+            <style>
+                @media (max-width: 820px) {
+                    .home-thinking-section { padding: 3rem 0 !important; }
+                    .home-thinking-section .indi-container { width: 92%; margin-inline: auto; }
+                    .home-thinking-section .blog-header-container {
+                        flex-direction: column;
+                        align-items: stretch !important;
+                        gap: 0.75rem;
+                        margin-bottom: 1.5rem !important;
+                    }
+                    .home-thinking-section .blog-header-container > div:first-child,
+                    .home-thinking-section .home-thinking-grid { padding-left: 0; }
+                    .home-thinking-section .blog-header-container > * {
+                        margin-left: max(0px, calc(var(--thinking-logo-edge, 65px) - 4vw));
+                    }
+                    .home-thinking-section .blog-header-container h2 {
+                        font-size: clamp(1.2rem, 4.8vw, 1.8rem) !important;
+                        line-height: 1.15;
+                        overflow-wrap: normal;
+                        word-break: normal;
+                        hyphens: none;
+                    }
+                    .home-thinking-section .blog-header-container > a { align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; }
+                    .home-thinking-section .home-thinking-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 1.5rem !important; }
+                    .home-thinking-section .blog-card { padding: 1rem !important; min-width: 0; }
+                    .home-thinking-section .blog-card > :not(.indi-card-notch) {
+                        margin-left: max(0px, calc(var(--thinking-logo-edge, 65px) - 4vw - 1rem));
+                    }
+                    .home-thinking-section .blog-title {
+                        font-size: clamp(1.05rem, 4.4vw, 1.35rem) !important;
+                        line-height: 1.25;
+                        letter-spacing: 0.01em;
+                        display: block;
+                        min-height: 0;
+                        overflow-wrap: normal;
+                        word-break: normal;
+                        hyphens: none;
+                        -webkit-line-clamp: unset;
+                    }
+                    .home-thinking-section .blog-read-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0.6rem 1rem !important; }
+                    .home-thinking-section .indi-card-notch {
+                        width: calc(100% + 2rem) !important;
+                        max-width: none;
+                        margin: 1rem -1rem -1rem !important;
+                        height: auto !important;
+                        aspect-ratio: 16 / 10;
+                    }
+                    .home-thinking-section .indi-card-notch img { width: 100%; height: 100%; object-fit: cover; }
+                }
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const section = document.querySelector('.home-thinking-section');
+                    const logo = document.getElementById('logoMenu');
+                    if (!section || !logo) return;
+                    let frame = 0, until = 0;
+                    const align = () => {
+                        frame = 0;
+                        if (innerWidth <= 820 && !logo.classList.contains('active') && !logo.matches(':hover')) {
+                            const parts = [...logo.querySelectorAll('.logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1')];
+                            const edge = Math.max(...parts.map(part => part.getBoundingClientRect().right));
+                            if (Number.isFinite(edge)) section.style.setProperty('--thinking-logo-edge', `${edge + 5}px`);
+                        }
+                        if (performance.now() < until) frame = requestAnimationFrame(align);
+                    };
+                    const schedule = () => {
+                        until = performance.now() + 650;
+                        if (!frame) frame = requestAnimationFrame(align);
+                    };
+                    window.addEventListener('scroll', schedule, { passive: true });
+                    window.addEventListener('resize', schedule);
+                    logo.addEventListener('mouseleave', schedule);
+                    logo.addEventListener('transitionend', schedule);
+                    schedule();
+                });
+            </script>
             <div class="indi-notch-divider gray">
                 <svg viewBox="0 0 1000 100" preserveAspectRatio="none">
                     <path d="M 0 100 V 40 H 420 L 450 0 H 550 L 580 40 H 1000 V 100 Z" />

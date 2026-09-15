@@ -150,16 +150,7 @@
                             {{ \App\Support\CmsText::get('social.support.title', 'FOMENTO DEPORTIVO Y SOCIAL') }}
                         </h2>
                         <p>{{ \App\Support\CmsText::get('social.support.text', 'Creemos en el poder transformador del deporte para fortalecer comunidades.') }}</p>
-                        <div class="stats-row">
-                            <div class="s-stat">
-                                <span class="val">+10</span>
-                                <span class="lab">{{ \App\Support\CmsText::get('social.support.years', 'ANOS DE IMPACTO') }}</span>
-                            </div>
-                            <div class="s-stat">
-                                <span class="val">LEED</span>
-                                <span class="lab">{{ \App\Support\CmsText::get('social.support.certification', 'CERTIFICACION') }}</span>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
                 <div class="indi-container social-sports-gallery">
@@ -945,4 +936,33 @@
     });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const page = document.querySelector('.social-page');
+    const logo = document.getElementById('logoMenu');
+    if (!page || !logo) return;
+    let frame = 0;
+    let until = 0;
+    const alignContent = () => {
+        frame = 0;
+        if (window.innerWidth <= 820 && !logo.classList.contains('active') && !logo.matches(':hover')) {
+            const parts = [...logo.querySelectorAll('.logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1')];
+            const right = Math.max(...parts.map(part => part.getBoundingClientRect().right));
+            if (Number.isFinite(right)) {
+                page.style.setProperty('--social-logo-safe-left', `${right + 5}px`);
+            }
+        }
+        if (performance.now() < until) frame = requestAnimationFrame(alignContent);
+    };
+    const schedule = () => {
+        until = performance.now() + 650;
+        if (!frame) frame = requestAnimationFrame(alignContent);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    logo.addEventListener('mouseleave', schedule);
+    logo.addEventListener('transitionend', schedule);
+    schedule();
+});
+</script>
 @endsection

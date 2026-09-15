@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    splitTextIntoChars(".indi-scroll-text:not(.hero-typer-text)");
-    gsap.utils.toArray(".indi-scroll-text").forEach((textBlock) => {
+    splitTextIntoChars(".indi-scroll-text:not(.hero-typer-text):not(.u-detail)");
+    gsap.utils.toArray(".indi-scroll-text:not(.u-detail)").forEach((textBlock) => {
         const chars = textBlock.querySelectorAll(".char");
         const initialColor = getComputedStyle(textBlock).getPropertyValue("--indi-scroll-initial").trim() || "#ccc";
         const accentColor = getComputedStyle(textBlock).getPropertyValue("--indi-unit-color").trim() || "#0066FF";
@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.to(unitsNotch, { scrollTrigger: { trigger: ".unit-section", start: "top bottom", end: "top center", scrub: 1 }, attr: { d: pathDown }, ease: "none" });
     }
 
-    // 9. Sticky Business Units (No changes)
+    // 9. Centered business units with synchronized fades.
     const boxes = gsap.utils.toArray(".unit-box-trigger");
-    const stageImages = gsap.utils.toArray(".stage-img");
+    const stageImages = gsap.utils.toArray(".units-sticky-stage .stage-img");
     const stage = document.querySelector(".units-sticky-stage");
     if (boxes.length > 0) {
         const unitsMedia = gsap.matchMedia();
@@ -165,13 +165,59 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.set(stage, { clipPath: notchPath });
                 }},
             });
-        });
 
-        boxes.forEach((box, i) => {
-            ScrollTrigger.create({ trigger: box, start: "top center", end: "bottom center", onEnter: () => { stageImages.forEach((img) => img.classList.remove("active")); if (stageImages[i]) stageImages[i].classList.add("active"); }, onEnterBack: () => { stageImages.forEach((img) => img.classList.remove("active")); if (stageImages[i]) stageImages[i].classList.add("active"); } });
-            const content = box.querySelectorAll(".u-num, .u-title, .u-detail");
-            gsap.fromTo(content, { opacity: 0, y: 100 }, { opacity: 1, y: 0, stagger: 0.1, duration: 1.5, ease: "power4.out", scrollTrigger: { trigger: box, start: "top 80%", end: "top 30%", scrub: 1 } });
-            gsap.to(content, { opacity: 0, y: -100, stagger: 0.1, scrollTrigger: { trigger: box, start: "bottom 70%", end: "bottom 20%", scrub: 1 } });
+            let centers = [];
+            let previousScroll = window.scrollY;
+            let activeImage = -1;
+            const previousOpacity = [];
+            const showImage = (index) => {
+                if (index === activeImage) return;
+                activeImage = index;
+                stageImages.forEach((image, i) => image.classList.toggle("active", i === index));
+            };
+            const syncText = (initialize = false) => {
+                const scroll = window.scrollY;
+                const viewportCenter = window.innerHeight / 2;
+                const fadeDistance = window.innerHeight * 0.5;
+                let nextImage = null;
+
+                centers.forEach((center, i) => {
+                    const crossing = center - viewportCenter;
+                    const proximity = Math.max(0, 1 - Math.abs(crossing - scroll) / fadeDistance);
+                    // Smooth fade without a delayed scrub: full opacity at the actual text center.
+                    const opacity = ((1 - Math.cos(Math.PI * proximity)) / 2).toFixed(3);
+                    if (previousOpacity[i] !== opacity) {
+                        boxes[i].style.setProperty("--unit-copy-opacity", opacity);
+                        previousOpacity[i] = opacity;
+                    }
+                    if (initialize) {
+                        if (i === 0 || crossing <= scroll) nextImage = i;
+                    } else if (scroll > previousScroll && crossing > previousScroll && crossing <= scroll) {
+                        nextImage = i;
+                    } else if (scroll < previousScroll && crossing < previousScroll && crossing >= scroll) {
+                        if (nextImage === null || i < nextImage) nextImage = i;
+                    }
+                });
+                if (nextImage !== null) showImage(nextImage);
+                previousScroll = scroll;
+            };
+            const measureText = () => {
+                centers = boxes.map((box) => {
+                    const title = box.querySelector(".u-title").getBoundingClientRect();
+                    const detail = box.querySelector(".u-detail").getBoundingClientRect();
+                    return window.scrollY + (title.top + detail.bottom) / 2;
+                });
+                syncText(true);
+            };
+            ScrollTrigger.create({
+                trigger: ".indi-units-module",
+                start: "top bottom",
+                end: "bottom top",
+                onUpdate: () => syncText(),
+                onRefresh: measureText,
+            });
+            measureText();
+            return () => boxes.forEach((box) => box.style.removeProperty("--unit-copy-opacity"));
         });
     }
 
@@ -182,9 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const markers = document.querySelectorAll(".mexico-map-svg .project-marker");
     if (projectCards.length > 0) {
         let mm = gsap.matchMedia();
-        // Keep the same map-above-cards experience at every responsive width.
-        // CSS owns the fluid dimensions; the scroll behavior no longer changes
-        // at the nearby 720/560/500/420px breakpoints.
+        // Scroll between full-height project cards at every viewport size.
         mm.add("(min-width: 0px)", () => {
             const projectsLayout = document.querySelector(".projects-layout");
             const getProjectSnapPoints = () => {
@@ -205,7 +249,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 start: "top top",
                 end: "bottom bottom",
                 snap: {
-                    snapTo: (progress) => gsap.utils.snap(getProjectSnapPoints(), progress),
+                    snapTo: (progress) => window.matchMedia("(max-width: 820px)").matches &&
+                        projectsLayout.querySelector('.has-expanded-description')
+                        ? progress : gsap.utils.snap(getProjectSnapPoints(), progress),
                     duration: { min: 0.28, max: 0.65 },
                     delay: 0.04,
                     ease: "power3.inOut",
