@@ -1582,7 +1582,7 @@ body {
     font-size: 2.4rem;
     line-height: 1;
     margin: 0 0 1.25rem;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .history-milestone p {
@@ -1664,7 +1664,7 @@ body {
     font-size: clamp(1.25rem, 2.2vw, 2.25rem);
     font-weight: 800;
     line-height: 1.05;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .history-text-stage__mark {
@@ -1729,7 +1729,7 @@ body {
     font-size: clamp(3rem, 5.2vw, 5rem);
     line-height: 0.95;
     margin: 0 0 1.4rem;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 .history-text-panel p {
@@ -2188,7 +2188,7 @@ body {
 
 .admin-card-meta code {
     color: #64748b;
-    font-family: Consolas, "Liberation Mono", monospace;
+    font-family: "inter-18pt", sans-serif;
     font-size: 0.78rem;
     overflow-wrap: anywhere;
 }
@@ -4420,6 +4420,13 @@ textarea {
 @media (max-width: 720px) {
     #home-stats .stats-solid-grid {
         margin-left: var(--stats-logo-inset, 65px);
+        margin-right: 4vw;
+    }
+
+    #home-stats .stat-card-notched {
+        margin-inline: 0;
+        -webkit-mask-image: url('/assets/stat-card-shape-mobile.svg');
+        mask-image: url('/assets/stat-card-shape-mobile.svg');
     }
 }
 

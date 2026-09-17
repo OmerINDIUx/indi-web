@@ -30,42 +30,42 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-1'),
             'milestones' => [
                 [
-                    'year' => '1977',
+                    'year' => \App\Support\CmsText::get('history.1977.year', '1977'),
                     'title' => 'INDI inicia operaciones',
                     'text' => '',
                 ],
                 [
-                    'year' => '1980',
+                    'year' => \App\Support\CmsText::get('history.1980.year', '1980'),
                     'title' => 'Comenzamos construyendo hospitales y escuelas',
                     'text' => '',
                 ],
                 [
-                    'year' => '1989',
+                    'year' => \App\Support\CmsText::get('history.1989.year', '1989'),
                     'title' => 'Construcción de Torres Gemelas TSJ',
                     'text' => '',
                 ],
                 [
-                    'year' => '1994',
+                    'year' => \App\Support\CmsText::get('history.1994.year', '1994'),
                     'title' => 'Construcción del Centro Nacional de las Artes',
                     'text' => '',
                 ],
                 [
-                    'year' => '2003',
+                    'year' => \App\Support\CmsText::get('history.2003.year', '2003'),
                     'title' => 'Sistema Cutzamala',
                     'text' => 'Impulsamos la modernización de infraestructura estratégica para el suministro de agua.',
                 ],
                 [
-                    'year' => '2005',
+                    'year' => \App\Support\CmsText::get('history.2005.year', '2005'),
                     'title' => 'Segundo Piso del Periférico',
                     'text' => 'Participamos en la construcción del Segundo Piso del Periférico en la Ciudad de México.',
                 ],
                 [
-                    'year' => '2007',
+                    'year' => \App\Support\CmsText::get('history.2007.year', '2007'),
                     'title' => 'Terminal Portuaria de Michoacán',
                     'text' => 'Construimos la Terminal Portuaria de Michoacán, fortaleciendo la infraestructura logística del país.',
                 ],
                 [
-                    'year' => '2009',
+                    'year' => \App\Support\CmsText::get('history.2009.year', '2009'),
                     'title' => 'Puente de rodamiento aeronáutico ASUR Cancún',
                     'text' => 'Construimos el puente de rodamiento aeronáutico de ASUR Cancún.',
                 ],
@@ -76,46 +76,46 @@
             'frames' => $getHistoryFrames('HISTORIA-INDI-2'),
             'milestones' => [
                 [
-                     'year' => '2010',
+                     'year' => \App\Support\CmsText::get('history.2010.year', '2010'),
                     'title' => 'Senado de la República',
                     'text' => 'Construimos la nueva sede del Senado de la República, obra galardonada como la primera megaestructura en América Latina y presentada en Megaestructuras de National Geographic.',
                 ],
 
                 [
 
-                'year' => '2011',
+                'year' => \App\Support\CmsText::get('history.2011.year', '2011'),
                     'title' => 'Mexibús',
                     'text' => 'Fuimos pioneros en el modelo operativo APP para sistemas BRT.',
                                     ],
 
 
                 [
-                    'year' => '2014',
+                    'year' => \App\Support\CmsText::get('history.2014.year', '2014'),
                     'title' => 'Tribunal Superior de Justicia',
                     'text' => 'Construimos el Tribunal Superior de Justicia de la Ciudad de México.',
                 ],
                 [
-                    'year' => '2018',
+                    'year' => \App\Support\CmsText::get('history.2018.year', '2018'),
                     'title' => 'Terminal de Contenedores del Puerto de Veracruz',
                     'text' => 'Realizamos la ampliación de la Terminal de Contenedores del Puerto de Veracruz.',
                 ],
                 [
-                    'year' => '2019',
+                    'year' => \App\Support\CmsText::get('history.2019.year', '2019'),
                     'title' => 'Puerto de Manzanillo',
                     'text' => 'Participamos en la construcción de las fases 2 y 3 del Puerto de Manzanillo.',
                 ],
                 [
-                    'year' => '2021-2024',
+                    'year' => \App\Support\CmsText::get('history.2021-2024.year', '2021-2024'),
                     'title' => 'Cablebús Línea 1 y 3',
                     'text' => 'Construimos y pusimos en marcha las líneas 1 y 3 del Cablebús en la Ciudad de México.',
                 ],
                 [
-                    'year' => '2023',
+                    'year' => \App\Support\CmsText::get('history.2023.year', '2023'),
                     'title' => 'Rompeolas de Salina Cruz, Oaxaca',
                     'text' => 'Construimos el rompeolas más grande de Latinoamérica en Salina Cruz, Oaxaca.',
                 ],
                 [
-                    'year' => '2024',
+                    'year' => \App\Support\CmsText::get('history.2024.year', '2024'),
                     'title' => 'Tramo 5 Sur del Tren Maya',
                     'text' => 'Concluimos la construcción del Tramo 5 Sur del Tren Maya, entre Puerto Aventuras y Akumal.',
                 ],
@@ -126,25 +126,25 @@
     $historyTextBlocks = [
         [
             'kicker' => 'Crecimiento institucional',
-            'title' => '1981',
+            'title' => \App\Support\CmsText::get('history.1981.year', '1981'),
             'image' => \App\Support\CmsMedia::url('history.1975.image', 'imagenes_indi/imagenes_historia/Oficinas naucalpan.JPG'),
             'text' => 'Abrimos oficinas en Naucalpan, Estado de México.',
         ],
         [
             'kicker' => 'Reconocimiento empresarial',
-            'title' => '1987',
+            'title' => \App\Support\CmsText::get('history.1987.year', '1987'),
             'image' => \App\Support\CmsMedia::url('history.1987.image', 'imagenes_indi/imagenes_historia/1987.jpeg'),
             'text' => 'Por primera vez, INDI figura entre las 500 empresas más importantes de México.',
         ],
         [
             'kicker' => 'Nueva etapa',
-            'title' => '1993',
+            'title' => \App\Support\CmsText::get('history.1993.year', '1993'),
             'image' => \App\Support\CmsMedia::url('history.1993.image', 'imagenes_indi/imagenes_historia/1993.JPG'),
             'text' => 'Se crea Grupo INDI, que se consolida como uno de los principales constructores de puentes urbanos en la Ciudad de México.',
         ],
         [
             'kicker' => 'Consolidación nacional',
-            'title' => '1997',
+            'title' => \App\Support\CmsText::get('history.1997.year', '1997'),
             'image' => \App\Support\CmsMedia::url('history.1997.image', 'imagenes_indi/imagenes_historia/1997.JPG'),
             'text' => 'Grupo INDI se convierte en una de las firmas de infraestructura más grandes de México.',
         ],
@@ -153,43 +153,43 @@
     $historyTextBlocksAfterVideo = [
         [
             'kicker' => 'Innovación en infraestructura',
-            'title' => '2002',
+            'title' => \App\Support\CmsText::get('history.2002.year', '2002'),
             'image' => \App\Support\CmsMedia::url('history.2002.image', 'imagenes_indi/imagenes_historia/2002.JPG'),
             'text' => 'Pioneros en la construcción de autopistas elevadas.',
         ],
         [
             'kicker' => 'Innovación constructiva',
-            'title' => '2008',
+            'title' => \App\Support\CmsText::get('history.2008.year', '2008'),
             'image' => \App\Support\CmsMedia::url('history.2008.image', 'imagenes_indi/imagenes_historia/2008.JPG'),
             'text' => 'Pioneros en la implementación de cimentación Top Down, así como en edificaciones inteligentes en México.',
         ],
         [
             'kicker' => 'Reconocimiento internacional',
-            'title' => '2012',
+            'title' => \App\Support\CmsText::get('history.2012.year', '2012'),
             'image' => \App\Support\CmsMedia::url('history.2012.image', 'imagenes_indi/Construccion/senado-de-la-republica-panoramica - copia.jpg'),
             'text' => 'Ganadores del premio Deal Of the Year en la categoría Latin America Social Infrastructure.',
         ],
         [
             'kicker' => 'Certificaciones',
-            'title' => '2015',
+            'title' => \App\Support\CmsText::get('history.2015.year', '2015'),
             'image' => \App\Support\CmsMedia::url('history.2015.image', 'imagenes_indi/imagenes_historia/2015.png'),
             'text' => 'Certificación ISO 9000, 14000 y 18000.',
         ],
         [
             'kicker' => 'Infraestructura portuaria',
-            'title' => '2017',
+            'title' => \App\Support\CmsText::get('history.2017.year', '2017'),
             'image' => \App\Support\CmsMedia::url('history.2017.image', 'imagenes_indi/imagenes_historia/Rompeolas campeche 2017.jpg'),
             'text' => 'Rompeolas en Isla del Carmen, Campeche.',
         ],
         [
             'kicker' => 'Expansión internacional',
-            'title' => '2020',
+            'title' => \App\Support\CmsText::get('history.2020.year', '2020'),
             'image' => \App\Support\CmsMedia::url('history.2020.image', 'imagenes_indi/imagenes_historia/2020.jpeg'),
             'text' => 'INDI USA.',
         ],
         [
             'kicker' => 'Responsabilidad social',
-            'title' => '2025',
+            'title' => \App\Support\CmsText::get('history.2025.year', '2025'),
             'image' => \App\Support\CmsMedia::url('history.2025.image', 'imagenes_indi/imagenes_historia/2025.png'),
             'text' => 'Obtención de Distintivo Empresa Socialmente Responsable.',
         ],

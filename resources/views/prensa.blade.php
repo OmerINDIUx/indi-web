@@ -61,10 +61,11 @@
                 <span class="filter-label" style="display: block; font-family: 'usual', sans-serif; font-weight: 700; font-size: 0.8rem; color: #888; letter-spacing: 0.2em; margin-bottom: 1.5rem;">{{ \App\Support\CmsText::get('press.filter', 'FILTRAR POR UNIDADES DE NEGOCIO') }}</span>
                 <div class="filter-group" id="filterLinks">
                     <button class="filter-pill active" data-filter="all">{{ \App\Support\CmsText::get('category.all', __('site.categories.all')) }}</button>
-                    <button class="filter-pill maritimo" data-filter="maritimo">{{ \App\Support\CmsText::get('category.maritimo', __('site.categories.maritimo')) }}</button>
-                    <button class="filter-pill construccion" data-filter="construccion">{{ \App\Support\CmsText::get('category.construccion', __('site.categories.construccion')) }}</button>
-                    <button class="filter-pill infraestructura" data-filter="infraestructura">{{ \App\Support\CmsText::get('category.infraestructura', __('site.categories.infraestructura')) }}</button>
-                    <button class="filter-pill ferroviario" data-filter="ferroviario">{{ \App\Support\CmsText::get('category.ferroviario', __('site.categories.ferroviario')) }}</button>
+                    @foreach($availableCategories as $category)
+                        <button class="filter-pill {{ $category }}" data-filter="{{ $category }}">
+                            {{ \App\Support\CmsText::get('category.' . $category, __('site.categories.' . $category)) }}
+                        </button>
+                    @endforeach
                 </div>
             </div>
 

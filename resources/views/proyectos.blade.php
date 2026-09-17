@@ -3,8 +3,6 @@
 @section('title', 'PROYECTOS | INDI')
 
 @section('content')
-<!-- usual Font from Reference -->
-<link href="https://fonts.googleapis.com/css2?family=usual:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <div class="projects-page-wrapper">
     <script>

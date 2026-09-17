@@ -8,7 +8,7 @@
     <style>
         :root { --blue: #0066f9; --ink: #101010; }
         * { box-sizing: border-box; }
-        body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f2f2f2; color: var(--ink); font-family: usual, Arial, sans-serif; }
+        body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f2f2f2; color: var(--ink); font-family: usual, sans-serif; }
         .access-shell { width: min(92vw, 520px); padding: 3rem; background: #fff; box-shadow: 0 24px 70px rgba(0,0,0,.12); }
         .brand { display: block; width: 130px; margin: 0 auto 3rem; }
         .eyebrow { margin: 0 0 .75rem; color: var(--blue); font-size: .75rem; font-weight: 700; letter-spacing: .2em; text-align: center; }

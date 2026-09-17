@@ -13,8 +13,12 @@ class PrensaController extends Controller
         
         $featured = $allPosts->first();
         $posts = $allPosts->skip(1);
+        $categoryOrder = ['maritimo', 'construccion', 'infraestructura', 'ferroviario'];
+        $availableCategories = collect($categoryOrder)
+            ->filter(fn (string $category) => $posts->contains('category', $category))
+            ->values();
 
-        return view('prensa', compact('posts', 'featured'));
+        return view('prensa', compact('posts', 'featured', 'availableCategories'));
     }
 
     public function show($slug)
