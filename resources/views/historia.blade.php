@@ -31,42 +31,42 @@
             'milestones' => [
                 [
                     'year' => \App\Support\CmsText::get('history.1977.year', '1977'),
-                    'title' => 'INDI inicia operaciones',
+                    'title' => \App\Support\CmsText::get('history.1977.title', 'INDI inicia operaciones'),
                     'text' => '',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.1980.year', '1980'),
-                    'title' => 'Comenzamos construyendo hospitales y escuelas',
+                    'title' => \App\Support\CmsText::get('history.1980.title', 'Comenzamos construyendo hospitales y escuelas'),
                     'text' => '',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.1989.year', '1989'),
-                    'title' => 'Construcción de Torres Gemelas TSJ',
+                    'title' => \App\Support\CmsText::get('history.1989.title', 'Construcción de Torres Gemelas TSJ'),
                     'text' => '',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.1994.year', '1994'),
-                    'title' => 'Construcción del Centro Nacional de las Artes',
+                    'title' => \App\Support\CmsText::get('history.1994.title', 'Construcción del Centro Nacional de las Artes'),
                     'text' => '',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2003.year', '2003'),
-                    'title' => 'Sistema Cutzamala',
+                    'title' => \App\Support\CmsText::get('history.2003.title', 'Sistema Cutzamala'),
                     'text' => 'Impulsamos la modernización de infraestructura estratégica para el suministro de agua.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2005.year', '2005'),
-                    'title' => 'Segundo Piso del Periférico',
+                    'title' => \App\Support\CmsText::get('history.2005.title', 'Segundo Piso del Periférico'),
                     'text' => 'Participamos en la construcción del Segundo Piso del Periférico en la Ciudad de México.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2007.year', '2007'),
-                    'title' => 'Terminal Portuaria de Michoacán',
+                    'title' => \App\Support\CmsText::get('history.2007.title', 'Terminal Portuaria de Michoacán'),
                     'text' => 'Construimos la Terminal Portuaria de Michoacán, fortaleciendo la infraestructura logística del país.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2009.year', '2009'),
-                    'title' => 'Puente de rodamiento aeronáutico ASUR Cancún',
+                    'title' => \App\Support\CmsText::get('history.2009.title', 'Puente de rodamiento aeronáutico ASUR Cancún'),
                     'text' => 'Construimos el puente de rodamiento aeronáutico de ASUR Cancún.',
                 ],
             ],
@@ -77,46 +77,46 @@
             'milestones' => [
                 [
                      'year' => \App\Support\CmsText::get('history.2010.year', '2010'),
-                    'title' => 'Senado de la República',
+                    'title' => \App\Support\CmsText::get('history.2010.title', 'Senado de la República'),
                     'text' => 'Construimos la nueva sede del Senado de la República, obra galardonada como la primera megaestructura en América Latina y presentada en Megaestructuras de National Geographic.',
                 ],
 
                 [
 
                 'year' => \App\Support\CmsText::get('history.2011.year', '2011'),
-                    'title' => 'Mexibús',
+                    'title' => \App\Support\CmsText::get('history.2011.title', 'Mexibús'),
                     'text' => 'Fuimos pioneros en el modelo operativo APP para sistemas BRT.',
                                     ],
 
 
                 [
                     'year' => \App\Support\CmsText::get('history.2014.year', '2014'),
-                    'title' => 'Tribunal Superior de Justicia',
+                    'title' => \App\Support\CmsText::get('history.2014.title', 'Tribunal Superior de Justicia'),
                     'text' => 'Construimos el Tribunal Superior de Justicia de la Ciudad de México.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2018.year', '2018'),
-                    'title' => 'Terminal de Contenedores del Puerto de Veracruz',
+                    'title' => \App\Support\CmsText::get('history.2018.title', 'Terminal de Contenedores del Puerto de Veracruz'),
                     'text' => 'Realizamos la ampliación de la Terminal de Contenedores del Puerto de Veracruz.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2019.year', '2019'),
-                    'title' => 'Puerto de Manzanillo',
+                    'title' => \App\Support\CmsText::get('history.2019.title', 'Puerto de Manzanillo'),
                     'text' => 'Participamos en la construcción de las fases 2 y 3 del Puerto de Manzanillo.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2021-2024.year', '2021-2024'),
-                    'title' => 'Cablebús Línea 1 y 3',
+                    'title' => \App\Support\CmsText::get('history.2021-2024.title', 'Cablebús Línea 1 y 3'),
                     'text' => 'Construimos y pusimos en marcha las líneas 1 y 3 del Cablebús en la Ciudad de México.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2023.year', '2023'),
-                    'title' => 'Rompeolas de Salina Cruz, Oaxaca',
+                    'title' => \App\Support\CmsText::get('history.2023.title', 'Rompeolas de Salina Cruz, Oaxaca'),
                     'text' => 'Construimos el rompeolas más grande de Latinoamérica en Salina Cruz, Oaxaca.',
                 ],
                 [
                     'year' => \App\Support\CmsText::get('history.2024.year', '2024'),
-                    'title' => 'Tramo 5 Sur del Tren Maya',
+                    'title' => \App\Support\CmsText::get('history.2024.title', 'Tramo 5 Sur del Tren Maya'),
                     'text' => 'Concluimos la construcción del Tramo 5 Sur del Tren Maya, entre Puerto Aventuras y Akumal.',
                 ],
             ],

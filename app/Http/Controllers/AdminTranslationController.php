@@ -16,7 +16,22 @@ class AdminTranslationController extends Controller
         $translations = SiteTranslation::orderBy('group')
             ->orderBy('id')
             ->get()
-            ->groupBy('group');
+            ->groupBy('group')
+            ->map(function ($items, $group) {
+                if ($group !== 'Historia') {
+                    return $items;
+                }
+
+                return $items->sortBy(function ($item) {
+                    if (! preg_match('/^history\.(\d{4}(?:-\d{4})?)\.(year|title|text)$/', $item->key, $matches)) {
+                        return sprintf('0-%s', $item->key);
+                    }
+
+                    $order = ['year' => '0', 'title' => '1', 'text' => '2'];
+
+                    return sprintf('1-%s-%s', str_pad(explode('-', $matches[1])[0], 4, '0', STR_PAD_LEFT), $order[$matches[2]]);
+                })->values();
+            });
 
         $media = SiteMedia::orderBy('group')
             ->orderBy('id')
