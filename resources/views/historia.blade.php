@@ -293,7 +293,7 @@
     </section>
 
     @if($index === 0)
-        <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocks) }};" aria-label="Historia sin fotografias">
+        <section class="history-text-sequence" style="--history-text-count: {{ count($historyTextBlocks) }};" aria-label="Otra parte de la historia">
             <div class="history-text-stage">
                 <div class="history-text-heading">
                     <h2>Otra parte de la historia</h2>

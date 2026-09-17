@@ -55,38 +55,55 @@
     background: transparent;
     padding: 0.8rem;
     border-radius: 4px;
-    transition: background 0.4s ease;
+    /* Compact from the first paint; scrolling never changes this state. */
+    transform: scale(0.75);
+    transform-origin: left top;
+    /* Full opacity preserves the original contrast against the page background. */
+    opacity: 1;
+    transition: background 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
     cursor: pointer;
     mix-blend-mode: difference;
     min-width: 120px;
     min-height: 154px;
 }
 
-/* Halo blanco con bordes transparentes para separar el menú del texto. */
+/*
+ * La capa amplia anterior se conserva inactiva: el script dibuja segmentos
+ * pequeños solo donde el menú o logo se cruza con una línea de texto.
+ */
 .logo-menu-wrapper::before {
-    content: "";
-    position: absolute;
-    left: calc(var(--menu-halo-left, 0px) - 40px);
-    top: calc(var(--menu-halo-top, 0px) - 28px);
-    width: calc(var(--menu-halo-width, 100%) + 80px);
-    height: calc(var(--menu-halo-height, 100%) + 56px);
-    z-index: 0;
-    border-radius: 12px;
-    background: #fff;
-    mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent), linear-gradient(to bottom, transparent, #000 28px, #000 calc(100% - 28px), transparent);
-    mask-composite: intersect;
-    opacity: 0;
+    display: none;
+}
+
+.menu-halo-layer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
     pointer-events: none;
-    transition: opacity 450ms ease;
 }
 
-.logo-menu-wrapper.active.has-text-collision::before {
-    opacity: 1;
+/* Halo only behind the expanded desktop menu; never behind the closed logo. */
+@media (min-width: 821px) and (hover: hover) and (pointer: fine) {
+    body:has(.logo-menu-wrapper.active) .menu-halo-layer,
+    body:has(.logo-menu-wrapper:hover:not(.logo-hover-locked)) .menu-halo-layer {
+        display: block;
+    }
 }
 
-@media (hover: hover) and (min-width: 821px) {
-    .logo-menu-wrapper.has-text-collision:hover:not(.logo-hover-locked)::before {
-        opacity: 1;
+.menu-halo-segment {
+    position: fixed;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    filter: blur(15px);
+    pointer-events: none;
+    opacity: 0;
+    animation: menu-halo-in 160ms ease forwards;
+}
+
+@keyframes menu-halo-in {
+    to {
+        opacity: 0.9;
     }
 }
 
@@ -179,6 +196,8 @@
  * wrapper ocupa solamente el ancho requerido por el logo y los enlaces.
  */
 .logo-menu-wrapper.active {
+    transform: none;
+    opacity: 1;
     background: transparent;
     mix-blend-mode: normal !important;
     padding: 0;
@@ -499,11 +518,6 @@
  * se distribuyan en varias filas sobre un fondo mas opaco y legible.
  */
 @media (max-width: 720px) {
-    /* En teléfono el menú ya tiene fondo propio; el halo del logo no es necesario. */
-    .logo-menu-wrapper::before {
-        display: none;
-    }
-
     .logo-menu-wrapper {
         top: var(--logo-menu-mobile-top);
         left: var(--logo-menu-mobile-left);
@@ -565,7 +579,8 @@
         padding: 0.35rem;
     }
 
-    .logo-menu-wrapper:not(.active):not(:hover) .logo-svg-wrapper {
+    .logo-menu-wrapper:not(.active):not(:hover) .logo-svg-wrapper,
+    .logo-menu-wrapper.logo-hover-locked:not(.active) .logo-svg-wrapper {
         width: 64px !important;
         height: 92px !important;
     }
@@ -685,6 +700,8 @@
 /* Al abrirse por hover, el panel y el logo dejan de mezclar colores con el mapa. */
 @media (hover: hover) and (min-width: 821px) {
     .logo-menu-wrapper:hover:not(.logo-hover-locked) {
+        transform: none;
+        opacity: 1;
         mix-blend-mode: normal !important;
     }
     .logo-menu-wrapper:hover:not(.logo-hover-locked) .logo-svg-wrapper .cls-1 {
@@ -747,6 +764,9 @@
 
 /* Teléfono en horizontal: el logo conserva una presencia discreta. */
 @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
+    .logo-menu-wrapper:not(.active) {
+        transform: scale(0.85);
+    }
     .logo-menu-wrapper {
         top: 0.4rem;
         left: 0.5rem;

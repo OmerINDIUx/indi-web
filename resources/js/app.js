@@ -1,4 +1,5 @@
 import "./bootstrap";
+import { initHistoryChapters } from "./history-chapters";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -621,88 +622,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const historyTextSequences = gsap.utils.toArray(".history-text-sequence");
-    historyTextSequences.forEach((textSequence) => {
-        const textStage = textSequence.querySelector(".history-text-stage");
-        const textPanels = gsap.utils.toArray(textSequence.querySelectorAll(".history-text-panel"));
-        const textSnapPoints = textPanels.map((_, index) => (
-            textPanels.length > 1 ? index / (textPanels.length - 1) : 0
-        ));
-
-        if (!textStage || !textPanels.length) return;
-
-        const renderTimeline = (progress) => {
-            const activeIndex = progress * Math.max(0, textPanels.length - 1);
-            const isMobile = window.matchMedia("(max-width: 720px)").matches;
-            const stageRect = textStage.getBoundingClientRect();
-            const heading = textStage.querySelector(".history-text-heading");
-            const headingRect = heading?.getBoundingClientRect();
-            const stageHeight = textStage.clientHeight || window.innerHeight;
-            const headingBottom = headingRect
-                ? Math.max(0, headingRect.bottom - stageRect.top)
-                : stageHeight * 0.16;
-            const contentTop = Math.max(
-                stageHeight * (isMobile ? 0.2 : 0.16),
-                headingBottom + (isMobile ? 18 : 32),
-            );
-            const contentBottom = Math.max(isMobile ? 24 : 36, stageHeight * 0.06);
-            const availableHeight = Math.max(0, stageHeight - contentTop - contentBottom);
-            const panelCenter = contentTop + (availableHeight / 2);
-
-            textStage.style.setProperty("--history-panel-center", `${panelCenter}px`);
-
-            const widestPanel = Math.max(...textPanels.map((panel) => panel.getBoundingClientRect().width));
-            const spacing = isMobile
-                ? Math.max(window.innerWidth * 0.9, widestPanel + 24)
-                : Math.max(window.innerWidth * 0.72, widestPanel + Math.min(96, window.innerWidth * 0.06));
-
-            textPanels.forEach((panel, index) => {
-                const distance = index - activeIndex;
-                const opacity = Math.max(0, 1 - (Math.abs(distance) * 1.5));
-                const scale = Math.max(0.86, 1 - (Math.abs(distance) * 0.08));
-
-                panel.classList.toggle("is-active", Math.abs(distance) < 0.5);
-                gsap.set(panel, {
-                    x: distance * spacing,
-                    yPercent: -50,
-                    xPercent: -50,
-                    opacity,
-                    scale,
-                    zIndex: Math.round(100 - Math.abs(distance) * 10),
-                });
-            });
-        };
-
-        renderTimeline(0);
-
-        ScrollTrigger.create({
-            trigger: textSequence,
-            start: "top top",
-            end: "bottom bottom",
-            pin: textStage,
-            pinSpacing: false,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            scrub: 0.6,
-            snap: window.matchMedia("(prefers-reduced-motion: reduce)").matches || textPanels.length < 2
-                ? false
-                : {
-                    snapTo: (progress, self) => snapByScrollDirection(
-                        textSnapPoints,
-                        progress,
-                        self.direction,
-                    ),
-                    delay: 0.12,
-                    duration: { min: 0.5, max: 1.1 },
-                    ease: "power1.inOut",
-                    directional: false,
-                },
-            onUpdate: (self) => {
-                renderTimeline(self.progress);
-            },
-            onRefresh: (self) => renderTimeline(self.progress),
-        });
-    });
+    initHistoryChapters();
 
     const scrollCues = document.querySelectorAll(
         ".home-scroll-cue, .negocios-scroll-cue, .history-scroll-cue",

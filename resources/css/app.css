@@ -4417,6 +4417,12 @@ textarea {
 }
 
 /* Footer global: todo el contenido libra el logotipo fijo. */
+@media (max-width: 720px) {
+    #home-stats .stats-solid-grid {
+        margin-left: var(--stats-logo-inset, 65px);
+    }
+}
+
 @media (min-width: 821px) and (max-width: 2080px) {
     .indi-footer .indi-container {
         width: auto;

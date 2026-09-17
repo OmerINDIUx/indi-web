@@ -4,30 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 /*
- * Configuracion matematica del estado reducido por scroll.
- * El ancho objetivo crece con el viewport, pero clamp evita que el logo quede
- * demasiado pequeno en movil o demasiado grande en escritorio.
- */
-const scrollLogoConfig = Object.freeze({
-    targetWidthRatio: 0.045,
-    minTargetWidth: 48,
-    maxTargetWidth: 64,
-    /* 0.75 significa que la reduccion nunca supera el 25%. */
-    minScale: 0.75,
-    maxScale: 0.85,
-    shiftRatio: 0.85,
-    minViewportGutter: 4,
-    maxViewportGutter: 10,
-    viewportGutterRatio: 0.005,
-    verticalLiftRatio: 0.1,
-    minVerticalLift: 6,
-    maxVerticalLift: 14,
-});
-
-/* Limita cualquier valor al intervalo indicado. */
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-/*
  * Animacion y comportamiento del logo/menu principal.
  * Los estilos y breakpoints visuales viven en resources/css/logo-menu.css.
  */
@@ -36,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoMenu = document.getElementById("logoMenu");
     const menuLinks = document.getElementById("menuLinks");
     let isMenuOpen = false;
-    let isCollided = false;
 
     if (logoMenu && menuLinks) {
         let autoCollapseTimer;
@@ -45,16 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
         let menuOpenedByTouch = false;
         const desktopBreakpoint = window.matchMedia("(min-width: 1081px)");
         const logoLink = logoMenu.querySelector(".logo-group");
-        const logoCanvas = logoMenu.querySelector(".logo-svg-wrapper");
         const logoFillTargets = logoMenu.querySelectorAll(".logo-svg-wrapper .cls-1, .logo-svg-wrapper .st1");
         const footer = document.querySelector('.indi-footer');
+        const homeStats = document.getElementById('home-stats');
         let footerFrame = 0;
         let footerUntil = 0;
         const alignFooter = () => {
             footerFrame = 0;
-            if (footer && innerWidth <= 1080 && !logoMenu.classList.contains('active') && !logoMenu.matches(':hover')) {
+            if ((footer || homeStats) && innerWidth <= 1080 && !logoMenu.classList.contains('active') && !logoMenu.matches(':hover')) {
                 const right = Math.max(...[...logoFillTargets].map(part => part.getBoundingClientRect().right));
-                if (Number.isFinite(right)) footer.style.setProperty('--footer-logo-edge', `${right + 5}px`);
+                if (Number.isFinite(right)) {
+                    footer?.style.setProperty('--footer-logo-edge', `${right + 5}px`);
+                    if (homeStats) {
+                        const contentLeft = homeStats.getBoundingClientRect().left + homeStats.clientLeft + parseFloat(getComputedStyle(homeStats).paddingLeft);
+                        homeStats.style.setProperty('--stats-logo-inset', `${Math.max(0, right + 5 - contentLeft)}px`);
+                    }
+                }
             }
             if (performance.now() < footerUntil) footerFrame = requestAnimationFrame(alignFooter);
         };
@@ -78,6 +59,31 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check actual text lines, not the large containers around videos or images.
         let haloFrame = 0;
         const nearbyText = new Set();
+        const haloLayer = document.createElement("div");
+        haloLayer.className = "menu-halo-layer";
+        haloLayer.setAttribute("aria-hidden", "true");
+        document.body.append(haloLayer);
+        const haloDesktop = window.matchMedia("(min-width: 821px) and (hover: hover) and (pointer: fine)");
+        const clearHaloSegments = () => {
+            haloLayer.replaceChildren();
+        };
+        const addHaloSegment = (intersection) => {
+            const paddingX = 26;
+            const paddingY = 18;
+            const left = intersection.left - paddingX;
+            const top = intersection.top - paddingY;
+            const right = intersection.right + paddingX;
+            const bottom = intersection.bottom + paddingY;
+            if (right <= left || bottom <= top) return;
+
+            const segment = document.createElement("span");
+            segment.className = "menu-halo-segment";
+            segment.style.left = `${left}px`;
+            segment.style.top = `${top}px`;
+            segment.style.width = `${right - left}px`;
+            segment.style.height = `${bottom - top}px`;
+            haloLayer.append(segment);
+        };
         const textObserver = new IntersectionObserver((entries) => {
             entries.forEach(({ target, isIntersecting }) => {
                 if (isIntersecting) nearbyText.add(target);
@@ -87,30 +93,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const updateHalo = () => {
             haloFrame = 0;
-            const opened = logoMenu.classList.contains("active") ||
-                (window.matchMedia("(hover: hover) and (min-width: 821px)").matches &&
-                    logoMenu.matches(":hover") && !logoMenu.classList.contains("logo-hover-locked"));
-            let collision = null;
-            if (opened) {
+            clearHaloSegments();
+            // The closed logo keeps its blend effect, without a halo. Touch
+            // devices (including landscape phones) never generate halo segments.
+            const needsHalo = haloDesktop.matches && (logoMenu.classList.contains("active") ||
+                (logoMenu.matches(":hover") && !logoMenu.classList.contains("logo-hover-locked")));
+            let hasCollision = false;
+            if (needsHalo) {
                 const menu = menuLinks.getBoundingClientRect();
                 const parts = [...logoFillTargets].map((part) => part.getBoundingClientRect());
                 const regions = [menu, ...parts].filter((rect) => rect.width && rect.height);
-                const area = { left: Math.min(...regions.map((rect) => rect.left)),
-                    right: Math.max(...regions.map((rect) => rect.right)),
-                    top: Math.min(...regions.map((rect) => rect.top)),
-                    bottom: Math.max(...regions.map((rect) => rect.bottom)) };
-                const wrapper = logoMenu.getBoundingClientRect();
-                const scaleX = wrapper.width / logoMenu.offsetWidth || 1;
-                const scaleY = wrapper.height / logoMenu.offsetHeight || 1;
-                logoMenu.style.setProperty("--menu-halo-left", `${(area.left - wrapper.left) / scaleX}px`);
-                logoMenu.style.setProperty("--menu-halo-top", `${(area.top - wrapper.top) / scaleY}px`);
-                logoMenu.style.setProperty("--menu-halo-width", `${(area.right - area.left) / scaleX}px`);
-                logoMenu.style.setProperty("--menu-halo-height", `${(area.bottom - area.top) / scaleY}px`);
-                const overlaps = (rect) => rect.width > 0 && rect.height > 0 && regions.some((area) =>
-                    rect.left < area.right && rect.right > area.left &&
-                    rect.top < area.bottom && rect.bottom > area.top);
                 for (const element of nearbyText) {
-                    if (!overlaps(element.getBoundingClientRect())) continue;
                     let visible = true;
                     for (let parent = element; parent; parent = parent.parentElement) {
                         const style = getComputedStyle(parent);
@@ -124,15 +117,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (node.nodeType !== Node.TEXT_NODE || !node.textContent.trim()) continue;
                         const range = document.createRange();
                         range.selectNodeContents(node);
-                        if ([...range.getClientRects()].some(overlaps)) {
-                            collision = element;
-                            break;
+                        for (const textRect of range.getClientRects()) {
+                            for (const region of regions) {
+                                const left = Math.max(textRect.left, region.left);
+                                const top = Math.max(textRect.top, region.top);
+                                const right = Math.min(textRect.right, region.right);
+                                const bottom = Math.min(textRect.bottom, region.bottom);
+                                if (right <= left || bottom <= top) continue;
+
+                                hasCollision = true;
+                                addHaloSegment({ left, top, right, bottom });
+                            }
                         }
                     }
-                    if (collision) break;
                 }
             }
-            logoMenu.classList.toggle("has-text-collision", Boolean(collision));
+            logoMenu.classList.toggle("has-text-collision", hasCollision);
         };
         function requestHaloUpdate() {
             if (!haloFrame) haloFrame = requestAnimationFrame(updateHalo);
@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         window.addEventListener("scroll", requestHaloUpdate, { passive: true });
         window.addEventListener("resize", requestHaloUpdate);
+        haloDesktop.addEventListener("change", requestHaloUpdate);
         const haloResizeObserver = new ResizeObserver(requestHaloUpdate);
         haloResizeObserver.observe(menuLinks);
         haloResizeObserver.observe(logoLink);
@@ -163,80 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.set(".part-bottom", { marginLeft: -100, y: 80 });
             gsap.set(".part-bottom .logo-svg-wrapper", { y: -70 });
         }
-
-        /*
-         * Calcula el estado reducido usando las dimensiones que CSS resolvio
-         * para el breakpoint actual.
-         *
-         * escala = ancho objetivo / ancho real
-         * desplazamiento X = reduccion del ancho * proporcion de movimiento
-         * desplazamiento Y = compensacion de escala + elevacion proporcional
-         *
-         * El desplazamiento se limita al espacio disponible entre el wrapper
-         * y un margen seguro del viewport. Por eso nunca puede sacar el logo
-         * por el borde izquierdo, incluso despues de un resize.
-         */
-        const getResponsiveCollisionTransform = () => {
-            const viewportWidth = document.documentElement.clientWidth;
-            const logoWidth = logoCanvas?.offsetWidth || 100;
-            const logoHeight = logoCanvas?.offsetHeight || 140;
-            const targetWidth = clamp(
-                viewportWidth * scrollLogoConfig.targetWidthRatio,
-                scrollLogoConfig.minTargetWidth,
-                scrollLogoConfig.maxTargetWidth,
-            );
-            const scale = clamp(
-                targetWidth / logoWidth,
-                scrollLogoConfig.minScale,
-                scrollLogoConfig.maxScale,
-            );
-            const safeGutter = clamp(
-                viewportWidth * scrollLogoConfig.viewportGutterRatio,
-                scrollLogoConfig.minViewportGutter,
-                scrollLogoConfig.maxViewportGutter,
-            );
-            const desiredShift = logoWidth * (1 - scale) * scrollLogoConfig.shiftRatio;
-            const availableShift = Math.max(0, logoMenu.offsetLeft - safeGutter);
-
-            /*
-             * Al escalar desde "left center", el borde superior baja la mitad
-             * de la altura perdida. Esta compensacion neutraliza ese descenso.
-             */
-            const scaleTopCompensation = logoHeight * (1 - scale) * 0.5;
-            const verticalLift = clamp(
-                logoHeight * scrollLogoConfig.verticalLiftRatio,
-                scrollLogoConfig.minVerticalLift,
-                scrollLogoConfig.maxVerticalLift,
-            );
-
-            return {
-                scale,
-                x: -Math.min(desiredShift, availableShift),
-                y: -(scaleTopCompensation + verticalLift),
-            };
-        };
-
-        /* Aplica o revierte el estado reducido sin interferir con el menu abierto. */
-        const updateLogoVisuals = (collisionRequested, duration = 0.4) => {
-            isCollided = collisionRequested;
-
-            if (isMenuOpen) return;
-
-            const collisionTransform = collisionRequested
-                ? getResponsiveCollisionTransform()
-                : { scale: 1, x: 0, y: 0 };
-
-            gsap.to(logoMenu, {
-                opacity: collisionRequested ? 0.5 : 1,
-                scale: collisionTransform.scale,
-                x: collisionTransform.x,
-                y: collisionTransform.y,
-                transformOrigin: "left center",
-                duration,
-                overwrite: true,
-                ease: "power2.out",
-            });
-        };
 
         /* Abre o cierra el menu y coordina las clases CSS con GSAP. */
         const toggleMenu = (forceState = null) => {
@@ -260,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 /* El menu siempre se abre con el logo en su escala normal. */
                 gsap.set(logoMenu, { mixBlendMode: "normal" });
-                gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.4, overwrite: true });
                 animateLogoFill("#0066FF");
 
                 const tl = gsap.timeline();
@@ -294,8 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         logoMenu.classList.remove("active");
                         gsap.set(logoMenu, { mixBlendMode: "difference" });
                         animateLogoFill("#ffffff");
-                        /* Recupera la reduccion si el usuario sigue debajo del umbral. */
-                        if (isCollided) updateLogoVisuals(true);
                     }
                 });
 
@@ -314,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
             logoMenu.classList.remove("logo-hover-locked");
             if (!isMenuOpen) {
                 toggleMenu(true);
-                gsap.to(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.3, overwrite: true });
                 if (hasMechanicalLogo) {
                     gsap.to(".logo-part", { width: 140, height: 100, duration: 0.5, ease: "power2.out" });
                     gsap.to(".part-bottom .logo-svg-wrapper", { y: -100, duration: 0.5, ease: "power2.out" });
@@ -367,13 +290,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggleMenu(false);
             }
         });
-        logoMenu.addEventListener("pointerleave", () => {
+        logoMenu.addEventListener("pointerleave", (event) => {
+            // Lifting a finger is not a mouse leaving the menu.
+            if (event.pointerType === "touch") return;
             /* Espera un instante para no cerrar por el reacomodo de la caja al abrir. */
             window.setTimeout(() => {
                 if (logoMenu.matches(":hover")) return;
                 logoMenu.classList.remove("logo-hover-locked");
                 if (!isMenuOpen) {
-                    if (isCollided) updateLogoVisuals(true, 0.5);
                     if (hasMechanicalLogo) {
                         gsap.to(".logo-part", { width: 100, height: 70, duration: 0.4, ease: "power2.inOut" });
                         gsap.to(".part-bottom .logo-svg-wrapper", { y: -70, duration: 0.4, ease: "power2.inOut" });
@@ -411,14 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (activeLink) updateNotch(activeLink);
         });
 
-        /* Inicializacion comun para todas las paginas. */
-        gsap.set(logoMenu, { opacity: 1, scale: 1, x: 0, y: 0 });
-
-        /* En desktop el estado inicial permanece cerrado hasta el hover. */
-
-        /* Umbrales de scroll: inicio reduce antes que las paginas interiores. */
-        const isHomePage = window.location.pathname === "/" || window.location.pathname === "" || window.location.pathname.includes("/index");
-
+        // Scroll only closes the menu; the closed size is defined in CSS.
         ScrollTrigger.create({
             trigger: "body",
             start: "top top",
@@ -430,26 +347,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     toggleMenu(false);
                 }
 
-                const collisionThreshold = isHomePage ? 160 : 350;
-
-                if (currentScrollY > collisionThreshold && !isCollided) {
-                    updateLogoVisuals(true);
-                } else if (currentScrollY < (collisionThreshold - 50) && isCollided) {
-                    updateLogoVisuals(false);
-                }
             }
         });
 
         /*
-         * Recalcula la transformacion cuando cambia el viewport. requestAnimationFrame
-         * agrupa multiples eventos de resize en una sola actualizacion visual.
+         * Actualiza las mediciones del scroll al cambiar el viewport.
+         * CSS mantiene el tamaño compacto desde el primer render.
          */
         window.addEventListener("resize", () => {
             window.cancelAnimationFrame(resizeFrame);
             resizeFrame = window.requestAnimationFrame(() => {
-                if (isCollided && !isMenuOpen) {
-                    updateLogoVisuals(true, 0.2);
-                }
                 ScrollTrigger.refresh();
             });
         });
